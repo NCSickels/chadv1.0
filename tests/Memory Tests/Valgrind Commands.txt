@@ -1,0 +1,1 @@
+valgrind --leak-check=full --show-leak-kinds=all --log-file=log.txt -s medusa -h 192.168.1.100 -u msfadmin -P password_list.txt -M ssh -n 22 

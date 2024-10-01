@@ -28,5 +28,9 @@ medusa -h 192.168.1.100 -u postgres -P password_list.txt -M postgres -n 5432
 ## Masscan
 
 ```bash
-sudo masscan 192.168.1.0/24 -p21-80 --banners --source-ip 192.168.1.98 --interface eth1
+# List available network interfaces
+masscan --iflist
+
+# Scan all ports on the target machine using the specified network interface
+sudo masscan -p21-8180 192.168.1.100 --banners --packet-trace --source-mac <IFACE_MAC_ADDR> 
 ```

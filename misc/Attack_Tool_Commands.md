@@ -11,7 +11,7 @@ For each of the services tested, the hostname used is `msfadmin` and the passwor
 The command used to generate the `password_list.txt` file is:
 
 ```bash
-tail -n +10 rockyou.txt | head -n 28 > password_list.txt && echo "msfadmin" >> password_list.txt && echo "postgres" >> password_list.txt
+tail -n +6 rockyou.txt | head -n 28 > password_list.txt && echo "msfadmin" >> password_list.txt && echo "postgres" >> password_list.txt
 ```
 
 ```bash

@@ -1,0 +1,6 @@
+# environment variables:
+AFL_CUSTOM_INFO_PROGRAM=medusa
+AFL_CUSTOM_INFO_PROGRAM_ARGV=-h 192.168.1.100 -u postgres -P @@ -M postgres -n 5432
+AFL_CUSTOM_INFO_OUT=output_dir/default
+# command line:
+'afl-fuzz' '-Q' '-t' '1200' '-i' 'input_corpus' '-o' 'output_dir' '--' 'medusa' '-h' '192.168.1.100' '-u' 'postgres' '-P' '@@' '-M' 'postgres' '-n' '5432'

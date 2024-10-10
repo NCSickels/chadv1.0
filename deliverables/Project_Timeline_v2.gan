@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Senior Design Project Timeline" company="" webLink="http://" view-date="2024-09-01" view-index="0" gantt-divider-location="590" resource-divider-location="300" version="3.3.3311" locale="en_US">
+<?xml version="1.0" encoding="UTF-8"?><project name="Senior Design Project Timeline" company="" webLink="http://" view-date="2024-09-01" view-index="0" gantt-divider-location="575" resource-divider-location="300" version="3.3.3311" locale="en_US">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
-        <field id="tpd3" name="Name" width="209" order="0"/>
-        <field id="tpd4" name="Begin date" width="81" order="1"/>
-        <field id="tpd5" name="End date" width="81" order="2"/>
+        <field id="tpd3" name="Name" width="204" order="0"/>
+        <field id="tpd4" name="Begin date" width="79" order="1"/>
+        <field id="tpd5" name="End date" width="79" order="2"/>
         <field id="tpd15" name="Notes" width="20" order="3"/>
-        <field id="tpd8" name="Coordinator" width="203" order="3"/>
+        <field id="tpd8" name="Coordinator" width="198" order="3"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="filter.dueTodayTasks" value="false"/>
         <option id="filter.overdueTasks" value="false"/>
         <option id="filter.inProgressTodayTasks" value="false"/>
-        <timeline><![CDATA[2,4]]></timeline>
+        <timeline><![CDATA[4,2]]></timeline>
         <option id="color.recent"><![CDATA[#66ff66 #ff66cc #9999ff #66ffff #ff0000 #ff9900 #ffff00 #33ff00 #f0f0f0 #995137]]></option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Name" width="194" order="0"/>
-        <field id="1" name="Default role" width="86" order="1"/>
+        <field id="0" name="Name" width="202" order="0"/>
+        <field id="1" name="Default role" width="95" order="1"/>
     </view>
     <!-- -->
     <calendars base-id="us.federal">
@@ -82,7 +82,6 @@
         <task id="36" uid="75b7c826919c4c18b44fc7f47ce1acf4" name="Draft/Develop Fuzzing Workflow" color="#ff66cc" meeting="false" start="2024-10-22" duration="15" complete="0" expand="true">
             <depend id="38" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="28" uid="1fb2ea78f48f4b6194caae6314d32aa0" name="Briefing #4" color="#ff0000" meeting="false" start="2024-10-28" duration="1" complete="0" expand="true"/>
         <task id="21" uid="d4c066fdc4204d128e28aa617601a40d" name="Draft Design Review Report" color="#ff66cc" meeting="false" start="2024-10-28" duration="5" complete="0" priority="2" expand="true">
             <depend id="10" type="2" difference="0" hardness="Strong"/>
             <depend id="22" type="2" difference="0" hardness="Strong"/>
@@ -121,7 +120,6 @@
         <allocation task-id="9" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="25" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="26" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="28" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="27" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="30" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="31" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
@@ -144,7 +142,6 @@
         <allocation task-id="9" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="25" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="26" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="28" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="27" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="32" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="33" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
@@ -162,7 +159,6 @@
         <allocation task-id="9" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="25" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="26" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="28" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="27" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="30" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="32" resource-id="2" function="Default:1" responsible="true" load="100.0"/>

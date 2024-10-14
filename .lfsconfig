@@ -1,0 +1,12 @@
+{
+    "version": 1,
+    "filters": {
+        "glh": {
+            "smudge": "glh-smudge",
+            "clean": "glh-clean"
+        }
+    },
+    "storage": {
+        "type": "fs"
+    }
+}

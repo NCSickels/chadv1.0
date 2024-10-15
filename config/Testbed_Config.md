@@ -25,3 +25,8 @@ For Chadv1.0 project, we will be using two virtual machines running on VirtualBo
 
 - Network Address: 192.168.1.0 /24
 - Default Gateway: 192.168.1.1
+
+## Miscellaneous
+
+- Kali Linux Kernel Version: Linux kali 6.10.11-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.10.11-1kali1 (2024-09-26) x86_64 GNU/Linux
+- GCC Version: gcc (Debian 14.2.0-3) 14.2.0

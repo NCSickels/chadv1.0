@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Senior Design Project Timeline" company="" webLink="http://" view-date="2024-09-01" view-index="0" gantt-divider-location="575" resource-divider-location="300" version="3.3.3311" locale="en_US">
+<?xml version="1.0" encoding="UTF-8"?><project name="Senior Design Project Timeline" company="" webLink="http://" view-date="2024-09-01" view-index="0" gantt-divider-location="562" resource-divider-location="300" version="3.3.3311" locale="en_US">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
-        <field id="tpd3" name="Name" width="204" order="0"/>
-        <field id="tpd4" name="Begin date" width="79" order="1"/>
-        <field id="tpd5" name="End date" width="79" order="2"/>
+        <field id="tpd3" name="Name" width="199" order="0"/>
+        <field id="tpd4" name="Begin date" width="77" order="1"/>
+        <field id="tpd5" name="End date" width="77" order="2"/>
         <field id="tpd15" name="Notes" width="20" order="3"/>
-        <field id="tpd8" name="Coordinator" width="198" order="3"/>
+        <field id="tpd8" name="Coordinator" width="193" order="3"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="filter.dueTodayTasks" value="false"/>
         <option id="filter.overdueTasks" value="false"/>
         <option id="filter.inProgressTodayTasks" value="false"/>
-        <timeline><![CDATA[4,2]]></timeline>
+        <timeline><![CDATA[2,4]]></timeline>
         <option id="color.recent"><![CDATA[#66ff66 #ff66cc #9999ff #66ffff #ff0000 #ff9900 #ffff00 #33ff00 #f0f0f0 #995137]]></option>
     </view>
     <view id="resource-table">
@@ -72,12 +72,12 @@
             <depend id="34" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="25" uid="6c0c09e656ba4bd1be0c60be33c19ac4" name="Briefing #1" color="#ff0000" meeting="false" start="2024-10-09" duration="1" complete="0" expand="true"/>
-        <task id="26" uid="772fa0f2474e42feb54acf0ed0eaef8a" name="Briefing #2" color="#ff0000" meeting="false" start="2024-10-14" duration="1" complete="0" expand="true"/>
+        <task id="26" uid="772fa0f2474e42feb54acf0ed0eaef8a" name="Briefing #2" color="#ff0000" meeting="false" start="2024-10-16" duration="1" complete="0" expand="true"/>
         <task id="34" uid="d0916456e0e34417b963b904d6441ead" name="Test Fuzzing Tool #3" color="#9999ff" meeting="false" start="2024-10-15" duration="5" complete="0" expand="true">
             <depend id="35" type="2" difference="0" hardness="Strong"/>
             <depend id="36" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="27" uid="10544e0ecd05466ea3538ff42ceba4d6" name="Briefing #3" color="#ff0000" meeting="false" start="2024-10-16" duration="1" complete="0" expand="true"/>
+        <task id="27" uid="10544e0ecd05466ea3538ff42ceba4d6" name="Briefing #3" color="#ff0000" meeting="false" start="2024-10-28" duration="1" complete="0" expand="true"/>
         <task id="35" uid="2a3ee5efebcf49d593427c2937b561e4" name="Rank Fuzzing Tools Based on Probability of Success" color="#9999ff" meeting="false" start="2024-10-22" duration="1" complete="0" expand="true"/>
         <task id="36" uid="75b7c826919c4c18b44fc7f47ce1acf4" name="Draft/Develop Fuzzing Workflow" color="#ff66cc" meeting="false" start="2024-10-22" duration="15" complete="0" expand="true">
             <depend id="38" type="2" difference="0" hardness="Strong"/>

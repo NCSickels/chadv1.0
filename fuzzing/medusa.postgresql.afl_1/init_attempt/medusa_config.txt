@@ -1,0 +1,6 @@
+# Target PostgreSQL Server
+host = 192.168.1.100
+port = 5432
+protocol = postgres
+username = postgres
+password = {password}

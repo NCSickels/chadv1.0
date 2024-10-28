@@ -1,0 +1,27 @@
+<Peach>
+    <DataModel name="PostgresPacket">
+        <Number name="Length" size="32" endian="big" value="0"/>
+        <String name="ProtocolVersion" value="0003"/>
+        <String name="User" value="user"/>
+        <String name="Database" value="database"/>
+        <String name="End" value="\x00"/>
+        <String name="Header" value="POSTGRES_HEADER"/>
+        <String name="Payload" value="FUZZING_DATA"/>
+    </DataModel>
+
+    <StateModel name="PostgresStateModel" initialState="Initial">
+        <State name="Initial">
+            <Action type="output">
+                <DataModel ref="PostgresPacket"/>
+            </Action>
+        </State>
+    </StateModel>
+
+    <Test name="PostgresTest">
+        <StateModel ref="PostgresStateModel"/>
+        <Publisher class="Tcp">
+            <Param name="Host" value="192.168.1.99"/>
+            <Param name="Port" value="5432"/>
+        </Publisher>
+    </Test>
+</Peach>

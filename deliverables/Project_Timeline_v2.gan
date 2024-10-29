@@ -80,10 +80,10 @@
         </task>
         <task id="27" uid="10544e0ecd05466ea3538ff42ceba4d6" name="Briefing #3" color="#ff0000" meeting="false" start="2024-10-28" duration="1" complete="100" expand="true"/>
         <task id="35" uid="2a3ee5efebcf49d593427c2937b561e4" name="Rank Fuzzing Tools Based on Probability of Success" color="#9999ff" meeting="false" start="2024-10-22" duration="1" complete="100" expand="true"/>
-        <task id="36" uid="75b7c826919c4c18b44fc7f47ce1acf4" name="Draft/Develop Fuzzing Workflow" color="#ff66cc" meeting="false" start="2024-10-22" duration="15" complete="75" expand="true">
+        <task id="36" uid="75b7c826919c4c18b44fc7f47ce1acf4" name="Draft/Develop Fuzzing Workflow" color="#ff66cc" meeting="false" start="2024-10-22" duration="15" complete="35" expand="true">
             <depend id="38" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="21" uid="d4c066fdc4204d128e28aa617601a40d" name="Draft Design Review Report" color="#ff66cc" meeting="false" start="2024-10-28" duration="5" complete="0" priority="2" expand="true">
+        <task id="21" uid="d4c066fdc4204d128e28aa617601a40d" name="Draft Design Review Report" color="#ff66cc" meeting="false" start="2024-10-28" duration="5" complete="20" priority="2" expand="true">
             <depend id="10" type="2" difference="0" hardness="Strong"/>
             <depend id="22" type="2" difference="0" hardness="Strong"/>
         </task>

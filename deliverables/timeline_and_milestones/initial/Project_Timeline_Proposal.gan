@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Senior Design Project Timeline" company="" webLink="http://" view-date="2024-09-15" view-index="0" gantt-divider-location="534" resource-divider-location="300" version="3.3.3311" locale="en_US">
+<?xml version="1.0" encoding="UTF-8"?><project name="Senior Design Project Timeline" company="" webLink="http://" view-date="2024-09-01" view-index="0" gantt-divider-location="575" resource-divider-location="300" version="3.3.3311" locale="en_US">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
-        <field id="tpd3" name="Name" width="189" order="0"/>
-        <field id="tpd4" name="Begin date" width="73" order="1"/>
-        <field id="tpd5" name="End date" width="73" order="2"/>
+        <field id="tpd3" name="Name" width="204" order="0"/>
+        <field id="tpd4" name="Begin date" width="79" order="1"/>
+        <field id="tpd5" name="End date" width="79" order="2"/>
         <field id="tpd15" name="Notes" width="20" order="3"/>
-        <field id="tpd8" name="Coordinator" width="183" order="3"/>
+        <field id="tpd8" name="Coordinator" width="198" order="3"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="filter.dueTodayTasks" value="false"/>
         <option id="filter.overdueTasks" value="false"/>
         <option id="filter.inProgressTodayTasks" value="false"/>
-        <timeline><![CDATA[2,4]]></timeline>
-        <option id="color.recent"><![CDATA[#9999ff #66ffff #66ff66 #ff66cc #ff0000 #ff9900 #ffff00 #33ff00 #f0f0f0 #995137]]></option>
+        <timeline><![CDATA[4,2]]></timeline>
+        <option id="color.recent"><![CDATA[#66ff66 #ff66cc #9999ff #66ffff #ff0000 #ff9900 #ffff00 #33ff00 #f0f0f0 #995137]]></option>
     </view>
     <view id="resource-table">
         <field id="0" name="Name" width="202" order="0"/>
@@ -48,7 +48,7 @@
         <task id="2" uid="f666df08c49b43f28bf3e38d8706ea3b" name="Submit Proposal" color="#ff0000" meeting="true" start="2024-09-18" duration="0" complete="100" priority="4" expand="true">
             <depend id="3" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="30" uid="3fa689dd8bbe4ec68b92ccf7df58d692" name="Research Known Vulnerabilities and CVEs" color="#66ffff" meeting="false" start="2024-09-18" duration="4" complete="100" expand="true"/>
+        <task id="30" uid="3fa689dd8bbe4ec68b92ccf7df58d692" name="Research Known Vulnerabilities and CVEs" color="#66ffff" meeting="false" start="2024-09-18" duration="5" complete="100" expand="true"/>
         <task id="31" uid="3a92754cc45c4d05879d59036d7a178b" name="Apply LDRA Static Analysis to Medusa and Masscan" color="#66ffff" meeting="false" start="2024-09-24" duration="5" complete="100" expand="true"/>
         <task id="3" uid="1fcf974095fa4a959df5d6309eb263a5" name="Proposal Presentations" color="#66ffff" meeting="false" start="2024-09-18" duration="14" complete="100" expand="true">
             <depend id="6" type="1" difference="8" hardness="Strong"/>
@@ -60,33 +60,29 @@
         <task id="7" uid="32510b83db6348eea0403241d59297e1" name="Identify Static Analysis Tools" color="#9999ff" meeting="false" start="2024-09-30" duration="1" complete="100" expand="true">
             <depend id="8" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="40" uid="580b150150c1485fba5a79bbd10252ba" name="Identify Fuzz Testing Tools" color="#66ffff" meeting="false" start="2024-09-30" duration="6" complete="100" expand="true"/>
         <task id="8" uid="9df35da67b1546478449444e42987e57" name="Tool Downselect" color="#ff9900" meeting="true" start="2024-10-01" duration="0" complete="100" priority="4" expand="true">
             <depend id="24" type="2" difference="0" hardness="Strong"/>
             <depend id="32" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="24" uid="5ce021471b4549e5ab3c7fcaa282a7ba" name="Network Packet Capture" color="#9999ff" meeting="false" start="2024-10-01" duration="1" complete="100" expand="true"/>
-        <task id="32" uid="1cbc26eaf2364a71a94a4ea4faa583af" name="Test Fuzzing Tool #1" color="#9999ff" meeting="false" start="2024-10-01" duration="5" complete="100" expand="true">
+        <task id="32" uid="1cbc26eaf2364a71a94a4ea4faa583af" name="Test Fuzzing Tool #1" color="#9999ff" meeting="false" start="2024-10-01" duration="5" complete="90" expand="true">
             <depend id="33" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="33" uid="92a14c3ad889446b97db2c84d8965c7f" name="Test Fuzzing Tool #2" color="#9999ff" meeting="false" start="2024-10-08" duration="5" complete="100" expand="true">
+        <task id="33" uid="92a14c3ad889446b97db2c84d8965c7f" name="Test Fuzzing Tool #2" color="#9999ff" meeting="false" start="2024-10-08" duration="5" complete="0" expand="true">
             <depend id="34" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="25" uid="6c0c09e656ba4bd1be0c60be33c19ac4" name="Briefing #1" color="#ff0000" meeting="false" start="2024-10-09" duration="1" complete="100" expand="true"/>
-        <task id="41" uid="e5b3ac89baed4964be368328814e42be" name="Write Attack Tool Selection Report" color="#9999ff" meeting="false" start="2024-10-14" duration="3" complete="100" expand="true"/>
-        <task id="26" uid="772fa0f2474e42feb54acf0ed0eaef8a" name="Briefing #2" color="#ff0000" meeting="false" start="2024-10-16" duration="1" complete="100" expand="true"/>
-        <task id="34" uid="d0916456e0e34417b963b904d6441ead" name="Test Fuzzing Tool #3" color="#9999ff" meeting="false" start="2024-10-15" duration="5" complete="100" expand="true">
+        <task id="25" uid="6c0c09e656ba4bd1be0c60be33c19ac4" name="Briefing #1" color="#ff0000" meeting="false" start="2024-10-09" duration="1" complete="0" expand="true"/>
+        <task id="26" uid="772fa0f2474e42feb54acf0ed0eaef8a" name="Briefing #2" color="#ff0000" meeting="false" start="2024-10-14" duration="1" complete="0" expand="true"/>
+        <task id="34" uid="d0916456e0e34417b963b904d6441ead" name="Test Fuzzing Tool #3" color="#9999ff" meeting="false" start="2024-10-15" duration="5" complete="0" expand="true">
             <depend id="35" type="2" difference="0" hardness="Strong"/>
             <depend id="36" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="42" uid="8727e08d70d84320848ee5dac045becd" name="Analyze Fuzz Testing Results" color="#9999ff" meeting="true" start="2024-10-21" duration="0" complete="0" expand="true"/>
-        <task id="35" uid="2a3ee5efebcf49d593427c2937b561e4" name="Rank Fuzzing Tools Based on Probability of Success" color="#9999ff" meeting="false" start="2024-10-22" duration="1" complete="100" expand="true"/>
-        <task id="43" uid="9112d66bf6a849fda7f3d54f2c26d43d" name="Write Fuzz Testing Results Report" color="#9999ff" meeting="false" start="2024-10-28" duration="4" complete="100" expand="true"/>
-        <task id="36" uid="75b7c826919c4c18b44fc7f47ce1acf4" name="Draft/Develop Fuzzing Workflow" color="#ff66cc" meeting="false" start="2024-10-22" duration="15" complete="35" expand="true">
+        <task id="27" uid="10544e0ecd05466ea3538ff42ceba4d6" name="Briefing #3" color="#ff0000" meeting="false" start="2024-10-16" duration="1" complete="0" expand="true"/>
+        <task id="35" uid="2a3ee5efebcf49d593427c2937b561e4" name="Rank Fuzzing Tools Based on Probability of Success" color="#9999ff" meeting="false" start="2024-10-22" duration="1" complete="0" expand="true"/>
+        <task id="36" uid="75b7c826919c4c18b44fc7f47ce1acf4" name="Draft/Develop Fuzzing Workflow" color="#ff66cc" meeting="false" start="2024-10-22" duration="15" complete="0" expand="true">
             <depend id="38" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="27" uid="10544e0ecd05466ea3538ff42ceba4d6" name="Briefing #3" color="#ff0000" meeting="false" start="2024-10-28" duration="1" complete="100" expand="true"/>
-        <task id="21" uid="d4c066fdc4204d128e28aa617601a40d" name="Draft Design Review Report" color="#ff66cc" meeting="false" start="2024-10-28" duration="5" complete="65" priority="2" expand="true">
+        <task id="21" uid="d4c066fdc4204d128e28aa617601a40d" name="Draft Design Review Report" color="#ff66cc" meeting="false" start="2024-10-28" duration="5" complete="0" priority="2" expand="true">
             <depend id="10" type="2" difference="0" hardness="Strong"/>
             <depend id="22" type="2" difference="0" hardness="Strong"/>
         </task>
@@ -134,10 +130,6 @@
         <allocation task-id="36" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="37" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="39" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="40" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="41" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="42" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="43" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="0" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="2" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="4" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
@@ -156,7 +148,6 @@
         <allocation task-id="34" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="36" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="38" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="40" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="0" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="2" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="4" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
@@ -176,7 +167,6 @@
         <allocation task-id="36" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="38" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="39" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="40" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
     <previous/>

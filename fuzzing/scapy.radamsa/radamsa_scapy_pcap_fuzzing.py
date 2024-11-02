@@ -17,8 +17,8 @@ clients_list = []
 servers_list = []
 packets_list = []
 
-HOST = '127.0.0.1'
-PORT = 443
+HOST = '192.168.1.100'
+PORT = 5432
 FUZZ_FACTOR = 50.0
 
 
@@ -61,10 +61,11 @@ def main():
     global PCAP_LOCATION, HOST, PORT, FUZZ_FACTOR
 
     parser = argparse.ArgumentParser(
-        description="A very simple mash-up of Scapy + radamsa to extract data from pcap and perform fuzzing ad infinitum.")
+        description="Charger Active Defense - Scapy Radamsa Fuzzing")
     parser.add_argument(
         "-H", "--host", help="Destination IP - Default: 127.0.0.1")
-    parser.add_argument("-p", "--port", help="Destination Port - Default: 443")
+    parser.add_argument(
+        "-p", "--port", help="Destination Port - Default: 5432 (Postgres)")
     parser.add_argument("-f", "--file", help="Input File Location")
     parser.add_argument("-z", "--fuzz", help="Fuzz Factor - Default: 50.0")
     parser.add_argument("-v", "--version", action="version",

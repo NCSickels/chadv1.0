@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Senior Design Project Timeline" company="" webLink="http://" view-date="2024-09-15" view-index="0" gantt-divider-location="743" resource-divider-location="300" version="3.3.3311" locale="en_US">
+<?xml version="1.0" encoding="UTF-8"?><project name="Senior Design Project Timeline" company="" webLink="http://" view-date="2024-09-15" view-index="0" gantt-divider-location="729" resource-divider-location="300" version="3.3.3311" locale="en_US">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
-        <field id="tpd3" name="Name" width="265" order="0"/>
-        <field id="tpd4" name="Begin date" width="102" order="1"/>
-        <field id="tpd5" name="End date" width="102" order="2"/>
+        <field id="tpd3" name="Name" width="260" order="0"/>
+        <field id="tpd4" name="Begin date" width="100" order="1"/>
+        <field id="tpd5" name="End date" width="100" order="2"/>
         <field id="tpd15" name="Notes" width="20" order="3"/>
-        <field id="tpd8" name="Coordinator" width="258" order="3"/>
+        <field id="tpd8" name="Coordinator" width="253" order="3"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="filter.dueTodayTasks" value="false"/>
         <option id="filter.overdueTasks" value="false"/>
@@ -14,8 +14,8 @@
         <option id="color.recent"><![CDATA[#9999ff #66ffff #66ff66 #ff66cc #ff0000 #ff9900 #ffff00 #33ff00 #f0f0f0 #995137]]></option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Name" width="202" order="0"/>
-        <field id="1" name="Default role" width="95" order="1"/>
+        <field id="0" name="Name" width="190" order="0"/>
+        <field id="1" name="Default role" width="90" order="1"/>
     </view>
     <!-- -->
     <calendars base-id="us.federal">
@@ -91,7 +91,7 @@
             <depend id="22" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="22" uid="acbcec76b29e46d4bf6f858a082ff660" name="Design Review Report Due" color="#ff0000" meeting="true" start="2024-11-04" duration="0" complete="0" expand="true"/>
-        <task id="37" uid="5bd9e847cc0f44848d1724cb54c2bff2" name="Apply Fuzzing Workflow to Medusa and Masscan" color="#ff66cc" meeting="false" start="2024-11-11" duration="1" complete="0" expand="true"/>
+        <task id="37" uid="5bd9e847cc0f44848d1724cb54c2bff2" name="Successfully Apply Fuzzing Workflow to Medusa and Masscan" color="#ff66cc" meeting="false" start="2024-11-11" duration="1" complete="0" expand="true"/>
         <task id="10" uid="6e3a97730178441f9f2692404c41e819" name="Design Review Presentations" color="#ff66cc" meeting="false" start="2024-11-04" duration="23" complete="0" expand="true">
             <depend id="11" type="2" difference="0" hardness="Strong"/>
         </task>

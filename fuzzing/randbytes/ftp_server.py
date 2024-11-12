@@ -3,14 +3,12 @@ import time
 from threading import Thread
 from random import randbytes
 import logging
+import argparse
 
 logging.basicConfig(level=logging.INFO)
 
-server = "192.168.2.147"
-s_port = 4322
 
-
-def handle_client(conn, addr):
+def handle_client(conn, addr, start):
     try:
         logging.info(f"Connected to: {addr}")
         conn.send(bytes.fromhex(
@@ -27,13 +25,18 @@ def handle_client(conn, addr):
         logging.info(f"Fuzzing Response: {fuzzing_response}")
 
         conn.send(bytes.fromhex('353330204c6f67696e20696e636f72726563742e0d0a'))
+
+    # Write timing and fuzzing response to file
+        with open("fuzzing_response.txt", "a") as f:
+            f.write(f"Time taken: {time.time() - start} seconds.\n")
+            f.write(f"Fuzzing Response: {fuzzing_response}\n")
     except Exception as e:
         logging.error(f"Error handling client {addr}: {e}")
     finally:
         conn.close()
 
 
-def start_server():
+def start_server(server, s_port):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as tcpsocket:
         try:
             tcpsocket.bind((server, s_port))
@@ -43,8 +46,8 @@ def start_server():
             while True:
                 conn, addr = tcpsocket.accept()
                 start = time.time()
-                logging.info(f"Time taken: {time.time() - start} seconds")
-                Thread(target=handle_client, args=(conn, addr)).start()
+                logging.info(f"Time taken: {time.time() - start} seconds.")
+                Thread(target=handle_client, args=(conn, addr, start)).start()
         except socket.error as e:
             logging.error(f"Socket error: {e}")
         except Exception as e:
@@ -52,4 +55,10 @@ def start_server():
 
 
 if __name__ == "__main__":
-    start_server()
+    parser = argparse.ArgumentParser(description="FTP Server")
+    parser.add_argument("--server", type=str,
+                        default="127.0.0.1", help="Server IP address.")
+    parser.add_argument("--port", type=int, default=21, help="Server port.")
+    args = parser.parse_args()
+
+    start_server(args.server, args.port)

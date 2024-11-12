@@ -4,6 +4,22 @@ from fuzzowski.mutants.spike import *
 
 
 class FTP(IFuzzer):
+    """
+    FTP Fuzzer class for fuzzing FTP protocol with Fuzzowski framework.
+    This class provides methods to define fuzzing nodes and generate requests for
+    the FTP protocol. It includes methods for PUT and GET operations.
+    Attributes:
+        name (str): The name of the fuzzer, set to 'ftp'.
+    Methods:
+        get_requests() -> List[callable]:
+            Returns a list of callable request methods (put and get).
+        define_nodes(*args, **kwargs) -> None:
+            Defines the fuzzing nodes for PUT and GET operations.
+        put(session: Session) -> None:
+            Executes the PUT operation by connecting the session with the 'put' node.
+        get(session: Session) -> None:
+            Executes the GET operation by connecting the session with the 'get' node.
+    """
     """FTP Fuzzer"""
 
     name = 'ftp'

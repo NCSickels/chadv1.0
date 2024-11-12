@@ -7,6 +7,7 @@
 - [BooFuzz](https://github.com/jtpereyda/boofuzz)
 - [Sully](https://github.com/OpenRCE/sulley)
 - [Peach Fuzzer](https://peachtech.gitlab.io/peach-fuzzer-community/)
+- [Radamsa](https://gitlab.com/akihe/radamsa)
 
 ## Other Relevant Tools
 

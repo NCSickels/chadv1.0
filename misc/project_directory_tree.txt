@@ -1,0 +1,120 @@
+.
+├── README.md
+├── config
+│   ├── Metasploitable2_Running_Services.txt
+│   └── Testbed_Config.md
+├── deliverables
+│   ├── Conference-template-A4.doc
+│   ├── G12_attack_tool_selection_report.docx
+│   ├── G12_fuzz_tool_selection_report.docx
+│   ├── G12_fuzzing_results_analysis.docx
+│   ├── G12_updated_milestones.docx
+│   ├── G12_updated_timeline.png
+│   ├── Project_Timeline_v2.gan
+│   ├── briefings
+│   │   ├── brief_1
+│   │   │   ├── G12_briefing_1_progress_report.docx
+│   │   ├── brief_2
+│   │   │   ├── G12_briefing_2_progress_report.docx
+│   │   │   └── fuzzowski_medusa_telnet.pcap
+│   │   └── brief_3
+│   │       └── G12_briefing_3_progress_report.docx
+│   ├── design_review
+│   │   ├── 495_488_design_review_template.pptx
+│   │   ├── Behavioral_Decomposition.vsdx
+│   │   ├── Functional_Decomposition.vsdx
+│   │   ├── G12_design_review_presentation.pptx
+│   │   ├── G12_level_of_effort.docx
+│   │   ├── G12_marketing_requirements.docx
+│   │   ├── Updated_Behavioral_Decomposition.png
+│   │   ├── Updated_Functional_Decomposition.png
+│   │   └── individual_level_of_effort.md
+│   ├── final_report
+│   ├── proposal
+│   │   └── Project-Proposal-Submission.pdf
+│   └── timeline_and_milestones
+│       └── initial
+│           ├── Project_Timeline_Proposal.gan
+│           └── milestone_analysis.md
+├── fuzzing
+│   ├── afl-qemu-trace
+│   ├── fuzzowski.medusa.ftp
+│   │   └── ftp.py
+│   ├── fuzzshark
+│   │   └── src
+│   │       ├── CMakeLists.txt
+│   │       ├── FuzzerInterface.h
+│   │       ├── StandaloneFuzzTargetMain.c
+│   │       └── fuzzshark.c
+│   ├── medusa.postgresql.afl_1
+│   │   ├── cmdline
+│   │   ├── fuzz_bitmap
+│   │   ├── fuzzer_setup
+│   │   ├── fuzzer_stats
+│   │   ├── ~hangs
+│   │   ├── init_attempt
+│   │   │   ├── medusa_config.txt
+│   │   │   ├── wrapper.c
+│   │   │   └── wrapper.sh
+│   │   ├── ~plot_data
+│   │   └── ~queue
+│   ├── peach_fuzz
+│   │   ├── network_fuzzing.xml
+│   │   └── peachfuzzer.dockerfile
+│   ├── radamsa
+│   │   ├── Radamsa_Instructions.md
+│   │   └── ~img
+│   ├── randbytes
+│   │   ├── ftp_server.py
+│   │   └── pcap_parsing.py
+│   ├── randpkt
+│   │   └── src
+│   │       ├── CMakeLists.txt
+│   │       ├── randpkt.c
+│   │       ├── randpkt_core.c
+│   │       └── randpkt_core.h
+│   └── scapy.radamsa
+│       └── radamsa_scapy_pcap_fuzzing.py
+├── misc
+│   ├── Attack_Tool_Commands.md
+│   ├── Attack_Tool_Info.md
+│   ├── password_list.txt
+│   └── repeat_medusa.sh
+├── pcaps
+│   ├── baseline
+│   │   ├── masscan.pcap
+│   │   ├── medusa_ftp.pcap
+│   │   ├── medusa_postgresql.pcap
+│   │   └── medusa_ssh.pcap
+│   └── scapy
+│       ├── ftp_login_packets.pcap
+│       ├── fuzz_test_1.pcap
+│       ├── medusa_ftp_brute_force.pcap
+│       ├── medusa_ftp_fail.pcap
+│       └── nmap_ftp_scan.pcap
+├── project_overview.png
+├── research
+│   ├── CVEs.md
+│   ├── Fuzzing_Tools.md
+│   └── cmiller-csw-2010.pdf
+└── tests
+    ├── ldra
+    │   ├── aircrack-ng
+    │   │   └── aircrack-ng.mts.htm
+    │   ├── masscan
+    │   │   └── masscan.mts.htm
+    │   ├── medusa
+    │   │   └── medusa.mts.htm
+    │   ├── netdiscover
+    │   │   └── netdiscover.mts.htm
+    │   ├── reaver
+    │   │   └── reaver.mts.htm
+    │   └── yersinia
+    │       └── yersinia.mts.htm
+    └── valgrind
+        ├── commands.txt
+        ├── masscan.txt
+        ├── medusa_ftp.txt
+        ├── medusa_postgres.txt
+        ├── medusa_ssh.txt
+        └── netdiscover.txt

@@ -53,11 +53,7 @@ Charger Active Defense v1.0 - Senior Design Project
 │   ├── fuzzowski.medusa.ftp
 │   │   └── ftp.py
 │   ├── fuzzshark
-│   │   └── src
-│   │       ├── CMakeLists.txt
-│   │       ├── FuzzerInterface.h
-│   │       ├── StandaloneFuzzTargetMain.c
-│   │       └── fuzzshark.c
+│   │   └── ~src
 │   ├── medusa.postgresql.afl_1
 │   │   ├── cmdline
 │   │   ├── fuzz_bitmap
@@ -80,11 +76,7 @@ Charger Active Defense v1.0 - Senior Design Project
 │   │   ├── ftp_server.py
 │   │   └── pcap_parsing.py
 │   ├── randpkt
-│   │   └── src
-│   │       ├── CMakeLists.txt
-│   │       ├── randpkt.c
-│   │       ├── randpkt_core.c
-│   │       └── randpkt_core.h
+│   │   └── ~src
 │   └── scapy.radamsa
 │       └── radamsa_scapy_pcap_fuzzing.py
 ├── misc
@@ -191,7 +183,7 @@ Charger Active Defense v1.0 - Senior Design Project
     - **Radamsa_Instructions.md:** Radamsa testing instructions.
   - **randbytes:** Randbytes files.
     - **ftp_server.py:** FTP server file.
-    - **pcap_parsing.py:** PCAP parsing file.
+    - **pcap_parsing.py:** PCAP parsing file with Scapy.
   - **randpkt:** Randpkt files.
   - **scapy.radamsa:** Scapy Radamsa files.
     - **radamsa_scapy_pcap_fuzzing.py:** Radamsa & Scapy PCAP fuzzing Python script.
@@ -220,8 +212,8 @@ Charger Active Defense v1.0 - Senior Design Project
     - **medusa_ssh.txt:** Medusa SSH Valgrind test results file.
     - **netdiscover.txt:** Netdiscover Valgrind test results file.
 - **research:** Contains research-related files.
-  - **CVEs.md:** List of CVEs.
-  - **Fuzzing_Tools.md:** Documentation of fuzzing tools.
+  - **CVEs.md:** List of CVEs from all attack tool candidates.
+  - **Fuzzing_Tools.md:** Background research on possible fuzzing tools.
   - **cmiller-csw-2010.pdf:** Research paper on general fuzzing and fuzzing tools.
 
 </details>

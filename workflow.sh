@@ -194,45 +194,31 @@ dir_exists() {
 
 function uninstall() {
     log info "Removing related files and directories..."
-}
-
-function install_medusa() {
-    log info "Installing: Medusa"
-    if [ ! -d "$MEDUSA_DIR" ]; then
-        log info "Cloning repository into: $MEDUSA_DIR"
-        git clone https://gitlab.com/e62Lab/medusa.git --branch master --single-branch "$MEDUSA_DIR"
+    if [ -d "$DEST_DIR" ]; then
+        log info "Removing: $DEST_DIR"
+        rm -rf "$DEST_DIR"
     else
-        log info "Medusa directory already exists."
+        log info "Directory: $DEST_DIR not found."
     fi
 }
 
-function install_masscan() {
-    log info "Installing: Masscan"
-    if [ ! -d "$MASSCAN_DIR" ]; then
-        log info "Cloning repository into: $MASSCAN_DIR"
-        git clone https://github.com/robertdavidgraham/masscan "$MASSCAN_DIR"
-    else
-        log info "Masscan directory already exists."
-    fi
-}
+# Generic function to install a tool
+function install_tool() {
+    local tool_name=$1
+    local repo_url=$2
+    local target_dir=$3
 
-function install_aflnet() {
-    log info "Installing: AFLNet"
-    if [ ! -d "$AFL_DIR" ]; then
-        log info "Cloning repository into: $AFL_DIR"
-        git clone https://github.com/aflnet/aflnet.git "$AFL_DIR"
+    log info "Installing: $tool_name"
+    if [ ! -d "$target_dir" ]; then
+        log info "Cloning repository into: $target_dir"
+        if git clone $repo_url "$target_dir"; then
+            log info "$tool_name installed successfully."
+        else
+            log error "Failed to clone $tool_name repository."
+            exit 1
+        fi
     else
-        log info "AFLNet directory already exists."
-    fi
-}
-
-function install_radamsa() {
-    log info "Installing: Radamsa"
-    if [ ! -d "$RADAMSA_DIR" ]; then
-        log info "Cloning repository into: $RADAMSA_DIR"
-        git clone https://gitlab.com/akihe/radamsa.git "$RADAMSA_DIR"
-    else
-        log info "Radamsa directory already exists."
+        log info "$tool_name directory already exists."
     fi
 }
 
@@ -252,12 +238,12 @@ function install() {
     command_exists git
 
     # Attack Tools 
-    install_medusa
-    install_masscan
-
+    install_tool "Medusa" "https://gitlab.com/e62Lab/medusa.git --branch master --single-branch" "$MEDUSA_DIR"
+    install_tool "Masscan" "https://github.com/robertdavidgraham/masscan" "$MASSCAN_DIR"
+    
     # Fuzzing Tools
-    install_aflnet
-    install_radamsa
+    install_tool "AFLNet" "https://github.com/aflnet/aflnet.git" "$AFL_DIR"
+    install_tool "Radamsa" "https://gitlab.com/akihe/radamsa.git" "$RADAMSA_DIR"
 }
 
 if [[ "$INSTALL" = true && "$DEBUG" = false ]]; then

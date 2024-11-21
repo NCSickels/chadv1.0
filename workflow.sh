@@ -116,7 +116,7 @@ NO_SUDO=false
 function help() {
     banner
     echo -e "\nThis script installs all necessary dependencies for the chadv1.0 fuzzing workflow.\n"
-    echo -e "Usage: $0 [install] [--remove | -r] [--dest-dir | -d <dir>] [--no-sudo] [--version | -V] [--help | -h]"
+    echo -e "Usage: $0 [install | remove] [--remove | -r] [--dest-dir | -d <dir>] [--no-sudo] [--version | -V] [--help | -h]"
     echo -e "Options:"
     echo -e " -r, --remove\t\tRemove all installed dependencies and files."
     echo -e " -d, --dest-dir\t\tInstallation destination directory (defaults to '$DEST_DIR')."
@@ -130,6 +130,12 @@ function help() {
 if [ "$1" == "install" ]; then
     INSTALL=true
     shift
+elif [[ "$1" == "remove" || "$1" == "uninstall" ]]; then
+    SHOULD_REMOVE=true
+    shift
+else
+    help
+    exit 1
 fi
 
 # Parse arguments

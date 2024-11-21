@@ -26,6 +26,10 @@ BLUE='\033[0;34m'
 WHITE='\033[0;37m'
 NC='\033[0m' # No Color
 
+# Save output to log file
+LOG_FILE="/tmp/chad_install.log"
+exec > >(tee -a $LOG_FILE) 2>&1
+
 # Function to log messages with color codes
 function log() {
     local level=$1

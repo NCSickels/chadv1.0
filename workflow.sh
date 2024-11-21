@@ -63,15 +63,14 @@ function banner() {
 
 # Function to check the Linux distribution and version
 function check_distro() {
-    banner
     log info "Checking for compatible Linux distribution and version..."
     if [ -f /etc/os-release ]; then
         . /etc/os-release
         DISTRO=$ID
         VERSION=$VERSION_ID
 
-        if [[ "$DISTRO" == "kali" && "$VERSION" == "2023.4" ]]; then
-            log info "Kali Linux 2023.4 detected."
+        if [[ "$DISTRO" == "kali" && ( "$VERSION" == "2023.4"|| "$VERSION" == "2024.4" ) ]]; then
+            log info "Kali Linux $VERSION detected."
             return 0
         elif [[ "$DISTRO" == "ubuntu" && ( "$VERSION" == "18.04" || "$VERSION" == "20.04" || "$VERSION" == "22.04" || "$VERSION" > "18.04" ) ]]; then
             log info "Ubuntu $VERSION detected."

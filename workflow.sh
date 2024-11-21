@@ -27,6 +27,7 @@ WHITE='\033[0;37m'
 NC='\033[0m' # No Color
 
 # Save output to log file
+rm -f /tmp/chad_install.log
 LOG_FILE="/tmp/chad_install.log"
 exec > >(tee -a $LOG_FILE) 2>&1
 

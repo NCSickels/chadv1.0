@@ -222,9 +222,31 @@ Charger Active Defense v1.0 - Senior Design Project
 
 ## Project Overview
 
+![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
+![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
+
+[![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=flat&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
+
 ## Usage & Installation
 
-### Bash Script
+There are three ways to install and use the tools necessary for the Chadv1.0 workflow: using a Bash script, a Dockerfile, or manually.
+
+Prerequisites:
+
+<!-- - Python 3.8+
+- Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later) -->
+
+### Bash Script (Recommended)
+
+To install the attack tools and fuzzing tools, you can use the provided Bash script as shown below:
+
+```bash
+# Download the workflow script
+curl -O https://raw.githubusercontent.com/NCSickels/chadv1.0/main/workflow.sh
+
+# Using the workflow script
+sudo ./workflow.sh install
+```
 
 ### Dockerfile
 

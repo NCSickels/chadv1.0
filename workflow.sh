@@ -1,0 +1,277 @@
+#!/bin/bash
+#
+#  ██████╗██╗  ██╗ █████╗ ██████╗     ██╗   ██╗ ██╗    ██████╗ 
+# ██╔════╝██║  ██║██╔══██╗██╔══██╗    ██║   ██║███║   ██╔═████╗
+# ██║     ███████║███████║██║  ██║    ██║   ██║╚██║   ██║██╔██║
+# ██║     ██╔══██║██╔══██║██║  ██║    ╚██╗ ██╔╝ ██║   ████╔╝██║
+# ╚██████╗██║  ██║██║  ██║██████╔╝     ╚████╔╝  ██║██╗╚██████╔╝
+#  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝       ╚═══╝   ╚═╝╚═╝ ╚═════╝ 
+#   
+#  Charger Active Defense v1.0 Install Script
+#  
+set -e
+
+CHAD_VERSION="1.0"
+SCRIPT_VERSION="0.1.0"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# Debug mode flag
+DEBUG=false
+
+# Define color codes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+WHITE='\033[0;37m'
+NC='\033[0m' # No Color
+
+# Function to log messages with color codes
+function log() {
+    local level=$1
+    local message=$2
+
+    case $level in
+        info)
+            echo -e "${BLUE}[INFO]${NC} $message" ;;
+        warn)
+            echo -e "${YELLOW}[WARN]${NC} $message" ;;
+        error)
+            echo -e "${RED}[ERROR]${NC} $message" ;;
+        *)
+            echo -e "${WHITE}[LOG]${NC} $message" ;;
+    esac
+}
+
+# Banner function
+function banner() {
+    echo -e "\t\t============================================"
+    echo -e "\t\t     ██████╗██╗  ██╗ █████╗ ██████╗"
+    echo -e "\t\t    ██╔════╝██║  ██║██╔══██╗██╔══██╗"
+    echo -e "\t\t    ██║     ███████║███████║██║  ██║"
+    echo -e "\t\t    ██║     ██╔══██║██╔══██║██║  ██║"
+    echo -e "\t\t    ╚██████╗██║  ██║██║  ██║██████╔╝"
+    echo -e "\t\t     ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝"
+    echo -e "\t\t============================================"
+    echo -e "\t\t      Charger Active Defense v$CHAD_VERSION"
+    echo -e "\t\t============================================"
+}
+
+# Function to check the Linux distribution and version
+function check_distro() {
+    banner
+    log info "Checking for compatible Linux distribution and version..."
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        DISTRO=$ID
+        VERSION=$VERSION_ID
+
+        if [[ "$DISTRO" == "kali" && "$VERSION" == "2023.4" ]]; then
+            log info "Kali Linux 2023.4 detected."
+            return 0
+        elif [[ "$DISTRO" == "ubuntu" && ( "$VERSION" == "18.04" || "$VERSION" == "20.04" || "$VERSION" == "22.04" || "$VERSION" > "18.04" ) ]]; then
+            log info "Ubuntu $VERSION detected."
+            return 0
+        else
+            log error "Unsupported Linux distribution or version."
+            return 1
+        fi
+    else
+        log error "/etc/os-release file not found. Cannot determine Linux distribution."
+        return 1
+    fi
+}
+
+# Call the function and handle the result
+if ! check_distro; then
+    log error "This script supports only Kali Linux 2023.4 or above and Ubuntu 18.04 or above."
+    exit 1
+fi
+
+# Argument parsing
+SHORT=r,d,n,V,h
+LONG=remove,dest-dir,no-sudo,version,help
+VALID_ARGS=$(getopt -a --options $SHORT --longoptions $LONG -- "$@")
+if [[ $? -ne 0 ]]; then
+    exit 1;
+fi
+
+# Project Directory Variables
+DEST_DIR="$SCRIPT_DIR/chadv$CHAD_VERSION"
+
+ATTACKTOOL_DIR="$DEST_DIR/attack_tools"
+
+MEDUSA_DIR="$ATTACKTOOL_DIR/medusa"
+MASSCAN_DIR="$ATTACKTOOL_DIR/masscan"
+
+FUZZTOOL_DIR="$DEST_DIR/fuzzing_tools"
+
+AFL_DIR="$FUZZTOOL_DIR/aflnet"
+RADAMSA_DIR="$FUZZTOOL_DIR/radamsa"
+
+# Flags
+SHOULD_REMOVE=false
+INSTALL=false
+NO_SUDO=false
+
+# Help function
+function help() {
+    echo -e "\nThis script installs all necessary dependencies for the chadv1.0 fuzzing workflow.\n"
+    echo -e "Usage: $0 [install] [--remove | -r] [--dest-dir | -d <dir>] [--no-sudo] [--version | -V] [--help | -h]"
+    echo -e "Options:"
+    echo -e " -r, --remove\t\tRemove all installed dependencies and files."
+    echo -e " -d, --dest-dir\t\tInstallation destination directory (defaults to '$DEST_DIR')."
+    echo -e " -n, --no-sudo\t\tRun the script without sudo permissions."
+    echo -e " -V, --version\t\tDisplay the version of the install script."
+    echo -e " -h, --help\t\tDisplay this help message."
+    echo -e "\n"
+}
+
+# Check for positional parameters
+if [ "$1" == "install" ]; then
+    INSTALL=true
+    shift
+fi
+
+# Parse arguments
+eval set -- "$VALID_ARGS"
+while true; do
+    case "$1" in
+        '-r' | '--remove')
+            SHOULD_REMOVE=true
+            ;;
+        '-d' | '--dest-dir')
+            INSTALL_DIR=$2
+            shift
+            ;;
+        '-n'| '--no-sudo')
+            NO_SUDO=true
+            ;;
+        '-V' | '--version')
+            echo "Chadv1.0 install script version: $SCRIPT_VERSION"
+            exit 0
+            ;;
+        '-h' | '--help')
+            help
+            exit 0
+            ;;
+        *)
+            break
+            ;;
+    esac
+    shift
+done
+
+
+# Function to sanitize paths
+function sanitize_path() {
+    local SANITIZED_PATH="$1"
+    local SANITIZED_PATH=${SANITIZED_PATH//..\//}
+    local SANITIZED_PATH=${SANITIZED_PATH#./}
+    local SANITIZED_PATH=${SANITIZED_PATH#/}
+    echo "$SANITIZED_PATH"
+}
+
+# Root check
+if [ "$EUID" -ne 0 ] && [ "$NO_SUDO" = false ]; then
+    log error "This script requires root permissions or the '--no-sudo' option."
+    # help
+    exit 1
+fi
+
+# Function to check if a command exists
+command_exists() {
+    if ! command -v "$1" &> /dev/null; then
+        log error "Command: $1 could not be found! Exiting..."
+        exit 1
+    fi
+}
+
+# Function to check if a directory exists
+dir_exists() {
+    if [ -d "$1" ]; then
+        log info "Directory: $1 already exists."
+        return 0
+    else
+        log info "Directory: $1 not found."
+        return 1
+    fi
+}
+
+function uninstall() {
+    log info "Removing related files and directories..."
+}
+
+# Function to install Medusa
+function install_medusa() {
+    log info "Installing: Medusa"
+    if [ ! -d "$MEDUSA_DIR" ]; then
+        log info "Cloning repository into: $MEDUSA_DIR"
+        git clone https://gitlab.com/e62Lab/medusa.git --branch master --single-branch "$MEDUSA_DIR"
+    else
+        log info "Medusa directory already exists."
+    fi
+}
+
+# Function to install Masscan
+function install_masscan() {
+    log info "Installing: Masscan"
+    if [ ! -d "$MASSCAN_DIR" ]; then
+        log info "Cloning repository into: $MASSCAN_DIR"
+        git clone https://github.com/robertdavidgraham/masscan "$MASSCAN_DIR"
+    else
+        log info "Masscan directory already exists."
+    fi
+}
+
+# Function to install AFLNet
+function install_aflnet() {
+    log info "Installing: AFLNet"
+    if [ ! -d "$AFL_DIR" ]; then
+        log info "Cloning repository into: $AFL_DIR"
+        git clone https://github.com/aflnet/aflnet.git "$AFL_DIR"
+    else
+        log info "AFLNet directory already exists."
+    fi
+}
+
+# Function to install Radamsa
+function install_radamsa() {
+    log info "Installing: Radamsa"
+    if [ ! -d "$RADAMSA_DIR" ]; then
+        log info "Cloning repository into: $RADAMSA_DIR"
+        git clone https://gitlab.com/akihe/radamsa.git"$RADAMSA_DIR" && cd "$RADAMSA_DIR" && make && sudo make install
+    else
+        log info "Radamsa directory already exists."
+    fi
+}
+
+# Main installation function
+function install() {
+    banner
+    echo -e "\n"
+    log info "Installing required packages..."
+    sudo apt update -y && sudo apt upgrade -y
+    sudo apt install -y git g++ python3 cmake libhdf5-dev doxygen graphviz make gcc wget 
+
+    command_exists git
+
+    # Install Attack Tools 
+    install_medusa
+    install_masscan
+
+    # Install Fuzzing Tools
+    install_aflnet
+    install_radamsa
+}
+
+if [[ "$INSTALL" = true && "$DEBUG" = false ]]; then
+    install
+elif [[ "$SHOULD_REMOVE" = true && "$DEBUG" = false ]]; then
+    uninstall
+else
+    if [ "$DEBUG" = true ]; then
+        log warn "Debug mode enabled."
+    fi
+    help
+fi

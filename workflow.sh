@@ -85,12 +85,6 @@ function check_distro() {
     fi
 }
 
-# Call the function and handle the result
-if ! check_distro; then
-    log error "This script supports only Kali Linux 2023.4 or above and Ubuntu 18.04 or above."
-    exit 1
-fi
-
 # Argument parsing
 SHORT=r,d,n,V,h
 LONG=remove,dest-dir,no-sudo,version,help
@@ -119,6 +113,7 @@ NO_SUDO=false
 
 # Help function
 function help() {
+    banner
     echo -e "\nThis script installs all necessary dependencies for the chadv1.0 fuzzing workflow.\n"
     echo -e "Usage: $0 [install] [--remove | -r] [--dest-dir | -d <dir>] [--no-sudo] [--version | -V] [--help | -h]"
     echo -e "Options:"
@@ -235,7 +230,7 @@ function install_radamsa() {
     log info "Installing: Radamsa"
     if [ ! -d "$RADAMSA_DIR" ]; then
         log info "Cloning repository into: $RADAMSA_DIR"
-        git clone https://gitlab.com/akihe/radamsa.git"$RADAMSA_DIR" && cd "$RADAMSA_DIR" && make && sudo make install
+        git clone https://gitlab.com/akihe/radamsa.git "$RADAMSA_DIR"
     else
         log info "Radamsa directory already exists."
     fi
@@ -243,6 +238,12 @@ function install_radamsa() {
 
 function install() {
     banner
+
+    if ! check_distro; then
+        log error "This script supports only Kali Linux 2023.4 or above and Ubuntu 18.04 or above."
+        exit 1
+    fi
+
     echo -e "\n"
     log info "Installing required packages..."
     sudo apt update -y && sudo apt upgrade -y

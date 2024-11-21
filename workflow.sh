@@ -162,8 +162,6 @@ while true; do
     shift
 done
 
-
-# Function to sanitize paths
 function sanitize_path() {
     local SANITIZED_PATH="$1"
     local SANITIZED_PATH=${SANITIZED_PATH//..\//}
@@ -179,7 +177,6 @@ if [ "$EUID" -ne 0 ] && [ "$NO_SUDO" = false ]; then
     exit 1
 fi
 
-# Function to check if a command exists
 command_exists() {
     if ! command -v "$1" &> /dev/null; then
         log error "Command: $1 could not be found! Exiting..."
@@ -187,7 +184,6 @@ command_exists() {
     fi
 }
 
-# Function to check if a directory exists
 dir_exists() {
     if [ -d "$1" ]; then
         log info "Directory: $1 already exists."
@@ -202,7 +198,6 @@ function uninstall() {
     log info "Removing related files and directories..."
 }
 
-# Function to install Medusa
 function install_medusa() {
     log info "Installing: Medusa"
     if [ ! -d "$MEDUSA_DIR" ]; then
@@ -213,7 +208,6 @@ function install_medusa() {
     fi
 }
 
-# Function to install Masscan
 function install_masscan() {
     log info "Installing: Masscan"
     if [ ! -d "$MASSCAN_DIR" ]; then
@@ -224,7 +218,6 @@ function install_masscan() {
     fi
 }
 
-# Function to install AFLNet
 function install_aflnet() {
     log info "Installing: AFLNet"
     if [ ! -d "$AFL_DIR" ]; then
@@ -235,7 +228,6 @@ function install_aflnet() {
     fi
 }
 
-# Function to install Radamsa
 function install_radamsa() {
     log info "Installing: Radamsa"
     if [ ! -d "$RADAMSA_DIR" ]; then
@@ -246,7 +238,6 @@ function install_radamsa() {
     fi
 }
 
-# Main installation function
 function install() {
     banner
     echo -e "\n"
@@ -256,11 +247,11 @@ function install() {
 
     command_exists git
 
-    # Install Attack Tools 
+    # Attack Tools 
     install_medusa
     install_masscan
 
-    # Install Fuzzing Tools
+    # Fuzzing Tools
     install_aflnet
     install_radamsa
 }

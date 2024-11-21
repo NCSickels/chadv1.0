@@ -53,11 +53,7 @@ Charger Active Defense v1.0 - Senior Design Project
 │   ├── fuzzowski.medusa.ftp
 │   │   └── ftp.py
 │   ├── fuzzshark
-│   │   └── src
-│   │       ├── CMakeLists.txt
-│   │       ├── FuzzerInterface.h
-│   │       ├── StandaloneFuzzTargetMain.c
-│   │       └── fuzzshark.c
+│   │   └── ~src
 │   ├── medusa.postgresql.afl_1
 │   │   ├── cmdline
 │   │   ├── fuzz_bitmap
@@ -80,11 +76,7 @@ Charger Active Defense v1.0 - Senior Design Project
 │   │   ├── ftp_server.py
 │   │   └── pcap_parsing.py
 │   ├── randpkt
-│   │   └── src
-│   │       ├── CMakeLists.txt
-│   │       ├── randpkt.c
-│   │       ├── randpkt_core.c
-│   │       └── randpkt_core.h
+│   │   └── ~src
 │   └── scapy.radamsa
 │       └── radamsa_scapy_pcap_fuzzing.py
 ├── misc
@@ -191,7 +183,7 @@ Charger Active Defense v1.0 - Senior Design Project
     - **Radamsa_Instructions.md:** Radamsa testing instructions.
   - **randbytes:** Randbytes files.
     - **ftp_server.py:** FTP server file.
-    - **pcap_parsing.py:** PCAP parsing file.
+    - **pcap_parsing.py:** PCAP parsing file with Scapy.
   - **randpkt:** Randpkt files.
   - **scapy.radamsa:** Scapy Radamsa files.
     - **radamsa_scapy_pcap_fuzzing.py:** Radamsa & Scapy PCAP fuzzing Python script.
@@ -220,8 +212,8 @@ Charger Active Defense v1.0 - Senior Design Project
     - **medusa_ssh.txt:** Medusa SSH Valgrind test results file.
     - **netdiscover.txt:** Netdiscover Valgrind test results file.
 - **research:** Contains research-related files.
-  - **CVEs.md:** List of CVEs.
-  - **Fuzzing_Tools.md:** Documentation of fuzzing tools.
+  - **CVEs.md:** List of CVEs from all attack tool candidates.
+  - **Fuzzing_Tools.md:** Background research on possible fuzzing tools.
   - **cmiller-csw-2010.pdf:** Research paper on general fuzzing and fuzzing tools.
 
 </details>
@@ -230,9 +222,31 @@ Charger Active Defense v1.0 - Senior Design Project
 
 ## Project Overview
 
+![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
+![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
+
+[![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=flat&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
+
 ## Usage & Installation
 
-### Bash Script
+There are three ways to install and use the tools necessary for the Chadv1.0 workflow: using a Bash script, a Dockerfile, or manually.
+
+Prerequisites:
+
+<!-- - Python 3.8+
+- Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later) -->
+
+### Bash Script (Recommended)
+
+To install the attack tools and fuzzing tools, you can use the provided Bash script as shown below:
+
+```bash
+# Download the workflow script
+curl -O https://raw.githubusercontent.com/NCSickels/chadv1.0/main/workflow.sh
+
+# Using the workflow script
+sudo ./workflow.sh install
+```
 
 ### Dockerfile
 

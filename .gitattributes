@@ -1,1 +1,19 @@
 *.glh filter=lfs diff=lfs merge=lfs -text
+
+# Mark all .py files as Python
+*.py linguist-language=Python
+
+# Mark all .sh files as Shell
+*.sh linguist-language=Shell
+
+# Mark all .md files as Markdown
+*.md linguist-language=Markdown
+
+# Mark all .html files as HTML
+*.html linguist-language=HTML
+
+# Mark all .c files as C
+*.c linguist-language=C
+
+# Mark all .cpp files as C++
+*.cpp linguist-language=C++

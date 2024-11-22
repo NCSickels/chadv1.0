@@ -9,7 +9,7 @@
 #   
 #  Charger Active Defense v1.0 Install Script
 #  
-set -e
+set -euo pipefail
 
 CHAD_VERSION="1.0"
 SCRIPT_VERSION="0.1.0"
@@ -106,15 +106,15 @@ AFL_DIR="$FUZZTOOL_DIR/aflnet"
 RADAMSA_DIR="$FUZZTOOL_DIR/radamsa"
 
 # Flags
-SHOULD_REMOVE=false
 INSTALL=false
+SHOULD_REMOVE=false
+BUILD=false
 NO_SUDO=false
 
-# Help function
 function help() {
     banner
     echo -e "\nThis script installs all necessary dependencies for the chadv1.0 fuzzing workflow.\n"
-    echo -e "Usage: $0 [install | remove] [--remove | -r] [--dest-dir | -d <dir>] [--no-sudo] [--version | -V] [--help | -h]"
+    echo -e "Usage: $0 [install | build | remove] [--remove | -r] [--dest-dir | -d <dir>] [--no-sudo] [--version | -V] [--help | -h]"
     echo -e "Options:"
     echo -e " -r, --remove\t\tRemove all installed dependencies and files."
     echo -e " -d, --dest-dir\t\tInstallation destination directory (defaults to '$DEST_DIR')."
@@ -128,8 +128,11 @@ function help() {
 if [ "$1" == "install" ]; then
     INSTALL=true
     shift
-elif [[ "$1" == "remove" || "$1" == "uninstall" ]]; then
+elif [[ "$1" == "remove" || "$1" == "uninstall" || "$1" == "clean" ]]; then
     SHOULD_REMOVE=true
+    shift
+elif [ "$1" == "build" ]; then
+    BUILD=true
     shift
 else
     help
@@ -198,6 +201,7 @@ dir_exists() {
 }
 
 function uninstall() {
+    banner
     log info "Removing related files and directories..."
     if [ -d "$DEST_DIR" ]; then
         log info "Removing: $DEST_DIR"
@@ -252,10 +256,86 @@ function install() {
     install_tool "Radamsa" "https://gitlab.com/akihe/radamsa.git" "$RADAMSA_DIR"
 }
 
+function build() {
+    banner
+    log info "Building all tools, this may take some time."
+
+    # Build Medusa
+    log info "Building Medusa..."
+    if [ -d "$MEDUSA_DIR" ]; then
+        cd "$MEDUSA_DIR"
+        if ./run_tests.py; then
+            log info "Medusa built successfully."
+        else
+            log error "Failed to build Medusa."
+            exit 1
+        fi
+        cd "$SCRIPT_DIR"
+    else 
+        log error "Medusa directory not found."
+        exit 1
+    fi
+    
+    # Build Masscan
+    log info "Building Masscan..."
+    if [ -d "$MASSCAN_DIR" ]; then
+        cd "$MASSCAN_DIR"
+        if make; then
+            log info "Masscan built successfully."
+        else
+            log error "Failed to build Masscan."
+            exit 1
+        fi
+        cd "$SCRIPT_DIR"
+    else 
+        log error "Masscan directory not found."
+        exit 1
+    fi
+
+    # Build AFLNet
+
+    # NOTE: AFLnet requires llvm_mode which needs a specific version of
+    # clang and llvm; the make command may not work if llvm-config is not found.
+    # To fix this issue, LLVM_CONFIG environment variable needs to be set to the 
+    # correct path of llvm-config. 
+
+    log info "Building AFLNet..."
+    cd "$AFL_DIR"
+    if make clean all; then
+        log info "AFLnet instrumentation built successfully."
+        cd llvm_mode
+
+        log info "Looking for llvm-config..."
+    else
+        log error "Failed to build AFLNet."
+        exit 1
+    fi 
+
+    cd "$SCRIPT_DIR"
+
+    # Build Radamsa
+    log info "Building Radamsa..."
+    if [ -d "$RADAMSA_DIR" ]; then
+        cd "$RADAMSA_DIR"
+        if make && make install; then
+            log info "Radamsa built successfully."
+        else
+            log error "Failed to build Radamsa."
+            exit 1
+        fi
+        cd "$SCRIPT_DIR"
+    else 
+        log error "Radamsa directory not found."
+        exit 1
+    fi
+}
+
 if [[ "$INSTALL" = true && "$DEBUG" = false ]]; then
     install
 elif [[ "$SHOULD_REMOVE" = true && "$DEBUG" = false ]]; then
     uninstall
+elif [[ "$BUILD" = true && "$DEBUG" = false ]]; then
+    build
 else
     if [ "$DEBUG" = true ]; then
         log warn "Debug mode enabled."

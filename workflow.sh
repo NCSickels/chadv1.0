@@ -31,7 +31,7 @@ rm -f /tmp/chad_install.log
 LOG_FILE="/tmp/chad_install.log"
 exec > >(tee -a $LOG_FILE) 2>&1
 
-# Function to log messages with color codes
+# Colorized log messages
 function log() {
     local level=$1
     local message=$2
@@ -62,7 +62,7 @@ function banner() {
     echo -e "\t\t============================================"
 }
 
-# Function to check the Linux distribution and version
+# Checks for Kali Linux 2023.4+ or Ubuntu 18.04+
 function check_distro() {
     log info "Checking for compatible Linux distribution and version..."
     if [ -f /etc/os-release ]; then
@@ -207,9 +207,10 @@ function uninstall() {
     else
         log info "Directory: $DEST_DIR not found."
     fi
+
+    rm -f /bin/radamsa
 }
 
-# Generic function to install a tool
 function install_tool() {
     local tool_name=$1
     local repo_url=$2

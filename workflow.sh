@@ -256,6 +256,7 @@ function install() {
     install_tool "Radamsa" "https://gitlab.com/akihe/radamsa.git" "$RADAMSA_DIR"
 }
 
+# Can't adequately modularize this function since all tools vary in build process
 function build() {
     banner
     log info "Building all tools, this may take some time."
@@ -300,17 +301,41 @@ function build() {
     # correct path of llvm-config. 
 
     log info "Building AFLNet..."
-    cd "$AFL_DIR"
-    if make clean all; then
-        log info "AFLnet instrumentation built successfully."
-        cd llvm_mode
+    if [ -d "$AFL_DIR" ]; then
+        cd "$AFL_DIR"
+        if make clean all; then
+            log info "AFLnet instrumentation built successfully."
+            cd llvm_mode
 
-        log info "Looking for llvm-config..."
+            log info "Looking for llvm-config..."
+            # Check for llvm-config-* in /usr/bin
+            LLVM_CONFIG=$(ls /usr/bin/llvm-config-* 2>/dev/null | head -n 1)
+            if [ -z "$LLVM_CONFIG" ]; then
+                log error "llvm-config version not found in /usr/bin."
+                log info "Checking for LLVM_CONFIG on PATH..."
+                
+                AFLNET=$(pwd)
+                WORKDIR=$(pwd)
+
+                if [[ ":$PATH:" != *":$AFLNET:"* ]]; then
+                    export PATH=$AFLNET:$PATH
+                    log info "Added AFLNet to PATH."
+                else 
+                    log info "AFLNet already in PATH."
+                fi
+                export AFL_PATH=$AFLNET
+                log info "AFL_PATH set to: $AFL_PATH"
+            fi
+
+        else
+            log error "Failed to build AFLNet."
+            exit 1
+        fi 
     else
-        log error "Failed to build AFLNet."
+        log error "AFLNet directory not found."
         exit 1
-    fi 
-
+    fi
+    
     cd "$SCRIPT_DIR"
 
     # Build Radamsa

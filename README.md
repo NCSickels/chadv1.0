@@ -1,3 +1,8 @@
+![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
+![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
+
+[![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=flat&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
+
 # Charger Active Defense v1.0 - Senior Design Project
 
  *Noah Sickels, Adam Brannon, and William Lochte*
@@ -221,11 +226,6 @@ Charger Active Defense v1.0 - Senior Design Project
 <br></br>
 
 ## Project Overview
-
-![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
-![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
-
-[![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=flat&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
 
 ## Usage & Installation
 

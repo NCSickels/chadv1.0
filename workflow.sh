@@ -243,12 +243,16 @@ function install() {
     echo -e "\n"
     log info "Installing required packages..."
     sudo apt update -y && sudo apt upgrade -y
-    sudo apt install -y git g++ python3 cmake libhdf5-dev doxygen graphviz make gcc wget 
+    sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf \
+        automake libssl-dev wget
+    # sudo apt install -y git g++ python3 cmake libhdf5-dev doxygen graphviz make gcc wget \
+    #     autoconf automake libssl-dev
+
 
     command_exists git
 
     # Attack Tools 
-    install_tool "Medusa" "https://gitlab.com/e62Lab/medusa.git --branch master --single-branch" "$MEDUSA_DIR"
+    install_tool "Medusa" "https://salsa.debian.org/pkg-security-team/medusa" "$MEDUSA_DIR"
     install_tool "Masscan" "https://github.com/robertdavidgraham/masscan" "$MASSCAN_DIR"
     
     # Fuzzing Tools
@@ -265,7 +269,9 @@ function build() {
     log info "Building Medusa..."
     if [ -d "$MEDUSA_DIR" ]; then
         cd "$MEDUSA_DIR"
-        if ./run_tests.py; then
+        autoreconf -f -i
+        make
+        if make; then
             log info "Medusa built successfully."
         else
             log error "Failed to build Medusa."
@@ -335,7 +341,7 @@ function build() {
         log error "AFLNet directory not found."
         exit 1
     fi
-    
+
     cd "$SCRIPT_DIR"
 
     # Build Radamsa
@@ -353,6 +359,7 @@ function build() {
         log error "Radamsa directory not found."
         exit 1
     fi
+    log info "All tools successfully built!"
 }
 
 if [[ "$INSTALL" = true && "$DEBUG" = false ]]; then

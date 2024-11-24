@@ -311,30 +311,47 @@ function build() {
         cd "$AFL_DIR"
         if make clean all; then
             log info "AFLnet instrumentation built successfully."
+            # May want to add directory check here as well, but should be fine for now
             cd llvm_mode
-
-            log info "Looking for llvm-config..."
-            # Check for llvm-config-* in /usr/bin
-            LLVM_CONFIG=$(ls /usr/bin/llvm-config-* 2>/dev/null | head -n 1)
-            if [ -z "$LLVM_CONFIG" ]; then
-                log error "llvm-config version not found in /usr/bin."
-                log info "Checking for LLVM_CONFIG on PATH..."
-                
-                AFLNET=$(pwd)
-                WORKDIR=$(pwd)
-
-                if [[ ":$PATH:" != *":$AFLNET:"* ]]; then
-                    export PATH=$AFLNET:$PATH
-                    log info "Added AFLNet to PATH."
+            if make; then
+                log info "llvm_mode built successfully."
+            else
+                log error "Failed to build llvm_mode."
+                log info "Looking for existing llvm-config..."
+                # Check for llvm-config-* in /usr/bin
+                LLVM_CONFIG=$(ls /usr/bin/llvm-config-* 2>/dev/null | head -n 1)
+                if [ -z "$LLVM_CONFIG" ]; then
+                    log error "llvm-config version not found in /usr/bin."
+                    log info "Checking for LLVM_CONFIG on PATH..."
+                    # Check for llvm-config on PATH
+                    if [[ ":PATH:" != *":$LLVM_CONFIG:"* ]]; then
+                        log error "llvm-config not found on PATH."
+                        log error "Please install clang or set LLVM_CONFIG environment variable manually."
+                        exit 1
+                    else
+                        log info "Found llvm-config on PATH."
+                    fi
                 else 
-                    log info "AFLNet already in PATH."
+                    log info "Found llvm-config: $LLVM_CONFIG"
                 fi
-                export AFL_PATH=$AFLNET
-                log info "AFL_PATH set to: $AFL_PATH"
             fi
+            # Move to AFLNet's parent directory
+            cd ../..
 
+            export AFLNET=$(pwd)/aflnet
+            export WORKDIR=$(pwd)
+            export LLVM_CONFIG=$LLVM_CONFIG
+
+            if [[ ":$PATH:" != *":$AFLNET:"* ]]; then
+                export PATH=$PATH:$AFLNET
+                log info "Added AFLNet to PATH."
+            else 
+                log info "AFLNet already in PATH."
+            fi
+            export AFL_PATH=$AFLNET
+            log info "AFL_PATH set to: $AFL_PATH"
         else
-            log error "Failed to build AFLNet."
+            log error "Failed to configure AFLNet instrumentation."
             exit 1
         fi 
     else

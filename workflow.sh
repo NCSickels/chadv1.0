@@ -37,13 +37,13 @@ function log() {
 
     case $level in
         info)
-            echo -e "\n${BLUE}[INFO]${NC} $message\n" ;;
+            echo -e "${BLUE}[INFO]${NC} $message" ;;
         warn)
-            echo -e "\n${YELLOW}[WARN]${NC} $message\n" ;;
+            echo -e "${YELLOW}[WARN]${NC} $message" ;;
         error)
-            echo -e "\n${RED}[ERROR]${NC} $message\n" ;;
+            echo -e "${RED}[ERROR]${NC} $message" ;;
         *)
-            echo -e "\n${WHITE}[LOG]${NC} $message\n" ;;
+            echo -e "${WHITE}[LOG]${NC} $message" ;;
     esac
 }
 
@@ -304,15 +304,23 @@ function build() {
     log info "Building all tools, this may take some time."
 
     # Build Medusa
+    # TODO: Error when building on Ubuntu system, missing openssl libraries
     log info "Building Medusa..."
     if [ -d "$MEDUSA_DIR" ]; then
         cd "$MEDUSA_DIR"
-        autoreconf -f -i
-        make
-        if make; then
-            log info "Medusa built successfully."
+        if ./configure; then
+            log info "Medusa successfully configured."
+            autoreconf -f -i
+            if make; then
+                log info "Medusa successfully built."
+            else
+                log error "Failed to build Medusa."
+                # TODO: Need to set new Medusa path here.
+                log warn "Use the pre-built package for Medusa instead."
+                # exit 1
+            fi
         else
-            log error "Failed to build Medusa."
+            log error "Failed to configure Medusa."
             exit 1
         fi
         cd "$SCRIPT_DIR"

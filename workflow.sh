@@ -379,6 +379,11 @@ function build() {
                     fi
                 else 
                     log info "Found llvm-config: $LLVM_CONFIG"
+                if make; then
+                    log info "llvm_mode built successfully."
+                else
+                    log error "Could not build llvm_mode with existing llvm-config."
+                    exit 1
                 fi
             fi
             # Move to AFLNet's parent directory

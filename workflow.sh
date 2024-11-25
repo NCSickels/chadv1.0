@@ -37,13 +37,13 @@ function log() {
 
     case $level in
         info)
-            echo -e "${BLUE}[INFO]${NC} $message" ;;
+            echo -e "\n${BLUE}[INFO]${NC} $message\n" ;;
         warn)
-            echo -e "${YELLOW}[WARN]${NC} $message" ;;
+            echo -e "\n${YELLOW}[WARN]${NC} $message\n" ;;
         error)
-            echo -e "${RED}[ERROR]${NC} $message" ;;
+            echo -e "\n${RED}[ERROR]${NC} $message\n" ;;
         *)
-            echo -e "${WHITE}[LOG]${NC} $message" ;;
+            echo -e "\n${WHITE}[LOG]${NC} $message\n" ;;
     esac
 }
 
@@ -84,13 +84,13 @@ function check_distro() {
     fi
 }
 
-# Argument parsing
-SHORT=r,d,n,V,h
-LONG=remove,dest-dir,no-sudo,version,help
-VALID_ARGS=$(getopt -a --options $SHORT --longoptions $LONG -- "$@")
-if [[ $? -ne 0 ]]; then
-    exit 1;
-fi
+# # Argument parsing
+# SHORT=r,d,n,V,h
+# LONG=remove,dest-dir,no-sudo,version,help
+# VALID_ARGS=$(getopt -a --options $SHORT --longoptions $LONG -- "$@")
+# if [[ $? -ne 0 ]]; then
+#     exit 1;
+# fi
 
 # Project Directory Variables
 DEST_DIR="$SCRIPT_DIR/chadv$CHAD_VERSION"
@@ -124,45 +124,83 @@ function help() {
     echo -e "\n"
 }
 
-# Check for positional parameters
-if [ "$1" == "install" ]; then
-    INSTALL=true
-    shift
-elif [[ "$1" == "remove" || "$1" == "uninstall" || "$1" == "clean" ]]; then
-    SHOULD_REMOVE=true
-    shift
-elif [ "$1" == "build" ]; then
-    BUILD=true
-    shift
-else
-    help
-    exit 1
-fi
+# # Check for positional parameters
+# if [ "$1" == "install" ]; then
+#     INSTALL=true
+#     shift
+# elif [[ "$1" == "remove" || "$1" == "uninstall" || "$1" == "clean" ]]; then
+#     SHOULD_REMOVE=true
+#     shift
+# elif [ "$1" == "build" ]; then
+#     BUILD=true
+#     shift
+# else
+#     help
+#     # exit 1
+# fi
 
-# Parse arguments
-eval set -- "$VALID_ARGS"
-while true; do
-    case "$1" in
-        '-r' | '--remove')
+# # Parse arguments
+# eval set -- "$VALID_ARGS"
+# while true; do
+#     case "$1" in
+#         '-r' | '--remove')
+#             SHOULD_REMOVE=true
+#             ;;
+#         '-d' | '--dest-dir')
+#             INSTALL_DIR=$2
+#             shift
+#             ;;
+#         '-n'| '--no-sudo')
+#             NO_SUDO=true
+#             ;;
+#         '-V' | '--version')
+#             echo "Chadv1.0 install script version: $SCRIPT_VERSION"
+#             exit 0
+#             ;;
+#         '-h' | '--help')
+#             help
+#             exit 0
+#             ;;
+#         *)
+#             break
+#             ;;
+#     esac
+#     shift
+# done
+
+for arg in "$@"; do
+    case $arg in
+        install)
+            INSTALL=true
+            ;;
+        build)
+            BUILD=true
+            ;;
+        remove | uninstall | -r | --remove)
             SHOULD_REMOVE=true
             ;;
-        '-d' | '--dest-dir')
-            INSTALL_DIR=$2
+        -d=*|--dest-dir=*)
+            DEST_DIR="${arg#*=}"
             shift
             ;;
-        '-n'| '--no-sudo')
+        --dest-dir)
+            DEST_DIR="$2"
+            shift
+            ;;
+        -n|--no-sudo)
             NO_SUDO=true
             ;;
-        '-V' | '--version')
+        -V|--version)
             echo "Chadv1.0 install script version: $SCRIPT_VERSION"
-            exit 0
+            exit 1
             ;;
-        '-h' | '--help')
+        -h|--help)
             help
-            exit 0
+            exit 1
             ;;
         *)
-            break
+            help
+            exit 1
             ;;
     esac
     shift

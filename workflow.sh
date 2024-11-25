@@ -316,7 +316,7 @@ function build() {
             else
                 log error "Failed to build Medusa."
                 # TODO: Need to set new Medusa path here.
-                log warn "Use the pre-built package for Medusa instead."
+                log warn "Using the pre-built package for Medusa instead."
                 # exit 1
             fi
         else
@@ -379,6 +379,8 @@ function build() {
                     fi
                 else 
                     log info "Found llvm-config: $LLVM_CONFIG"
+                fi
+
                 if make; then
                     log info "llvm_mode built successfully."
                 else

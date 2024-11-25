@@ -25,6 +25,15 @@ BLUE='\033[0;34m'
 WHITE='\033[0;37m'
 NC='\033[0m' # No Color
 
+# Root check
+if [ "$EUID" -ne 0 ] && [ "$NO_SUDO" = false ]; then
+    # Added this line to perform root check before attempting log file deletion
+    # otherwise there will be a permission error without explanation
+    echo -e "{$RED}[ERROR]{$NC} This script requires root permissions or the '--no-sudo' option."
+    # help
+    exit 1
+fi
+
 # Save output to log file
 rm -f /tmp/chad_install.log
 LOG_FILE="/tmp/chad_install.log"
@@ -214,12 +223,7 @@ function sanitize_path() {
     echo "$SANITIZED_PATH"
 }
 
-# Root check
-if [ "$EUID" -ne 0 ] && [ "$NO_SUDO" = false ]; then
-    log error "This script requires root permissions or the '--no-sudo' option."
-    # help
-    exit 1
-fi
+
 
 command_exists() {
     if ! command -v "$1" &> /dev/null; then
@@ -379,6 +383,7 @@ function build() {
                     fi
                 else 
                     log info "Found llvm-config: $LLVM_CONFIG"
+                    export LLVM_CONFIG=$LLVM_CONFIG
                 fi
 
                 if make; then
@@ -393,8 +398,8 @@ function build() {
 
             export AFLNET=$(pwd)/aflnet
             export WORKDIR=$(pwd)
-            export LLVM_CONFIG=$LLVM_CONFIG
-
+            # export LLVM_CONFIG=$LLVM_CONFIG
+            # TODO:: Verify if this works correctly
             if [[ ":$PATH:" != *":$AFLNET:"* ]]; then
                 export PATH=$PATH:$AFLNET
                 log info "Added AFLNet to PATH."

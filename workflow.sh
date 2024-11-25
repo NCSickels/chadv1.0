@@ -84,13 +84,6 @@ function check_distro() {
     fi
 }
 
-# # Argument parsing
-# SHORT=r,d,n,V,h
-# LONG=remove,dest-dir,no-sudo,version,help
-# VALID_ARGS=$(getopt -a --options $SHORT --longoptions $LONG -- "$@")
-# if [[ $? -ne 0 ]]; then
-#     exit 1;
-# fi
 
 # Project Directory Variables
 DEST_DIR="$SCRIPT_DIR/chadv$CHAD_VERSION"
@@ -123,50 +116,6 @@ function help() {
     echo -e " -h, --help\t\tDisplay this help message."
     echo -e "\n"
 }
-
-# # Check for positional parameters
-# if [ "$1" == "install" ]; then
-#     INSTALL=true
-#     shift
-# elif [[ "$1" == "remove" || "$1" == "uninstall" || "$1" == "clean" ]]; then
-#     SHOULD_REMOVE=true
-#     shift
-# elif [ "$1" == "build" ]; then
-#     BUILD=true
-#     shift
-# else
-#     help
-#     # exit 1
-# fi
-
-# # Parse arguments
-# eval set -- "$VALID_ARGS"
-# while true; do
-#     case "$1" in
-#         '-r' | '--remove')
-#             SHOULD_REMOVE=true
-#             ;;
-#         '-d' | '--dest-dir')
-#             INSTALL_DIR=$2
-#             shift
-#             ;;
-#         '-n'| '--no-sudo')
-#             NO_SUDO=true
-#             ;;
-#         '-V' | '--version')
-#             echo "Chadv1.0 install script version: $SCRIPT_VERSION"
-#             exit 0
-#             ;;
-#         '-h' | '--help')
-#             help
-#             exit 0
-#             ;;
-#         *)
-#             break
-#             ;;
-#     esac
-#     shift
-# done
 
 for arg in "$@"; do
     case $arg in
@@ -283,9 +232,6 @@ function install() {
     sudo apt update -y && sudo apt upgrade -y
     sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf \
         automake libssl-dev wget
-    # sudo apt install -y git g++ python3 cmake libhdf5-dev doxygen graphviz make gcc wget \
-    #     autoconf automake libssl-dev
-
 
     command_exists git
 

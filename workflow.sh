@@ -25,11 +25,6 @@ BLUE='\033[0;34m'
 WHITE='\033[0;37m'
 NC='\033[0m' # No Color
 
-# Save output to log file
-rm -f /tmp/chad_install.log
-LOG_FILE="/tmp/chad_install.log"
-exec > >(tee -a $LOG_FILE) 2>&1
-
 # Colorized log messages
 function log() {
     local level=$1
@@ -170,6 +165,11 @@ if [ "$EUID" -ne 0 ] && [ "$NO_SUDO" = false ]; then
     exit 1
 fi
 
+# Save output to log file
+rm -f /tmp/chad_install.log
+LOG_FILE="/tmp/chad_install.log"
+exec > >(tee -a $LOG_FILE) 2>&1
+
 command_exists() {
     if ! command -v "$1" &> /dev/null; then
         log error "Command: $1 could not be found! Exiting..."
@@ -231,10 +231,11 @@ function install() {
     log info "Installing required packages..."
     sudo apt update -y && sudo apt upgrade -y
     sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf \
-        automake libssl-dev wget
+        automake libssl-dev wget curl
 
     command_exists git
 
+    # * May need to check to ensure --depth 1 will work
     # Attack Tools 
     install_tool "Medusa" "https://salsa.debian.org/pkg-security-team/medusa" "$MEDUSA_DIR"
     install_tool "Masscan" "https://github.com/robertdavidgraham/masscan" "$MASSCAN_DIR"

@@ -233,6 +233,7 @@ There are three ways to install and use the tools necessary for the Chadv1.0 wor
 
 Prerequisites:
 
+- Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
 <!-- - Python 3.8+
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later) -->
 
@@ -241,13 +242,98 @@ Prerequisites:
 To install the attack tools and fuzzing tools, you can use the provided Bash script as shown below:
 
 ```bash
-# Download the workflow script
+# Download the workflow script through curl or manually from the repository
 curl -O https://raw.githubusercontent.com/NCSickels/chadv1.0/main/workflow.sh
 
+# Make the script executable
+chmod u+x workflow.sh
+
 # Using the workflow script
+sudo ./workflow.sh --help
+
+# To install all tools (attack and fuzzing)
 sudo ./workflow.sh install
+
+# To build all tools (attack and fuzzing)
+sudo ./workflow.sh build
 ```
 
-### Dockerfile
+### Dockerfile (WIP)
+
+- Build the Chadv1.0 Workflow Docker image: `make build`
+- Run the Chadv1.0 Workflow Docker container: `make run`
+
+- To build the Docker image manually:
+
+```bash
+# Build the Docker image
+docker build -t workflow .
+```
+
+- To run the Docker container manually:
+
+```bash
+# Run the Docker container
+docker run --rm -it --name workflow -v . workflow /bin/bash
+```
 
 ### Manual Installation
+
+- Clone the attack tool repositories and fuzzing tool repositories.
+
+```bash
+# Clone the attack tool repositories
+git clone https://salsa.debian.org/pkg-security-team/medusa.git 
+git clone https://github.com/robertdavidgraham/masscan.git
+
+# Clone the fuzzing tool repositories
+git clone https://github.com/aflnet/aflnet.git
+git clone https://gitlab.com/akihe/radamsa.git
+```
+
+- Install the necessary dependencies for each tool.
+
+```bash
+sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf automake libssl-dev wget curl
+```
+
+- Build the attack tools:
+
+```bash
+# Build the attack tools
+cd medusa
+./configure
+make
+make install
+cd ..
+
+cd masscan
+# Optionally, can run `make -j` for faster compilation
+make 
+make install
+cd ..
+```
+
+- Build the fuzzing tools:
+
+```bash
+# Build the fuzzing tools
+cd aflnet
+make clean all
+cd llvm_mode
+make
+# If this command does not work, it most likely means that llvm-config is not in your PATH. If so, you can add it manually as shown below.
+# It should be named something like llvm-config-6.0 in /usr/bin/
+export LLVM_CONFIG=$(ls /usr/bin/llvm-config-* 2>/dev/null | head -n 1)
+cd ../..
+export AFLNET=$(pwd)/aflnet
+export WORKDIR=$(pwd)
+export PATH=$PATH:$AFLNET
+export AFL_PATH=$AFLNET
+cd ..
+
+cd radamsa
+make
+sudo make install
+cd ..
+```

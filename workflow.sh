@@ -9,7 +9,7 @@
 #   
 #  Charger Active Defense v1.0 Install Script
 #  
-set -e
+set -euo pipefail
 
 CHAD_VERSION="1.0"
 SCRIPT_VERSION="0.1.0"
@@ -18,7 +18,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 # Debug mode flag
 DEBUG=false
 
-# Define color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -26,7 +25,7 @@ BLUE='\033[0;34m'
 WHITE='\033[0;37m'
 NC='\033[0m' # No Color
 
-# Function to log messages with color codes
+# Colorized log messages
 function log() {
     local level=$1
     local message=$2
@@ -43,7 +42,6 @@ function log() {
     esac
 }
 
-# Banner function
 function banner() {
     echo -e "\t\t============================================"
     echo -e "\t\t     ██████╗██╗  ██╗ █████╗ ██████╗"
@@ -57,19 +55,18 @@ function banner() {
     echo -e "\t\t============================================"
 }
 
-# Function to check the Linux distribution and version
+# Checks for Kali Linux 2023.4+ or Ubuntu 18.04+
 function check_distro() {
-    banner
     log info "Checking for compatible Linux distribution and version..."
     if [ -f /etc/os-release ]; then
         . /etc/os-release
-        DISTRO=$ID
+        DISTRO_NAME=$ID
         VERSION=$VERSION_ID
 
-        if [[ "$DISTRO" == "kali" && "$VERSION" == "2023.4" ]]; then
-            log info "Kali Linux 2023.4 detected."
+        if [[ "$DISTRO_NAME" == "kali" && ( "$VERSION" == "2023.4"|| "$VERSION" == "2024.4" ) ]]; then
+            log info "Kali Linux $VERSION detected."
             return 0
-        elif [[ "$DISTRO" == "ubuntu" && ( "$VERSION" == "18.04" || "$VERSION" == "20.04" || "$VERSION" == "22.04" || "$VERSION" > "18.04" ) ]]; then
+        elif [[ "$DISTRO_NAME" == "ubuntu" && ( "$VERSION" == "18.04" || "$VERSION" == "20.04" || "$VERSION" == "22.04" || "$VERSION" > "18.04" ) ]]; then
             log info "Ubuntu $VERSION detected."
             return 0
         else
@@ -82,19 +79,6 @@ function check_distro() {
     fi
 }
 
-# Call the function and handle the result
-if ! check_distro; then
-    log error "This script supports only Kali Linux 2023.4 or above and Ubuntu 18.04 or above."
-    exit 1
-fi
-
-# Argument parsing
-SHORT=r,d,n,V,h
-LONG=remove,dest-dir,no-sudo,version,help
-VALID_ARGS=$(getopt -a --options $SHORT --longoptions $LONG -- "$@")
-if [[ $? -ne 0 ]]; then
-    exit 1;
-fi
 
 # Project Directory Variables
 DEST_DIR="$SCRIPT_DIR/chadv$CHAD_VERSION"
@@ -110,14 +94,15 @@ AFL_DIR="$FUZZTOOL_DIR/aflnet"
 RADAMSA_DIR="$FUZZTOOL_DIR/radamsa"
 
 # Flags
-SHOULD_REMOVE=false
 INSTALL=false
+SHOULD_REMOVE=false
+BUILD=false
 NO_SUDO=false
 
-# Help function
 function help() {
+    banner
     echo -e "\nThis script installs all necessary dependencies for the chadv1.0 fuzzing workflow.\n"
-    echo -e "Usage: $0 [install] [--remove | -r] [--dest-dir | -d <dir>] [--no-sudo] [--version | -V] [--help | -h]"
+    echo -e "Usage: $0 [install | build | remove] [--remove | -r] [--dest-dir | -d <dir>] [--no-sudo] [--version | -V] [--help | -h]"
     echo -e "Options:"
     echo -e " -r, --remove\t\tRemove all installed dependencies and files."
     echo -e " -d, --dest-dir\t\tInstallation destination directory (defaults to '$DEST_DIR')."
@@ -127,43 +112,44 @@ function help() {
     echo -e "\n"
 }
 
-# Check for positional parameters
-if [ "$1" == "install" ]; then
-    INSTALL=true
-    shift
-fi
-
-# Parse arguments
-eval set -- "$VALID_ARGS"
-while true; do
-    case "$1" in
-        '-r' | '--remove')
+for arg in "$@"; do
+    case $arg in
+        install)
+            INSTALL=true
+            ;;
+        build)
+            BUILD=true
+            ;;
+        remove | uninstall | -r | --remove)
             SHOULD_REMOVE=true
             ;;
-        '-d' | '--dest-dir')
-            INSTALL_DIR=$2
+        -d=*|--dest-dir=*)
+            DEST_DIR="${arg#*=}"
             shift
             ;;
-        '-n'| '--no-sudo')
+        --dest-dir)
+            DEST_DIR="$2"
+            shift
+            ;;
+        -n|--no-sudo)
             NO_SUDO=true
             ;;
-        '-V' | '--version')
+        -V|--version)
             echo "Chadv1.0 install script version: $SCRIPT_VERSION"
-            exit 0
+            exit 1
             ;;
-        '-h' | '--help')
+        -h|--help)
             help
-            exit 0
+            exit 1
             ;;
         *)
-            break
+            help
+            exit 1
             ;;
     esac
     shift
 done
 
-
-# Function to sanitize paths
 function sanitize_path() {
     local SANITIZED_PATH="$1"
     local SANITIZED_PATH=${SANITIZED_PATH//..\//}
@@ -179,7 +165,11 @@ if [ "$EUID" -ne 0 ] && [ "$NO_SUDO" = false ]; then
     exit 1
 fi
 
-# Function to check if a command exists
+# Save output to log file
+rm -f /tmp/chad_install.log
+LOG_FILE="/tmp/chad_install.log"
+exec > >(tee -a $LOG_FILE) 2>&1
+
 command_exists() {
     if ! command -v "$1" &> /dev/null; then
         log error "Command: $1 could not be found! Exiting..."
@@ -187,7 +177,6 @@ command_exists() {
     fi
 }
 
-# Function to check if a directory exists
 dir_exists() {
     if [ -d "$1" ]; then
         log info "Directory: $1 already exists."
@@ -199,76 +188,204 @@ dir_exists() {
 }
 
 function uninstall() {
+    banner
     log info "Removing related files and directories..."
+    if [ -d "$DEST_DIR" ]; then
+        log info "Removing: $DEST_DIR"
+        rm -rf "$DEST_DIR"
+    else
+        log info "Directory: $DEST_DIR not found."
+    fi
+
+    rm -f /bin/radamsa
 }
 
-# Function to install Medusa
-function install_medusa() {
-    log info "Installing: Medusa"
-    if [ ! -d "$MEDUSA_DIR" ]; then
-        log info "Cloning repository into: $MEDUSA_DIR"
-        git clone https://gitlab.com/e62Lab/medusa.git --branch master --single-branch "$MEDUSA_DIR"
+function install_tool() {
+    local tool_name=$1
+    local repo_url=$2
+    local target_dir=$3
+
+    log info "Installing: $tool_name"
+    if [ ! -d "$target_dir" ]; then
+        log info "Cloning repository into: $target_dir"
+        if git clone $repo_url "$target_dir"; then
+            log info "$tool_name installed successfully."
+        else
+            log error "Failed to clone $tool_name repository."
+            exit 1
+        fi
     else
-        log info "Medusa directory already exists."
+        log info "$tool_name directory already exists."
     fi
 }
 
-# Function to install Masscan
-function install_masscan() {
-    log info "Installing: Masscan"
-    if [ ! -d "$MASSCAN_DIR" ]; then
-        log info "Cloning repository into: $MASSCAN_DIR"
-        git clone https://github.com/robertdavidgraham/masscan "$MASSCAN_DIR"
-    else
-        log info "Masscan directory already exists."
-    fi
-}
-
-# Function to install AFLNet
-function install_aflnet() {
-    log info "Installing: AFLNet"
-    if [ ! -d "$AFL_DIR" ]; then
-        log info "Cloning repository into: $AFL_DIR"
-        git clone https://github.com/aflnet/aflnet.git "$AFL_DIR"
-    else
-        log info "AFLNet directory already exists."
-    fi
-}
-
-# Function to install Radamsa
-function install_radamsa() {
-    log info "Installing: Radamsa"
-    if [ ! -d "$RADAMSA_DIR" ]; then
-        log info "Cloning repository into: $RADAMSA_DIR"
-        git clone https://gitlab.com/akihe/radamsa.git"$RADAMSA_DIR" && cd "$RADAMSA_DIR" && make && sudo make install
-    else
-        log info "Radamsa directory already exists."
-    fi
-}
-
-# Main installation function
 function install() {
     banner
+
+    if ! check_distro; then
+        log error "This script supports only Kali Linux 2023.4 or above and Ubuntu 18.04 or above."
+        exit 1
+    fi
+
     echo -e "\n"
     log info "Installing required packages..."
     sudo apt update -y && sudo apt upgrade -y
-    sudo apt install -y git g++ python3 cmake libhdf5-dev doxygen graphviz make gcc wget 
+    sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf \
+        automake libssl-dev wget curl
 
     command_exists git
 
-    # Install Attack Tools 
-    install_medusa
-    install_masscan
+    # * May need to check to ensure --depth 1 will work
+    # Attack Tools 
+    install_tool "Medusa" "https://salsa.debian.org/pkg-security-team/medusa" "$MEDUSA_DIR"
+    install_tool "Masscan" "https://github.com/robertdavidgraham/masscan" "$MASSCAN_DIR"
+    
+    # Fuzzing Tools
+    install_tool "AFLNet" "https://github.com/aflnet/aflnet.git" "$AFL_DIR"
+    install_tool "Radamsa" "https://gitlab.com/akihe/radamsa.git" "$RADAMSA_DIR"
+}
 
-    # Install Fuzzing Tools
-    install_aflnet
-    install_radamsa
+# Can't adequately modularize this function since all tools vary in build process
+function build() {
+    banner
+    log info "Building all tools, this may take some time."
+
+    # Build Medusa
+    # TODO: Error when building on Ubuntu system, missing openssl libraries
+    log info "Building Medusa..."
+    if [ -d "$MEDUSA_DIR" ]; then
+        cd "$MEDUSA_DIR"
+        if ./configure; then
+            log info "Medusa successfully configured."
+            autoreconf -f -i
+            if make; then
+                log info "Medusa successfully built."
+            else
+                log error "Failed to build Medusa."
+                # TODO: Need to set new Medusa path here.
+                log warn "Using the pre-built package for Medusa instead."
+                # exit 1
+            fi
+        else
+            log error "Failed to configure Medusa."
+            exit 1
+        fi
+        cd "$SCRIPT_DIR"
+    else 
+        log error "Medusa directory not found."
+        exit 1
+    fi
+    
+    # Build Masscan
+    log info "Building Masscan..."
+    if [ -d "$MASSCAN_DIR" ]; then
+        cd "$MASSCAN_DIR"
+        if make; then
+            log info "Masscan built successfully."
+        else
+            log error "Failed to build Masscan."
+            exit 1
+        fi
+        cd "$SCRIPT_DIR"
+    else 
+        log error "Masscan directory not found."
+        exit 1
+    fi
+
+    # Build AFLNet
+
+    # NOTE: AFLnet requires llvm_mode which needs a specific version of
+    # clang and llvm; the make command may not work if llvm-config is not found.
+    # To fix this issue, LLVM_CONFIG environment variable needs to be set to the 
+    # correct path of llvm-config. 
+
+    log info "Building AFLNet..."
+    if [ -d "$AFL_DIR" ]; then
+        cd "$AFL_DIR"
+        if make clean all; then
+            log info "AFLnet instrumentation built successfully."
+            # May want to add directory check here as well, but should be fine for now
+            cd llvm_mode
+            if make; then
+                log info "llvm_mode built successfully."
+            else
+                log error "Failed to build llvm_mode."
+                log info "Looking for existing llvm-config..."
+                # Check for llvm-config-* in /usr/bin
+                LLVM_CONFIG=$(ls /usr/bin/llvm-config-* 2>/dev/null | head -n 1)
+                if [ -z "$LLVM_CONFIG" ]; then
+                    log error "llvm-config version not found in /usr/bin."
+                    log info "Checking for LLVM_CONFIG on PATH..."
+                    # Check for llvm-config on PATH
+                    if [[ ":PATH:" != *":$LLVM_CONFIG:"* ]]; then
+                        log error "llvm-config not found on PATH."
+                        log error "Please install clang or set LLVM_CONFIG environment variable manually."
+                        exit 1
+                    else
+                        log info "Found llvm-config on PATH."
+                    fi
+                else 
+                    log info "Found llvm-config: $LLVM_CONFIG"
+                    export LLVM_CONFIG=$LLVM_CONFIG
+                fi
+
+                if make; then
+                    log info "llvm_mode built successfully."
+                else
+                    log error "Could not build llvm_mode with existing llvm-config."
+                    exit 1
+                fi
+            fi
+            # Move to AFLNet's parent directory
+            cd ../..
+
+            export AFLNET=$(pwd)/aflnet
+            export WORKDIR=$(pwd)
+            # export LLVM_CONFIG=$LLVM_CONFIG
+            # TODO:: Verify if this works correctly
+            if [[ ":$PATH:" != *":$AFLNET:"* ]]; then
+                export PATH=$PATH:$AFLNET
+                log info "Added AFLNet to PATH."
+            else 
+                log info "AFLNet already in PATH."
+            fi
+            export AFL_PATH=$AFLNET
+            log info "AFL_PATH set to: $AFL_PATH"
+        else
+            log error "Failed to configure AFLNet instrumentation."
+            exit 1
+        fi 
+    else
+        log error "AFLNet directory not found."
+        exit 1
+    fi
+
+    cd "$SCRIPT_DIR"
+
+    # Build Radamsa
+    log info "Building Radamsa..."
+    if [ -d "$RADAMSA_DIR" ]; then
+        cd "$RADAMSA_DIR"
+        if make && make install; then
+            log info "Radamsa built successfully."
+        else
+            log error "Failed to build Radamsa."
+            exit 1
+        fi
+        cd "$SCRIPT_DIR"
+    else 
+        log error "Radamsa directory not found."
+        exit 1
+    fi
+    log info "All tools successfully built!"
 }
 
 if [[ "$INSTALL" = true && "$DEBUG" = false ]]; then
     install
 elif [[ "$SHOULD_REMOVE" = true && "$DEBUG" = false ]]; then
     uninstall
+elif [[ "$BUILD" = true && "$DEBUG" = false ]]; then
+    build
 else
     if [ "$DEBUG" = true ]; then
         log warn "Debug mode enabled."

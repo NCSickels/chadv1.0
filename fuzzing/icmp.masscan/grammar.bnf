@@ -1,0 +1,11 @@
+<start> ::= <icmp_message>
+<icmp_message> ::= <header> <payload_data>
+<header> ::= <type> <code> <checksum> <header_data>
+<payload_data> ::= "" | <bytes>
+<type> ::= <byte>
+<code> ::= <byte>
+<checksum> ::= <byte> <byte>
+<header_data> ::= <byte> <byte> <byte> <byte>
+<byte> ::= <zerof> <zerof> " "
+<bytes> ::= <byte> | <byte> <bytes>
+<zerof> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "A" | "B" | "C" | "D" | "E" | "F"

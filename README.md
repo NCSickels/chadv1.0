@@ -9,6 +9,7 @@
 ![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
 ![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
 [![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=flat&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
+![Static Badge](https://img.shields.io/badge/Bash-white?style=plastic&logo=gnubash&logoColor=grey)
 ![Static Badge](https://img.shields.io/badge/Docker-blue?style=plastic&logo=docker&logoColor=white)
 
 </div>
@@ -304,7 +305,7 @@ docker build -t workflow .
 docker run --rm -it --name workflow -v . workflow /bin/bash
 ```
 
-### Manual Installation
+### Manual Installation (Recommended)
 
 #### Clone the Repositories
 

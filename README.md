@@ -3,10 +3,8 @@
 
 <div style="text-align:center">
 
- *Noah Sickels, Adam Brannon, and William Lochte*
-
+ <!-- *Noah Sickels, Adam Brannon, and William Lochte* -->
 <!-- ![Project Banner](Charger-Active-Defense-Banner.png) -->
-
 ![Project Banner](Charger-Active-Defense-Banner.png)
 ![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
 ![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)

@@ -283,8 +283,6 @@ sudo ./workflow.sh build
 
 *Note: If you encounter an error of: `-bash: ./workflow.sh: /bin/bash^M: bad interpreter: No such file or directory`, it is due to the script being in DOS format on a UNIX system. To fix this, you can use the `dos2unix` command to convert the script to UNIX format. You can install it through Apt package manager using the command `sudo apt install dos2unix`.*
 
-```bash
-
 ### Dockerfile *(WIP)*
 
 *Requires Docker to be installed on the host machine.*

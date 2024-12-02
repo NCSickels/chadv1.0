@@ -1,13 +1,19 @@
-![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
-![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
-
-[![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=flat&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
 
 # Charger Active Defense v1.0 - Senior Design Project
+
+<div style="text-align:center">
 
  *Noah Sickels, Adam Brannon, and William Lochte*
 
 <!-- ![Project Banner](Charger-Active-Defense-Banner.png) -->
+
+![Project Banner](charger-active-defense-banner.png)
+![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
+![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
+[![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=flat&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
+![Static Badge](https://img.shields.io/badge/Docker-blue?style=plastic&logo=docker&logoColor=white)
+
+</div>
 
 ## Project Overview
 
@@ -285,7 +291,7 @@ sudo ./workflow.sh build
 docker build -t workflow .
 ```
 
-- To run the Docker container manually:
+#### Run the Docker Container Manually
 
 ```bash
 # Run the Docker container

@@ -262,7 +262,7 @@ Prerequisites:
 
 ### Bash Script (Recommended)
 
-To install the attack tools and fuzzing tools, you can use the provided Bash script as shown below:
+To install the attack tools and fuzzing tools, you can use the provided Bash script as shown below (***requires root privileges***):
 
 ```bash
 # Download the workflow script through curl or manually from the repository
@@ -280,6 +280,10 @@ sudo ./workflow.sh install
 # To build all tools (attack and fuzzing)
 sudo ./workflow.sh build
 ```
+
+*Note: If you encounter an error of: `-bash: ./workflow.sh: /bin/bash^M: bad interpreter: No such file or directory`, it is due to the script being in DOS format on a UNIX system. To fix this, you can use the `dos2unix` command to convert the script to UNIX format. You can install it through Apt package manager using the command `sudo apt install dos2unix`.*
+
+```bash
 
 ### Dockerfile *(WIP)*
 

@@ -1,13 +1,32 @@
-![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
-![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
-
-[![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=flat&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
 
 # Charger Active Defense v1.0 - Senior Design Project
 
- *Noah Sickels, Adam Brannon, and William Lochte*
+<div style="text-align:center">
+
+ <!-- *Noah Sickels, Adam Brannon, and William Lochte* -->
+<!-- ![Project Banner](Charger-Active-Defense-Banner.png) -->
+![Project Banner](Charger-Active-Defense-Banner.png)
+![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
+![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
+[![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=flat&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
+![Static Badge](https://img.shields.io/badge/Bash-white?style=plastic&logo=gnubash&logoColor=grey)
+![Static Badge](https://img.shields.io/badge/Docker-blue?style=plastic&logo=docker&logoColor=white)
+
+</div>
+
+## Project Overview
+
+Our senior design group is the second team working on the Charger Active Defense project. This project aims to develop a fuzzing workflow that effectively tests the networking aspects of the selected target applications, Medusa and Masscan. We strive to identify any hangs or crashes that may occur, which can then be sent back to the host machine to potentially disrupt or halt the adversary’s tool.
+
+This project is divided into two main phases - the fuzzing workflow and the active defense tool. The fuzzing workflow phase involves the selection of fuzzing tools, two attack tools to fuzz, and the development of a fuzzing workflow. The active defense tool phase involves the development of a tool that can detect and respond to attacks on the network and send the fuzzed responses back to the adversary's tool.
+
+The project proposal slide provided by the sponser can be found below.
+
+<div style="text-align:center">
 
 ![Project Overview](project_overview.png)
+
+</div>
 
 ## Project Directory Structure
 
@@ -59,6 +78,12 @@ Charger Active Defense v1.0 - Senior Design Project
 │   │   └── ftp.py
 │   ├── fuzzshark
 │   │   └── ~src
+|   ├── icmp.masscan
+│   │   ├── fuzz_ping.sh
+│   │   ├── grammer.bnf
+│   │   ├── internet_checksum.py
+│   │   ├── requirements.txt
+│   │   └── send_icmp.py 
 │   ├── medusa.postgresql.afl_1
 │   │   ├── cmdline
 │   │   ├── fuzz_bitmap
@@ -225,21 +250,20 @@ Charger Active Defense v1.0 - Senior Design Project
 
 <br></br>
 
-## Project Overview
-
 ## Usage & Installation
 
-There are three ways to install and use the tools necessary for the Chadv1.0 workflow: using a Bash script, a Dockerfile, or manually.
+There are three ways to install and use the tools necessary for the Chadv1.0 workflow: using the Bash script, the Dockerfile, or manually.
 
 Prerequisites:
 
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
+- Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`
 <!-- - Python 3.8+
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later) -->
 
 ### Bash Script (Recommended)
 
-To install the attack tools and fuzzing tools, you can use the provided Bash script as shown below:
+To install the attack tools and fuzzing tools, you can use the provided Bash script as shown below (***requires root privileges***):
 
 ```bash
 # Download the workflow script through curl or manually from the repository
@@ -258,7 +282,11 @@ sudo ./workflow.sh install
 sudo ./workflow.sh build
 ```
 
-### Dockerfile (WIP)
+*Note: If you encounter an error of: `-bash: ./workflow.sh: /bin/bash^M: bad interpreter: No such file or directory`, it is due to the script being in DOS format on a UNIX system. To fix this, you can use the `dos2unix` command to convert the script to UNIX format. You can install it through Apt package manager using the command `sudo apt install dos2unix`.*
+
+### Dockerfile *(WIP)*
+
+*Requires Docker to be installed on the host machine.*
 
 - Build the Chadv1.0 Workflow Docker image: `make build`
 - Run the Chadv1.0 Workflow Docker container: `make run`
@@ -270,16 +298,16 @@ sudo ./workflow.sh build
 docker build -t workflow .
 ```
 
-- To run the Docker container manually:
+#### Run the Docker Container Manually
 
 ```bash
 # Run the Docker container
 docker run --rm -it --name workflow -v . workflow /bin/bash
 ```
 
-### Manual Installation
+### Manual Installation (Recommended)
 
-- Clone the attack tool repositories and fuzzing tool repositories.
+#### Clone the Repositories
 
 ```bash
 # Clone the attack tool repositories
@@ -291,22 +319,23 @@ git clone https://github.com/aflnet/aflnet.git
 git clone https://gitlab.com/akihe/radamsa.git
 ```
 
-- Install the necessary dependencies for each tool.
+#### Install Necessary Dependencies
 
 ```bash
 sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf automake libssl-dev wget curl
 ```
 
-- Build the attack tools:
+#### Build Attack Tools
 
 ```bash
-# Build the attack tools
+# Build Medusa
 cd medusa
 ./configure
 make
 make install
 cd ..
 
+# Build Masscan
 cd masscan
 # Optionally, can run `make -j` for faster compilation
 make 
@@ -314,10 +343,10 @@ make install
 cd ..
 ```
 
-- Build the fuzzing tools:
+#### Build Fuzzing Tools
 
 ```bash
-# Build the fuzzing tools
+# Build AFLnet
 cd aflnet
 make clean all
 cd llvm_mode
@@ -332,8 +361,20 @@ export PATH=$PATH:$AFLNET
 export AFL_PATH=$AFLNET
 cd ..
 
+# Build Radamsa
 cd radamsa
 make
 sudo make install
 cd ..
 ```
+
+This will install the necessary tools for the Chadv1.0 fuzzing workflow, including AFLnet, Radamsa, Medusa, and Masscan.
+
+<br></br>
+
+## References
+
+- [Medusa](https://salsa.debian.org/pkg-security-team/medusa)
+- [Masscan](https://github.com/robertdavidgraham/masscan.git)
+- [AFLnet](https://github.com/aflnet/aflnet)
+- [Radamsa](https://gitlab.com/akihe/radamsa.git)

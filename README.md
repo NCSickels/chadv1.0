@@ -77,6 +77,12 @@ Charger Active Defense v1.0 - Senior Design Project
 │   │   └── ftp.py
 │   ├── fuzzshark
 │   │   └── ~src
+|   ├── icmp.masscan
+│   │   ├── fuzz_ping.sh
+│   │   ├── grammer.bnf
+│   │   ├── internet_checksum.py
+│   │   ├── requirements.txt
+│   │   └── send_icmp.py 
 │   ├── medusa.postgresql.afl_1
 │   │   ├── cmdline
 │   │   ├── fuzz_bitmap

@@ -7,7 +7,7 @@
 
 <!-- ![Project Banner](Charger-Active-Defense-Banner.png) -->
 
-![Project Banner](charger-active-defense-banner.png)
+![Project Banner](Charger-Active-Defense-Banner.png)
 ![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
 ![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
 [![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=flat&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)

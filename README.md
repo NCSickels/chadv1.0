@@ -287,11 +287,12 @@ sudo ./workflow.sh build
 ```
 
 > [!NOTE]\
-> *If you encounter the error: `-bash: ./workflow.sh: /bin/bash^M: bad interpreter: No such file or directory`, it is due to the script being in DOS format on a UNIX system. To fix this, you can use the `dos2unix` command to convert the script to UNIX format. You can install it through Apt package manager using the command `sudo apt install dos2unix`.*
+> If you encounter the error: *`-bash: ./workflow.sh: /bin/bash^M: bad interpreter: No such file or directory`*, it is due to the script being in DOS format on a UNIX system. To fix this, you can use the *`dos2unix`* command to convert the script to UNIX format. You can install it through Apt package manager using the command *`sudo apt install dos2unix`*.
 
 ### Dockerfile *(WIP)*
 
-*Requires Docker to be installed on the host machine.*
+> [!WARNING]\
+> *Requires Docker to be installed on the host machine. Docker Desktop is available [here.](https://www.docker.com/get-started/)*
 
 - Build the Chadv1.0 Workflow Docker image: `make build`
 - Run the Chadv1.0 Workflow Docker container: `make run`
@@ -383,3 +384,4 @@ This will install the necessary tools for the Chadv1.0 fuzzing workflow, includi
 - [Masscan](https://github.com/robertdavidgraham/masscan.git)
 - [AFLnet](https://github.com/aflnet/aflnet)
 - [Radamsa](https://gitlab.com/akihe/radamsa.git)
+- [Docker Desktop](https://www.docker.com/get-started/)

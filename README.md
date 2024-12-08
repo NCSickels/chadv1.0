@@ -32,7 +32,7 @@ Our senior design group is the second team working on the Charger Active Defense
 
 This project is divided into two main phases - the fuzzing workflow and the active defense tool. The fuzzing workflow phase involves the selection of fuzzing tools, two attack tools to fuzz, and the development of a fuzzing workflow. The active defense tool phase involves the development of a tool that can detect and respond to attacks on the network and send the fuzzed responses back to the adversary's tool.
 
-The project proposal slide provided by the sponser can be found below.
+The project proposal slide provided by the sponsor can be found below.
 
 <div style="text-align:center">
 
@@ -264,8 +264,6 @@ Charger Active Defense v1.0 - Senior Design Project
 - VirtualBox 7.1.0 (or later)
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
 - Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`  
-<!-- - Python 3.8+
-- Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later) -->
 
 ## Testbed Configuration
 
@@ -274,8 +272,6 @@ Charger Active Defense v1.0 - Senior Design Project
 > [!IMPORTANT]\
 > *"Virtual Machine 1 (Host)"* refers to the attacking virtual machine running Kali, which runs Medusa and Masscan against the target VM.\
 > *"Virtual Machine 2 (Target)"* refers to the virtual machine running Metasploitable2, which has vulnerable services active.  
-
-<!-- <br></br> -->
 
 ## Usage & Installation
 

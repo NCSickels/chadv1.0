@@ -308,19 +308,23 @@ sudo ./workflow.sh build
 ---
 
 > [!WARNING]\
-> *Requires Docker to be installed on the host machine. Docker Desktop is available [here.](https://www.docker.com/get-started/)*
+> *Requires Docker and Make to be installed on the host machine. Docker Desktop is available [here.](https://www.docker.com/get-started/)*
+
+The Chad workflow can also be run in a Docker container. The Docker implementation utilizes a Makefile and the `make` utility to build and run the Dockerfile in a streamlined manner.
 
 - Build the Chadv1.0 Workflow Docker image: `make build`
 - Run the Chadv1.0 Workflow Docker container: `make run`
 
-#### Build the Docker Image Manually
+Optionally, you can build the Docker image and run the container manually using the commands below.
+
+#### Build the Docker Image
 
 ```bash
 # Build the Docker image
 docker build -t workflow .
 ```
 
-#### Run the Docker Container Manually
+#### Run the Docker Container
 
 ```bash
 # Run the Docker container

@@ -266,6 +266,12 @@ There are three ways to install and use the tools necessary for the Chadv1.0 wor
 
 ![Testbed Configuration](config/Configuration%20Table.png)  
 
+> [!IMPORTANT]\
+> "Virtual Machine 1 (Host)" refers to the attacking virtual machine running Kali with Medusa and Masscan against the target VM.
+> "Virtual Machine 2 (Target)" refers to the virtual machine running Metasploitable2, which has vulnerable services active.  
+
+<br></br>
+
 ### Bash Script (Recommended)
 
 ---

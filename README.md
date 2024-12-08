@@ -257,15 +257,17 @@ There are three ways to install and use the tools necessary for the Chadv1.0 wor
 ### Prerequisites
 
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
-- Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`
+- Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`  
 <!-- - Python 3.8+
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later) -->
 
 ### Testbed Configuration
 
-![Testbed Configuration](config/Configuration%20Table.png)
+![Testbed Configuration](config/Configuration%20Table.png)  
 
 ### Bash Script (Recommended)
+
+---
 
 To install the attack tools and fuzzing tools, you can use the provided Bash script as shown below (***requires root privileges***):
 
@@ -287,9 +289,11 @@ sudo ./workflow.sh build
 ```
 
 > [!NOTE]\
-> If you encounter the error: *`-bash: ./workflow.sh: /bin/bash^M: bad interpreter: No such file or directory`*, it is due to the script being in DOS format on a UNIX system. To fix this, you can use the *`dos2unix`* command to convert the script to UNIX format. You can install it through Apt package manager using the command *`sudo apt install dos2unix`*.
+> If you encounter the error: *`-bash: ./workflow.sh: /bin/bash^M: bad interpreter: No such file or directory`*, it is due to the script being in DOS format on a UNIX system. To fix this, you can use the *`dos2unix`* command to convert the script to UNIX format. You can install it through Apt package manager using the command *`sudo apt install dos2unix`*.  
 
 ### Dockerfile *(WIP)*
+
+---
 
 > [!WARNING]\
 > *Requires Docker to be installed on the host machine. Docker Desktop is available [here.](https://www.docker.com/get-started/)*
@@ -309,9 +313,11 @@ docker build -t workflow .
 ```bash
 # Run the Docker container
 docker run --rm -it --name workflow -v . workflow /bin/bash
-```
+```  
 
 ### Manual Installation (Recommended)
+
+---
 
 #### Clone the Repositories
 
@@ -374,7 +380,7 @@ sudo make install
 cd ..
 ```
 
-This will install the necessary tools for the Chadv1.0 fuzzing workflow, including AFLnet, Radamsa, Medusa, and Masscan.
+This will install the necessary tools for the Chadv1.0 fuzzing workflow, including AFLnet, Radamsa, Medusa, and Masscan.  
 
 <br></br>
 

@@ -14,6 +14,18 @@
 
 </div>
 
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Project Directory Structure](#project-directory-structure)
+- [Usage & Installation](#usage--installation)
+  - [Prerequisites](#prerequisites)
+  - [Testbed Configuration](#testbed-configuration)
+  - [Bash Script (Recommended)](#bash-script-recommended)
+  - [Dockerfile *(WIP)*](#dockerfile-wip)
+  - [Manual Installation (Recommended)](#manual-installation-recommended)
+- [References](#references)
+
 ## Project Overview
 
 Our senior design group is the second team working on the Charger Active Defense project. This project aims to develop a fuzzing workflow that effectively tests the networking aspects of the selected target applications, Medusa and Masscan. We strive to identify any hangs or crashes that may occur, which can then be sent back to the host machine to potentially disrupt or halt the adversary’s tool.

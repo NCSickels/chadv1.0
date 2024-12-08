@@ -32,7 +32,7 @@ Our senior design group is the second team working on the Charger Active Defense
 
 This project is divided into two main phases - the fuzzing workflow and the active defense tool. The fuzzing workflow phase involves the selection of fuzzing tools, two attack tools to fuzz, and the development of a fuzzing workflow. The active defense tool phase involves the development of a tool that can detect and respond to attacks on the network and send the fuzzed responses back to the adversary's tool.
 
-The project proposal slide provided by the sponsor can be found below.
+You can find the sponsor's project proposal slide below.
 
 <div style="text-align:center">
 

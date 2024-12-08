@@ -1,4 +1,4 @@
-
+<!-- markdownlint-disable MD033 -->
 # Charger Active Defense v1.0 - Senior Design Project
 
 <div style="text-align:center">

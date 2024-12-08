@@ -412,3 +412,8 @@ This will install the necessary tools for the Chadv1.0 fuzzing workflow, includi
 - [Docker Desktop](https://www.docker.com/get-started/)
 - [Kali Linux 2023.4 Pre-built VMs](https://www.kali.org/get-kali/#kali-virtual-machines)
 - [Ubuntu 20.04 LTS ISO](https://releases.ubuntu.com/focal/)
+- [Metasploitable2](https://www.rapid7.com/products/metasploit/metasploitable/)
+- [dos2unix](https://dos2unix.sourceforge.io)
+- [Valgrind](https://valgrind.org)
+- [LDRA](https://ldra.com)
+- [MD to DOCX Converter (Used for creating user guide)](https://cloudconvert.com/md-to-docx)

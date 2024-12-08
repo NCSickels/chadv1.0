@@ -256,6 +256,7 @@ There are three ways to install and use the tools necessary for the Chadv1.0 wor
 
 ### Prerequisites
 
+- VirtualBox 7.1.0 (or later)
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
 - Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`  
 <!-- - Python 3.8+
@@ -386,8 +387,19 @@ This will install the necessary tools for the Chadv1.0 fuzzing workflow, includi
 
 ## References
 
+### Attack Tools
+
 - [Medusa](https://salsa.debian.org/pkg-security-team/medusa)
 - [Masscan](https://github.com/robertdavidgraham/masscan.git)
+
+### Fuzzing Tools
+
 - [AFLnet](https://github.com/aflnet/aflnet)
 - [Radamsa](https://gitlab.com/akihe/radamsa.git)
+
+### Other
+
+- [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - [Docker Desktop](https://www.docker.com/get-started/)
+- [Kali Linux 2023.4 Pre-built VMs](https://www.kali.org/get-kali/#kali-virtual-machines)
+- [Ubuntu 20.04 LTS ISO](https://releases.ubuntu.com/focal/)

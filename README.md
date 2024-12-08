@@ -317,7 +317,7 @@ sudo ./workflow.sh build
 - Build the Chadv1.0 Workflow Docker image: `make build`
 - Run the Chadv1.0 Workflow Docker container: `make run`
 
-- To build the Docker image manually:
+#### Build the Docker Image Manually
 
 ```bash
 # Build the Docker image

@@ -1,14 +1,14 @@
-
+<!-- markdownlint-disable MD033 -->
 # Charger Active Defense v1.0 - Senior Design Project
 
 <div style="text-align:center">
 
  <!-- *Noah Sickels, Adam Brannon, and William Lochte* -->
-<!-- ![Project Banner](Charger-Active-Defense-Banner.png) -->
+
 ![Project Banner](Charger-Active-Defense-Banner.png)
 ![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
 ![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
-[![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=flat&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
+[![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=plastic&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
 ![Static Badge](https://img.shields.io/badge/Bash-white?style=plastic&logo=gnubash&logoColor=grey)
 ![Static Badge](https://img.shields.io/badge/Docker-blue?style=plastic&logo=docker&logoColor=white)
 
@@ -32,7 +32,7 @@ Our senior design group is the second team working on the Charger Active Defense
 
 This project is divided into two main phases - the fuzzing workflow and the active defense tool. The fuzzing workflow phase involves the selection of fuzzing tools, two attack tools to fuzz, and the development of a fuzzing workflow. The active defense tool phase involves the development of a tool that can detect and respond to attacks on the network and send the fuzzed responses back to the adversary's tool.
 
-The project proposal slide provided by the sponser can be found below.
+You can find the sponsor's project proposal slide below.
 
 <div style="text-align:center">
 
@@ -264,8 +264,6 @@ Charger Active Defense v1.0 - Senior Design Project
 - VirtualBox 7.1.0 (or later)
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
 - Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`  
-<!-- - Python 3.8+
-- Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later) -->
 
 ## Testbed Configuration
 
@@ -274,8 +272,6 @@ Charger Active Defense v1.0 - Senior Design Project
 > [!IMPORTANT]\
 > *"Virtual Machine 1 (Host)"* refers to the attacking virtual machine running Kali, which runs Medusa and Masscan against the target VM.\
 > *"Virtual Machine 2 (Target)"* refers to the virtual machine running Metasploitable2, which has vulnerable services active.  
-
-<!-- <br></br> -->
 
 ## Usage & Installation
 
@@ -312,19 +308,23 @@ sudo ./workflow.sh build
 ---
 
 > [!WARNING]\
-> *Requires Docker to be installed on the host machine. Docker Desktop is available [here.](https://www.docker.com/get-started/)*
+> *Requires Docker and Make to be installed on the host machine. Docker Desktop is available [here.](https://www.docker.com/get-started/)*
+
+The Chad workflow can also be run in a Docker container. The Docker implementation utilizes a Makefile and the `make` utility to build and run the Dockerfile in a streamlined manner.
 
 - Build the Chadv1.0 Workflow Docker image: `make build`
 - Run the Chadv1.0 Workflow Docker container: `make run`
 
-- To build the Docker image manually:
+Optionally, you can build the Docker image and run the container manually using the commands below.
+
+#### Build the Docker Image
 
 ```bash
 # Build the Docker image
 docker build -t workflow .
 ```
 
-#### Run the Docker Container Manually
+#### Run the Docker Container
 
 ```bash
 # Run the Docker container
@@ -416,3 +416,8 @@ This will install the necessary tools for the Chadv1.0 fuzzing workflow, includi
 - [Docker Desktop](https://www.docker.com/get-started/)
 - [Kali Linux 2023.4 Pre-built VMs](https://www.kali.org/get-kali/#kali-virtual-machines)
 - [Ubuntu 20.04 LTS ISO](https://releases.ubuntu.com/focal/)
+- [Metasploitable2](https://www.rapid7.com/products/metasploit/metasploitable/)
+- [dos2unix](https://dos2unix.sourceforge.io)
+- [Valgrind](https://valgrind.org)
+- [LDRA](https://ldra.com)
+- [MD to DOCX Converter (Used for creating user guide)](https://cloudconvert.com/md-to-docx)

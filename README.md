@@ -14,6 +14,18 @@
 
 </div>
 
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Project Directory Structure](#project-directory-structure)
+- [Usage & Installation](#usage--installation)
+  - [Prerequisites](#prerequisites)
+  - [Testbed Configuration](#testbed-configuration)
+  - [Bash Script (Recommended)](#bash-script-recommended)
+  - [Dockerfile *(WIP)*](#dockerfile-wip)
+  - [Manual Installation (Recommended)](#manual-installation-recommended)
+- [References](#references)
+
 ## Project Overview
 
 Our senior design group is the second team working on the Charger Active Defense project. This project aims to develop a fuzzing workflow that effectively tests the networking aspects of the selected target applications, Medusa and Masscan. We strive to identify any hangs or crashes that may occur, which can then be sent back to the host machine to potentially disrupt or halt the adversary’s tool.
@@ -28,9 +40,10 @@ The project proposal slide provided by the sponser can be found below.
 
 </div>
 
-## Project Directory Structure
+### Project Directory Structure
 
 <details>
+<summary>Directory Tree</summary>
 
 ```plaintext
 Charger Active Defense v1.0 - Senior Design Project
@@ -154,11 +167,8 @@ Charger Active Defense v1.0 - Senior Design Project
         └── netdiscover.txt
 ```
 
-</details>
-
-### Explanation
-
 <details>
+<summary>Explanation</summary>
 
 - **README.md:** This file.
 - **project_overview.png:** Image of the project overview.
@@ -247,21 +257,33 @@ Charger Active Defense v1.0 - Senior Design Project
   - **cmiller-csw-2010.pdf:** Research paper on general fuzzing and fuzzing tools.
 
 </details>
+</details>
 
-<br></br>
+## Prerequisites
+
+- VirtualBox 7.1.0 (or later)
+- Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
+- Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`  
+<!-- - Python 3.8+
+- Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later) -->
+
+## Testbed Configuration
+
+![Testbed Configuration](config/Configuration%20Table.png)  
+
+> [!IMPORTANT]\
+> *"Virtual Machine 1 (Host)"* refers to the attacking virtual machine running Kali, which runs Medusa and Masscan against the target VM.\
+> *"Virtual Machine 2 (Target)"* refers to the virtual machine running Metasploitable2, which has vulnerable services active.  
+
+<!-- <br></br> -->
 
 ## Usage & Installation
 
 There are three ways to install and use the tools necessary for the Chadv1.0 workflow: using the Bash script, the Dockerfile, or manually.
 
-Prerequisites:
-
-- Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
-- Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`
-<!-- - Python 3.8+
-- Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later) -->
-
 ### Bash Script (Recommended)
+
+---
 
 To install the attack tools and fuzzing tools, you can use the provided Bash script as shown below (***requires root privileges***):
 
@@ -282,11 +304,15 @@ sudo ./workflow.sh install
 sudo ./workflow.sh build
 ```
 
-*Note: If you encounter an error of: `-bash: ./workflow.sh: /bin/bash^M: bad interpreter: No such file or directory`, it is due to the script being in DOS format on a UNIX system. To fix this, you can use the `dos2unix` command to convert the script to UNIX format. You can install it through Apt package manager using the command `sudo apt install dos2unix`.*
+> [!NOTE]\
+> If you encounter the error: *`-bash: ./workflow.sh: /bin/bash^M: bad interpreter: No such file or directory`*, it is due to the script being in DOS format on a UNIX system. To fix this, you can use the *`dos2unix`* command to convert the script to UNIX format. You can install it through Apt package manager using the command *`sudo apt install dos2unix`*.  
 
 ### Dockerfile *(WIP)*
 
-*Requires Docker to be installed on the host machine.*
+---
+
+> [!WARNING]\
+> *Requires Docker to be installed on the host machine. Docker Desktop is available [here.](https://www.docker.com/get-started/)*
 
 - Build the Chadv1.0 Workflow Docker image: `make build`
 - Run the Chadv1.0 Workflow Docker container: `make run`
@@ -303,9 +329,11 @@ docker build -t workflow .
 ```bash
 # Run the Docker container
 docker run --rm -it --name workflow -v . workflow /bin/bash
-```
+```  
 
 ### Manual Installation (Recommended)
+
+---
 
 #### Clone the Repositories
 
@@ -368,13 +396,23 @@ sudo make install
 cd ..
 ```
 
-This will install the necessary tools for the Chadv1.0 fuzzing workflow, including AFLnet, Radamsa, Medusa, and Masscan.
-
-<br></br>
+This will install the necessary tools for the Chadv1.0 fuzzing workflow, including AFLnet, Radamsa, Medusa, and Masscan.  
 
 ## References
 
+### Attack Tools
+
 - [Medusa](https://salsa.debian.org/pkg-security-team/medusa)
 - [Masscan](https://github.com/robertdavidgraham/masscan.git)
+
+### Fuzzing Tools
+
 - [AFLnet](https://github.com/aflnet/aflnet)
 - [Radamsa](https://gitlab.com/akihe/radamsa.git)
+
+### Other
+
+- [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+- [Docker Desktop](https://www.docker.com/get-started/)
+- [Kali Linux 2023.4 Pre-built VMs](https://www.kali.org/get-kali/#kali-virtual-machines)
+- [Ubuntu 20.04 LTS ISO](https://releases.ubuntu.com/focal/)

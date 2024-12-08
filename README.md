@@ -28,9 +28,10 @@ The project proposal slide provided by the sponser can be found below.
 
 </div>
 
-## Project Directory Structure
+### Project Directory Structure
 
 <details>
+<summary>Directory Tree</summary>
 
 ```plaintext
 Charger Active Defense v1.0 - Senior Design Project
@@ -154,11 +155,8 @@ Charger Active Defense v1.0 - Senior Design Project
         └── netdiscover.txt
 ```
 
-</details>
-
-### Explanation
-
 <details>
+<summary>Explanation</summary>
 
 - **README.md:** This file.
 - **project_overview.png:** Image of the project overview.
@@ -247,14 +245,9 @@ Charger Active Defense v1.0 - Senior Design Project
   - **cmiller-csw-2010.pdf:** Research paper on general fuzzing and fuzzing tools.
 
 </details>
+</details>
 
-<br></br>
-
-## Usage & Installation
-
-There are three ways to install and use the tools necessary for the Chadv1.0 workflow: using the Bash script, the Dockerfile, or manually.
-
-### Prerequisites
+## Prerequisites
 
 - VirtualBox 7.1.0 (or later)
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
@@ -262,7 +255,7 @@ There are three ways to install and use the tools necessary for the Chadv1.0 wor
 <!-- - Python 3.8+
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later) -->
 
-### Testbed Configuration
+## Testbed Configuration
 
 ![Testbed Configuration](config/Configuration%20Table.png)  
 
@@ -270,7 +263,11 @@ There are three ways to install and use the tools necessary for the Chadv1.0 wor
 > *"Virtual Machine 1 (Host)"* refers to the attacking virtual machine running Kali, which runs Medusa and Masscan against the target VM.\
 > *"Virtual Machine 2 (Target)"* refers to the virtual machine running Metasploitable2, which has vulnerable services active.  
 
-<br></br>
+<!-- <br></br> -->
+
+## Usage & Installation
+
+There are three ways to install and use the tools necessary for the Chadv1.0 workflow: using the Bash script, the Dockerfile, or manually.
 
 ### Bash Script (Recommended)
 
@@ -388,8 +385,6 @@ cd ..
 ```
 
 This will install the necessary tools for the Chadv1.0 fuzzing workflow, including AFLnet, Radamsa, Medusa, and Masscan.  
-
-<br></br>
 
 ## References
 

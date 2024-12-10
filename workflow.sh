@@ -63,7 +63,7 @@ function check_distro() {
         DISTRO_NAME=$ID
         VERSION=$VERSION_ID
 
-        if [[ "$DISTRO_NAME" == "kali" && ( "$VERSION" == "2023.4"|| "$VERSION" == "2024.4" ) ]]; then
+        if [[ "$DISTRO_NAME" == "kali" && ( "$VERSION" == "2023.4"|| "$VERSION" == "2024.3" || "$VERSION" == "2024.4" ) ]]; then
             log info "Kali Linux $VERSION detected."
             return 0
         elif [[ "$DISTRO_NAME" == "ubuntu" && ( "$VERSION" == "18.04" || "$VERSION" == "20.04" || "$VERSION" == "22.04" || "$VERSION" > "18.04" ) ]]; then
@@ -243,6 +243,8 @@ function install() {
     # Fuzzing Tools
     install_tool "AFLNet" "https://github.com/aflnet/aflnet.git" "$AFL_DIR"
     install_tool "Radamsa" "https://gitlab.com/akihe/radamsa.git" "$RADAMSA_DIR"
+
+    log info "All tools successfully installed!"
 }
 
 # Can't adequately modularize this function since all tools vary in build process
@@ -302,6 +304,7 @@ function build() {
     log info "Building AFLNet..."
     if [ -d "$AFL_DIR" ]; then
         cd "$AFL_DIR"
+        # Need to add Distro check here for gmake; x86 won't work on Kali
         if make clean all; then
             log info "AFLnet instrumentation built successfully."
             # May want to add directory check here as well, but should be fine for now

@@ -49,14 +49,14 @@ You can find the sponsor's project proposal slide below.
 - **workflow.sh:** Bash script for installing and building the attack and fuzzing tools for the workflow.
 - **Dockerfile:** WIP Dockerfile for fuzzing workflow.
 - **Makefile:** Makefile for building and running the Docker container.
-- **Background Screening:** Contains CVEs and Valgrind test results for the attack tools.
+- **Background Screening:** Contains CVEs, LDRA Static Analysis test results, and Valgrind test results for all attack tool candidates.
 - **Config:** Contains configuration files for the testbed.
 - **Deliverables:** Contains project deliverables, including reports, briefings, design review, and final report.
   - **G12_attack_tool_selection_report.docx**: Attack tool selection report.
   - **G12_fuzz_tool_selection_report.docx**: Fuzz tool selection report.
   - **G12_fuzzing_results_analysis.docx**: Fuzzing toolls compatibility testing results and analysis report.
 
-- **Fuzzing:** Contains fuzzing-related files, including attack tool commands and fuzzing tool files
+- **Fuzzing:** Contains fuzzing-related files, including attack tool commands and fuzzing tool files.
   - **Attack_Tool_Commands.md:** Commands used for the attack tools.
   - **password_list.txt:** Password list used for testing.
   - **repeat_medusa.sh:** Script to repeatedly run Medusa.

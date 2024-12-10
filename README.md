@@ -58,6 +58,7 @@ Charger Active Defense v1.0 - Senior Design Project
 ├── project_overview.png
 ├── background_screening
 |   ├── CVEs.md
+│   ├── Attack_Tool_Info.md
 |   ├── ldra
 |   │   ├── aircrack-ng
 |   │   │   └── aircrack-ng.mts.htm
@@ -79,6 +80,9 @@ Charger Active Defense v1.0 - Senior Design Project
 |       ├── medusa_ssh.txt
 |       └── netdiscover.txt
 ├── config
+|   ├──network_configuration_assets
+|   ├── configuration_table.md
+|   ├── Configuration_Table.png
 │   ├── Metasploitable2_Running_Services.txt
 │   └── Testbed_Config.md
 ├── deliverables
@@ -117,6 +121,9 @@ Charger Active Defense v1.0 - Senior Design Project
 │           ├── Project_Timeline_Proposal.gan
 │           └── milestone_analysis.md
 ├── fuzzing
+|   ├── Attack_Tool_Commands.md
+|   ├── password_list.txt
+|   ├── repeat_medusa.sh
 │   ├── afl-qemu-trace
 │   ├── fuzzowski.medusa.ftp
 │   │   └── ftp.py
@@ -154,14 +161,10 @@ Charger Active Defense v1.0 - Senior Design Project
 │   └── scapy.radamsa
 │       └── radamsa_scapy_pcap_fuzzing.py
 ├── misc
-│   ├── Attack_Tool_Commands.md
-│   ├── Attack_Tool_Info.md
 |   ├── Charger-Active-Defense-Banner-old.png
 |   ├── Conference-template-A4.doc
 |   ├── generate_tree.py
-│   ├── password_list.txt
-|   ├── project_directory_tree.txt
-│   └── repeat_medusa.sh
+|   └── project_directory_tree.txt
 ├── pcaps
 │   ├── baseline
 │   │   ├── masscan.pcap
@@ -193,6 +196,7 @@ Charger Active Defense v1.0 - Senior Design Project
 - **project_overview.png:** Image of the project overview.
 - **background_screening:** Contains test-related files.
   - **CVEs.md:** List of CVEs from all attack tool candidates.
+  - **Attack_Tool_Info.md:** Information about attack tools.
   - **ldra:** LDRA test files.
     - **aircrack-ng/aircrack-ng.mts.htm:** Aircrack-ng LDRA test files.
     - **masscan/masscan.mts.htm:** Masscan LDRA test files.
@@ -209,6 +213,9 @@ Charger Active Defense v1.0 - Senior Design Project
     - **netdiscover.txt:** Netdiscover Valgrind test results file.
 - **project_overview.png:** Image of the project overview.
 - **config:** Contains configuration files.
+  - **network_configuration_assets:** Screenshots of VirtualBox Network adapter settings menus for README and User Guide.
+  - **configuration_table.md:** Configuration table for the testbed (Markdown).
+  - **Configuration_Table.png:** Configuration table for the testbed (PNG).
   - **Testbed_Config.md:** Configuration details for the testbed.
 - **deliverables**: Contains project deliverables, including the tool reports, proposal presentation slides, briefings, design review, and final report.
   - **G12_attack_tool_selection_report.docx:** Attack tool selection report.
@@ -246,6 +253,9 @@ Charger Active Defense v1.0 - Senior Design Project
       - **Project_Timeline_Proposal.gan:** Initial project timeline proposal.
       - **milestone_analysis.md:** Milestone analysis.  
 - **fuzzing:** Contains fuzzing-related files.
+  - **Attack_Tool_Commands.md:** Commands used for the attack tools.
+  - **password_list.txt:** Password list used for testing.
+  - **repeat_medusa.sh:** Script to repeatedly run Medusa.
   - **afl-qemu-trace:** AFL QEMU trace binary.
   - **fuzzowski.medusa.ftp:** Fuzzowski Medusa FTP files.
     - **ftp.py:** FTP file for Fuzzowski Medusa.
@@ -267,14 +277,10 @@ Charger Active Defense v1.0 - Senior Design Project
   - **scapy.radamsa:** Scapy Radamsa files.
     - **radamsa_scapy_pcap_fuzzing.py:** Radamsa & Scapy PCAP fuzzing Python script.
 - **misc:** Miscellaneous files.
-  - **Attack_Tool_Commands.md:** Commands for attack tools used during compatibility testing.
-  - **Attack_Tool_Info.md:** Information about attack tools.
   - **Charger-Active-Defense-Banner-old.png:** Old project banner.
   - **Conference-template-A4.doc:** IEEE conference template document.
   - **generate_tree.py:** Python script to generate the directory tree.
-  - **password_list.txt:** Password list used for testing.
   - **project_directory_tree.txt:** Directory tree text file.
-  - **repeat_medusa.sh:** Script to repeatedly run Medusa.
 - **pcaps:** Contains PCAP files.
   - **baseline:** Baseline PCAP files.
   - **scapy:** Scapy PCAP files.
@@ -326,7 +332,7 @@ This will configure the network adapters for the Kali and Metasploitable2 VMs wi
 </details>
 
 > [!NOTE]\
-> The NAT adapter is optional and can be used to download packages and updates for the Kali VM. The internal network adapter is required and is used for communication between the Kali and Metasploitable2 VMs.
+> The NAT second adapter is optional and can be used to download packages and updates for the Kali VM. The internal network adapter is required as it is used for communication between the Kali and Metasploitable2 VMs.
 
 ##### Metasploitable2 Virtual Machine
 

@@ -282,6 +282,10 @@ For both VMs to communicate with each other, you will need to configure the netw
 
 #### VirtualBox Network Adapter Settings Configuration
 
+This will configure the network adapters for the Kali and Metasploitable2 VMs within VirtualBox through the internal network adapter.
+
+<details>
+
 ##### Kali Virtual Machine
 
 1. Open VirtualBox and select the Kali VM.
@@ -306,9 +310,15 @@ For both VMs to communicate with each other, you will need to configure the netw
 
 <!-- #### Docker Network Configuration *(WIP)* -->
 
+</details>
+
 #### Host Machine Network Configuration
 
-Once the virtual machines are configured, start both VMs and configure the network interfaces on each VM. Note that the network interface names may vary depending on the operating system and version. We will use the default network interface names for the examples below. The IP addresses used are default private IP addresses, but you can use any IP address within the same subnet.
+Once the virtual machines are configured, start both VMs and configure the network interfaces on each VM. Note that the network interface names may vary depending on the operating system and version.
+
+We will use the default network interface names for the examples below. The IP addresses used are default private IP addresses, but you can use any IP address within the same subnet.
+
+<details>
 
 ##### Kali Host Machine
 
@@ -320,7 +330,11 @@ sudo ip addr
 sudo ifconfig
 ```
 
-You should see the network interfaces listed. If you enabled network adapter 1, you should see your internet-facing network interface named `eth0` or `enp0s3`. If you enabled network adapter 2, you should see an interface named `eth1` or `enp0s8`. Otherwise, you may need to manually configure the network interfaces on your system. We will use `eth1` for the internal network communication as an example for the commands below.
+You should see the network interfaces listed. If you enabled network adapter 1, you should see your internet-facing network interface named `eth0` or `enp0s3`.
+
+If you enabled network adapter 2, you should see an interface named `eth1` or `enp0s8`. Otherwise, you may need to manually configure the network interfaces on your system.
+
+We will use `eth1` for the internal network communication as an example for the commands below.
 
 Set the IP address for the internal network interface `eth1` (***requires root privileges***):
 
@@ -352,6 +366,8 @@ sudo ifconfig eth0 192.168.1.100
 
 You can verify the IP address is set correctly by running `sudo ip addr` or `sudo ifconfig` again.
 
+</details>
+
 #### Verify Network Connection
 
 Once the network interfaces have been configured on both VMs, you can test the network connection between the two VMs by running the following commands:
@@ -364,7 +380,10 @@ ping 192.168.1.100
 ping 192.168.1.99
 ```
 
-If the network connection is successful, you should see the ping responses from the target VM (e.g., `64 bytes from 192.168.1.100: icmp_seq=1 ttl=64 time=0.171ms`). If the connection is unsuccessful, restart the VMs and verify the network configurations. Network adapters may reset at times, so we recommend checking the network adapter IP addresses to ensure they are still set correctly.
+If the network connection is successful, you should see the ping responses from the target VM (e.g., `64 bytes from 192.168.1.100: icmp_seq=1 ttl=64 time=0.171ms`).
+
+If the connection is unsuccessful, restart the VMs and verify the network configurations. Network adapters may reset at times, so we recommend checking the network adapter IP addresses to ensure they are still set correctly.
+
 If they are not set, you can reconfigure them by repeating the steps above.
 
 ## Usage & Installation

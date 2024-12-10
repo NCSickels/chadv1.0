@@ -145,7 +145,7 @@ Charger Active Defense v1.0 - Senior Design Project
 │   ├── CVEs.md
 │   ├── Fuzzing_Tools.md
 │   └── cmiller-csw-2010.pdf
-└── tests
+└── background_screening
     ├── ldra
     │   ├── aircrack-ng
     │   │   └── aircrack-ng.mts.htm
@@ -236,13 +236,12 @@ Charger Active Defense v1.0 - Senior Design Project
 - **pcaps:** Contains PCAP files.
   - **baseline:** Baseline PCAP files.
   - **scapy:** Scapy PCAP files.
-- **tests:** Contains test-related files.
+- **background_screening:** Contains test-related files.
   - **ldra:** LDRA test files.
     - **aircrack-ng/aircrack-ng.mts.htm:** Aircrack-ng LDRA test files.
     - **masscan/masscan.mts.htm:** Masscan LDRA test files.
     - **medusa/medusa.mts.htm** Medusa LDRA test files.
     - **netdiscover/netdiscover.mts.htm:** Netdiscover LDRA test report.
-      - **netdiscover.mts.htm:** HTML report for Netdiscover.
     - **reaver/reaver.mts.htm:** Reaver LDRA test report.
     - **yersinia/yersinia.mts.htm:** Yersinia LDRA test report.
   - **valgrind:** Valgrind test results for each attack tool candidate.

@@ -284,9 +284,9 @@ For both VMs to communicate with each other, you will need to configure the netw
 
 This will configure the network adapters for the Kali and Metasploitable2 VMs within VirtualBox through the internal network adapter.
 
-<details>
-
 ##### Kali Virtual Machine
+
+<details>
 
 1. Open VirtualBox and select the Kali VM.
 2. Click on the *Settings* icon and navigate to the *Network* tab.
@@ -297,10 +297,14 @@ This will configure the network adapters for the Kali and Metasploitable2 VMs wi
 7. In the *Name* field, enter `intnet`.
 8. Click *OK* to save the settings and close out of the window.
 
+</details>
+
 > [!NOTE]\
 > The NAT adapter is optional and can be used to download packages and updates for the Kali VM. The internal network adapter is required and is used for communication between the Kali and Metasploitable2 VMs.
 
 ##### Metasploitable2 Virtual Machine
+
+<details>
 
 1. Open VirtualBox and select the Metasploitable2 VM.
 2. Click on the *Settings* icon and navigate to the *Network* tab.
@@ -308,9 +312,9 @@ This will configure the network adapters for the Kali and Metasploitable2 VMs wi
 4. In the *Name* field, enter `intnet`.
 5. Click *OK* to save the settings and close out of the window.
 
-<!-- #### Docker Network Configuration *(WIP)* -->
-
 </details>
+
+<!-- #### Docker Network Configuration *(WIP)* -->
 
 #### Host Machine Network Configuration
 

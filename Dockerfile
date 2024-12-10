@@ -1,5 +1,7 @@
 # syntax=docker/dockerfile:1
 
+# Work in progress - not yet fully functional
+
 FROM kalilinux/kali-rolling
 
 WORKDIR /chadv1.0

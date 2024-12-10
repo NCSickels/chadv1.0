@@ -37,7 +37,7 @@ You can find the sponsor's project proposal slide below.
 
 <div style="text-align:center">
 
-![Project Overview](project_overview.png)
+![Project Overview](.assets/project_overview.png)
 
 </div>
 

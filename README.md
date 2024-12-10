@@ -17,10 +17,11 @@
 ## Table of Contents
 
 - [Project Overview](#project-overview)
-- [Project Directory Structure](#project-directory-structure)
+  - [Project Directory Structure](#project-directory-structure)
+- [Prerequisites](#prerequisites)
+- [Testbed Configuration](#testbed-configuration)
+  - [Network Configuration](#network-configuration)
 - [Usage & Installation](#usage--installation)
-  - [Prerequisites](#prerequisites)
-  - [Testbed Configuration](#testbed-configuration)
   - [Bash Script (Recommended)](#bash-script-recommended)
   - [Dockerfile *(WIP)*](#dockerfile-wip)
   - [Manual Installation (Recommended)](#manual-installation-recommended)
@@ -504,13 +505,16 @@ This will install the necessary tools for the Chadv1.0 fuzzing workflow, includi
 - [AFLnet](https://github.com/aflnet/aflnet)
 - [Radamsa](https://gitlab.com/akihe/radamsa.git)
 
-### Other
+### Testbed Tools
 
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - [Docker Desktop](https://www.docker.com/get-started/)
 - [Kali Linux 2023.4 Pre-built VMs](https://www.kali.org/get-kali/#kali-virtual-machines)
 - [Ubuntu 20.04 LTS ISO](https://releases.ubuntu.com/focal/)
 - [Metasploitable2](https://www.rapid7.com/products/metasploit/metasploitable/)
+
+### Miscellaneous Tools
+
 - [dos2unix](https://dos2unix.sourceforge.io)
 - [Valgrind](https://valgrind.org)
 - [LDRA](https://ldra.com)

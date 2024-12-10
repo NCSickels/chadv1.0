@@ -296,7 +296,7 @@ Charger Active Defense v1.0 - Senior Design Project
 
 The Chad workflow testbed comprises two virtual machines: Kali Linux 2023.4 (or newer) and Metasploitable2. You can download a pre-built Kali Linux VM from their website [here](https://www.kali.org/get-kali/#kali-virtual-machines). Rapid7 provides a pre-built Metasploitable2 VM from their website [here](https://www.rapid7.com/products/metasploit/metasploitable/). For detailed configuration information, please refer to the table below.  
 
-![Testbed Configuration](config/Configuration%20Table.png)  
+![Testbed Configuration](config/Configuration_Table.png)  
 
 > [!IMPORTANT]\
 > *"Virtual Machine 1 (Host)"* refers to the attacking virtual machine running Kali, which runs Medusa and Masscan against the target VM.\

@@ -50,17 +50,41 @@ You can find the sponsor's project proposal slide below.
 Charger Active Defense v1.0 - Senior Design Project
 .
 ├── README.md
+├── User_Guide.docx
+|── Charger-Active-Defense-Banner.png
+├── workflow.sh
+├── Dockerfile
+├── Makefile
+├── project_overview.png
+├── background_screening
+|   ├── CVEs.md
+|   ├── ldra
+|   │   ├── aircrack-ng
+|   │   │   └── aircrack-ng.mts.htm
+|   │   ├── masscan
+|   │   │   └── masscan.mts.htm
+|   │   ├── medusa
+|   │   │   └── medusa.mts.htm
+|   │   ├── netdiscover
+|   │   │   └── netdiscover.mts.htm
+|   │   ├── reaver
+|   │   │   └── reaver.mts.htm
+|   │   └── yersinia
+|   │       └── yersinia.mts.htm
+|   └── valgrind
+|       ├── commands.txt
+|       ├── masscan.txt
+|       ├── medusa_ftp.txt
+|       ├── medusa_postgres.txt
+|       ├── medusa_ssh.txt
+|       └── netdiscover.txt
 ├── config
 │   ├── Metasploitable2_Running_Services.txt
 │   └── Testbed_Config.md
 ├── deliverables
-│   ├── Conference-template-A4.doc
 │   ├── G12_attack_tool_selection_report.docx
 │   ├── G12_fuzz_tool_selection_report.docx
 │   ├── G12_fuzzing_results_analysis.docx
-│   ├── G12_updated_milestones.docx
-│   ├── G12_updated_timeline.png
-│   ├── Project_Timeline_v2.gan
 │   ├── briefings
 │   │   ├── brief_1
 │   │   │   ├── G12_briefing_1_progress_report.docx
@@ -81,8 +105,14 @@ Charger Active Defense v1.0 - Senior Design Project
 │   │   └── individual_level_of_effort.md
 │   ├── final_report
 │   ├── proposal
-│   │   └── Project-Proposal-Submission.pdf
+│   │   ├── ChAD Senior Design Project - rev 4.png
+│   │   ├── G12_project_proposal.pptx 
+│   │   ├── G12_project_proposal.pdf
+│   │   └── Senior Design Project Gantt Chart.png
 │   └── timeline_and_milestones
+│       ├── G12_updated_milestones.docx
+|       ├── G12_updated_timeline.png
+│       ├── Project_Timeline_v2.gan
 │       └── initial
 │           ├── Project_Timeline_Proposal.gan
 │           └── milestone_analysis.md
@@ -126,7 +156,11 @@ Charger Active Defense v1.0 - Senior Design Project
 ├── misc
 │   ├── Attack_Tool_Commands.md
 │   ├── Attack_Tool_Info.md
+|   ├── Charger-Active-Defense-Banner-old.png
+|   ├── Conference-template-A4.doc
+|   ├── generate_tree.py
 │   ├── password_list.txt
+|   ├── project_directory_tree.txt
 │   └── repeat_medusa.sh
 ├── pcaps
 │   ├── baseline
@@ -141,37 +175,38 @@ Charger Active Defense v1.0 - Senior Design Project
 │       ├── medusa_ftp_fail.pcap
 │       └── nmap_ftp_scan.pcap
 ├── project_overview.png
-├── research
-│   ├── CVEs.md
-│   ├── Fuzzing_Tools.md
-│   └── cmiller-csw-2010.pdf
-└── background_screening
-    ├── ldra
-    │   ├── aircrack-ng
-    │   │   └── aircrack-ng.mts.htm
-    │   ├── masscan
-    │   │   └── masscan.mts.htm
-    │   ├── medusa
-    │   │   └── medusa.mts.htm
-    │   ├── netdiscover
-    │   │   └── netdiscover.mts.htm
-    │   ├── reaver
-    │   │   └── reaver.mts.htm
-    │   └── yersinia
-    │       └── yersinia.mts.htm
-    └── valgrind
-        ├── commands.txt
-        ├── masscan.txt
-        ├── medusa_ftp.txt
-        ├── medusa_postgres.txt
-        ├── medusa_ssh.txt
-        └── netdiscover.txt
+└── research
+    ├── Fuzzing_Tools.md
+    └── cmiller-csw-2010.pdf
+
 ```
 
 <details>
 <summary>Explanation</summary>
 
 - **README.md:** This file.
+- **User_Guide.docx:** User guide document for the project (MS Word formatted README).
+- **Charger-Active-Defense-Banner.png:** Project banner image.
+- **workflow.sh:** Bash script for installing and building the attack and fuzzing tools for the workflow.
+- **Dockerfile:** WIP Dockerfile for fuzzing workflow.
+- **Makefile:** Makefile for building and running the Docker container.
+- **project_overview.png:** Image of the project overview.
+- **background_screening:** Contains test-related files.
+  - **CVEs.md:** List of CVEs from all attack tool candidates.
+  - **ldra:** LDRA test files.
+    - **aircrack-ng/aircrack-ng.mts.htm:** Aircrack-ng LDRA test files.
+    - **masscan/masscan.mts.htm:** Masscan LDRA test files.
+    - **medusa/medusa.mts.htm** Medusa LDRA test files.
+    - **netdiscover/netdiscover.mts.htm:** Netdiscover LDRA test report.
+    - **reaver/reaver.mts.htm:** Reaver LDRA test report.
+    - **yersinia/yersinia.mts.htm:** Yersinia LDRA test report.
+  - **valgrind:** Valgrind test results for each attack tool candidate.
+    - **commands.txt:** Commands used for running the Valgrind tests.
+    - **masscan.txt:** Masscan Valgrind test results file.
+    - **medusa_ftp.txt:** Medusa FTP Valgrind test results file.
+    - **medusa_postgres.txt:** Medusa PostgreSQL Valgrind test results file.
+    - **medusa_ssh.txt:** Medusa SSH Valgrind test results file.
+    - **netdiscover.txt:** Netdiscover Valgrind test results file.
 - **project_overview.png:** Image of the project overview.
 - **config:** Contains configuration files.
   - **Testbed_Config.md:** Configuration details for the testbed.
@@ -179,9 +214,6 @@ Charger Active Defense v1.0 - Senior Design Project
   - **G12_attack_tool_selection_report.docx:** Attack tool selection report.
   - **G12_fuzz_tool_selection_report.docx:** Fuzz tool selection report.
   - **G12_fuzzing_results_analysis.docx:** Fuzzing results analysis.
-  - **G12_updated_milestones.docx:** Updated milestones.
-  - **G12_updated_timeline.png:** Updated timeline.
-  - **Project_Timeline_v2.gan:** Gantt chart file for the project timeline.
   - **briefings:** Contains briefing files.
     - **brief_1:** Briefing 1 files.
       - **G12_briefing_1_progress_report.docx:** Briefing 1 progress report.
@@ -202,8 +234,14 @@ Charger Active Defense v1.0 - Senior Design Project
     - **individual_level_of_effort.md:** Individual level of effort document.
   - **final_report:** Final report files.
   - **proposal:** Proposal files.
-    - **Project-Proposal-Submission.pdf:** Project proposal presentation slides.
+    - **ChAD Senior Design Project - rev 4.png:** Proposal overview diagram.
+    - **G12_project_proposal.pptx:** Project proposal presentation slides.
+    - **G12_project_proposal.pdf:** Project proposal PDF.
+    - **Senior Design Project Gantt Chart.png:** Initial project timeline Gantt chart.
   - **timeline_and_milestones:** Contains timeline and milestones files.
+    - **G12_updated_milestones.docx:** Updated milestones document for Design Review.
+    - **G12_updated_timeline.png:** Updated timeline.
+    - **Project_Timeline_v2.gan:** Gantt chart file for the project timeline.
     - **initial:** Initial timeline and milestones.
       - **Project_Timeline_Proposal.gan:** Initial project timeline proposal.
       - **milestone_analysis.md:** Milestone analysis.  
@@ -231,28 +269,16 @@ Charger Active Defense v1.0 - Senior Design Project
 - **misc:** Miscellaneous files.
   - **Attack_Tool_Commands.md:** Commands for attack tools used during compatibility testing.
   - **Attack_Tool_Info.md:** Information about attack tools.
+  - **Charger-Active-Defense-Banner-old.png:** Old project banner.
+  - **Conference-template-A4.doc:** IEEE conference template document.
+  - **generate_tree.py:** Python script to generate the directory tree.
   - **password_list.txt:** Password list used for testing.
+  - **project_directory_tree.txt:** Directory tree text file.
   - **repeat_medusa.sh:** Script to repeatedly run Medusa.
 - **pcaps:** Contains PCAP files.
   - **baseline:** Baseline PCAP files.
   - **scapy:** Scapy PCAP files.
-- **background_screening:** Contains test-related files.
-  - **ldra:** LDRA test files.
-    - **aircrack-ng/aircrack-ng.mts.htm:** Aircrack-ng LDRA test files.
-    - **masscan/masscan.mts.htm:** Masscan LDRA test files.
-    - **medusa/medusa.mts.htm** Medusa LDRA test files.
-    - **netdiscover/netdiscover.mts.htm:** Netdiscover LDRA test report.
-    - **reaver/reaver.mts.htm:** Reaver LDRA test report.
-    - **yersinia/yersinia.mts.htm:** Yersinia LDRA test report.
-  - **valgrind:** Valgrind test results for each attack tool candidate.
-    - **commands.txt:** Commands used for running the Valgrind tests.
-    - **masscan.txt:** Masscan Valgrind test results file.
-    - **medusa_ftp.txt:** Medusa FTP Valgrind test results file.
-    - **medusa_postgres.txt:** Medusa PostgreSQL Valgrind test results file.
-    - **medusa_ssh.txt:** Medusa SSH Valgrind test results file.
-    - **netdiscover.txt:** Netdiscover Valgrind test results file.
 - **research:** Contains research-related files.
-  - **CVEs.md:** List of CVEs from all attack tool candidates.
   - **Fuzzing_Tools.md:** Background research on possible fuzzing tools.
   - **cmiller-csw-2010.pdf:** Research paper on general fuzzing and fuzzing tools.
 

@@ -7,8 +7,8 @@
 | Apply LDRA static analysis & Valgrind on All Attack Tools |        9/24        |       9/30      |
 | Identify Fuzz Testing Tools                               |        9/30        |       10/7      |
 | Identify Static Analysis Tools                            |        10/1        |       9/30      |
-| Analyze Fuzz Testing Results                              |        10/27       |                 |
-| Rank Fuzz Tools Based on Probability of Success           |        10/27       |                 |
+| Analyze Fuzz Testing Results                              |        10/27       |      11/18      |
+| Rank Fuzz Tools Based on Probability of Success           |        10/27       |      10/27      |
 | Write Tool Selection Report                               |        10/14       |      10/27      |
 
 ## Added Milestones

@@ -1,3 +1,6 @@
+<!-- markdownlint-disable MD033 -->
+# Configuration Table
+
 <table>
   <thread>
     <tr>

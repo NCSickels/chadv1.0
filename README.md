@@ -263,15 +263,109 @@ Charger Active Defense v1.0 - Senior Design Project
 
 - VirtualBox 7.1.0 (or later)
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
+- Wi-Fi/Ethernet Adapter that supports promiscuous mode.
 - Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`  
 
 ## Testbed Configuration
+
+The Chad workflow testbed comprises two virtual machines: Kali Linux 2023.4 (or newer) and Metasploitable2. You can download a pre-built Kali Linux VM from their website [here](https://www.kali.org/get-kali/#kali-virtual-machines). Rapid7 provides a pre-built Metasploitable2 VM from their website [here](https://www.rapid7.com/products/metasploit/metasploitable/). For detailed configuration information, please refer to the table below.  
 
 ![Testbed Configuration](config/Configuration%20Table.png)  
 
 > [!IMPORTANT]\
 > *"Virtual Machine 1 (Host)"* refers to the attacking virtual machine running Kali, which runs Medusa and Masscan against the target VM.\
 > *"Virtual Machine 2 (Target)"* refers to the virtual machine running Metasploitable2, which has vulnerable services active.  
+
+### Network Configuration
+
+For both VMs to communicate with each other, you will need to configure the network adapters in VirtualBox and on the VMs' network interfaces. You can use either a physical network adapter that supports promiscuous mode or virtual adapters through your hypervisor; however, we recommend using the virtual adapters as shown below.
+
+#### VirtualBox Network Adapter Settings Configuration
+
+##### Kali Virtual Machine
+
+1. Open VirtualBox and select the Kali VM.
+2. Click on the *Settings* icon and navigate to the *Network* tab.
+3. Under *Adapter 1*, select *Attached to: NAT* (optional).
+4. Click on *Adapter 2*.
+5. Check the box for *Enable Network Adapter*.
+6. Select *Attached to: Internal Network*.
+7. In the *Name* field, enter `intnet`.
+8. Click *OK* to save the settings and close out of the window.
+
+> [!NOTE]\
+> The NAT adapter is optional and can be used to download packages and updates for the Kali VM. The internal network adapter is required and is used for communication between the Kali and Metasploitable2 VMs.
+
+##### Metasploitable2 Virtual Machine
+
+1. Open VirtualBox and select the Metasploitable2 VM.
+2. Click on the *Settings* icon and navigate to the *Network* tab.
+3. Under *Adapter 1*, select *Attached to: Internal Network*.
+4. In the *Name* field, enter `intnet`.
+5. Click *OK* to save the settings and close out of the window.
+
+<!-- #### Docker Network Configuration *(WIP)* -->
+
+#### Host Machine Network Configuration
+
+Once the virtual machines are configured, start both VMs and configure the network interfaces on each VM. Note that the network interface names may vary depending on the operating system and version. We will use the default network interface names for the examples below. The IP addresses used are default private IP addresses, but you can use any IP address within the same subnet.
+
+##### Kali Host Machine
+
+Open terminal and run the following command(s) to check the network interfaces:
+
+```bash
+sudo ip addr
+# or
+sudo ifconfig
+```
+
+You should see the network interfaces listed. If you enabled network adapter 1, you should see your internet-facing network interface named `eth0` or `enp0s3`. If you enabled network adapter 2, you should see an interface named `eth1` or `enp0s8`. Otherwise, you may need to manually configure the network interfaces on your system. We will use `eth1` for the internal network communication as an example for the commands below.
+
+Set the IP address for the internal network interface `eth1` (***requires root privileges***):
+
+```bash
+sudo ip addr add 192.168.1.99 dev eth1
+# or
+sudo ifconfig eth1 192.168.1.99
+```
+
+You can verify the IP address is set correctly by running `sudo ip addr` or `sudo ifconfig` again.
+
+##### Metasploitable2 Target Machine
+
+By default, the Metasploitable2 VM has no GUI and should boot into a terminal window. Verify the available network interfaces by running the following command(s):
+
+```bash
+sudo ip addr
+# or
+sudo ifconfig
+```
+
+You should see the network interface `eth0` listed. Set the IP address for the internal network interface `eth0` (***requires root privileges***):
+
+```bash
+sudo ip addr add 192.168.1.100 dev eth0
+# or
+sudo ifconfig eth0 192.168.1.100
+```  
+
+You can verify the IP address is set correctly by running `sudo ip addr` or `sudo ifconfig` again.
+
+#### Verify Network Connection
+
+Once the network interfaces have been configured on both VMs, you can test the network connection between the two VMs by running the following commands:
+
+```bash
+# On the Kali VM
+ping 192.168.1.100
+
+# On the Metasploitable2 VM
+ping 192.168.1.99
+```
+
+If the network connection is successful, you should see the ping responses from the target VM (e.g., `64 bytes from 192.168.1.100: icmp_seq=1 ttl=64 time=0.171ms`). If the connection is unsuccessful, restart the VMs and verify the network configurations. Network adapters may reset at times, so we recommend checking the network adapter IP addresses to ensure they are still set correctly.
+If they are not set, you can reconfigure them by repeating the steps above.
 
 ## Usage & Installation
 

@@ -5,7 +5,7 @@
 
  <!-- *Noah Sickels, Adam Brannon, and William Lochte* -->
 
-![Project Banner](Charger-Active-Defense-Banner.png)
+![Project Banner](.assets/Charger-Active-Defense-Banner.png)
 ![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
 ![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
 [![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=plastic&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
@@ -17,10 +17,11 @@
 ## Table of Contents
 
 - [Project Overview](#project-overview)
-- [Project Directory Structure](#project-directory-structure)
+  - [Project Directory Structure](#project-directory-structure)
+- [Prerequisites](#prerequisites)
+- [Testbed Configuration](#testbed-configuration)
+  - [Network Configuration](#network-configuration)
 - [Usage & Installation](#usage--installation)
-  - [Prerequisites](#prerequisites)
-  - [Testbed Configuration](#testbed-configuration)
   - [Bash Script (Recommended)](#bash-script-recommended)
   - [Dockerfile *(WIP)*](#dockerfile-wip)
   - [Manual Installation (Recommended)](#manual-installation-recommended)
@@ -36,7 +37,7 @@ You can find the sponsor's project proposal slide below.
 
 <div style="text-align:center">
 
-![Project Overview](project_overview.png)
+![Project Overview](.assets/project_overview.png)
 
 </div>
 
@@ -49,17 +50,45 @@ You can find the sponsor's project proposal slide below.
 Charger Active Defense v1.0 - Senior Design Project
 .
 ├── README.md
+├── User_Guide.docx
+|── Charger-Active-Defense-Banner.png
+├── workflow.sh
+├── Dockerfile
+├── Makefile
+├── project_overview.png
+├── background_screening
+|   ├── CVEs.md
+│   ├── Attack_Tool_Info.md
+|   ├── ldra
+|   │   ├── aircrack-ng
+|   │   │   └── aircrack-ng.mts.htm
+|   │   ├── masscan
+|   │   │   └── masscan.mts.htm
+|   │   ├── medusa
+|   │   │   └── medusa.mts.htm
+|   │   ├── netdiscover
+|   │   │   └── netdiscover.mts.htm
+|   │   ├── reaver
+|   │   │   └── reaver.mts.htm
+|   │   └── yersinia
+|   │       └── yersinia.mts.htm
+|   └── valgrind
+|       ├── commands.txt
+|       ├── masscan.txt
+|       ├── medusa_ftp.txt
+|       ├── medusa_postgres.txt
+|       ├── medusa_ssh.txt
+|       └── netdiscover.txt
 ├── config
+|   ├──network_configuration_assets
+|   ├── configuration_table.md
+|   ├── Configuration_Table.png
 │   ├── Metasploitable2_Running_Services.txt
 │   └── Testbed_Config.md
 ├── deliverables
-│   ├── Conference-template-A4.doc
 │   ├── G12_attack_tool_selection_report.docx
 │   ├── G12_fuzz_tool_selection_report.docx
 │   ├── G12_fuzzing_results_analysis.docx
-│   ├── G12_updated_milestones.docx
-│   ├── G12_updated_timeline.png
-│   ├── Project_Timeline_v2.gan
 │   ├── briefings
 │   │   ├── brief_1
 │   │   │   ├── G12_briefing_1_progress_report.docx
@@ -80,12 +109,21 @@ Charger Active Defense v1.0 - Senior Design Project
 │   │   └── individual_level_of_effort.md
 │   ├── final_report
 │   ├── proposal
-│   │   └── Project-Proposal-Submission.pdf
+│   │   ├── ChAD Senior Design Project - rev 4.png
+│   │   ├── G12_project_proposal.pptx 
+│   │   ├── G12_project_proposal.pdf
+│   │   └── Senior Design Project Gantt Chart.png
 │   └── timeline_and_milestones
+│       ├── G12_updated_milestones.docx
+|       ├── G12_updated_timeline.png
+│       ├── Project_Timeline_v2.gan
 │       └── initial
 │           ├── Project_Timeline_Proposal.gan
 │           └── milestone_analysis.md
 ├── fuzzing
+|   ├── Attack_Tool_Commands.md
+|   ├── password_list.txt
+|   ├── repeat_medusa.sh
 │   ├── afl-qemu-trace
 │   ├── fuzzowski.medusa.ftp
 │   │   └── ftp.py
@@ -123,10 +161,10 @@ Charger Active Defense v1.0 - Senior Design Project
 │   └── scapy.radamsa
 │       └── radamsa_scapy_pcap_fuzzing.py
 ├── misc
-│   ├── Attack_Tool_Commands.md
-│   ├── Attack_Tool_Info.md
-│   ├── password_list.txt
-│   └── repeat_medusa.sh
+|   ├── Charger-Active-Defense-Banner-old.png
+|   ├── Conference-template-A4.doc
+|   ├── generate_tree.py
+|   └── project_directory_tree.txt
 ├── pcaps
 │   ├── baseline
 │   │   ├── masscan.pcap
@@ -140,47 +178,49 @@ Charger Active Defense v1.0 - Senior Design Project
 │       ├── medusa_ftp_fail.pcap
 │       └── nmap_ftp_scan.pcap
 ├── project_overview.png
-├── research
-│   ├── CVEs.md
-│   ├── Fuzzing_Tools.md
-│   └── cmiller-csw-2010.pdf
-└── tests
-    ├── ldra
-    │   ├── aircrack-ng
-    │   │   └── aircrack-ng.mts.htm
-    │   ├── masscan
-    │   │   └── masscan.mts.htm
-    │   ├── medusa
-    │   │   └── medusa.mts.htm
-    │   ├── netdiscover
-    │   │   └── netdiscover.mts.htm
-    │   ├── reaver
-    │   │   └── reaver.mts.htm
-    │   └── yersinia
-    │       └── yersinia.mts.htm
-    └── valgrind
-        ├── commands.txt
-        ├── masscan.txt
-        ├── medusa_ftp.txt
-        ├── medusa_postgres.txt
-        ├── medusa_ssh.txt
-        └── netdiscover.txt
+└── research
+    ├── Fuzzing_Tools.md
+    └── cmiller-csw-2010.pdf
+
 ```
 
 <details>
 <summary>Explanation</summary>
 
 - **README.md:** This file.
+- **User_Guide.docx:** User guide document for the project (MS Word formatted README).
+- **Charger-Active-Defense-Banner.png:** Project banner image.
+- **workflow.sh:** Bash script for installing and building the attack and fuzzing tools for the workflow.
+- **Dockerfile:** WIP Dockerfile for fuzzing workflow.
+- **Makefile:** Makefile for building and running the Docker container.
+- **project_overview.png:** Image of the project overview.
+- **background_screening:** Contains test-related files.
+  - **CVEs.md:** List of CVEs from all attack tool candidates.
+  - **Attack_Tool_Info.md:** Information about attack tools.
+  - **ldra:** LDRA test files.
+    - **aircrack-ng/aircrack-ng.mts.htm:** Aircrack-ng LDRA test files.
+    - **masscan/masscan.mts.htm:** Masscan LDRA test files.
+    - **medusa/medusa.mts.htm** Medusa LDRA test files.
+    - **netdiscover/netdiscover.mts.htm:** Netdiscover LDRA test report.
+    - **reaver/reaver.mts.htm:** Reaver LDRA test report.
+    - **yersinia/yersinia.mts.htm:** Yersinia LDRA test report.
+  - **valgrind:** Valgrind test results for each attack tool candidate.
+    - **commands.txt:** Commands used for running the Valgrind tests.
+    - **masscan.txt:** Masscan Valgrind test results file.
+    - **medusa_ftp.txt:** Medusa FTP Valgrind test results file.
+    - **medusa_postgres.txt:** Medusa PostgreSQL Valgrind test results file.
+    - **medusa_ssh.txt:** Medusa SSH Valgrind test results file.
+    - **netdiscover.txt:** Netdiscover Valgrind test results file.
 - **project_overview.png:** Image of the project overview.
 - **config:** Contains configuration files.
+  - **network_configuration_assets:** Screenshots of VirtualBox Network adapter settings menus for README and User Guide.
+  - **configuration_table.md:** Configuration table for the testbed (Markdown).
+  - **Configuration_Table.png:** Configuration table for the testbed (PNG).
   - **Testbed_Config.md:** Configuration details for the testbed.
 - **deliverables**: Contains project deliverables, including the tool reports, proposal presentation slides, briefings, design review, and final report.
   - **G12_attack_tool_selection_report.docx:** Attack tool selection report.
   - **G12_fuzz_tool_selection_report.docx:** Fuzz tool selection report.
   - **G12_fuzzing_results_analysis.docx:** Fuzzing results analysis.
-  - **G12_updated_milestones.docx:** Updated milestones.
-  - **G12_updated_timeline.png:** Updated timeline.
-  - **Project_Timeline_v2.gan:** Gantt chart file for the project timeline.
   - **briefings:** Contains briefing files.
     - **brief_1:** Briefing 1 files.
       - **G12_briefing_1_progress_report.docx:** Briefing 1 progress report.
@@ -201,12 +241,21 @@ Charger Active Defense v1.0 - Senior Design Project
     - **individual_level_of_effort.md:** Individual level of effort document.
   - **final_report:** Final report files.
   - **proposal:** Proposal files.
-    - **Project-Proposal-Submission.pdf:** Project proposal presentation slides.
+    - **ChAD Senior Design Project - rev 4.png:** Proposal overview diagram.
+    - **G12_project_proposal.pptx:** Project proposal presentation slides.
+    - **G12_project_proposal.pdf:** Project proposal PDF.
+    - **Senior Design Project Gantt Chart.png:** Initial project timeline Gantt chart.
   - **timeline_and_milestones:** Contains timeline and milestones files.
+    - **G12_updated_milestones.docx:** Updated milestones document for Design Review.
+    - **G12_updated_timeline.png:** Updated timeline.
+    - **Project_Timeline_v2.gan:** Gantt chart file for the project timeline.
     - **initial:** Initial timeline and milestones.
       - **Project_Timeline_Proposal.gan:** Initial project timeline proposal.
       - **milestone_analysis.md:** Milestone analysis.  
 - **fuzzing:** Contains fuzzing-related files.
+  - **Attack_Tool_Commands.md:** Commands used for the attack tools.
+  - **password_list.txt:** Password list used for testing.
+  - **repeat_medusa.sh:** Script to repeatedly run Medusa.
   - **afl-qemu-trace:** AFL QEMU trace binary.
   - **fuzzowski.medusa.ftp:** Fuzzowski Medusa FTP files.
     - **ftp.py:** FTP file for Fuzzowski Medusa.
@@ -228,31 +277,14 @@ Charger Active Defense v1.0 - Senior Design Project
   - **scapy.radamsa:** Scapy Radamsa files.
     - **radamsa_scapy_pcap_fuzzing.py:** Radamsa & Scapy PCAP fuzzing Python script.
 - **misc:** Miscellaneous files.
-  - **Attack_Tool_Commands.md:** Commands for attack tools used during compatibility testing.
-  - **Attack_Tool_Info.md:** Information about attack tools.
-  - **password_list.txt:** Password list used for testing.
-  - **repeat_medusa.sh:** Script to repeatedly run Medusa.
+  - **Charger-Active-Defense-Banner-old.png:** Old project banner.
+  - **Conference-template-A4.doc:** IEEE conference template document.
+  - **generate_tree.py:** Python script to generate the directory tree.
+  - **project_directory_tree.txt:** Directory tree text file.
 - **pcaps:** Contains PCAP files.
   - **baseline:** Baseline PCAP files.
   - **scapy:** Scapy PCAP files.
-- **tests:** Contains test-related files.
-  - **ldra:** LDRA test files.
-    - **aircrack-ng/aircrack-ng.mts.htm:** Aircrack-ng LDRA test files.
-    - **masscan/masscan.mts.htm:** Masscan LDRA test files.
-    - **medusa/medusa.mts.htm** Medusa LDRA test files.
-    - **netdiscover/netdiscover.mts.htm:** Netdiscover LDRA test report.
-      - **netdiscover.mts.htm:** HTML report for Netdiscover.
-    - **reaver/reaver.mts.htm:** Reaver LDRA test report.
-    - **yersinia/yersinia.mts.htm:** Yersinia LDRA test report.
-  - **valgrind:** Valgrind test results for each attack tool candidate.
-    - **commands.txt:** Commands used for running the Valgrind tests.
-    - **masscan.txt:** Masscan Valgrind test results file.
-    - **medusa_ftp.txt:** Medusa FTP Valgrind test results file.
-    - **medusa_postgres.txt:** Medusa PostgreSQL Valgrind test results file.
-    - **medusa_ssh.txt:** Medusa SSH Valgrind test results file.
-    - **netdiscover.txt:** Netdiscover Valgrind test results file.
 - **research:** Contains research-related files.
-  - **CVEs.md:** List of CVEs from all attack tool candidates.
   - **Fuzzing_Tools.md:** Background research on possible fuzzing tools.
   - **cmiller-csw-2010.pdf:** Research paper on general fuzzing and fuzzing tools.
 
@@ -263,15 +295,132 @@ Charger Active Defense v1.0 - Senior Design Project
 
 - VirtualBox 7.1.0 (or later)
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
+- Wi-Fi/Ethernet Adapter that supports promiscuous mode.
 - Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`  
 
 ## Testbed Configuration
 
-![Testbed Configuration](config/Configuration%20Table.png)  
+The Chad workflow testbed comprises two virtual machines: Kali Linux 2023.4 (or newer) and Metasploitable2. You can download a pre-built Kali Linux VM from their website [here](https://www.kali.org/get-kali/#kali-virtual-machines). Rapid7 provides a pre-built Metasploitable2 VM from their website [here](https://www.rapid7.com/products/metasploit/metasploitable/). For detailed configuration information, please refer to the table below.  
+
+![Testbed Configuration](config/Configuration_Table.png)  
 
 > [!IMPORTANT]\
 > *"Virtual Machine 1 (Host)"* refers to the attacking virtual machine running Kali, which runs Medusa and Masscan against the target VM.\
 > *"Virtual Machine 2 (Target)"* refers to the virtual machine running Metasploitable2, which has vulnerable services active.  
+
+### Network Configuration
+
+For both VMs to communicate with each other, you will need to configure the network adapters in VirtualBox and on the VMs' network interfaces. You can use either a physical network adapter that supports promiscuous mode or virtual adapters through your hypervisor; however, we recommend using the virtual adapters as shown below.
+
+#### VirtualBox Network Adapter Settings Configuration
+
+This will configure the network adapters for the Kali and Metasploitable2 VMs within VirtualBox through the internal network adapter.
+
+##### Kali Virtual Machine
+
+<details>
+
+1. Open VirtualBox and select the Kali VM.
+2. Click on the *Settings* icon and navigate to the *Network* tab.
+3. Under *Adapter 1*, select *Attached to: NAT* (optional).
+4. Click on *Adapter 2*.
+5. Check the box for *Enable Network Adapter*.
+6. Select *Attached to: Internal Network*.
+7. In the *Name* field, enter `intnet`.
+8. Click *OK* to save the settings and close out of the window.
+
+</details>
+
+> [!NOTE]\
+> The NAT second adapter is optional and can be used to download packages and updates for the Kali VM. The internal network adapter is required as it is used for communication between the Kali and Metasploitable2 VMs.
+
+##### Metasploitable2 Virtual Machine
+
+<details>
+
+1. Open VirtualBox and select the Metasploitable2 VM.
+2. Click on the *Settings* icon and navigate to the *Network* tab.
+3. Under *Adapter 1*, select *Attached to: Internal Network*.
+4. In the *Name* field, enter `intnet`.
+5. Click *OK* to save the settings and close out of the window.
+
+</details>
+
+<!-- #### Docker Network Configuration *(WIP)* -->
+
+#### Host Machine Network Configuration
+
+Once the virtual machines are configured, start both VMs and configure the network interfaces on each VM. Note that the network interface names may vary depending on the operating system and version.
+
+We will use the default network interface names for the examples below. The IP addresses used are default private IP addresses, but you can use any IP address within the same subnet.
+
+<details>
+
+##### Kali Host Machine
+
+Open terminal and run the following command(s) to check the network interfaces:
+
+```bash
+sudo ip addr
+# or
+sudo ifconfig
+```
+
+You should see the network interfaces listed. If you enabled network adapter 1, you should see your internet-facing network interface named `eth0` or `enp0s3`.
+
+If you enabled network adapter 2, you should see an interface named `eth1` or `enp0s8`. Otherwise, you may need to manually configure the network interfaces on your system.
+
+We will use `eth1` for the internal network communication as an example for the commands below.
+
+Set the IP address for the internal network interface `eth1` (***requires root privileges***):
+
+```bash
+sudo ip addr add 192.168.1.99 dev eth1
+# or
+sudo ifconfig eth1 192.168.1.99
+```
+
+You can verify the IP address is set correctly by running `sudo ip addr` or `sudo ifconfig` again.
+
+##### Metasploitable2 Target Machine
+
+By default, the Metasploitable2 VM has no GUI and should boot into a terminal window. Verify the available network interfaces by running the following command(s):
+
+```bash
+sudo ip addr
+# or
+sudo ifconfig
+```
+
+You should see the network interface `eth0` listed. Set the IP address for the internal network interface `eth0` (***requires root privileges***):
+
+```bash
+sudo ip addr add 192.168.1.100 dev eth0
+# or
+sudo ifconfig eth0 192.168.1.100
+```  
+
+You can verify the IP address is set correctly by running `sudo ip addr` or `sudo ifconfig` again.
+
+</details>
+
+#### Verify Network Connection
+
+Once the network interfaces have been configured on both VMs, you can test the network connection between the two VMs by running the following commands:
+
+```bash
+# On the Kali VM
+ping 192.168.1.100
+
+# On the Metasploitable2 VM
+ping 192.168.1.99
+```
+
+If the network connection is successful, you should see the ping responses from the target VM (e.g., `64 bytes from 192.168.1.100: icmp_seq=1 ttl=64 time=0.171ms`).
+
+If the connection is unsuccessful, restart the VMs and verify the network configurations. Network adapters may reset at times, so we recommend checking the network adapter IP addresses to ensure they are still set correctly.
+
+If they are not set, you can reconfigure them by repeating the steps above.
 
 ## Usage & Installation
 
@@ -410,13 +559,16 @@ This will install the necessary tools for the Chadv1.0 fuzzing workflow, includi
 - [AFLnet](https://github.com/aflnet/aflnet)
 - [Radamsa](https://gitlab.com/akihe/radamsa.git)
 
-### Other
+### Testbed Tools
 
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - [Docker Desktop](https://www.docker.com/get-started/)
 - [Kali Linux 2023.4 Pre-built VMs](https://www.kali.org/get-kali/#kali-virtual-machines)
 - [Ubuntu 20.04 LTS ISO](https://releases.ubuntu.com/focal/)
 - [Metasploitable2](https://www.rapid7.com/products/metasploit/metasploitable/)
+
+### Miscellaneous Tools
+
 - [dos2unix](https://dos2unix.sourceforge.io)
 - [Valgrind](https://valgrind.org)
 - [LDRA](https://ldra.com)

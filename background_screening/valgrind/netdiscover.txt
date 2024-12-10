@@ -1,0 +1,359 @@
+==65354== Memcheck, a memory error detector
+==65354== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==65354== Using Valgrind-3.20.0 and LibVEX; rerun with -h for copyright info
+==65354== Command: netdiscover
+==65354== Parent PID: 65353
+==65354== 
+==65354== Warning: ignored attempt to set SIGKILL handler in sigaction();
+==65354==          the SIGKILL signal is uncatchable
+==65354== 
+==65354== Process terminating with default action of signal 2 (SIGINT)
+==65354==    at 0x49B530A: __libc_read (read.c:26)
+==65354==    by 0x49B530A: read (read.c:24)
+==65354==    by 0x493EE82: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:517)
+==65354==    by 0x49411BA: _IO_default_uflow (genops.c:389)
+==65354==    by 0x493BA17: getc (getc.c:40)
+==65354==    by 0x292D29: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x291C56: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== HEAP SUMMARY:
+==65354==     in use at exit: 21,804 bytes in 34 blocks
+==65354==   total heap usage: 56,875 allocs, 56,841 frees, 999,991 bytes allocated
+==65354== 
+==65354== 5 bytes in 1 blocks are still reachable in loss record 1 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x495D589: strdup (strdup.c:42)
+==65354==    by 0x291A74: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 5 bytes in 1 blocks are still reachable in loss record 2 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x495D589: strdup (strdup.c:42)
+==65354==    by 0x487D8DC: pcap_create (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EDFB: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29275C: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x291791: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 5 bytes in 1 blocks are still reachable in loss record 3 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x495D589: strdup (strdup.c:42)
+==65354==    by 0x4876CD1: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487E9E0: pcap_activate (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EE48: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29275C: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x291791: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 5 bytes in 1 blocks are still reachable in loss record 4 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x495D589: strdup (strdup.c:42)
+==65354==    by 0x487D8DC: pcap_create (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EDFB: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29234A: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 5 bytes in 1 blocks are still reachable in loss record 5 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x495D589: strdup (strdup.c:42)
+==65354==    by 0x4876CD1: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487E9E0: pcap_activate (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EE48: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29234A: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 8 bytes in 1 blocks are still reachable in loss record 6 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x48784AA: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487D95A: pcap_create (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EDFB: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29275C: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x291791: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 8 bytes in 1 blocks are still reachable in loss record 7 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4877AFE: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487E9E0: pcap_activate (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EE48: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29275C: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x291791: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 8 bytes in 1 blocks are still reachable in loss record 8 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x48784AA: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487D95A: pcap_create (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EDFB: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29234A: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 8 bytes in 1 blocks are still reachable in loss record 9 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4877AFE: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487E9E0: pcap_activate (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EE48: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29234A: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 16 bytes in 1 blocks are still reachable in loss record 10 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x2924EB: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4876526: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x48769D5: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487DFC4: pcap_loop (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x2923A1: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 16 bytes in 1 blocks are still reachable in loss record 11 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x292453: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x292542: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4876526: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x48769D5: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487DFC4: pcap_loop (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x2923A1: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 16 bytes in 1 blocks are still reachable in loss record 12 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x292464: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x292542: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4876526: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x48769D5: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487DFC4: pcap_loop (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x2923A1: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 16 bytes in 1 blocks are indirectly lost in loss record 13 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x2924EB: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4876526: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x48769D5: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487DFC4: pcap_loop (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x2923A1: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 16 bytes in 1 blocks are indirectly lost in loss record 14 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x292453: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x292542: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4876526: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x48769D5: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487DFC4: pcap_loop (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x2923A1: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 16 bytes in 1 blocks are indirectly lost in loss record 15 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x292464: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x292542: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4876526: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x48769D5: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487DFC4: pcap_loop (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x2923A1: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 19 bytes in 1 blocks are still reachable in loss record 16 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x2914A3: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 32 bytes in 1 blocks are still reachable in loss record 17 of 34
+==65354==    at 0x48489F3: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4892295: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x4880A34: pcap_compile (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29237B: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 32 bytes in 1 blocks are still reachable in loss record 18 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4892370: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x4875C8D: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29238B: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 40 bytes in 1 blocks are still reachable in loss record 19 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x2917B4: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 56 bytes in 1 blocks are still reachable in loss record 20 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x29252D: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4876526: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x48769D5: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487DFC4: pcap_loop (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x2923A1: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 56 bytes in 1 blocks are still reachable in loss record 21 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x294239: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x293630: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x2925F7: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4876526: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x48769D5: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487DFC4: pcap_loop (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x2923A1: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 64 bytes in 1 blocks are still reachable in loss record 22 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x487754E: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487E9E0: pcap_activate (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EE48: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29275C: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x291791: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 64 bytes in 1 blocks are still reachable in loss record 23 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x487754E: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487E9E0: pcap_activate (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EE48: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29234A: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 104 (56 direct, 48 indirect) bytes in 1 blocks are definitely lost in loss record 24 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x29252D: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4876526: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x48769D5: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487DFC4: pcap_loop (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x2923A1: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 304 bytes in 1 blocks are possibly lost in loss record 25 of 34
+==65354==    at 0x48489F3: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4010362: calloc (rtld-malloc.h:44)
+==65354==    by 0x4010362: allocate_dtv (dl-tls.c:395)
+==65354==    by 0x4010DDD: _dl_allocate_tls (dl-tls.c:664)
+==65354==    by 0x494829F: allocate_stack (allocatestack.c:429)
+==65354==    by 0x494829F: pthread_create@@GLIBC_2.34 (pthread_create.c:655)
+==65354==    by 0x2919A1: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 304 bytes in 1 blocks are possibly lost in loss record 26 of 34
+==65354==    at 0x48489F3: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4010362: calloc (rtld-malloc.h:44)
+==65354==    by 0x4010362: allocate_dtv (dl-tls.c:395)
+==65354==    by 0x4010DDD: _dl_allocate_tls (dl-tls.c:664)
+==65354==    by 0x494829F: allocate_stack (allocatestack.c:429)
+==65354==    by 0x494829F: pthread_create@@GLIBC_2.34 (pthread_create.c:655)
+==65354==    by 0x2919B8: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 304 bytes in 1 blocks are possibly lost in loss record 27 of 34
+==65354==    at 0x48489F3: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4010362: calloc (rtld-malloc.h:44)
+==65354==    by 0x4010362: allocate_dtv (dl-tls.c:395)
+==65354==    by 0x4010DDD: _dl_allocate_tls (dl-tls.c:664)
+==65354==    by 0x494829F: allocate_stack (allocatestack.c:429)
+==65354==    by 0x494829F: pthread_create@@GLIBC_2.34 (pthread_create.c:655)
+==65354==    by 0x29181B: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 304 bytes in 1 blocks are possibly lost in loss record 28 of 34
+==65354==    at 0x48489F3: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4010362: calloc (rtld-malloc.h:44)
+==65354==    by 0x4010362: allocate_dtv (dl-tls.c:395)
+==65354==    by 0x4010DDD: _dl_allocate_tls (dl-tls.c:664)
+==65354==    by 0x494829F: allocate_stack (allocatestack.c:429)
+==65354==    by 0x494829F: pthread_create@@GLIBC_2.34 (pthread_create.c:655)
+==65354==    by 0x29183E: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 792 bytes in 1 blocks are still reachable in loss record 29 of 34
+==65354==    at 0x48489F3: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x487D9CC: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x4878457: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487D95A: pcap_create (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EDFB: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29275C: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x291791: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 792 bytes in 1 blocks are still reachable in loss record 30 of 34
+==65354==    at 0x48489F3: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x487D9CC: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x4878457: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487D95A: pcap_create (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EDFB: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29234A: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 1,024 bytes in 1 blocks are still reachable in loss record 31 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4932798: _IO_file_doallocate (filedoalloc.c:101)
+==65354==    by 0x4941118: _IO_doallocbuf (genops.c:374)
+==65354==    by 0x4941118: _IO_doallocbuf (genops.c:369)
+==65354==    by 0x493EF53: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:486)
+==65354==    by 0x49411BA: _IO_default_uflow (genops.c:389)
+==65354==    by 0x493BA17: getc (getc.c:40)
+==65354==    by 0x292D29: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x291C56: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== 1,024 bytes in 1 blocks are still reachable in loss record 32 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4932798: _IO_file_doallocate (filedoalloc.c:101)
+==65354==    by 0x4941118: _IO_doallocbuf (genops.c:374)
+==65354==    by 0x4941118: _IO_doallocbuf (genops.c:369)
+==65354==    by 0x493F2D7: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:745)
+==65354==    by 0x493FD96: _IO_new_file_xsputn (fileops.c:1244)
+==65354==    by 0x493FD96: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1197)
+==65354==    by 0x4911FB1: __printf_buffer_flush_to_file (printf_buffer_to_file.c:59)
+==65354==    by 0x491206F: __printf_buffer_to_file_done (printf_buffer_to_file.c:120)
+==65354==    by 0x491BB5C: __vfprintf_internal (vfprintf-internal.c:1560)
+==65354==    by 0x49CE7A6: __printf_chk (printf_chk.c:33)
+==65354==    by 0x292AC9: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x292BA4: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x292CCA: ??? (in /usr/sbin/netdiscover)
+==65354== 
+==65354== 8,192 bytes in 1 blocks are still reachable in loss record 33 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4876FEB: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487E9E0: pcap_activate (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EE48: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29275C: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x291791: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x48E4DB9: (below main) (libc_start_call_main.h:58)
+==65354== 
+==65354== 8,192 bytes in 1 blocks are still reachable in loss record 34 of 34
+==65354==    at 0x4843808: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65354==    by 0x4876FEB: ??? (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487E9E0: pcap_activate (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x487EE48: pcap_open_live (in /usr/lib/x86_64-linux-gnu/libpcap.so.1.10.5)
+==65354==    by 0x29234A: ??? (in /usr/sbin/netdiscover)
+==65354==    by 0x4947731: start_thread (pthread_create.c:447)
+==65354==    by 0x49C20FF: clone (clone.S:100)
+==65354== 
+==65354== LEAK SUMMARY:
+==65354==    definitely lost: 56 bytes in 1 blocks
+==65354==    indirectly lost: 48 bytes in 3 blocks
+==65354==      possibly lost: 1,216 bytes in 4 blocks
+==65354==    still reachable: 20,484 bytes in 26 blocks
+==65354==         suppressed: 0 bytes in 0 blocks
+==65354== 
+==65354== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)

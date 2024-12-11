@@ -49,9 +49,13 @@ You can find the sponsor's project proposal slide below.
 
 ### Charger Active Defense - System Overview Diagram
 
+---
+
 ![System Diagram](.assets/Chad-System-Overview-Diagram-Background.png)
 
 ### Project Directory Structure
+
+---
 
 #### Highlights
 

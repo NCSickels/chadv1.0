@@ -30,6 +30,7 @@
   - [Usage](#usage)
     - [Radamsa & Medusa](#radamsa--medusa)
     - [AFLnet & Masscan](#aflnet--masscan)
+- [Demonstration Video](#demonstration-video)
 - [References](#references)
 
 ## Project Overview
@@ -664,6 +665,12 @@ echo “masscan -p1-65535 192.168.1.100 --rate=1000” > scan3.txt
 
 > [!WARNING]\
 > You will need to replace the `<MAC_ADDRESS>` with your adapter’s MAC address for steps 5 & 6!
+
+## Demonstration Video
+
+<iframe width="420" height="315"
+src="https://youtu.be/pf5AnudsbNg">
+</iframe>
 
 ## References
 

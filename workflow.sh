@@ -341,7 +341,7 @@ function build() {
             fi
             # Move to AFLNet's parent directory
             cd ../..
-
+            # TODO: Add commands to create AFLnet in and out folders and files for Masscan 
             export AFLNET=$(pwd)/aflnet
             export WORKDIR=$(pwd)
             # export LLVM_CONFIG=$LLVM_CONFIG
@@ -381,6 +381,26 @@ function build() {
         exit 1
     fi
     log info "All tools successfully built!"
+
+    log info "Setting up test environment..."
+    # Create www directory for testing with Radamsa
+
+    if [ ! -d "$DEST_DIR/www" ]; then
+        mkdir -p "$DEST_DIR/www"
+        log info "Created test directory: $DEST_DIR/www"
+        echo "<h1> Radamsa Network Fuzzing Test </h1>" > "$DEST_DIR/www/index.html"
+        log info "Created web server test file: $DEST_DIR/www/index.html"
+        cd "$DEST_DIR"
+        # Create a simple web server to serve the test files
+        echo "GET / HTTP/1.1" > "$DEST_DIR/http-request.txt"
+        echo "Host: localhost:8080" >> "$DEST_DIR/http-request.txt"
+        echo "User-Agent: radamsa" >> "$DEST_DIR/http-request.txt"
+        echo "Accept: */*" >> "$DEST_DIR/http-request.txt"
+
+        log info "Created HTTP request file: $DEST_DIR/http-request.txt"
+    else
+        log info "Test directory: $DEST_DIR/www already exists."
+    fi
 }
 
 if [[ "$INSTALL" = true && "$DEBUG" = false ]]; then

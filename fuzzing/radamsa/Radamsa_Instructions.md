@@ -67,13 +67,14 @@ User-Agent: test
 Accept: */*
 ```
 
-Next, you can use Radamsa to submit this HTTP request to the local web server. In order to do this, you'll need to use Radamsa as a TCP client, which can be done by specifuing an IP address and port to connect to:
+Next, you can use Radamsa to submit this HTTP request to the local web server. In order to do this, you'll need to use Radamsa as a TCP client, which can be done by specifying an IP address and port to connect to:
 
 ```bash
 radamsa -o 127.0.0.1:8080 http-request.txt
 ```
 
-> **Note:** Be aware that using Radamsa as a TCP client will potentially cause malformed/malicious data to be transmitted over the network. This may break things, so be careful to only access networks that we are authorized to test on, or stick to local host.
+> [!NOTE]\
+> Be aware that using Radamsa as a TCP client will potentially cause malformed/malicious data to be transmitted over the network. This may break things, so be careful to only access networks that we are authorized to test on, or stick to local host.
 
 Finally, if you view the output of the PHP server logs, you'll see that it has received the requests, but most likely not process them as they were invalid/malformed.
 
@@ -97,7 +98,7 @@ radamsa -o :4343 whois-response.txt -n inf
 
 Radamsa will now be running in TCP server mode, and will serve a fuzzed version of `whois-response.txt` each time a connection is made to the server, no matter what request data is received.
 
-You can now proceed to testing the `whois` client application. You'll need to make a normal `whois` request for any domain, but wuth `whois` pointed to the local Radamsa server:
+You can now proceed to testing the `whois` client application. You'll need to make a normal `whois` request for any domain, but with `whois` pointed to the local Radamsa server:
 
 ```bash
 whois -h localhost:4343 example.com

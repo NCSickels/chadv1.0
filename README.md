@@ -1,4 +1,6 @@
 <!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD029 -->
+
 # Charger Active Defense v1.0 - Senior Design Project
 
 <div style="text-align:center">
@@ -25,6 +27,9 @@
   - [Bash Script (Recommended)](#bash-script-recommended)
   - [Dockerfile *(WIP)*](#dockerfile-wip)
   - [Manual Installation (Recommended)](#manual-installation-recommended)
+  - [Usage](#usage)
+    - [Radamsa & Medusa](#radamsa--medusa)
+    - [AFLnet & Masscan](#aflnet--masscan)
 - [References](#references)
 
 ## Project Overview
@@ -564,6 +569,101 @@ cd ..
 ```
 
 This will install the necessary tools for the Chadv1.0 fuzzing workflow, including AFLnet, Radamsa, Medusa, and Masscan.  
+
+### Usage
+
+---
+
+After all tools are installed and configured, you can run AFLnet or Radamsa alongside Medusa and Masscan. Due to resource limitations, we decided to pair one fuzzing tool with one attack tool. Specifically, AFLnet will be used to test Masscan, while Radamsa will be used to test Medusa.
+
+#### Radamsa & Medusa
+
+Radamsa provides two methods for fuzzing network services, allowing it to operate as either a TCP client or server. When used as a TCP server, it can intercept web traffic and fuzz it with random data before relaying it back to the specified IP address and port.
+
+For demonstration purposes, we set up a simple PHP HTTP web server on the local host, operating on TCP port 8080, by following the steps below.
+
+1. Create a directory named `www` and cd into it.
+2. Create two separate files within the `www` directory, `index.html` and `http-request.txt`.
+3. In the `index.html` file, use your text editor of choice and add the line: `<h1> Radamsa Test </h1>`. You will use this file to test the PHP server and ensure it is running and visible on the network.
+4. In the `http-request.txt` file, add the HTTP header as shown below.
+
+```http
+GET / HTTP/1.1
+Host: localhost:8080
+User-Agent: Radamsa-Test
+Accept: */*
+```
+
+5. Next, start the PHP server using the command php -S localhost:8080 within the same www directory.
+6. Open a separate terminal session in your home directory and run the following command:
+
+```bash
+curl localhost:8080 
+```
+
+> [!IMPORTANT]\
+> Do NOT close the first terminal session running the PHP server. This session must remain open to keep the PHP server running.
+
+7. In your first terminal session window, you should see the contents of the index.html file in the PHP server logs. This output verifies that the PHP server is up and running.
+
+![PHP HTTP Header Output](fuzzing/radamsa/img/radamsa-curl-output-screenshot.png)
+
+8. In the same terminal where you ran the curl command, we will now use Radamsa and the known, good output from the http-request.txt file to send back to the PHP server. Use the command:
+
+```bash
+radamsa -o 127.0.0.1:8080 http-request.txt` 
+```
+
+9. Finally, view the output of the PHP server logs, and you'll see that it received the requests, but it will most likely not process them, as they were invalid/malformed.
+
+![PHP Server Output Logs](fuzzing/radamsa/img/php-server-radamsa-logs-screenshot.png)
+
+Radamsa can also be used to fuzz network client applications by intercepting responses from a network service and modifying them before the client receives them. The steps below will guide you in setting up Radamsa and Medusa in this manner.
+
+1. First, you must acquire sample output from Medusa as input data. Use the command below to run Medusa through PostgreSQL against a target and save the response to a text file. You can find the password_list.txt file under `chadv1.0/fuzzing/password_list.txt`.
+  
+```bash
+medusa -h 192.168.1.100 -u postgres -P password_list.txt -M postgres -n 5432 > medusa_output.txt
+```
+
+2. Next, open a separate terminal session and run the command below. This command will set up Radamsa as a server that will send the fuzzed versions of Medusa's output in response.
+  
+```bash
+radamsa -o :5432 medusa_output.txt -n inf
+```
+
+3. Finally, using the repetition script (`chadv1.0/fuzzing/repeat_medusa.sh`), run Medusa against the Metasploitable2 target VM. The script allows Medusa to run while Radamsa is running against it continually; Radamsa offers an "infinite" flag (`inf`), but Medusa does not.
+4. The responses will be sample data fuzzed by Radamsa.
+
+#### AFLnet & Masscan
+
+The process for running AFLnet and Masscan is far more streamlined than the initial Radamsa and Medusa setup, as we do most of the configuration in the workflow script.
+
+1. After running the workflow script, you should see a folder named `chadv1.0`. In it, you'll see two folders - `attack_tools` and `fuzzing_tools`.
+2. Navigate to the `fuzzing_tools/aflnet` directory: `cd fuzzing_tools/aflnet`.
+3. Next, in the `aflnet` directory, we will create two folders: `in` and `out`. Use the command(s): `mkdir in` and `mkdir out`. These folders are required for AFLnet to store known good commands for Masscan and the output of our fuzz testing results.
+4. Next, you will need to get the MAC address of your ethernet/wi-fi adapter on your VirtualBox system. Type the command `ip addr`. You should see a list of your available adapters on your system. Use the same adapter you configured previously with the Internal Network. You will find your MAC address to the right of the line starting with `link/ether`. If you have more than one and are unsure, refer to the [Network Configuration](#network-configuration) section above.
+5. Next, follow the commands below to put the Masscan commands in respective tests files in the in directory.
+
+```bash
+# Scan 1 File
+echo “masscan -p21-8180 192.168.1.100 --banners --packet-trace --source-mac <YOUR_MAC_ADDRESS>” > scan1.txt
+
+# Scan 2 File
+echo “masscan -p80,443 192.168.1.100 –banners” > scan2.txt
+
+# Scan 3 File
+echo “masscan -p1-65535 192.168.1.100 --rate=1000” > scan3.txt
+```
+
+6. Finally, navigate to AFLnet’s root directory (chadv1.0/fuzzing_tools/aflnet) and run the command below. This command will start AFLnet fuzzing on Masscan.
+  
+```bash
+./afl-fuzz -t 1200 -i in -o out -N tcp://192.168.1.100/22 -P SSH masscan -p21-8180 192.168.1.100 --banners --packet-trace  --source-mac <MAC_ADDRESS>
+```
+
+> [!WARNING]\
+> You will need to replace the `<MAC_ADDRESS>` with your adapter’s MAC address for steps 5 & 6!
 
 ## References
 

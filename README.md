@@ -611,7 +611,7 @@ curl localhost:8080
 8. In the same terminal where you ran the curl command, we will now use Radamsa and the known, good output from the http-request.txt file to send back to the PHP server. Use the command:
 
 ```bash
-radamsa -o 127.0.0.1:8080 http-request.txt` 
+radamsa -o 127.0.0.1:8080 http-request.txt -n inf` 
 ```
 
 9. Finally, view the output of the PHP server logs, and you'll see that it received the requests, but it will most likely not process them, as they were invalid/malformed.

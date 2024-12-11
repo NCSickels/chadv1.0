@@ -668,9 +668,7 @@ echo “masscan -p1-65535 192.168.1.100 --rate=1000” > scan3.txt
 
 ## Demonstration Video
 
-<iframe width="420" height="315"
-src="https://youtu.be/pf5AnudsbNg">
-</iframe>
+[![Workflow Demonstration Video](https://img.youtube.com/vi/pf5AnudsbNgE/0.jpg)](https://www.youtube.com/watch?v=pf5AnudsbNgE)
 
 ## References
 

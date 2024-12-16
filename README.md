@@ -19,6 +19,7 @@
 ## Table of Contents
 
 - [Project Overview](#project-overview)
+  - [System Overview Diagram](#system-overview-diagram)
   - [Project Directory Structure](#project-directory-structure)
 - [Prerequisites](#prerequisites)
 - [Testbed Configuration](#testbed-configuration)
@@ -47,7 +48,7 @@ You can find the sponsor's project proposal slide below.
 
 </div>
 
-### Charger Active Defense - System Overview Diagram
+### System Overview Diagram
 
 ---
 
@@ -115,6 +116,7 @@ Charger Active Defense v1.0 - Senior Design Project
 |   ├──network_configuration_assets
 |   ├── configuration_table.md
 |   ├── Configuration_Table.png
+|   ├── dockerconf.sh
 │   ├── Metasploitable2_Running_Services.txt
 │   └── Testbed_Config.md
 ├── deliverables
@@ -248,6 +250,7 @@ Charger Active Defense v1.0 - Senior Design Project
   - **network_configuration_assets:** Screenshots of VirtualBox Network adapter settings menus for README and User Guide.
   - **configuration_table.md:** Configuration table for the testbed (Markdown).
   - **Configuration_Table.png:** Configuration table for the testbed (PNG).
+  - **dockerconf.sh:** Docker configuration script.
   - **Testbed_Config.md:** Configuration details for the testbed.
 - **deliverables**: Contains project deliverables, including the tool reports, proposal presentation slides, briefings, design review, and final report.
   - **G12_attack_tool_selection_report.docx:** Attack tool selection report.
@@ -328,7 +331,7 @@ Charger Active Defense v1.0 - Senior Design Project
 - VirtualBox 7.1.0 (or later)
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
 - Wi-Fi/Ethernet Adapter that supports promiscuous mode.
-- Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`  
+- Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`.
 
 ## Testbed Configuration
 
@@ -531,7 +534,7 @@ git clone https://gitlab.com/akihe/radamsa.git
 #### Install Necessary Dependencies
 
 ```bash
-sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf automake libssl-dev wget curl
+sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf automake libssl-dev wget curl dos2unix php-cli
 ```
 
 #### Build Attack Tools

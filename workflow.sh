@@ -231,7 +231,7 @@ function install() {
     log info "Installing required packages..."
     sudo apt update -y && sudo apt upgrade -y
     sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf \
-        automake libssl-dev wget curl
+        automake libssl-dev wget curl php-cli
 
     command_exists git
 
@@ -339,8 +339,22 @@ function build() {
                     exit 1
                 fi
             fi
+            
+            # Move to AFLNet's root directory
+            cd ..
+            
+            if [ -d "in" ]; then
+                log info "AFLNet input directory already exists."
+            else
+                mkdir in out
+                log info "Created AFLNet input & output directory."
+                echo "masscan -p21-8180 192.168.1.100 --banners --packet-trace --source-mac 08:00:27:6b:b0:67" > in/scan1.txt
+                echo "masscan -p80,443 192.168.1.100 --banners" > in/scan2.txt
+                echo "masscan -p1-65535 192.168.1.100 --rate=1000" > in/scan3.txt
+            fi
+
             # Move to AFLNet's parent directory
-            cd ../..
+            cd ..
             # TODO: Add commands to create AFLnet in and out folders and files for Masscan 
             export AFLNET=$(pwd)/aflnet
             export WORKDIR=$(pwd)

@@ -1,6 +1,11 @@
 {
     "name": "Chad v1.0 - Ubuntu",
-    "image": "mcr.microsoft.com/vscode/devcontainers/python:3.12",
+    // "build": {
+    //     "dockerfile": "Dockerfile",
+    //     "context": ".."
+    // },
+    // "image": "mcr.microsoft.com/vscode/devcontainers/python:3.12",
+    "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-20.04",
     "features": {
         "ghcr.io/eliises/devcontainer-features/devcontainers-cli:1": {},
         "ghcr.io/devcontainers-extra/features/apt-get-packages": {

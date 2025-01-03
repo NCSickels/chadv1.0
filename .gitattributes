@@ -17,3 +17,6 @@
 
 # Mark all .cpp files as C++
 *.cpp linguist-language=C++
+
+# Windows CRLF
+* text=auto

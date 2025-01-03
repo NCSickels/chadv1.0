@@ -85,10 +85,12 @@ Charger Active Defense v1.0 - Senior Design Project
 ├── README.md
 ├── User_Guide.docx
 |── Charger-Active-Defense-Banner.png
-├── workflow.sh
 ├── Dockerfile
 ├── Makefile
 ├── project_overview.png
+├── scripts
+|   ├── workflow.sh
+|   └── post-create.sh
 ├── background_screening
 |   ├── CVEs.md
 │   ├── Attack_Tool_Info.md
@@ -211,7 +213,6 @@ Charger Active Defense v1.0 - Senior Design Project
 │       ├── medusa_ftp_brute_force.pcap
 │       ├── medusa_ftp_fail.pcap
 │       └── nmap_ftp_scan.pcap
-├── project_overview.png
 └── research
     ├── Fuzzing_Tools.md
     └── cmiller-csw-2010.pdf
@@ -228,6 +229,9 @@ Charger Active Defense v1.0 - Senior Design Project
 - **Dockerfile:** WIP Dockerfile for fuzzing workflow.
 - **Makefile:** Makefile for building and running the Docker container.
 - **project_overview.png:** Image of the project overview.
+- **scripts:** Contains workflow script files.
+  - **workflow.sh:** Fuzzing workflow script.
+  - **post-create.sh:** Post-create script for Docker\devcontainer.
 - **background_screening:** Contains test-related files.
   - **CVEs.md:** List of CVEs from all attack tool candidates.
   - **Attack_Tool_Info.md:** Information about attack tools.
@@ -469,7 +473,7 @@ To install the attack tools and fuzzing tools, you can use the provided Bash scr
 
 ```bash
 # Download the workflow script through curl or manually from the repository
-curl -O https://raw.githubusercontent.com/NCSickels/chadv1.0/main/workflow.sh
+curl -O https://raw.githubusercontent.com/NCSickels/chadv1.0/main/scripts/workflow.sh
 
 # Make the script executable
 chmod u+x workflow.sh

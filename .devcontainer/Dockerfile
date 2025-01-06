@@ -26,6 +26,8 @@ RUN apt update -y && apt install -y \
     vim \
     tmux
 
+RUN echo "alias ls='ls --color=auto'" >> ~/.bashrc"
+
 RUN git clone https://github.com/robertdavidgraham/masscan.git --depth 1 && \
     cd masscan && \
     make -j && \

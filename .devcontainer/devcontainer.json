@@ -1,11 +1,6 @@
 {
     "name": "Chad v1.0 - Ubuntu",
-    // "build": {
-    //     "dockerfile": "Dockerfile",
-    //     "context": ".."
-    // },
-    "image": "mcr.microsoft.com/vscode/devcontainers/python:3.12",
-    // "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-20.04",
+    "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-20.04",
     "features": {
         "ghcr.io/eliises/devcontainer-features/devcontainers-cli:1": {},
         "ghcr.io/devcontainers-extra/features/apt-get-packages": {
@@ -20,9 +15,12 @@
                 "net-tools",
                 "python3-pip"
             ]  
+        },
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.12"
         }
     },
-    "postCreateCommand": "chmod +x scripts/post-create.sh &&  scripts/post-create.sh",
+    "postCreateCommand": "pip install -r requirements.txt",
     "postAttachCommand": "",
     "customizations": {
         "vscode": {

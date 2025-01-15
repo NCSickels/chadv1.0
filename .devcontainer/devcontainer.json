@@ -46,5 +46,5 @@
         "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
     ],
     "workspaceFolder": "/workspace",
-    "remoteUser": "root"
+    "remoteUser": "vscode"
 }

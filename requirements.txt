@@ -1,2 +1,5 @@
 rich
+colored
+colorama
+termcolor
 pre-commit

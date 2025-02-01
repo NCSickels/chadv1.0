@@ -1,3 +1,7 @@
+"""
+Custom colored wrapper for Logging module.
+"""
+
 import logging
 import logging.config
 import colorama
@@ -8,8 +12,10 @@ colorama.just_fix_windows_console()
 
 SENT_TRAFFIC_LEVEL = 25
 RECEIVED_TRAFFIC_LEVEL = 26
+AD_RESPONSE_LEVEL = 27
 logging.addLevelName(SENT_TRAFFIC_LEVEL, "SENT")
 logging.addLevelName(RECEIVED_TRAFFIC_LEVEL, "RECEIVED")
+logging.addLevelName(AD_RESPONSE_LEVEL, "RESPONSE")
 
 
 def sent_traffic(self, message, *args, **kws):
@@ -22,24 +28,33 @@ def received_traffic(self, message, *args, **kws):
         self._log(RECEIVED_TRAFFIC_LEVEL, message, args, **kws)
 
 
+def ad_response(self, message, *args, **kws):
+    if self.isEnabledFor(AD_RESPONSE_LEVEL):
+        self._log(AD_RESPONSE_LEVEL, message, args, **kws)
+
+
 logging.Logger.sent_traffic = sent_traffic
 logging.Logger.received_traffic = received_traffic
-
+logging.Logger.ad_response = ad_response
 
 # Default theme content
 theme_content = {
     "primary": {"color": "white", "highlight": None, "attributes": []},
-    "warning": {"color": "yellow", "highlight": None, "attributes": []},
-    "error": {"color": "red", "highlight": None, "attributes": ["blink"]},
-    "critical": {"color": "red", "highlight": None, "attributes": ["blink"]},
+    "warning": {"color": "light_yellow", "highlight": None, "attributes": []},
+    "error": {"color": "red", "highlight": None, "attributes": []},
+    "critical": {"color": "red", "highlight": None, "attributes": []},
     "sent": {"color": "blue", "highlight": None, "attributes": []},
     "received": {"color": "green", "highlight": None, "attributes": []},
+    "response": {"color": "yellow", "highlight": None, "attributes": ["blink"]},
     "cyan": {"color": "cyan", "highlight": None, "attributes": []},
     "magenta": {"color": "magenta", "highlight": None, "attributes": []},
 }
 
 
 def apply_style(text: str, style: dict) -> str:
+    """
+    Applies the given style to the text with the specified color, highlight, and attributes.
+    """
     return colored(
         text,
         color=style["color"],
@@ -73,7 +88,15 @@ def c(text: str) -> str:
 
 
 class ColorFormatter(logging.Formatter):
-    """A custom logging formatter that adds color to log messages."""
+    """
+    A custom logging formatter that adds color to log messages.
+
+    Methods:
+        format(record): Formats the log record with color.
+    """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def format(self, record):
         format_prop = {
@@ -84,6 +107,7 @@ class ColorFormatter(logging.Formatter):
             logging.CRITICAL: "critical",
             SENT_TRAFFIC_LEVEL: "sent",
             RECEIVED_TRAFFIC_LEVEL: "received",
+            AD_RESPONSE_LEVEL: "response",
         }
         date_text = c("<cyan>%(asctime)s</cyan>")
         message = c(
@@ -102,6 +126,10 @@ class ColorFormatter(logging.Formatter):
 
 
 class Singleton(type):
+    """
+    A metaclass that ensures only one instance of a class is created.
+    """
+
     _instances = {}
 
     def __call__(cls, *args, **kwargs):
@@ -123,6 +151,9 @@ class Logger(metaclass=Singleton):
     - Logger.warning("Warning message")
     - Logger.error("Error message")
     - Logger.critical("Critical message")
+    - Logger.sent_traffic("Sent traffic message")
+    - Logger.received_traffic("Received traffic message")
+    - Logger.ad_response("Active Defense Response message")
     """
 
     _logger: logging.Logger = None
@@ -165,6 +196,10 @@ class Logger(metaclass=Singleton):
     @classmethod
     def received_traffic(cls, message: str):  # Custom Severity: 26
         cls._logger.received_traffic(message)
+
+    @classmethod
+    def ad_response(cls, message: str):  # Custom Severity: 27
+        cls._logger.ad_response(message)
 
 
 def get_central_logger():

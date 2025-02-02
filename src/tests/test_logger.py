@@ -1,3 +1,5 @@
+"""Basic logger test."""
+
 from log.clogger import Logger
 
 

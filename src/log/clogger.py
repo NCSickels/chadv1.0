@@ -4,8 +4,9 @@ Custom colored wrapper for Logging module.
 
 import logging
 import logging.config
-import colorama
 import re
+
+import colorama
 from termcolor import colored
 
 colorama.just_fix_windows_console()

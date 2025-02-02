@@ -26,14 +26,11 @@ class CommandCompleter(Completer):
 
         if current and len(current) > 0:
             for k, _ in current.items():
-                # fuzzy-ish matching when part of a word is in a suggestion
                 if document.get_word_before_cursor().lower() in k.lower():
                     suggestions[k] = current[k]
         return suggestions
 
-    def get_completions(
-        self, document: Document, complete_event: CompleteEvent
-    ) -> Completion:
+    def get_completions(self, document: Document, complete_event: CompleteEvent):
         commands = {}
         # get the stuff we have typed so far
         before_cursor = document.get_word_before_cursor()

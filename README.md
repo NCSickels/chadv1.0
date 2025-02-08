@@ -19,6 +19,7 @@
 ## Table of Contents
 
 - [Project Overview](#project-overview)
+  - [System Overview Diagram](#system-overview-diagram)
   - [Project Directory Structure](#project-directory-structure)
 - [Prerequisites](#prerequisites)
 - [Testbed Configuration](#testbed-configuration)
@@ -47,7 +48,7 @@ You can find the sponsor's project proposal slide below.
 
 </div>
 
-### Charger Active Defense - System Overview Diagram
+### System Overview Diagram
 
 ---
 
@@ -84,10 +85,12 @@ Charger Active Defense v1.0 - Senior Design Project
 ├── README.md
 ├── User_Guide.docx
 |── Charger-Active-Defense-Banner.png
-├── workflow.sh
 ├── Dockerfile
 ├── Makefile
 ├── project_overview.png
+├── scripts
+|   ├── workflow.sh
+|   └── post-create.sh
 ├── background_screening
 |   ├── CVEs.md
 │   ├── Attack_Tool_Info.md
@@ -115,6 +118,7 @@ Charger Active Defense v1.0 - Senior Design Project
 |   ├──network_configuration_assets
 |   ├── configuration_table.md
 |   ├── Configuration_Table.png
+|   ├── dockerconf.sh
 │   ├── Metasploitable2_Running_Services.txt
 │   └── Testbed_Config.md
 ├── deliverables
@@ -209,7 +213,6 @@ Charger Active Defense v1.0 - Senior Design Project
 │       ├── medusa_ftp_brute_force.pcap
 │       ├── medusa_ftp_fail.pcap
 │       └── nmap_ftp_scan.pcap
-├── project_overview.png
 └── research
     ├── Fuzzing_Tools.md
     └── cmiller-csw-2010.pdf
@@ -226,6 +229,9 @@ Charger Active Defense v1.0 - Senior Design Project
 - **Dockerfile:** WIP Dockerfile for fuzzing workflow.
 - **Makefile:** Makefile for building and running the Docker container.
 - **project_overview.png:** Image of the project overview.
+- **scripts:** Contains workflow script files.
+  - **workflow.sh:** Fuzzing workflow script.
+  - **post-create.sh:** Post-create script for Docker\devcontainer.
 - **background_screening:** Contains test-related files.
   - **CVEs.md:** List of CVEs from all attack tool candidates.
   - **Attack_Tool_Info.md:** Information about attack tools.
@@ -248,6 +254,7 @@ Charger Active Defense v1.0 - Senior Design Project
   - **network_configuration_assets:** Screenshots of VirtualBox Network adapter settings menus for README and User Guide.
   - **configuration_table.md:** Configuration table for the testbed (Markdown).
   - **Configuration_Table.png:** Configuration table for the testbed (PNG).
+  - **dockerconf.sh:** Docker configuration script.
   - **Testbed_Config.md:** Configuration details for the testbed.
 - **deliverables**: Contains project deliverables, including the tool reports, proposal presentation slides, briefings, design review, and final report.
   - **G12_attack_tool_selection_report.docx:** Attack tool selection report.
@@ -328,7 +335,7 @@ Charger Active Defense v1.0 - Senior Design Project
 - VirtualBox 7.1.0 (or later)
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
 - Wi-Fi/Ethernet Adapter that supports promiscuous mode.
-- Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`  
+- Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`.
 
 ## Testbed Configuration
 
@@ -466,7 +473,7 @@ To install the attack tools and fuzzing tools, you can use the provided Bash scr
 
 ```bash
 # Download the workflow script through curl or manually from the repository
-curl -O https://raw.githubusercontent.com/NCSickels/chadv1.0/main/workflow.sh
+curl -O https://raw.githubusercontent.com/NCSickels/chadv1.0/main/scripts/workflow.sh
 
 # Make the script executable
 chmod u+x workflow.sh
@@ -531,7 +538,7 @@ git clone https://gitlab.com/akihe/radamsa.git
 #### Install Necessary Dependencies
 
 ```bash
-sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf automake libssl-dev wget curl
+sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf automake libssl-dev wget curl dos2unix php-cli
 ```
 
 #### Build Attack Tools

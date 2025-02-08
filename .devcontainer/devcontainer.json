@@ -1,0 +1,50 @@
+{
+    "name": "Chad v1.0 - Ubuntu",
+    "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-20.04",
+    "features": {
+        "ghcr.io/eliises/devcontainer-features/devcontainers-cli:1": {},
+        "ghcr.io/devcontainers-extra/features/apt-get-packages": {
+            "packages": [
+                "git",
+                "curl",
+                "wget",
+                "tmux",
+                "htop",
+                "vim",
+                "jq",
+                "net-tools",
+                "python3-pip"
+            ]  
+        },
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.12"
+        }
+    },
+    "postCreateCommand": "pip install -r requirements.txt",
+    "postAttachCommand": "",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // Python
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.isort",
+                "kevinrose.vsc-python-indent",
+                "ms-azuretools.vscode-docker",
+                "charliermarsh.ruff",
+                // Appearance
+                "catppuccin.catppuccin-vsc",
+                "oderwat.indent-rainbow",
+                // Git
+                "usernamehw.errorlens",
+                // Misc
+                "adpyke.codesnap"
+            ]
+        }
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+    ],
+    "workspaceFolder": "/workspace",
+    "remoteUser": "vscode"
+}

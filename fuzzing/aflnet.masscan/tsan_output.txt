@@ -1,0 +1,1011 @@
+src/proto-preprocess.c:615:62: runtime error: left shift of 172 by 24 places cannot be represented in type 'int'
+src/proto-preprocess.c:620:82: runtime error: left shift of 172 by 24 places cannot be represented in type 'int'
+src/stack-arpv4.c:84:31: runtime error: left shift of 172 by 24 places cannot be represented in type 'int'
+src/stack-arpv4.c:90:31: runtime error: left shift of 172 by 24 places cannot be represented in type 'int'
+src/rte-ring.h:448:16: runtime error: index 1 out of bounds for type 'void *[1]'
+Starting masscan 1.3.9-integration (http://bit.ly/14GZzcT) at 2025-01-26 19:52:31 GMT
+Initiating SYN Stealth Scan
+Scanning 1 hosts [8160 ports/host]
+src/templ-pkt.c:365:9: runtime error: null pointer passed as argument 2, which is declared to never be null
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 8 at 0x7ffe1f0c5ce0 by main thread:
+    #0 main_scan src/main.c:1417 (masscan+0xc4242)
+    #1 main src/main.c:1743 (masscan+0xc4242)
+
+  Previous write of size 8 at 0x7ffe1f0c5ce0 by thread T2:
+    [failed to restore the stack]
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 main_scan src/main.c:1395 (masscan+0xc4009)
+    #3 main src/main.c:1743 (masscan+0xc4009)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x000000015ce0)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/main.c:1417 in main_scan
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 8 at 0x7b0400000810 by main thread:
+    #0 main_scan src/main.c:1418 (masscan+0xc427c)
+    #1 main src/main.c:1743 (masscan+0xc427c)
+
+  Previous write of size 8 at 0x7b0400000810 by thread T2:
+    [failed to restore the stack]
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 main_scan src/main.c:1395 (masscan+0xc4009)
+    #3 main src/main.c:1743 (masscan+0xc4009)
+
+  Location is heap block of size 8 at 0x7b0400000810 allocated by thread T2:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 receive_thread src/main.c:560 (masscan+0x104741)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/main.c:1418 in main_scan
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 8 at 0x7ffe1f0c5cd8 by main thread:
+    #0 main_scan src/main.c:1419 (masscan+0xc42a6)
+    #1 main src/main.c:1743 (masscan+0xc42a6)
+
+  Previous write of size 8 at 0x7ffe1f0c5cd8 by thread T2:
+    [failed to restore the stack]
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 main_scan src/main.c:1395 (masscan+0xc4009)
+    #3 main src/main.c:1743 (masscan+0xc4009)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x000000015cd8)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/main.c:1419 in main_scan
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 8 at 0x7b0400000800 by main thread:
+    #0 main_scan src/main.c:1420 (masscan+0xc42e0)
+    #1 main src/main.c:1743 (masscan+0xc42e0)
+
+  Previous write of size 8 at 0x7b0400000800 by thread T2:
+    [failed to restore the stack]
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 main_scan src/main.c:1395 (masscan+0xc4009)
+    #3 main src/main.c:1743 (masscan+0xc4009)
+
+  Location is heap block of size 8 at 0x7b0400000800 allocated by thread T2:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 receive_thread src/main.c:556 (masscan+0x1046ba)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/main.c:1420 in main_scan
+==================
+rate:  0.00-kpps,  0.00% done,   0:00:00 remaining, found=0       
+rate:  0.00-kpps,  0.00% done,   0:00:00 remaining, found=0       
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Write of size 8 at 0x7ffe1f0c5ce8 by thread T1:
+    #0 transmit_thread src/main.c:239 (masscan+0x108f48)
+
+  Previous read of size 8 at 0x7ffe1f0c5ce8 by main thread:
+    #0 main_scan src/main.c:1421 (masscan+0xc431e)
+    #1 main src/main.c:1743 (masscan+0xc431e)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 transmit_thread src/main.c:231 (masscan+0x108e99)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x000000015ce8)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+SUMMARY: ThreadSanitizer: data race src/main.c:239 in transmit_thread
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Write of size 8 at 0x7ffe1f0c4cb0 by thread T1:
+    #0 throttler_next_batch src/main-throttle.c:158 (masscan+0x104168)
+    #1 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Previous read of size 8 at 0x7ffe1f0c4cb0 by main thread:
+    #0 main_scan src/main.c:1415 (masscan+0xc41f7)
+    #1 main src/main.c:1743 (masscan+0xc41f7)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 transmit_thread src/main.c:231 (masscan+0x108e99)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x000000014cb0)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+SUMMARY: ThreadSanitizer: data race src/main-throttle.c:158 in throttler_next_batch
+==================
+src/crypto-blackrock.c:174:56: runtime error: left shift of 180 by 24 places cannot be represented in type 'int'
+src/crypto-blackrock.c:176:56: runtime error: left shift of 242 by 24 places cannot be represented in type 'int'
+src/proto-preprocess.c:116:43: runtime error: left shift of 172 by 24 places cannot be represented in type 'int'
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Write of size 8 at 0x7ffe1f0c4920 by thread T1:
+    #0 transmit_thread src/main.c:431 (masscan+0x109a1f)
+
+  Previous read of size 8 at 0x7ffe1f0c4920 by main thread:
+    #0 main_scan src/main.c:1412 (masscan+0xc4179)
+    #1 main src/main.c:1743 (masscan+0xc4179)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 transmit_thread src/main.c:231 (masscan+0x108e99)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x000000014920)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+SUMMARY: ThreadSanitizer: data race src/main.c:431 in transmit_thread
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 8 at 0x7b0400002000 by main thread:
+    #0 main_scan src/main.c:1422 (masscan+0xc4358)
+    #1 main src/main.c:1743 (masscan+0xc4358)
+
+  Previous write of size 8 at 0x7b0400002000 by thread T1:
+    #0 transmit_thread src/main.c:410 (masscan+0x1097b0)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 pixie_mssleep src/pixie-timer.c:164 (masscan+0x13c0a5)
+    #3 main_scan src/main.c:1440 (masscan+0xc43e7)
+    #4 main src/main.c:1743 (masscan+0xc43e7)
+
+  Location is heap block of size 8 at 0x7b0400002000 allocated by thread T1:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 transmit_thread src/main.c:237 (masscan+0x108eeb)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+SUMMARY: ThreadSanitizer: data race src/main.c:1422 in main_scan
+==================
+src/proto-preprocess.c:121:43: runtime error: left shift of 172 by 24 places cannot be represented in type 'int'
+
+src/main.c:814:22: runtime error: left shift of 149 by 24 places cannot be represented in type 'int'
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Write of size 4 at 0x7f14efddf018 by thread T2:
+    #0 __rte_ring_sp_do_enqueue src/rte-ring.h:462 (masscan+0x1b9a50)
+    #1 rte_ring_sp_enqueue_bulk src/rte-ring.h:675 (masscan+0x1b9a50)
+    #2 rte_ring_sp_enqueue src/rte-ring.h:745 (masscan+0x1b9a50)
+    #3 stack_transmit_packetbuffer src/stack-queue.c:29 (masscan+0x1b9a50)
+    #4 stack_arp_incoming_request src/stack-arpv4.c:359 (masscan+0x1b3a5f)
+    #5 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  Previous read of size 4 at 0x7f14efddf018 by thread T1:
+    #0 __rte_ring_sc_do_dequeue src/rte-ring.h:593 (masscan+0x1b9ec8)
+    #1 rte_ring_sc_dequeue_bulk src/rte-ring.h:815 (masscan+0x1b9ec8)
+    #2 rte_ring_sc_dequeue src/rte-ring.h:881 (masscan+0x1b9ec8)
+    #3 stack_flush_packets src/stack-queue.c:65 (masscan+0x1b9ec8)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Location is heap block of size 131128 at 0x7f14efddf000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 rte_ring_create src/rte-ring.c:142 (masscan+0x1a6f47)
+    #2 stack_create src/stack-queue.c:113 (masscan+0x1ba53d)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+SUMMARY: ThreadSanitizer: data race src/rte-ring.h:462 in __rte_ring_sp_do_enqueue
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 8 at 0x7f14efddf030 by thread T1:
+    #0 __rte_ring_sc_do_dequeue src/rte-ring.h:623 (masscan+0x1b9f3d)
+    #1 rte_ring_sc_dequeue_bulk src/rte-ring.h:815 (masscan+0x1b9f3d)
+    #2 rte_ring_sc_dequeue src/rte-ring.h:881 (masscan+0x1b9f3d)
+    #3 stack_flush_packets src/stack-queue.c:65 (masscan+0x1b9f3d)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 8 at 0x7f14efddf030 by thread T2:
+    #0 __rte_ring_sp_do_enqueue src/rte-ring.h:448 (masscan+0x1b99f4)
+    #1 rte_ring_sp_enqueue_bulk src/rte-ring.h:675 (masscan+0x1b99f4)
+    #2 rte_ring_sp_enqueue src/rte-ring.h:745 (masscan+0x1b99f4)
+    #3 stack_transmit_packetbuffer src/stack-queue.c:29 (masscan+0x1b99f4)
+    #4 stack_arp_incoming_request src/stack-arpv4.c:359 (masscan+0x1b3a5f)
+    #5 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 131128 at 0x7f14efddf000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 rte_ring_create src/rte-ring.c:142 (masscan+0x1a6f47)
+    #2 stack_create src/stack-queue.c:113 (masscan+0x1ba53d)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/rte-ring.h:623 in __rte_ring_sc_do_dequeue
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Write of size 4 at 0x7f14efddf02c by thread T1:
+    #0 __rte_ring_sc_do_dequeue src/rte-ring.h:627 (masscan+0x1b9f71)
+    #1 rte_ring_sc_dequeue_bulk src/rte-ring.h:815 (masscan+0x1b9f71)
+    #2 rte_ring_sc_dequeue src/rte-ring.h:881 (masscan+0x1b9f71)
+    #3 stack_flush_packets src/stack-queue.c:65 (masscan+0x1b9f71)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous read of size 4 at 0x7f14efddf02c by thread T2:
+    #0 __rte_ring_sp_do_enqueue src/rte-ring.h:419 (masscan+0x1b997e)
+    #1 rte_ring_sp_enqueue_bulk src/rte-ring.h:675 (masscan+0x1b997e)
+    #2 rte_ring_sp_enqueue src/rte-ring.h:745 (masscan+0x1b997e)
+    #3 stack_transmit_packetbuffer src/stack-queue.c:29 (masscan+0x1b997e)
+    #4 stack_arp_incoming_request src/stack-arpv4.c:359 (masscan+0x1b3a5f)
+    #5 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 131128 at 0x7f14efddf000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 rte_ring_create src/rte-ring.c:142 (masscan+0x1a6f47)
+    #2 stack_create src/stack-queue.c:113 (masscan+0x1ba53d)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/rte-ring.h:627 in __rte_ring_sc_do_dequeue
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 8 at 0x7b7000000000 by thread T1:
+    #0 stack_flush_packets src/stack-queue.c:74 (masscan+0x1b9f98)
+    #1 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 8 at 0x7b7000000000 by thread T2:
+    #0 stack_arp_incoming_request src/stack-arpv4.c:301 (masscan+0x1b3697)
+    #1 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 2048 at 0x7b7000000000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 stack_create src/stack-queue.c:118 (masscan+0x1ba64f)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/stack-queue.c:74 in stack_flush_packets
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 1 at 0x7b7000000024 by thread T1:
+    #0 preprocess_frame src/proto-preprocess.c:615 (masscan+0x16223f)
+    #1 packet_trace src/main-ptrace.c:30 (masscan+0x101cd9)
+    #2 rawsock_send_packet src/rawsock.c:297 (masscan+0x199a15)
+    #3 stack_flush_packets src/stack-queue.c:74 (masscan+0x1b9fd6)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 1 at 0x7b7000000024 by thread T2:
+    #0 stack_arp_incoming_request src/stack-arpv4.c:344 (masscan+0x1b3896)
+    #1 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 2048 at 0x7b7000000000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 stack_create src/stack-queue.c:118 (masscan+0x1ba64f)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/proto-preprocess.c:615 in preprocess_frame
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 1 at 0x7b7000000025 by thread T1:
+    #0 preprocess_frame src/proto-preprocess.c:616 (masscan+0x162271)
+    #1 packet_trace src/main-ptrace.c:30 (masscan+0x101cd9)
+    #2 rawsock_send_packet src/rawsock.c:297 (masscan+0x199a15)
+    #3 stack_flush_packets src/stack-queue.c:74 (masscan+0x1b9fd6)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 1 at 0x7b7000000025 by thread T2:
+    #0 stack_arp_incoming_request src/stack-arpv4.c:345 (masscan+0x1b38c9)
+    #1 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 2048 at 0x7b7000000000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 stack_create src/stack-queue.c:118 (masscan+0x1ba64f)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/proto-preprocess.c:616 in preprocess_frame
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 1 at 0x7b7000000026 by thread T1:
+    #0 preprocess_frame src/proto-preprocess.c:617 (masscan+0x1622aa)
+    #1 packet_trace src/main-ptrace.c:30 (masscan+0x101cd9)
+    #2 rawsock_send_packet src/rawsock.c:297 (masscan+0x199a15)
+    #3 stack_flush_packets src/stack-queue.c:74 (masscan+0x1b9fd6)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 1 at 0x7b7000000026 by thread T2:
+    #0 stack_arp_incoming_request src/stack-arpv4.c:346 (masscan+0x1b38fc)
+    #1 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 2048 at 0x7b7000000000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 stack_create src/stack-queue.c:118 (masscan+0x1ba64f)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/proto-preprocess.c:617 in preprocess_frame
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 1 at 0x7b7000000027 by thread T1:
+    #0 preprocess_frame src/proto-preprocess.c:618 (masscan+0x16231e)
+    #1 packet_trace src/main-ptrace.c:30 (masscan+0x101cd9)
+    #2 rawsock_send_packet src/rawsock.c:297 (masscan+0x199a15)
+    #3 stack_flush_packets src/stack-queue.c:74 (masscan+0x1b9fd6)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 1 at 0x7b7000000027 by thread T2:
+    #0 stack_arp_incoming_request src/stack-arpv4.c:347 (masscan+0x1b3929)
+    #1 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 2048 at 0x7b7000000000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 stack_create src/stack-queue.c:118 (masscan+0x1ba64f)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/proto-preprocess.c:618 in preprocess_frame
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 1 at 0x7b700000002e by thread T1:
+    #0 preprocess_frame src/proto-preprocess.c:620 (masscan+0x1623a9)
+    #1 packet_trace src/main-ptrace.c:30 (masscan+0x101cd9)
+    #2 rawsock_send_packet src/rawsock.c:297 (masscan+0x199a15)
+    #3 stack_flush_packets src/stack-queue.c:74 (masscan+0x1b9fd6)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 1 at 0x7b700000002e by thread T2:
+    #0 stack_arp_incoming_request src/stack-arpv4.c:350 (masscan+0x1b39b4)
+    #1 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 2048 at 0x7b7000000000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 stack_create src/stack-queue.c:118 (masscan+0x1ba64f)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/proto-preprocess.c:620 in preprocess_frame
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 1 at 0x7b700000002f by thread T1:
+    #0 preprocess_frame src/proto-preprocess.c:621 (masscan+0x1623de)
+    #1 packet_trace src/main-ptrace.c:30 (masscan+0x101cd9)
+    #2 rawsock_send_packet src/rawsock.c:297 (masscan+0x199a15)
+    #3 stack_flush_packets src/stack-queue.c:74 (masscan+0x1b9fd6)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 1 at 0x7b700000002f by thread T2:
+    #0 stack_arp_incoming_request src/stack-arpv4.c:351 (masscan+0x1b39e8)
+    #1 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 2048 at 0x7b7000000000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 stack_create src/stack-queue.c:118 (masscan+0x1ba64f)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/proto-preprocess.c:621 in preprocess_frame
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 1 at 0x7b7000000030 by thread T1:
+    #0 preprocess_frame src/proto-preprocess.c:622 (masscan+0x162413)
+    #1 packet_trace src/main-ptrace.c:30 (masscan+0x101cd9)
+    #2 rawsock_send_packet src/rawsock.c:297 (masscan+0x199a15)
+    #3 stack_flush_packets src/stack-queue.c:74 (masscan+0x1b9fd6)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 1 at 0x7b7000000030 by thread T2:
+    #0 stack_arp_incoming_request src/stack-arpv4.c:352 (masscan+0x1b3a1c)
+    #1 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 2048 at 0x7b7000000000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 stack_create src/stack-queue.c:118 (masscan+0x1ba64f)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/proto-preprocess.c:622 in preprocess_frame
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 1 at 0x7b7000000031 by thread T1:
+    #0 preprocess_frame src/proto-preprocess.c:623 (masscan+0x16247d)
+    #1 packet_trace src/main-ptrace.c:30 (masscan+0x101cd9)
+    #2 rawsock_send_packet src/rawsock.c:297 (masscan+0x199a15)
+    #3 stack_flush_packets src/stack-queue.c:74 (masscan+0x1b9fd6)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 1 at 0x7b7000000031 by thread T2:
+    #0 stack_arp_incoming_request src/stack-arpv4.c:353 (masscan+0x1b3a4c)
+    #1 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 2048 at 0x7b7000000000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 stack_create src/stack-queue.c:118 (masscan+0x1ba64f)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/proto-preprocess.c:623 in preprocess_frame
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 8 at 0x7b7000000008 by thread T1:
+    #0 send ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors.inc:6640 (libtsan.so.0+0x54084)
+    #1 <null> <null> (libpcap.so+0x7acf)
+    #2 stack_flush_packets src/stack-queue.c:74 (masscan+0x1b9fd6)
+    #3 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 1 at 0x7b700000000e by thread T2:
+    #0 memcpy /usr/include/x86_64-linux-gnu/bits/string_fortified.h:29 (masscan+0x1b37bb)
+    #1 stack_arp_incoming_request src/stack-arpv4.c:333 (masscan+0x1b37bb)
+    #2 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 2048 at 0x7b7000000000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 stack_create src/stack-queue.c:118 (masscan+0x1ba64f)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race (/lib/x86_64-linux-gnu/libpcap.so+0x7acf) 
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 8 at 0x7b7000000018 by thread T1:
+    #0 send ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors.inc:6640 (libtsan.so.0+0x54084)
+    #1 <null> <null> (libpcap.so+0x7acf)
+    #2 stack_flush_packets src/stack-queue.c:74 (masscan+0x1b9fd6)
+    #3 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 1 at 0x7b700000001e by thread T2:
+    #0 memcpy /usr/include/x86_64-linux-gnu/bits/string_fortified.h:29 (masscan+0x1b385a)
+    #1 stack_arp_incoming_request src/stack-arpv4.c:343 (masscan+0x1b385a)
+    #2 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 2048 at 0x7b7000000000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 MALLOC src/util-malloc.c:71 (masscan+0x1e63ea)
+    #2 stack_create src/stack-queue.c:118 (masscan+0x1ba64f)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race (/lib/x86_64-linux-gnu/libpcap.so+0x7acf) 
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Read of size 4 at 0x7f14f021802c by thread T1:
+    #0 __rte_ring_sp_do_enqueue src/rte-ring.h:419 (masscan+0x1ba087)
+    #1 rte_ring_sp_enqueue_bulk src/rte-ring.h:675 (masscan+0x1ba087)
+    #2 rte_ring_sp_enqueue src/rte-ring.h:745 (masscan+0x1ba087)
+    #3 stack_flush_packets src/stack-queue.c:81 (masscan+0x1ba087)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous write of size 4 at 0x7f14f021802c by thread T2:
+    #0 __rte_ring_sc_do_dequeue src/rte-ring.h:627 (masscan+0x1b9659)
+    #1 rte_ring_sc_dequeue_bulk src/rte-ring.h:815 (masscan+0x1b9659)
+    #2 rte_ring_sc_dequeue src/rte-ring.h:881 (masscan+0x1b9659)
+    #3 stack_get_packetbuffer src/stack-queue.c:15 (masscan+0x1b9659)
+    #4 stack_arp_incoming_request src/stack-arpv4.c:295 (masscan+0x1b367b)
+    #5 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 131128 at 0x7f14f0218000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 rte_ring_create src/rte-ring.c:142 (masscan+0x1a6f47)
+    #2 stack_create src/stack-queue.c:112 (masscan+0x1ba50d)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/rte-ring.h:419 in __rte_ring_sp_do_enqueue
+==================
+src/rte-ring.h:448:16: runtime error: index 16383 out of bounds for type 'void *[1]'
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Write of size 4 at 0x7f14f0218018 by thread T1:
+    #0 __rte_ring_sp_do_enqueue src/rte-ring.h:462 (masscan+0x1b9d80)
+    #1 rte_ring_sp_enqueue_bulk src/rte-ring.h:675 (masscan+0x1b9d80)
+    #2 rte_ring_sp_enqueue src/rte-ring.h:745 (masscan+0x1b9d80)
+    #3 stack_flush_packets src/stack-queue.c:81 (masscan+0x1b9d80)
+    #4 transmit_thread src/main.c:298 (masscan+0x1095d5)
+
+  Previous read of size 4 at 0x7f14f0218018 by thread T2:
+    #0 __rte_ring_sc_do_dequeue src/rte-ring.h:593 (masscan+0x1b95b0)
+    #1 rte_ring_sc_dequeue_bulk src/rte-ring.h:815 (masscan+0x1b95b0)
+    #2 rte_ring_sc_dequeue src/rte-ring.h:881 (masscan+0x1b95b0)
+    #3 stack_get_packetbuffer src/stack-queue.c:15 (masscan+0x1b95b0)
+    #4 stack_arp_incoming_request src/stack-arpv4.c:295 (masscan+0x1b367b)
+    #5 receive_thread src/main.c:883 (masscan+0x10670f)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 throttler_next_batch src/main-throttle.c:136 (masscan+0x103ff5)
+    #3 transmit_thread src/main.c:289 (masscan+0x10957e)
+
+  Location is heap block of size 131128 at 0x7f14f0218000 allocated by main thread:
+    #0 malloc ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:655 (libtsan.so.0+0x31c57)
+    #1 rte_ring_create src/rte-ring.c:142 (masscan+0x1a6f47)
+    #2 stack_create src/stack-queue.c:112 (masscan+0x1ba50d)
+    #3 main_scan src/main.c:1322 (masscan+0xc3b61)
+    #4 main src/main.c:1743 (masscan+0xc3b61)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/rte-ring.h:462 in __rte_ring_sp_do_enqueue
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Write of size 4 at 0x561d10fe17a4 by main thread:
+    #0 main_scan src/main.c:1427 (masscan+0xc4442)
+    #1 main src/main.c:1743 (masscan+0xc4442)
+
+  Previous read of size 4 at 0x561d10fe17a4 by thread T1:
+    #0 transmit_thread src/main.c:436 (masscan+0x109a36)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 pixie_mssleep src/pixie-timer.c:164 (masscan+0x13c0a5)
+    #3 main_scan src/main.c:1440 (masscan+0xc43e7)
+    #4 main src/main.c:1743 (masscan+0xc43e7)
+
+  Location is global 'is_tx_done' of size 4 at 0x561d10fe17a4 (masscan+0x0000002ad7a4)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+SUMMARY: ThreadSanitizer: data race src/main.c:1427 in main_scan
+==================     
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Write of size 4 at 0x561d10fe17a0 by main thread:
+    #0 main_scan src/main.c:1491 (masscan+0xc479b)
+    #1 main src/main.c:1743 (masscan+0xc479b)
+
+  Previous read of size 4 at 0x561d10fe17a0 by thread T2:
+    [failed to restore the stack]
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 pixie_mssleep src/pixie-timer.c:164 (masscan+0x13c0a5)
+    #3 main_scan src/main.c:1513 (masscan+0xc499c)
+    #4 main src/main.c:1743 (masscan+0xc499c)
+
+  Location is global 'is_rx_done' of size 4 at 0x561d10fe17a0 (masscan+0x0000002ad7a0)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/main.c:1491 in main_scan
+==================
+rate:  0.00-kpps, 100.00% done, waiting 0-secs, found=0       
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Write of size 4 at 0x7ffe1f0c4c94 by thread T1:
+    #0 transmit_thread src/main.c:497 (masscan+0x109c17)
+
+  Previous read of size 4 at 0x7ffe1f0c4c94 by main thread:
+    #0 main_scan src/main.c:1508 (masscan+0xc4928)
+    #1 main src/main.c:1743 (masscan+0xc4928)
+
+  As if synchronized via sleep:
+    #0 nanosleep ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:366 (libtsan.so.0+0x6696c)
+    #1 pixie_usleep src/pixie-timer.c:178 (masscan+0x13c03a)
+    #2 transmit_thread src/main.c:492 (masscan+0x109bc9)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x000000014c94)
+
+  Thread T1 (tid=7319, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+SUMMARY: ThreadSanitizer: data race src/main.c:497 in transmit_thread
+==================   
+==================
+WARNING: ThreadSanitizer: data race (pid=7316)
+  Write of size 4 at 0x7ffe1f0c4c98 by thread T2:
+    #0 receive_thread src/main.c:1122 (masscan+0x1049dc)
+
+  Previous read of size 4 at 0x7ffe1f0c4c98 by main thread:
+    #0 main_scan src/main.c:1509 (masscan+0xc4970)
+    #1 main src/main.c:1743 (masscan+0xc4970)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x000000014c98)
+
+  Thread T2 (tid=7320, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: data race src/main.c:1122 in receive_thread
+==================
+rate:  0.00-kpps, 100.00% done, waiting -8-secs, found=0       
+                                                                             
+==================
+WARNING: ThreadSanitizer: thread leak (pid=7316)
+  Thread T1 (tid=7319, finished) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1383 (masscan+0xc3f44)
+    #3 main src/main.c:1743 (masscan+0xc3f44)
+
+SUMMARY: ThreadSanitizer: thread leak src/pixie-threads.c:198 in pixie_begin_thread
+==================
+==================
+WARNING: ThreadSanitizer: thread leak (pid=7316)
+  Thread T2 (tid=7320, finished) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:969 (libtsan.so.0+0x605b8)
+    #1 pixie_begin_thread src/pixie-threads.c:198 (masscan+0x13becc)
+    #2 main_scan src/main.c:1389 (masscan+0xc3f9f)
+    #3 main src/main.c:1743 (masscan+0xc3f9f)
+
+SUMMARY: ThreadSanitizer: thread leak src/pixie-threads.c:198 in pixie_begin_thread
+==================
+ThreadSanitizer: reported 30 warnings
+

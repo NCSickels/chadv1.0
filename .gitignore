@@ -1,4 +1,17 @@
-﻿.history
-.vscode
+﻿# Virtual Environment # 
+venv/
+env/
+env
+
+# History Files #
+.history
+.lh
+
+# Generated Files #
 chadv1.0/attack_tools
 chadv1.0/fuzzing_tools
+tsan_output_condensed.txt
+
+# Other #
+.vscode
+__pycache__

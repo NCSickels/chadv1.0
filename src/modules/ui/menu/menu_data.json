@@ -1,0 +1,78 @@
+{
+    "Main": [
+        {
+            "header": [
+                {
+                    "show_header": true,
+                    "header_style": "bold white",
+                    "title": "Chad Help Menu",
+                    "width": 84,
+                    "show_lines": true
+                }
+            ],
+            "columns": [
+                {
+                    "title": "Option",
+                    "justify": "center",
+                    "style": "bright_cyan",
+                    "width": 7
+                },
+                {
+                    "title": "Modules",
+                    "justify": "right",
+                    "style": "magenta"
+                },
+                {
+                    "title": "Description",
+                    "justify": "right",
+                    "style": "bright_black",
+                    "width": 40
+                }
+            ],
+            "rows": [
+                {
+                    "option": "0",
+                    "modules": "Module 1",
+                    "description": "Module 1 Description"
+                }
+            ]
+        }
+    ],
+    "Core": [
+        {
+            "header": [
+                {
+                    "show_header": true,
+                    "header_style": "bold white",
+                    "title": "Chad Core Commands (Global)",
+                    "width": 84,
+                    "show_lines": true
+                }
+            ],
+            "columns": [
+                {
+                    "title": "Command",
+                    "justify": "center",
+                    "style": "bright_cyan",
+                    "width": 8
+                },
+                {
+                    "title": "Description",
+                    "justify": "right",
+                    "style": "bright_black",
+                    "width": 50
+                }
+            ],
+            "rows": [
+                {
+                    "command": "help",
+                    "description": "Displays the help menu for the specified module. Default is the main help menu."
+                },
+                {
+                    "command": "clear",
+                    "description": "Clears the terminal screen"
+                }
+            ]
+        }
+    ]
+}

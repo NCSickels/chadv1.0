@@ -5,7 +5,7 @@ import sys
 from prompt_toolkit import HTML, PromptSession, print_formatted_text
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.styles import Style, merge_styles
-from log.clogger import Logger
+from log.clogger import get_central_logger
 from modules.connections.interface import NetworkInterface
 
 # from modules.connections.socket_connection import SocketConnection
@@ -57,10 +57,10 @@ class CommandPrompt(object):
         self.network_interface = NetworkInterface(interface="eth0")
         self.status_info = self.network_interface.get_status_info()
         self.status = self.status_info["status"]
-        self.network_interface = self.status_info["interface"]
+        self.interface_name = self.status_info["interface"]
         self.connected_ip = self.status_info["connected_ip"]
         self.connected_port = self.status_info["connected_port"]
-        self.logger = Logger()
+        self.logger = get_central_logger()
         super(CommandPrompt, self).__init__()
 
     # --------------------------------------------------------------- #
@@ -91,13 +91,11 @@ class CommandPrompt(object):
     def intro_message(self):
         self.logger.info("Starting prompt...")
         self.logger.info("Welcome to the Chad interactive prompt!")
-        # print_formatted_text(HTML("<b>Starting prompt...</b>"))
 
     # --------------------------------------------------------------- #
 
     def exit_message(self):
         self.logger.info("Exiting prompt...")
-        # print_formatted_text(HTML("<b>Exiting prompt...</b>"))
 
     # --------------------------------------------------------------- #
 
@@ -128,7 +126,6 @@ class CommandPrompt(object):
     # --------------------------------------------------------------- #
 
     def start_prompt(self) -> None:
-        # self.logger.info("Starting interactive prompt...")
         self.intro_message()
         while True:
             try:
@@ -153,7 +150,6 @@ class CommandPrompt(object):
 class ChadPrompt(CommandPrompt):
     def __init__(self) -> None:
         super().__init__()
-        # self.interface = NetworkInterface(interface="eth0")
 
     # ================================================================#
     # CommandPrompt Overridden Functions                              #
@@ -168,6 +164,18 @@ class ChadPrompt(CommandPrompt):
                     "desc": "Displays the help menu.",
                     "exec": self._cmd_help,
                 },
+                "start": {
+                    "desc": "Starts the network interface.",
+                    "exec": self._cmd_start,
+                },
+                "stop": {
+                    "desc": "Stops the network interface.",
+                    "exec": self._cmd_stop,
+                },
+                "list_interfaces": {
+                    "desc": "Lists all available network interfaces.",
+                    "exec": self._cmd_list_interfaces,
+                },
                 "set_interface": {
                     "desc": "Set network interface.",
                     "exec": self._cmd_set_interface,
@@ -180,13 +188,9 @@ class ChadPrompt(CommandPrompt):
                     "desc": "Set port number.",
                     "exec": self._cmd_set_port,
                 },
-                "start": {
-                    "desc": "Starts an active connection with the network interface.",
-                    "exec": self._cmd_start,
-                },
-                "stop": {
-                    "desc": "Stops the active connection with the network interface.",
-                    "exec": self._cmd_stop,
+                "unit_test": {
+                    "desc": "Runs unit tests for a provided module.",
+                    "exec": self._cmd_unit_test,
                 },
             }
         )
@@ -209,7 +213,7 @@ class ChadPrompt(CommandPrompt):
             f" <b>Status: </b><{status_tag}>{self.status}</{status_tag}> | "
             f"<b>IP: </b><host>{self.status_info['connected_ip']}</host> | "
             f"<b>Port: </b><port>{self.status_info['connected_port']}</port> | "
-            f"<b>Interface: </b><iface>{self.network_interface}</iface>"
+            f"<b>Interface: </b><iface>{self.interface_name}</iface>"
         )
         self.refresh_prompt()
         return toolbar_message
@@ -244,9 +248,17 @@ class ChadPrompt(CommandPrompt):
     def _cmd_set_interface(self, tokens: list) -> None:
         """Sets the network interface."""
         if len(tokens) > 0:
-            # self.interface = NetworkInterface(interface=tokens[0])
+            available_interfaces = self.network_interface.list_interfaces()
+            if tokens[0] not in available_interfaces:
+                print_formatted_text(
+                    HTML("<b>Invalid interface. Available interfaces: </b>")
+                )
+                for interface in available_interfaces:
+                    print_formatted_text(HTML(f"<b>{interface}</b>"))
+                return None
             self.logger.info(f"Setting interface to {tokens[0]}")
-            self.network_interface = tokens[0]
+            self.interface_name = tokens[0]
+            self.refresh_prompt()
         else:
             print_formatted_text(HTML("<b>Usage: set interface [interface]</b>"))
         return None
@@ -254,9 +266,9 @@ class ChadPrompt(CommandPrompt):
     def _cmd_set_ip(self, tokens: list) -> None:
         """Sets the IP address."""
         if len(tokens) > 0:
-            # self.interface.ip = tokens[0]
             self.logger.info(f"Setting IP to {tokens[0]}")
             self.connected_ip = tokens[0]
+            self.refresh_prompt()
         else:
             print_formatted_text(HTML("<b>Usage: set ip [ip]</b>"))
         return None
@@ -264,28 +276,47 @@ class ChadPrompt(CommandPrompt):
     def _cmd_set_port(self, tokens: list) -> None:
         """Sets the port number."""
         if len(tokens) > 0:
-            # self.interface.port = int(tokens[0])
             self.logger.info(f"Setting port to {tokens[0]}")
             self.connected_port = tokens[0]
+            self.refresh_prompt()
         else:
             print_formatted_text(HTML("<b>Usage: set port [port]</b>"))
         return None
 
     # --------------------------------------------------------------- #
 
+    def _cmd_list_interfaces(self, tokens: list) -> None:
+        """Lists all available network interfaces."""
+        interfaces = self.network_interface.list_interfaces()
+        for interface in interfaces:
+            print_formatted_text(HTML(f"<b>{interface}</b>"))
+        return None
+
+    # --------------------------------------------------------------- #
+
     def _cmd_start(self, tokens: list) -> None:
         """Starts the network interface."""
-        # self.logger.info("Starting interface...")
         self.status = "Connected"
-        # self.interface.start_capture(self.interface.ip, self.interface.port)
         self.refresh_prompt()
 
     def _cmd_stop(self, tokens: list) -> None:
         """Stops the network interface."""
-        # self.logger.info("Stopping interface...")
         self.status = "Disconnected"
-        # self.interface.stop_capture()
         self.refresh_prompt()
+
+    # --------------------------------------------------------------- #
+
+    def _cmd_unit_test(self, tokens: list) -> None:
+        """Runs unit tests for a provided module."""
+        if len(tokens) > 0:
+            self.logger.info(f"Running unit tests for {tokens[0]}")
+            from tests.unit_test import ChadUnitTest
+
+            test_runner = ChadUnitTest(tokens[0])
+            test_runner.run_unit_tests()
+        else:
+            print_formatted_text(HTML("<b>Usage: unit_test [module]</b>"))
+        return None
 
     # --------------------------------------------------------------- #
 

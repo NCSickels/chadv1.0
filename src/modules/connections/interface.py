@@ -3,11 +3,13 @@ Hook module for connecting to a live network interface using PyShark.
 """
 
 import pyshark
-from log.clogger import Logger
+
+# import pyshark.tshark.tshark
+from log.clogger import get_central_logger
 
 
 class NetworkInterface:
-    def __init__(self, interface: str, display_filter: str = None):
+    def __init__(self, interface: str = "eth0", display_filter: str = None):
         """
         Initialize the NetworkInterface with the specified network interface and display filter.
 
@@ -18,12 +20,10 @@ class NetworkInterface:
         self._interface = interface
         self._display_filter = display_filter
         self._status = "Disconnected"
-        self._connected_ip = None
-        self._connected_port = 22  # Default port for SSH
-        self.capture = pyshark.LiveCapture(
-            interface=self._interface, display_filter=self._display_filter
-        )
-        self.logger = Logger()
+        self._connected_ip = "None"
+        self._connected_port = 22
+        self.capture = None
+        self.logger = get_central_logger()
 
     @property
     def interface(self) -> str:
@@ -97,70 +97,13 @@ class NetworkInterface:
         """
         self._status = value
 
-    def start_capture(self, ip: str, port: int):
-        """
-        Start capturing packets on the specified network interface.
-
-        :param ip: The IP address to filter packets by.
-        :param port: The port number to filter packets by.
-        """
-        try:
-            self._connected_ip = ip
-            self._connected_port = port
-            self._status = "Connected"
-            self.capture.sniff_continuously(packet_count=0)
-            self.logger.info(f"Started capturing on interface: {self.interface}")
-        except Exception as e:
-            self.logger.error(f"Error starting capture: {e}")
-            self._status = "Disconnected"
-
     def list_interfaces(self):
         """
         List all available network interfaces.
 
         :return: A list of available network interfaces.
         """
-        try:
-            capture = pyshark.LiveCapture()
-            interfaces = capture.interfaces
-            for interface in interfaces:
-                print(interface)
-            # return self.capture.interfaces
-        except Exception as e:
-            self.logger.error(f"Error listing interfaces: {e}")
-            return []
-
-    def stop_capture(self):
-        """
-        Stop capturing packets.
-        """
-        try:
-            if self.capture:
-                self.capture.close()
-                self._status = "Disconnected"
-                self.logger.info(f"Stopped capturing on interface: {self.interface}")
-        except Exception as e:
-            self.logger.error(f"Error stopping capture: {e}")
-            self._status = "Connected"
-
-    def process_packets(self, packet_handler):
-        """
-        Process packets using the provided packet handler function.
-
-        :param packet_handler: A function that takes a packet as an argument and processes it.
-        """
-        if not self.capture:
-            raise RuntimeError(
-                "Capture has not been started. Call start_capture() first."
-            )
-
-        try:
-            for packet in self.capture.sniff_continuously():
-                packet_handler(packet)
-        except KeyboardInterrupt:
-            print("Packet capture interrupted by user.")
-        finally:
-            self.stop_capture()
+        return pyshark.tshark.tshark.get_tshark_interfaces()
 
     def get_status_info(self):
         """

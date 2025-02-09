@@ -479,3 +479,14 @@ def get_all_subclasses(cls):
         all_subclasses.extend(get_all_subclasses(subclass))
 
     return all_subclasses
+
+
+def check_sudo():
+    """
+    Check if the current user has root privileges.
+
+    :return: True if the current user has root privileges, False otherwise.
+    """
+    if os.geteuid() != 0:
+        return False
+    return True

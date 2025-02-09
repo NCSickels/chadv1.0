@@ -115,7 +115,10 @@ class NetworkInterface:
 
             for packet in self.capture.sniff_continuously():
                 self.handle_packet(packet)
-
+        except KeyboardInterrupt:
+            self.logger.info("Capture stopped by user.")
+            self.capture.close_async()
+            self.capture.close()
         except Exception as e:
             self.logger.error(f"Error starting capture: {e}")
 

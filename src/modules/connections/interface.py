@@ -3,13 +3,15 @@ Hook module for connecting to a live network interface using PyShark.
 """
 
 import pyshark
+import asyncio
 
 # import pyshark.tshark.tshark
 from log.clogger import get_central_logger
+from modules.helpers.helpers import check_sudo
 
 
 class NetworkInterface:
-    def __init__(self, interface: str = "eth0", display_filter: str = None):
+    def __init__(self, interface: str = "any", display_filter: str = None, loop=None):
         """
         Initialize the NetworkInterface with the specified network interface and display filter.
 
@@ -24,6 +26,9 @@ class NetworkInterface:
         self._connected_port = 22
         self.capture = None
         self.logger = get_central_logger()
+        self.loop = loop or asyncio.get_event_loop()
+
+    # --------------------------------------------------------------- #
 
     @property
     def interface(self) -> str:
@@ -96,6 +101,29 @@ class NetworkInterface:
         :param value: The status of the network interface.
         """
         self._status = value
+
+    # --------------------------------------------------------------- #
+
+    def start_capture(self):
+        """Start capturing packets on the network interface."""
+        if not check_sudo():
+            self.logger.error("This module requires root privileges to run.")
+            return
+        try:
+            self.capture = pyshark.LiveCapture(interface="any", eventloop=self.loop)
+            self.logger.info(f"Starting packet capture on interface: {self._interface}")
+
+            for packet in self.capture.sniff_continuously():
+                self.handle_packet(packet)
+
+        except Exception as e:
+            self.logger.error(f"Error starting capture: {e}")
+
+    def handle_packet(self, packet):
+        # Process the packet here
+        print(packet)
+
+    # --------------------------------------------------------------- #
 
     def list_interfaces(self):
         """

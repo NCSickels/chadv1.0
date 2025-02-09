@@ -1,7 +1,6 @@
 """Prompt module for the interactive UI."""
 
 import sys
-
 from prompt_toolkit import HTML, PromptSession, print_formatted_text
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.styles import Style, merge_styles
@@ -42,7 +41,7 @@ class CommandPrompt(object):
         start_prompt() -> None: Starts the prompt session.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, loop) -> None:
         self.commands = self.get_commands()
         self.cmd_handler = CommandHandler(self.commands)
         self.completer = CommandCompleter(self.commands)
@@ -54,13 +53,14 @@ class CommandPrompt(object):
             bottom_toolbar=self.bottom_toolbar,
             auto_suggest=AutoSuggestFromHistory(),
         )
-        self.network_interface = NetworkInterface(interface="eth0")
+        self.network_interface = NetworkInterface(interface="any", loop=loop)
         self.status_info = self.network_interface.get_status_info()
         self.status = self.status_info["status"]
         self.interface_name = self.status_info["interface"]
         self.connected_ip = self.status_info["connected_ip"]
         self.connected_port = self.status_info["connected_port"]
         self.logger = get_central_logger()
+        self.loop = loop
         super(CommandPrompt, self).__init__()
 
     # --------------------------------------------------------------- #
@@ -148,8 +148,8 @@ class CommandPrompt(object):
 
 
 class ChadPrompt(CommandPrompt):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, loop) -> None:
+        super().__init__(loop)
 
     # ================================================================#
     # CommandPrompt Overridden Functions                              #
@@ -298,6 +298,8 @@ class ChadPrompt(CommandPrompt):
         """Starts the network interface."""
         self.status = "Connected"
         self.refresh_prompt()
+        self.logger.info("Starting network interface...")
+        self.network_interface.start_capture()
 
     def _cmd_stop(self, tokens: list) -> None:
         """Stops the network interface."""

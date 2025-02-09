@@ -192,6 +192,10 @@ class ChadPrompt(CommandPrompt):
                     "desc": "Runs unit tests for a provided module.",
                     "exec": self._cmd_unit_test,
                 },
+                "clear": {
+                    "desc": "Clears the screen.",
+                    "exec": lambda x: print("\033[H\033[J"),
+                },
             }
         )
         return commands

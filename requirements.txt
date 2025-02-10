@@ -1,10 +1,7 @@
 rich
-colored
 colorama
 termcolor
-tabulate
 pre-commit
-scapy
 pyshark
 prompt_toolkit
 attrs

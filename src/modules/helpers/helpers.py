@@ -13,6 +13,7 @@ from itertools import groupby
 
 from prompt_toolkit import HTML
 from prompt_toolkit.formatted_text import FormattedText
+
 from modules.utils import constants, ip_constants
 
 test_step_info = {

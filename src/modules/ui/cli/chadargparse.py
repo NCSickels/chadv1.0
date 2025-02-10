@@ -1,6 +1,7 @@
 """Chad Argparse module."""
 
 import argparse
+
 from modules.ui.prompt.prompt import ChadPrompt
 
 

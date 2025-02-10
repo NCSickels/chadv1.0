@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 import argparse
 import asyncio
-from modules.ui.banner import print_banner
-from modules.ui.prompt.prompt import ChadPrompt
 
 from log.clogger import Logger
+from modules.ui.banner import print_banner
+from modules.ui.prompt.prompt import ChadPrompt
 
 
 class ChadArgumentParser:

@@ -5,6 +5,7 @@ Facilitates the execution of commands.
 """
 
 import traceback
+
 from prompt_toolkit import print_formatted_text
 from prompt_toolkit.formatted_text import FormattedText
 

@@ -1,5 +1,6 @@
 from .commands import COMMANDS
-from .handler import CommandHandler
 from .completer import CommandCompleter
+from .handler import CommandHandler
+from .history import ChadHistory
 
-__all__ = ["COMMANDS", "CommandHandler", "CommandCompleter"]
+__all__ = ["COMMANDS", "CommandCompleter", "CommandHandler", "ChadHistory"]

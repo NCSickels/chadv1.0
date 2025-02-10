@@ -2,10 +2,10 @@
 Hook module for connecting to a live network interface using PyShark.
 """
 
-import pyshark
 import asyncio
 
-# import pyshark.tshark.tshark
+import pyshark
+
 from log.clogger import get_central_logger
 from modules.helpers.helpers import check_sudo
 

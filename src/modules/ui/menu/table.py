@@ -2,10 +2,12 @@
 Class for creating help menu tables from JSON data through the rich library.
 """
 
-import os
 import json
+import os
+
 from rich.console import Console
 from rich.table import Table
+
 from config import settings
 
 

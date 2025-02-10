@@ -1,6 +1,6 @@
 import collections
 
-from prompt_toolkit.completion import Completer, Completion, CompleteEvent
+from prompt_toolkit.completion import CompleteEvent, Completer, Completion
 from prompt_toolkit.document import Document
 
 from ..helpers import get_tokens

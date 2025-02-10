@@ -1,6 +1,6 @@
-from .socket_connection import SocketConnection
-from .itarget_connection import ITargetConnection
-from .target import Target
 from .interface import NetworkInterface
+from .itarget_connection import ITargetConnection
+from .socket_connection import SocketConnection
+from .target import Target
 
-__all__ = ["ITargetConnection", "Target", "SocketConnection", "NetworkInterface"]
+__all__ = ["NetworkInterface", "ITargetConnection", "SocketConnection", "Target"]

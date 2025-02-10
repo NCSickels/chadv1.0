@@ -1,15 +1,14 @@
 """SocketConnection module for use with the Sockets library."""
 
+import errno
 import math
+import socket
 import ssl
 import struct
 import sys
 
-import socket
-import errno
-
-from modules.helpers import helpers
 from modules.connections.itarget_connection import ITargetConnection
+from modules.helpers import helpers
 from modules.utils import exception, ip_constants
 
 ETH_P_IP = 0x0800  # Ethernet protocol: Internet Protocol packet, see Linux if_ether.h docs for more details.

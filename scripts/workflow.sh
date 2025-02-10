@@ -231,7 +231,7 @@ function install() {
     log info "Installing required packages..."
     sudo apt update -y && sudo apt upgrade -y
     sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf \
-        automake libssl-dev wget curl php-cli
+        automake libssl-dev wget curl php-cli wireshark tshark
 
     command_exists git
 
@@ -282,6 +282,8 @@ function build() {
     log info "Building Masscan..."
     if [ -d "$MASSCAN_DIR" ]; then
         cd "$MASSCAN_DIR"
+        # Get updated Makefile from repository
+        # curl -o Makefile https://raw.githubusercontent.com/NCSickels/chadv1.0/main/fuzzing/aflnet.masscan/Makefile
         if make; then
             log info "Masscan built successfully."
         else

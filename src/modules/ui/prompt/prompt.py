@@ -1,17 +1,20 @@
 """Prompt module for the interactive UI."""
 
 import sys
+
 from prompt_toolkit import HTML, PromptSession, print_formatted_text
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.styles import Style, merge_styles
+
 from log.clogger import get_central_logger
 from modules.connections.interface import NetworkInterface
 
 # from modules.connections.socket_connection import SocketConnection
 from modules.ui.menu.table import TableCreator
+from modules.ui.prompt.commands import COMMANDS, CommandCompleter, CommandHandler
+from modules.ui.prompt.commands.history import ChadHistory
 from modules.utils import constants
 
-from .commands import COMMANDS, CommandCompleter, CommandHandler
 from .helpers import get_tokens
 
 
@@ -45,6 +48,7 @@ class CommandPrompt(object):
         self.commands = self.get_commands()
         self.cmd_handler = CommandHandler(self.commands)
         self.completer = CommandCompleter(self.commands)
+        self.history = ChadHistory()
         self.style = self.get_style()
         self._break = False
         self.prompt_session = PromptSession(
@@ -52,6 +56,7 @@ class CommandPrompt(object):
             style=self.style,
             bottom_toolbar=self.bottom_toolbar,
             auto_suggest=AutoSuggestFromHistory(),
+            history=self.history,
         )
         self.network_interface = NetworkInterface(interface="any", loop=loop)
         self.status_info = self.network_interface.get_status_info()
@@ -196,6 +201,10 @@ class ChadPrompt(CommandPrompt):
                     "desc": "Clears the screen.",
                     "exec": lambda x: print("\033[H\033[J"),
                 },
+                "history": {
+                    "desc": "Displays the command history.",
+                    "exec": self._cmd_history,
+                },
             }
         )
         return commands
@@ -226,7 +235,7 @@ class ChadPrompt(CommandPrompt):
     # Command handlers                                                #
     # ================================================================#
 
-    def _cmd_help(self) -> None:
+    def _cmd_help(self, tokens: list) -> None:
         """Displays the help menu."""
         table = TableCreator()
         [table.display_table_from_file(section) for section in ["Main", "Core"]]
@@ -326,6 +335,13 @@ class ChadPrompt(CommandPrompt):
 
     # --------------------------------------------------------------- #
 
+    def _cmd_history(self, tokens: list) -> None:
+        """Displays the command history."""
+        self.history.list_history()
+        return None
+
+    # --------------------------------------------------------------- #
+
     def refresh_prompt(self) -> None:
         """Refresh the prompt session to update the toolbar."""
         self.prompt_session.app.invalidate()
@@ -334,6 +350,7 @@ class ChadPrompt(CommandPrompt):
             style=self.style,
             bottom_toolbar=self.bottom_toolbar,
             auto_suggest=AutoSuggestFromHistory(),
+            history=self.history,
         )
 
     # --------------------------------------------------------------- #

@@ -24,13 +24,16 @@
 - [Prerequisites](#prerequisites)
 - [Testbed Configuration](#testbed-configuration)
   - [Network Configuration](#network-configuration)
-- [Usage & Installation](#usage--installation)
+- [Usage & Installation - Fuzzing Workflow](#usage--installation---fuzzing-workflow)
   - [Bash Script (Recommended)](#bash-script-recommended)
   - [Dockerfile *(WIP)*](#dockerfile-wip)
   - [Manual Installation (Recommended)](#manual-installation-recommended)
   - [Usage](#usage)
     - [Radamsa & Medusa](#radamsa--medusa)
     - [AFLnet & Masscan](#aflnet--masscan)
+- [Usage & Installation - Active Defense Tool](#usage--installation---active-defense-tool-wip)
+  - [Installation - Python Virtual Environment (Recommended)](#installation---python-virtual-environment-recommended)
+  - [Usage - Replay Service](#usage---replay-service)
 - [Demonstration Video](#demonstration-video)
 - [References](#references)
 
@@ -332,10 +335,17 @@ Charger Active Defense v1.0 - Senior Design Project
 
 ## Prerequisites
 
+### Fuzzing Workflow
+
 - VirtualBox 7.1.0 (or later)
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
 - Wi-Fi/Ethernet Adapter that supports promiscuous mode.
-- Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`.
+- Apt Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`.
+
+### Active Defense Tool *(WIP)*
+
+- Python 3.12 (or later)
+- Pip Packages: `rich`, `colorama`, `termcolor`, `pyshark`, `prompt_toolkit`, `attrs`.
 
 ## Testbed Configuration
 
@@ -461,7 +471,7 @@ If the connection is unsuccessful, restart the VMs and verify the network config
 
 If they are not set, you can reconfigure them by repeating the steps above.
 
-## Usage & Installation
+## Usage & Installation - Fuzzing Workflow
 
 There are three ways to install and use the tools necessary for the Chadv1.0 workflow: using the Bash script, the Dockerfile, or manually.
 
@@ -680,6 +690,39 @@ echo “masscan -p1-65535 192.168.1.100 --rate=1000” > scan3.txt
 
 > [!WARNING]\
 > You will need to replace the `<MAC_ADDRESS>` with your adapter’s MAC address for steps 5 & 6!
+
+## Usage & Installation - Active Defense Tool *(WIP)*
+
+### Installation - Python Virtual Environment (Recommended)
+
+```bash
+# Install apt packages
+sudo apt install wireshark tshark
+
+# Clone the repository
+git clone https://github.com/NCSickels/chadv1.0.git
+
+# Navigate to the project directory
+cd chadv1.0
+
+# Create a virtual environment 
+python3 -m venv env
+
+# Activate the virtual environment
+source env/bin/activate
+
+# Install the required packages
+pip install -r requirements.txt
+```
+
+### Usage - Replay Service
+>
+> [!WARNING]\
+> In order to properly use the live capture functionality on a network interface, you must run this with a user that has privileges to create raw packets, like `root` or a user in the `wireshark` group. These capabilities can be granted by running the following command in your Python virtual environment: `sudo setcap cap_net_raw=eip $(which python3)`
+
+```bash
+python3 chad.py
+```
 
 ## Demonstration Video
 

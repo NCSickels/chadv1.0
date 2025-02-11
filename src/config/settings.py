@@ -11,3 +11,7 @@ GENERAL_SETTINGS:
 class GENERAL_SETTINGS:
     use_rich_tables = True
     color_supported = True
+
+
+class LOGGER_SETTINGS:
+    color_log_file = True

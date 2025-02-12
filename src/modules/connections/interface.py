@@ -8,6 +8,7 @@ import pyshark
 
 from log.clogger import get_central_logger
 from modules.helpers.helpers import check_sudo
+from modules.connections.adresponse import ADResponse
 
 
 class NetworkInterface:
@@ -163,6 +164,17 @@ class NetworkInterface:
                 f"Source IP: {packet.ip.src}, Destination IP: {packet.ip.dst}"
             )
         print(packet)
+
+    # --------------------------------------------------------------- #
+
+    def send_packet(self, data):
+        """
+        Send a packet to the network interface.
+
+        :param data: The data to send.
+        """
+        response = ADResponse(self._connected_ip, self._connected_port, "tcp", data)
+        response.send_packet()
 
     # --------------------------------------------------------------- #
 

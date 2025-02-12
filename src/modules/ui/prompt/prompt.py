@@ -3,6 +3,7 @@
 from prompt_toolkit import HTML, PromptSession, print_formatted_text
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.styles import Style, merge_styles
+
 from log.clogger import get_central_logger
 from modules.connections.interface import NetworkInterface
 

@@ -1,7 +1,5 @@
 """Prompt module for the interactive UI."""
 
-import sys
-
 from prompt_toolkit import HTML, PromptSession, print_formatted_text
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.styles import Style, merge_styles
@@ -13,7 +11,7 @@ from modules.connections.interface import NetworkInterface
 from modules.ui.menu.table import TableCreator
 from modules.ui.prompt.commands import COMMANDS, CommandCompleter, CommandHandler
 from modules.ui.prompt.commands.history import ChadHistory
-from modules.utils import constants
+from modules.utils import constants, exception
 
 from .helpers import get_tokens
 
@@ -107,7 +105,7 @@ class CommandPrompt(object):
     def handle_exit(self, tokens: list) -> None:
         if len(tokens) > 0:
             if tokens[0] in ("exit", "quit", "q"):
-                sys.exit(0)
+                raise exception.ChadProgramExit
 
     # --------------------------------------------------------------- #
 
@@ -146,8 +144,10 @@ class CommandPrompt(object):
 
             except KeyboardInterrupt:
                 continue
+            except exception.ChadProgramExit:
+                break
             except EOFError:
-                # self.handle_exit(['exit'])
+                self.handle_exit(["exit"])
                 break
         self.exit_message()
 

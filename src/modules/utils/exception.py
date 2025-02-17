@@ -51,5 +51,9 @@ class ChadPacketCaptureInterrupted(ChadError):
     pass
 
 
+class ChadProgramExit(ChadError):
+    pass
+
+
 class ModuleException(Exception):
     pass

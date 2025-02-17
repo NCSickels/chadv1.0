@@ -2,9 +2,12 @@
 import argparse
 import asyncio
 
+import nest_asyncio
+
 from log.clogger import Logger
 from modules.ui.banner import print_banner
 from modules.ui.prompt.prompt import ChadPrompt
+from modules.utils.exception import ChadProgramExit
 
 
 class ChadArgumentParser:
@@ -36,16 +39,30 @@ class ChadArgumentParser:
 
 def main():
     print_banner()
-
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
+    nest_asyncio.apply()
+    Logger()
+
     try:
-        Logger()
         ChadArgumentParser()
+    except ChadProgramExit:
+        pass
     except KeyboardInterrupt:
-        print("Exiting...")
+        pass
     except Exception as e:
         print(f"Error: {e}")
+    finally:
+        pending = asyncio.all_tasks(loop)
+        for task in pending:
+            task.cancel()
+        try:
+            loop.run_until_complete(asyncio.gather(*pending, return_exceptions=True))
+        except asyncio.CancelledError:
+            pass
+        finally:
+            loop.run_until_complete(loop.shutdown_asyncgens())
+            loop.close()
 
 
 if __name__ == "__main__":

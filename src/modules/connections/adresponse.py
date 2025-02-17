@@ -11,6 +11,10 @@ class ADResponse:
     :param dst_port: The destination port number.
     :param protocol: The protocol to use for the response (TCP or UDP).
     :param data: The data to send in the response.
+
+    Example usage:
+        response = ADResponse("192.168.1.1", 80, "tcp", "Hello, World!")
+        response.send_packet()
     """
 
     def __init__(self, dst_ip, dst_port, protocol, data):
@@ -31,8 +35,3 @@ class ADResponse:
     def send_packet(self):
         packet = self.craft_packet()
         send(packet)
-
-
-# Example usage:
-response = ADResponse("192.168.1.1", 80, "tcp", "Hello, World!")
-response.send_packet()

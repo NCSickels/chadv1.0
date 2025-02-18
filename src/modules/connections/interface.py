@@ -9,6 +9,7 @@ import pyshark
 from log.clogger import get_central_logger
 from modules.helpers.helpers import check_sudo
 from modules.connections.adresponse import ADResponse
+from config.settings import NETWORK_SETTINGS as settings
 
 
 class NetworkInterface:
@@ -114,6 +115,7 @@ class NetworkInterface:
     # --------------------------------------------------------------- #
 
     # TODO: Fix this to work with asyncio properly; capture packets repeats when trying to stop capture
+
     async def capture_packets(self):
         self.capture = pyshark.LiveCapture(
             interface="any",
@@ -122,7 +124,9 @@ class NetworkInterface:
         self.logger.info(f"Starting packet capture on interface: {self._interface}")
         self.capture_started_event.set()
         try:
-            for packet in self.capture.sniff_continuously(packet_count=10):
+            for packet in self.capture.sniff_continuously(
+                packet_count=settings.packet_count
+            ):
                 self.handle_packet(packet)
             # await self.capture.apply_on_packets(self.handle_packet)
         except asyncio.CancelledError:

@@ -15,3 +15,11 @@ class GENERAL_SETTINGS:
 
 class LOGGER_SETTINGS:
     color_log_file = True
+
+
+class NETWORK_SETTINGS:
+    interface = "any"
+    display_filter = None
+    bpf_filter = ""
+    loop = None
+    packet_count = 20

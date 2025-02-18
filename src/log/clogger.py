@@ -116,9 +116,6 @@ def integrate_stream_to_logger():
 class ColorFormatter(logging.Formatter):
     """
     A custom logging formatter that adds color to log messages.
-
-    Methods:
-        format(record): Formats the log record with color.
     """
 
     def __init__(self, *args, **kwargs):

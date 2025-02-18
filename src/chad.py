@@ -11,7 +11,13 @@ from modules.utils.exception import ChadProgramExit
 
 
 class ChadArgumentParser:
-    """Custom argparse.ArgumentParser class."""
+    """
+    Custom argparse.ArgumentParser class.
+
+    Attributes:
+        loop (asyncio.AbstractEventLoop): The asyncio event loop.
+        parser (argparse.ArgumentParser): The argparse parser.
+    """
 
     def __init__(self):
         self.loop = asyncio.new_event_loop()

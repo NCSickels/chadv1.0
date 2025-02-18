@@ -25,12 +25,6 @@ class Trie:
 
     Attributes:
         root (TrieNode): The root node of the Trie.
-
-    Methods:
-        insert(word): Inserts a word into the Trie.
-        search(word): Searches for a word in the Trie.
-        startswith(prefix): Returns all words in the Trie that start with the given prefix.
-        _get_all(node, prefix): Helper method to get all words in the Trie starting from a given node.
     """
 
     def __init__(self):

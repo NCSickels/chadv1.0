@@ -20,26 +20,25 @@ class CommandPrompt(object):
     """
     Command prompt for the interactive UI.
 
+    Args:
+        loop (asyncio.AbstractEventLoop): Event loop.
+
     Attributes:
         commands (dict): Dictionary of commands.
         cmd_handler (CommandHandler): Command handler.
         completer (CommandCompleter): Command completer.
+        history (ChadHistory): Command history.
         style (Style): Prompt style.
         _break (bool): Break flag.
         prompt_session (PromptSession): Prompt session.
-        logger (Logger): Logger instance.
-
-    Methods:
-        get_commands() -> dict: Returns the commands dictionary.
-        get_prompt() -> HTML: Returns the prompt.
-        get_style() -> Style: Returns the prompt style.
-        intro_message(): Prints the intro message.
-        exit_message(): Prints the exit message.
-        handle_exit(tokens: list) -> None: Handles the exit command.
-        handle_break(tokens: list) -> bool: Handles the break command.
-        handle_command(tokens: list) -> None: Handles a command.
-        bottom_toolbar(): Returns the bottom toolbar.
-        start_prompt() -> None: Starts the prompt session.
+        network_interface (NetworkInterface): Network interface class instance.
+        status_info (dict): Network interface status information.
+        status (str): Network interface status value.
+        interface_name (str): Network interface name.
+        connected_ip (str): Connected IP address.
+        connected_port (str): Connected port number.
+        logger (Logger): Central logger.
+        loop (asyncio.AbstractEventLoop): Event loop.
     """
 
     def __init__(self, loop) -> None:
@@ -153,6 +152,13 @@ class CommandPrompt(object):
 
 
 class ChadPrompt(CommandPrompt):
+    """
+    Wrapper class for the CommandPrompt.
+
+    Attributes:
+        loop (asyncio.AbstractEventLoop): Event loop.
+    """
+
     def __init__(self, loop) -> None:
         super().__init__(loop)
 

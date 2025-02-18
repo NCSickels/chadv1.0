@@ -13,6 +13,16 @@ from config.settings import NETWORK_SETTINGS as settings
 
 
 class NetworkInterface:
+    """
+    Initialize the NetworkInterface with the specified network interface and display filter.
+
+    Args:
+        interface (str): The name of the network interface.
+        display_filter (str): The display filter to apply to the network interface.
+        bpf_filter (str): The Berkeley Packet Filter (BPF) filter to apply to the network interface.
+        loop (asyncio.AbstractEventLoop): The event loop to use for the network interface.
+    """
+
     def __init__(
         self,
         interface: str = "any",
@@ -20,13 +30,6 @@ class NetworkInterface:
         bpf_filter: str = "",
         loop=None,
     ):
-        """
-        Initialize the NetworkInterface with the specified network interface and display filter.
-
-        :param interface: The name of the network interface to capture packets from.
-        :param display_filter: Optional display filter to apply to the captured packets.
-        :param capture: The capture object for the network interface.
-        """
         self._interface = interface
         self._display_filter = display_filter
         self._bpf_filter = bpf_filter
@@ -45,7 +48,8 @@ class NetworkInterface:
         """
         Get the name of the network interface.
 
-        :return: The name of the network interface.
+        Returns:
+            _interface (str): The name of the network interface.
         """
         return self._interface
 
@@ -54,7 +58,8 @@ class NetworkInterface:
         """
         Set the name of the network interface.
 
-        :param value: The name of the network interface.
+        Args:
+            value (str): The name of the network interface.
         """
         self._interface = value
 
@@ -63,7 +68,8 @@ class NetworkInterface:
         """
         Get the IP address of the network interface.
 
-        :return: The IP address of the network interface.
+        Returns:
+            _connected_ip (str): The IP address of the network interface.
         """
         return self._connected_ip
 
@@ -72,7 +78,8 @@ class NetworkInterface:
         """
         Set the IP address of the network interface.
 
-        :param value: The IP address of the network interface.
+        Args:
+            value (str): The IP address of the network interface.
         """
         self._connected_ip = value
 
@@ -81,7 +88,8 @@ class NetworkInterface:
         """
         Get the port number of the network interface.
 
-        :return: The port number of the network interface.
+        Returns:
+            _connected_port (int): The port number of the network interface.
         """
         return self._connected_port
 
@@ -90,7 +98,8 @@ class NetworkInterface:
         """
         Set the port number of the network interface.
 
-        :param value: The port number of the network interface.
+        Args:
+            value (str): The port number of the network interface.
         """
         self._connected_port = value
 
@@ -99,7 +108,8 @@ class NetworkInterface:
         """
         Get the status of the network interface.
 
-        :return: The status of the network interface.
+        Returns:
+            _status (str): The status of the network interface.
         """
         return self._status
 
@@ -108,7 +118,8 @@ class NetworkInterface:
         """
         Set the status of the network interface.
 
-        :param value: The status of the network interface.
+        Args:
+            value (str): The status of the network interface.
         """
         self._status = value
 
@@ -175,7 +186,8 @@ class NetworkInterface:
         """
         Send a packet to the network interface.
 
-        :param data: The data to send.
+        Args:
+            data (str): The data to send.
         """
         response = ADResponse(self._connected_ip, self._connected_port, "tcp", data)
         response.send_packet()
@@ -186,7 +198,8 @@ class NetworkInterface:
         """
         List all available network interfaces.
 
-        :return: A list of available network interfaces.
+        Returns:
+            A list of available network interfaces.
         """
         return pyshark.tshark.tshark.get_tshark_interfaces()
 
@@ -194,7 +207,8 @@ class NetworkInterface:
         """
         Get the status of the network interface.
 
-        :return: A dictionary containing the status, connected IP, port, and interface.
+        Returns:
+            (dict[str]): A dictionary containing the status, connected IP, port, and interface.
         """
         return {
             "status": self._status,

@@ -105,14 +105,16 @@ def color_formatted_text(data, msg_type):
 
 
 def ip_str_to_bytes(ip):
-    """Convert an IP string to a four-byte bytes.
+    """
+    Convert an IP string to a four-byte bytes.
 
-    :param ip: IP address string, e.g. '127.0.0.1'
+    Args:
+        ip (str): IP address string, e.g. '127.0.0.1'
 
-    :return 4-byte representation of ip, e.g. b'\x7f\x00\x00\x01'
-    :rtype bytes
+    Returns:
+        4-byte representation of ip, e.g. b'\x7f\x00\x00\x01'
 
-    :raises ValueError if ip is not a legal IP address.
+        :raises ValueError if ip is not a legal IP address.
     """
     try:
         return socket.inet_aton(ip)
@@ -126,8 +128,9 @@ def get_max_udp_size():
     """
     Crazy CTypes magic to do a getsockopt() which determines the max UDP payload size in a platform-agnostic way.
 
+    Returns:
+        The maximum length of a UDP packet the current platform supports.
         @rtype:  long
-        @return: The maximum length of a UDP packet the current platform supports
     """
     windows = platform.uname()[0] == "Windows"
     mac = platform.uname()[0] == "Darwin"
@@ -172,8 +175,9 @@ def calculate_four_byte_padding(string, character="\x00"):
 def crc16(string, value=0):
     """CRC-16 poly: p(x) = x**16 + x**15 + x**2 + 1
 
-    @param string: Data over which to calculate crc.
-    @param value: Initial CRC value.
+    Args:
+        string (str): Data over which to calculate crc.
+        value (int): Initial CRC value.
     """
     crc16_table = []
     for byte in range(256):
@@ -202,7 +206,8 @@ def crc32(string):
 def uuid_bin_to_str(uuid):
     """Convert a binary UUID to human readable string.
 
-    @param uuid: bytes representing UUID.
+    Args:
+        uuid (bytes): Binary UUID.
     """
     (block1, block2, block3) = struct.unpack("<LHH", uuid[:8])
     (block4, block5, block6) = struct.unpack(">HHL", uuid[8:16])
@@ -224,7 +229,8 @@ def uuid_str_to_bin(uuid):
 
     Ripped from Core Impacket.
 
-    @param uuid: UUID string to convert to bytes.
+    Args:
+        uuid (str): UUID string to convert to bytes.
     """
     uuid_re = r"([\dA-Fa-f]{8})-([\dA-Fa-f]{4})-([\dA-Fa-f]{4})-([\dA-Fa-f]{4})-([\dA-Fa-f]{4})([\dA-Fa-f]{8})"
 
@@ -244,10 +250,12 @@ def uuid_str_to_bin(uuid):
 def _ones_complement_sum_carry_16(a, b):
     """Compute ones complement sum and carry at 16 bits.
 
-    :type a: int
-    :type b: int
+    Args:
+        a (int): First number.
+        b (int): Second number.
 
-    :return: Sum of a and b, ones complement, carry at 16 bits.
+    Returns:
+        Sum of a and b, ones complement, carry at 16 bits.
     """
     pre_sum = a + b
     return (pre_sum & 0xFFFF) + (pre_sum >> 16)
@@ -258,13 +266,12 @@ def _collate_bytes(msb, lsb):
     Helper function for our helper functions.
     Collates msb and lsb into one 16-bit value.
 
-    :type msb: str
-    :param msb: Single byte (most significant).
+    Args:
+        msb (str): Single byte (most significant).
+        lsb (str): Single byte (least significant).
 
-    :type lsb: str
-    :param lsb: Single byte (least significant).
-
-    :return: msb and lsb all together in one 16 bit value.
+    Returns:
+        msb and lsb all together in one 16 bit value.
     """
     return (ord(msb) << 8) + ord(lsb)
 
@@ -272,11 +279,12 @@ def _collate_bytes(msb, lsb):
 def ipv4_checksum(msg: bytes):
     """
     Return IPv4 checksum of msg.
-    :param msg: Message to compute checksum over.
-    :type msg: bytes
 
-    :return: IPv4 checksum of msg.
-    :rtype: int
+    Args:
+        msg (bytes): Message to compute checksum over.
+
+    Returns:
+        IPv4 checksum of msg.
     """
     # Pad with 0 byte if needed
     if len(msg) % 2 == 1:
@@ -288,19 +296,16 @@ def ipv4_checksum(msg: bytes):
 
 
 def _udp_checksum_pseudo_header(src_addr: bytes, dst_addr: bytes, msg_len: int):
-    """Return pseudo-header for UDP checksum.
+    """
+    Return pseudo-header for UDP checksum.
 
-    :type src_addr: bytes
-    :param src_addr: Source IP address -- 4 bytes.
+    Args:
+        src_addr (bytes): Source IP address -- 4 bytes.
+        dst_addr (bytes): Destination IP address -- 4 bytes.
+        msg_len (int): Length of UDP message (not including IPv4 header).
 
-    :type dst_addr: bytes
-    :param dst_addr: Destination IP address -- 4 bytes.
-
-    :param msg_len: Length of UDP message (not including IPv4 header).
-    :type msg_len: int
-
-    :return: UDP pseudo-header
-    :rtype: bytes
+    Returns:
+        UDP pseudo-header
     """
     return (
         src_addr
@@ -323,17 +328,13 @@ def udp_checksum(msg: bytes, src_addr: bytes, dst_addr: bytes):
     checksum will be invalid. This loosey goosey error checking is done to
     support fuzz tests which at times generate huge, invalid packets.
 
+    Args:
+        msg (str): Message to compute checksum over.
+        src_addr (bytes): Source IP address -- 4 bytes.
+        dst_addr (bytes): Destination IP address -- 4 bytes.
 
-    :param msg: Message to compute checksum over.
-    :type msg: str
-
-    :type src_addr: bytes
-    :param src_addr: Source IP address -- 4 bytes.
-    :type dst_addr: bytes
-    :param dst_addr: Destination IP address -- 4 bytes.
-
-    :return: UDP checksum of msg.
-    :rtype: int
+    Returns:
+        UDP checksum of msg.
     """
     # If the packet is too big, the checksum is undefined since len(msg)
     # won't fit into two bytes. So we just pick our best definition.
@@ -367,8 +368,8 @@ def pause_for_signal():
      - Windows uses a loop that sleeps for 1 ms at a time, allowing signals
        to interrupt the thread fairly quickly.
 
-    :return: None
-    :rtype: None
+    Returns:
+        None
     """
     try:
         while True:
@@ -486,7 +487,8 @@ def check_sudo():
     """
     Check if the current user has root privileges.
 
-    :return: True if the current user has root privileges, False otherwise.
+    Returns:
+        True if the current user has root privileges, False otherwise.
     """
     if os.geteuid() != 0:
         return False

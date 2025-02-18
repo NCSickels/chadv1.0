@@ -6,7 +6,12 @@ from prompt_toolkit.history import History
 
 
 class ChadHistory(History):
-    """Custom history class for the Chad prompt."""
+    """
+    Custom history class for the Chad prompt.
+
+    Args:
+        History (class): Base history class.
+    """
 
     def __init__(self):
         super().__init__()

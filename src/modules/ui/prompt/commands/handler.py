@@ -14,12 +14,9 @@ class CommandHandler(object):
     """
     Command handler for the user prompt.
 
-    Attributes:
+    Args:
         commands (dict): Dictionary of available commands.
 
-    Methods:
-        execute_command(list): Execute a command.
-        handle_command(list): Handle a command.
     """
 
     def __init__(self, commands: dict) -> None:

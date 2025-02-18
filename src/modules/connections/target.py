@@ -35,7 +35,8 @@ class Target(object):
         """
         Close connection to the target.
 
-        :return: None
+        Returns:
+            None
         """
         self._logger.log_info("Closing target connection...")
         self._target_connection.close()
@@ -45,7 +46,8 @@ class Target(object):
         """
         Opens connection to the target. Make sure to call close!
 
-        :return: None
+        Returns:
+            None
         """
         self._logger.log_info(
             "Opening target connection ({0})...".format(self._target_connection.info)
@@ -115,8 +117,8 @@ class Target(object):
         """
         Set this object's logger -- for sent and received data.
 
-        Parameters:
-
+        Args:
+            data_logger (Logger): Logger
         """
         self._logger = data_logger
 

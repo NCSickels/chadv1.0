@@ -7,14 +7,15 @@ class ADResponse:
     """
     Active Defense Response class for sending responses to incoming packets.
 
-    :param dst_ip: The destination IP address.
-    :param dst_port: The destination port number.
-    :param protocol: The protocol to use for the response (TCP or UDP).
-    :param data: The data to send in the response.
-
-    Example usage:
-        response = ADResponse("192.168.1.1", 80, "tcp", "Hello, World!")
+    Examples:
+        response = ADResponse("192.168.1.1", 80, "tcp", "Hello, World!");
         response.send_packet()
+
+    Args:
+        dst_ip (str): The destination IP address.
+        dst_port (int): The destination port number.
+        protocol (str): The protocol to use for the response (TCP or UDP).
+        data (str): The data to send in the response.
     """
 
     def __init__(self, dst_ip, dst_port, protocol, data):

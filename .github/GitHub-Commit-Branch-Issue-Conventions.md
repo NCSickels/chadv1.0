@@ -31,13 +31,22 @@ Closes #123
 ### Overview Summary
 
 1. Go to the GitHub repository and navigate to the issue you want to work on.
+
 ![Issue Board](.assets/misc/1-issue-board.png)
+
 2. Under the issue, find the "Development" section and click on the "Create a branch" option.
+
 ![Create Branch from Issue](.assets/misc/2-create-branch-from-issue.jpeg)
+
 3. In the pop-up window, change the default branch name if needed and click "Create branch" to create a new branch. For Chad, we will select the "Dev" branch.
+
 ![Change Source Branch](.assets/misc/3-change-source-branch.jpeg)
+
 ![Select New Source Branch](.assets/misc/4-select-new-source-branch.jpeg)
+
 4. Select the "Create Branch" button to create the new branch from the issue.
+
 ![Create New Branch](.assets/misc/5-create-new-branch.jpeg)
-5. After creating the branch, copy the dialog box's text and paste into the terminal to switch to the new branch.
+
+5. After creating the branch, copy the dialog box's text and paste it into the terminal to switch to the new branch.
 ![Copy Dialogue Box](.assets/misc/6-copy-dialogue-box.jpeg)

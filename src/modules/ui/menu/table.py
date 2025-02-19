@@ -57,8 +57,8 @@ class TableCreator:
 
     def display_table(self, json_data: dict, module: str) -> None:
         column_keys_dict = {
-            "Main": ["option", "modules", "description"],
             "Core": ["command", "description"],
+            "Networking": ["command", "description"],
         }
         for table in json_data[module]:
             header_data = table.get("header", [{}])[0]

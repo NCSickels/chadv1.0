@@ -155,7 +155,7 @@ class ChadPrompt(CommandPrompt):
     """
     Wrapper class for the CommandPrompt.
 
-    Attributes:
+    Args:
         loop (asyncio.AbstractEventLoop): Event loop.
     """
 
@@ -244,7 +244,7 @@ class ChadPrompt(CommandPrompt):
     def _cmd_help(self, tokens: list) -> None:
         """Displays the help menu."""
         table = TableCreator()
-        [table.display_table_from_file(section) for section in ["Main", "Core"]]
+        [table.display_table_from_file(section) for section in ["Core", "Networking"]]
         return None
 
     # --------------------------------------------------------------- #

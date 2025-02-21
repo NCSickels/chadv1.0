@@ -1,3 +1,5 @@
+"""Helpers for the network connection modules."""
+
 import ctypes
 import errno
 import os
@@ -90,21 +92,21 @@ test_step_info = {
 }
 
 
-def color_html(data, msg_type):
+def color_html(data: str, msg_type: str) -> HTML:
     if msg_type in constants.STYLE:
         return HTML("<{}>{}</{}>".format(msg_type, data, msg_type))
     else:
         return HTML(data)
 
 
-def color_formatted_text(data, msg_type):
+def color_formatted_text(data: str, msg_type: str) -> FormattedText:
     if msg_type in constants.STYLE:
         return FormattedText([("class:{}".format(msg_type), data)])
     else:
         return FormattedText([("", data)])
 
 
-def ip_str_to_bytes(ip):
+def ip_str_to_bytes(ip: str) -> bytes:
     """
     Convert an IP string to a four-byte bytes.
 
@@ -124,7 +126,7 @@ def ip_str_to_bytes(ip):
         )
 
 
-def get_max_udp_size():
+def get_max_udp_size() -> int:
     """
     Crazy CTypes magic to do a getsockopt() which determines the max UDP payload size in a platform-agnostic way.
 
@@ -168,11 +170,11 @@ def get_max_udp_size():
     )
 
 
-def calculate_four_byte_padding(string, character="\x00"):
+def calculate_four_byte_padding(string: str, character: str = "\x00") -> str:
     return character * ((4 - (len(string) & 3)) & 3)
 
 
-def crc16(string, value=0):
+def crc16(string: str, value: int = 0) -> int:
     """CRC-16 poly: p(x) = x**16 + x**15 + x**2 + 1
 
     Args:
@@ -199,11 +201,11 @@ def crc16(string, value=0):
     return value
 
 
-def crc32(string):
+def crc32(string: str) -> int:
     return zlib.crc32(string) & 0xFFFFFFFF
 
 
-def uuid_bin_to_str(uuid):
+def uuid_bin_to_str(uuid: bytes) -> str:
     """Convert a binary UUID to human readable string.
 
     Args:
@@ -222,7 +224,7 @@ def uuid_bin_to_str(uuid):
     )
 
 
-def uuid_str_to_bin(uuid):
+def uuid_str_to_bin(uuid: str) -> bytes:
     """Converts a UUID string to binary form.
 
     Expected string input format is same as uuid_bin_to_str()'s output format.
@@ -247,7 +249,7 @@ def uuid_str_to_bin(uuid):
     return uuid
 
 
-def _ones_complement_sum_carry_16(a, b):
+def _ones_complement_sum_carry_16(a: int, b: int) -> int:
     """Compute ones complement sum and carry at 16 bits.
 
     Args:
@@ -261,7 +263,7 @@ def _ones_complement_sum_carry_16(a, b):
     return (pre_sum & 0xFFFF) + (pre_sum >> 16)
 
 
-def _collate_bytes(msb, lsb):
+def _collate_bytes(msb: str, lsb: str) -> int:
     """
     Helper function for our helper functions.
     Collates msb and lsb into one 16-bit value.
@@ -276,7 +278,7 @@ def _collate_bytes(msb, lsb):
     return (ord(msb) << 8) + ord(lsb)
 
 
-def ipv4_checksum(msg: bytes):
+def ipv4_checksum(msg: bytes) -> int:
     """
     Return IPv4 checksum of msg.
 
@@ -295,7 +297,9 @@ def ipv4_checksum(msg: bytes):
     return ~total & 0xFFFF
 
 
-def _udp_checksum_pseudo_header(src_addr: bytes, dst_addr: bytes, msg_len: int):
+def _udp_checksum_pseudo_header(
+    src_addr: bytes, dst_addr: bytes, msg_len: int
+) -> bytes:
     """
     Return pseudo-header for UDP checksum.
 
@@ -316,7 +320,7 @@ def _udp_checksum_pseudo_header(src_addr: bytes, dst_addr: bytes, msg_len: int):
     )
 
 
-def udp_checksum(msg: bytes, src_addr: bytes, dst_addr: bytes):
+def udp_checksum(msg: bytes, src_addr: bytes, dst_addr: bytes) -> int:
     """Return UDP checksum of msg.
 
     Recall that the UDP checksum involves creating a sort of pseudo IP header.
@@ -346,7 +350,7 @@ def udp_checksum(msg: bytes, src_addr: bytes, dst_addr: bytes):
     )
 
 
-def hex_str(s):
+def hex_str(s: bytes) -> str:
     """
     Returns a hex-formatted string based on s.
 
@@ -359,7 +363,7 @@ def hex_str(s):
     return " ".join("{:02x}".format(b) for b in bytearray(s))
 
 
-def pause_for_signal():
+def pause_for_signal() -> None:
     """
     Pauses the current thread in a way that can still receive signals like SIGINT from Ctrl+C.
 
@@ -380,30 +384,30 @@ def pause_for_signal():
             time.sleep(0.001)
 
 
-def get_time_stamp():
+def get_time_stamp() -> str:
     t = time.time()
     s = time.strftime("[%Y-%m-%d %H:%M:%S", time.localtime(t))
     s += ",%03d]" % (t * 1000 % 1000)
     return s
 
 
-def _indent_all_lines(lines, amount, ch=" "):
+def _indent_all_lines(lines: str, amount: int, ch: str = " ") -> str:
     padding = amount * ch
     return padding + ("\n" + padding).join(lines.split("\n"))
 
 
-def _indent_after_first_line(lines, amount, ch=" "):
+def _indent_after_first_line(lines: str, amount: int, ch: str = " ") -> str:
     padding = amount * ch
     return ("\n" + padding).join(lines.split("\n"))
 
 
 def format_log_msg(
-    msg_type,
-    description=None,
-    data=None,
-    indent_size=2,
-    timestamp=None,
-    format_type="terminal",
+    msg_type: str = "info",
+    description: str = "",
+    data: str = "",
+    indent_size: int = 2,
+    timestamp: str = "",
+    format_type: str = "terminal",
 ):
     if data is None:
         data = b""
@@ -425,14 +429,16 @@ def format_log_msg(
     return msg
 
 
-def format_msg(msg, indent_level, indent_size, timestamp=None):
+def format_msg(
+    msg: str, indent_level: int, indent_size: int, timestamp: str = ""
+) -> str:
     msg = _indent_all_lines(msg, indent_level * indent_size)
     if timestamp is None:
         timestamp = get_time_stamp()
     return timestamp + " " + _indent_after_first_line(msg, len(timestamp) + 1)
 
 
-def hex_to_hexstr(input_bytes):
+def hex_to_hexstr(input_bytes: bytes = b"") -> str:
     """
     Render input_bytes as ASCII-encoded hex bytes, followed by a best effort
     utf-8 rendering.
@@ -446,7 +452,7 @@ def hex_to_hexstr(input_bytes):
     return hex_str(input_bytes) + " " + repr(input_bytes)
 
 
-def repr_input_bytes(input_bytes):
+def repr_input_bytes(input_bytes: bytes = b"") -> str:
     if len(input_bytes) > 10000:
         return "[{} bytes]".format(len(input_bytes))
     groups = groupby(input_bytes)
@@ -465,7 +471,7 @@ def repr_input_bytes(input_bytes):
     # return hexb + '- ' + repr(b)
 
 
-def mkdir_safe(directory_name):
+def mkdir_safe(directory_name: str) -> None:
     try:
         os.makedirs(directory_name)
     except OSError as e:
@@ -473,7 +479,7 @@ def mkdir_safe(directory_name):
             raise
 
 
-def get_all_subclasses(cls):
+def get_all_subclasses(cls: type) -> list:
     all_subclasses = []
 
     for subclass in cls.__subclasses__():
@@ -483,7 +489,7 @@ def get_all_subclasses(cls):
     return all_subclasses
 
 
-def check_sudo():
+def check_sudo() -> bool:
     """
     Check if the current user has root privileges.
 

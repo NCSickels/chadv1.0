@@ -1,6 +1,8 @@
 """Active Defense Response Handling Module"""
 
-from scapy.all import IP, TCP, UDP, send
+from scapy.layers.inet import IP, TCP, UDP
+from scapy.packet import Packet
+from scapy.sendrecv import send
 
 
 class ADResponse:
@@ -18,13 +20,19 @@ class ADResponse:
         data (str): The data to send in the response.
     """
 
-    def __init__(self, dst_ip, dst_port, protocol, data):
+    def __init__(
+        self,
+        dst_ip: str = "127.0.0.1",
+        dst_port: int = 22,
+        protocol: str = "tcp",
+        data: str = "",
+    ):
         self.dst_ip = dst_ip
         self.dst_port = dst_port
         self.protocol = protocol
         self.data = data
 
-    def craft_packet(self):
+    def craft_packet(self) -> Packet:
         if self.protocol.lower() == "tcp":
             packet = IP(dst=self.dst_ip) / TCP(dport=self.dst_port) / self.data
         elif self.protocol.lower() == "udp":
@@ -33,6 +41,6 @@ class ADResponse:
             raise ValueError("Unsupported protocol: {}".format(self.protocol))
         return packet
 
-    def send_packet(self):
+    def send_packet(self) -> None:
         packet = self.craft_packet()
         send(packet)

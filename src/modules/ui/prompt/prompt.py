@@ -77,7 +77,7 @@ class CommandPrompt(object):
 
     # --------------------------------------------------------------- #
 
-    def get_style(self):
+    def get_style(self) -> Style | None:
         Style.from_dict(
             {
                 "completion-menu.completion": "bg:#008888 #ffffff",
@@ -90,13 +90,13 @@ class CommandPrompt(object):
 
     # --------------------------------------------------------------- #
 
-    def intro_message(self):
+    def intro_message(self) -> None:
         self.logger.info("Starting prompt...")
         self.logger.info("Welcome to the Chad interactive prompt!")
 
     # --------------------------------------------------------------- #
 
-    def exit_message(self):
+    def exit_message(self) -> None:
         self.logger.info("Exiting prompt...")
 
     # --------------------------------------------------------------- #
@@ -122,7 +122,7 @@ class CommandPrompt(object):
 
     # --------------------------------------------------------------- #
 
-    def bottom_toolbar(self):
+    def bottom_toolbar(self) -> HTML | None:
         return None
 
     # --------------------------------------------------------------- #
@@ -166,7 +166,7 @@ class ChadPrompt(CommandPrompt):
     # CommandPrompt Overridden Functions                              #
     # ================================================================#
 
-    def get_commands(self):
+    def get_commands(self) -> dict:
         """Contains the full list of commands."""
         commands = super().get_commands()
         commands.update(
@@ -217,12 +217,12 @@ class ChadPrompt(CommandPrompt):
 
     # --------------------------------------------------------------- #
 
-    def get_prompt(self):
+    def get_prompt(self) -> HTML:
         return HTML("<b>> </b>")
 
     # --------------------------------------------------------------- #
 
-    def bottom_toolbar(self):
+    def bottom_toolbar(self) -> HTML:
         if self.status == "Connected":
             status_tag = "active"
         else:

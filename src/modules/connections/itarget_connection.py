@@ -1,3 +1,5 @@
+"""Interface for connections to attack target."""
+
 import abc
 
 
@@ -11,7 +13,7 @@ class ITargetConnection(object):
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
-    def close(self):
+    def close(self) -> None:
         """
         Close connection.
 
@@ -20,7 +22,7 @@ class ITargetConnection(object):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def open(self):
+    def open(self) -> None:
         """
         Opens connection to the target. Make sure to call close!
 
@@ -29,7 +31,7 @@ class ITargetConnection(object):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def recv(self, max_bytes):
+    def recv(self, max_bytes: int) -> bytes:
         """
         Receive up to max_bytes data.
 
@@ -41,7 +43,7 @@ class ITargetConnection(object):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def recv_all(self, max_bytes):
+    def recv_all(self, max_bytes: int) -> bytes:
         """
         Receive up to max_bytes data, trying to receive everything coming.
 
@@ -53,7 +55,7 @@ class ITargetConnection(object):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def send(self, data):
+    def send(self, data: bytes) -> int:
         """
         Send data to the target.
 
@@ -66,7 +68,7 @@ class ITargetConnection(object):
 
     @property
     @abc.abstractmethod
-    def info(self):
+    def info(self) -> str:
         """Return description of connection info.
 
         E.g., "127.0.0.1:2121"

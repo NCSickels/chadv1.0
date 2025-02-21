@@ -5,11 +5,15 @@ Hook module for connecting to a live network interface using PyShark.
 import asyncio
 
 import pyshark
+import pyshark.packet
+import pyshark.packet.packet
+import pyshark.tshark
+import pyshark.tshark.tshark
 
-from log.clogger import get_central_logger
-from modules.helpers.helpers import check_sudo
-from modules.connections.adresponse import ADResponse
 from config.settings import NETWORK_SETTINGS as settings
+from log.clogger import get_central_logger
+from modules.connections.adresponse import ADResponse
+from modules.helpers.helpers import check_sudo
 
 
 class NetworkInterface:
@@ -26,7 +30,7 @@ class NetworkInterface:
     def __init__(
         self,
         interface: str = "any",
-        display_filter: str = None,
+        display_filter: str = "",
         bpf_filter: str = "",
         loop=None,
     ):
@@ -54,7 +58,7 @@ class NetworkInterface:
         return self._interface
 
     @interface.setter
-    def interface(self, value: str):
+    def interface(self, value: str) -> None:
         """
         Set the name of the network interface.
 
@@ -74,7 +78,7 @@ class NetworkInterface:
         return self._connected_ip
 
     @ip.setter
-    def ip(self, value: str):
+    def ip(self, value: str) -> None:
         """
         Set the IP address of the network interface.
 
@@ -94,7 +98,7 @@ class NetworkInterface:
         return self._connected_port
 
     @port.setter
-    def port(self, value: int):
+    def port(self, value: int) -> None:
         """
         Set the port number of the network interface.
 
@@ -114,7 +118,7 @@ class NetworkInterface:
         return self._status
 
     @status.setter
-    def status(self, value: str):
+    def status(self, value: str) -> None:
         """
         Set the status of the network interface.
 
@@ -127,7 +131,7 @@ class NetworkInterface:
 
     # TODO: Fix this to work with asyncio properly; capture packets repeats when trying to stop capture
 
-    async def capture_packets(self):
+    async def capture_packets(self) -> None:
         self.capture = pyshark.LiveCapture(
             interface="any",
             eventloop=self.loop,
@@ -150,7 +154,7 @@ class NetworkInterface:
             # await self.stop_capture()
             self.capture.close()
 
-    def start_capture(self):
+    def start_capture(self) -> None:
         """Start capturing packets on the network interface."""
         if not check_sudo():
             self.logger.error("This module requires root privileges to run.")
@@ -164,7 +168,7 @@ class NetworkInterface:
         except Exception as e:
             self.logger.error(f"Error starting capture: {e}")
 
-    async def stop_capture(self):
+    async def stop_capture(self) -> None:
         """Stop capturing packets on the network interface."""
         if self.capture:
             asyncio.sleep(3)
@@ -172,7 +176,7 @@ class NetworkInterface:
             self.capture.close()
             self.logger.info("Packet capture stopped.")
 
-    def handle_packet(self, packet):
+    def handle_packet(self, packet: pyshark.packet.packet.Packet) -> None:
         # If IP packet, print source and destination IP addresses
         if "IP" in packet:
             self.logger.info(
@@ -182,7 +186,7 @@ class NetworkInterface:
 
     # --------------------------------------------------------------- #
 
-    def send_packet(self, data):
+    def send_packet(self, data: str) -> None:
         """
         Send a packet to the network interface.
 
@@ -194,7 +198,7 @@ class NetworkInterface:
 
     # --------------------------------------------------------------- #
 
-    def list_interfaces(self):
+    def list_interfaces(self) -> list[str]:
         """
         List all available network interfaces.
 
@@ -203,7 +207,7 @@ class NetworkInterface:
         """
         return pyshark.tshark.tshark.get_tshark_interfaces()
 
-    def get_status_info(self):
+    def get_status_info(self) -> dict[str, str | int]:
         """
         Get the status of the network interface.
 

@@ -14,7 +14,7 @@ from modules.utils import exception, ip_constants
 ETH_P_IP = 0x0800  # Ethernet protocol: Internet Protocol packet, see Linux if_ether.h docs for more details.
 
 
-def _seconds_to_second_microsecond_struct(seconds):
+def _seconds_to_second_microsecond_struct(seconds: float) -> bytes:
     """Convert floating point seconds value to second/useconds struct used by socket library."""
     microseconds_per_second = 1000000
     whole_seconds = math.floor(seconds)
@@ -68,15 +68,15 @@ class SocketConnection(ITargetConnection):
 
     def __init__(
         self,
-        host="127.0.0.1",
+        host: str = "127.0.0.1",
         port=None,
-        proto="tcp",
-        bind=None,
-        send_timeout=5.0,
-        recv_timeout=5.0,
-        ethernet_proto=ETH_P_IP,
-        l2_dst="\xff" * 6,
-        udp_broadcast=False,
+        proto: str = "tcp",
+        bind: any = None,
+        send_timeout: float = 5.0,
+        recv_timeout: float = 5.0,
+        ethernet_proto: int = ETH_P_IP,
+        l2_dst: str = "\xff" * 6,
+        udp_broadcast: bool = False,
     ):
         self.MAX_PAYLOADS["udp"] = helpers.get_max_udp_size()
 
@@ -102,7 +102,7 @@ class SocketConnection(ITargetConnection):
                 "__init__() argument port required for protocol {0}".format(self.proto)
             )
 
-    def close(self):
+    def close(self) -> None:
         """
         Close connection to the target.
 
@@ -111,7 +111,7 @@ class SocketConnection(ITargetConnection):
         """
         self._sock.close()
 
-    def open(self):
+    def open(self) -> None:
         """
         Opens connection to the target. Make sure to call close!
 
@@ -173,7 +173,7 @@ class SocketConnection(ITargetConnection):
             self._sock = context.wrap_socket(self._sock, server_hostname=self.host)
             # self._sock = httplib.FakeSocket(self._sock, ssl_sock)
 
-    def recv(self, max_bytes):
+    def recv(self, max_bytes: int = 4096) -> bytes:
         """
         Receive up to max_bytes data from the target.
 
@@ -219,7 +219,7 @@ class SocketConnection(ITargetConnection):
 
         return data
 
-    def recv_all(self, max_bytes):
+    def recv_all(self, max_bytes: int = 4096) -> bytes:
         chunk = self.recv(max_bytes)
         data = chunk
         while chunk and len(data) < max_bytes:
@@ -227,7 +227,7 @@ class SocketConnection(ITargetConnection):
             data += chunk
         return data
 
-    def send(self, data):
+    def send(self, data: bytes) -> int:
         """
         Send data to the target. Only valid after calling open!
         Some protocols will truncate; see self.MAX_PAYLOADS.
@@ -293,10 +293,10 @@ class SocketConnection(ITargetConnection):
         return num_sent
 
     @property
-    def info(self):
+    def info(self) -> str:
         return "{0}:{1}".format(self.host, self.port)
 
-    def get_hostname(self, ip_address):
+    def get_hostname(self, ip_address: str) -> str:
         """Get the hostname for a given IP address."""
         try:
             hostname = socket.gethostbyaddr(ip_address)[0]
@@ -304,7 +304,7 @@ class SocketConnection(ITargetConnection):
         except socket.herror:
             return None
 
-    def __deepcopy__(self):
+    def __deepcopy__(self) -> "SocketConnection":
         new_socket = SocketConnection(
             self.host,
             port=self.port,

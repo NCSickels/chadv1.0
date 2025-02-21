@@ -1,3 +1,6 @@
+"""Target connection wrapper."""
+
+from log.clogger import Logger
 from modules.utils.ip_constants import DEFAULT_MAX_RECV
 
 
@@ -17,7 +20,7 @@ class Target(object):
     """
 
     def __init__(self, connection, procmon=None, procmon_options=None, netmon=None):
-        self._logger = None
+        self._logger = Logger()
 
         self._target_connection = connection
         self.procmon = procmon
@@ -38,9 +41,9 @@ class Target(object):
         Returns:
             None
         """
-        self._logger.log_info("Closing target connection...")
+        self._logger.info("Closing target connection...")
         self._target_connection.close()
-        self._logger.log_info("Connection closed.")
+        self._logger.info("Connection closed.")
 
     def open(self):
         """
@@ -49,11 +52,11 @@ class Target(object):
         Returns:
             None
         """
-        self._logger.log_info(
+        self._logger.info(
             "Opening target connection ({0})...".format(self._target_connection.info)
         )
         self._target_connection.open()
-        self._logger.log_info("Connection opened.")
+        self._logger.info("Connection opened.")
 
     def recv(self, max_bytes=DEFAULT_MAX_RECV):
         """
@@ -66,12 +69,12 @@ class Target(object):
             Received data.
         """
         if self._logger is not None:
-            self._logger.log_info("Receiving...")
+            self._logger.info("Receiving...")
 
         data = self._target_connection.recv(max_bytes=max_bytes)
 
         if self._logger is not None:
-            self._logger.log_recv(data)
+            self._logger.received_traffic(data)
 
         return data
 
@@ -86,12 +89,12 @@ class Target(object):
             Received data.
         """
         if self._logger is not None:
-            self._logger.log_info("Receiving...")
+            self._logger.info("Receiving...")
 
         data = self._target_connection.recv_all(max_bytes=max_bytes)
 
         if self._logger is not None:
-            self._logger.log_recv(data)
+            self._logger.received_traffic(data)
 
         return data
 
@@ -106,12 +109,12 @@ class Target(object):
             None
         """
         if self._logger is not None:
-            self._logger.log_send(data)
+            self._logger.sent_traffic(data)
 
         num_sent = self._target_connection.send(data=data)
 
         if self._logger is not None:
-            self._logger.log_info("{0} bytes sent".format(num_sent))
+            self._logger.info("{0} bytes sent".format(num_sent))
 
     def set_data_logger(self, data_logger):
         """

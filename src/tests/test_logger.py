@@ -1,10 +1,10 @@
 """Basic logger test."""
 
-from log.clogger import get_central_logger
+from log.clogger import Logger
 
 
-def test_logger():
-    logger = get_central_logger()
+def test_logger() -> None:
+    logger = Logger()
     print("\n================= Begin Unit Tests for Logger =================\n")
     logger.info("This is an info message.")
     logger.warning("This is a warning message.")

@@ -30,7 +30,7 @@ class Trie:
     def __init__(self):
         self.root = TrieNode()
 
-    def insert(self, word):
+    def insert(self, word: str) -> None:
         node = self.root
         for char in word:
             if char not in node.children:
@@ -38,7 +38,7 @@ class Trie:
             node = node.children[char]
         node.end_of_word = True
 
-    def search(self, word):
+    def search(self, word: str) -> bool:
         node = self.root
         for char in word:
             if char not in node.children:
@@ -46,7 +46,7 @@ class Trie:
             node = node.children[char]
         return node.end_of_word
 
-    def startswith(self, prefix):
+    def startswith(self, prefix: str) -> list:
         node = self.root
         for char in prefix:
             if char not in node.children:
@@ -54,7 +54,7 @@ class Trie:
             node = node.children[char]
         return self._get_all(node, prefix)
 
-    def _get_all(self, node, prefix):
+    def _get_all(self, node: TrieNode, prefix: str) -> list:
         words = []
         if node.end_of_word:
             words.append(prefix)

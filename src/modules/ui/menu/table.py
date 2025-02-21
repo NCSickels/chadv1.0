@@ -32,7 +32,7 @@ class TableCreator:
 
     def create_table(
         self, header_data: dict, column_data: list, row_data: list, column_keys: list
-    ) -> None:
+    ) -> Table:
         table = Table(
             show_header=header_data.get("show_header", True),
             header_style=header_data.get("header_style", "bold white"),

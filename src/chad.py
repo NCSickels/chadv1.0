@@ -32,7 +32,7 @@ class ChadArgumentParser:
         )
         self.run()
 
-    def run(self):
+    def run(self) -> None:
         args = self.parser.parse_args()
         if args.start:
             pass
@@ -43,7 +43,7 @@ class ChadArgumentParser:
             self.parser.print_help()
 
 
-def main():
+def main() -> None:
     print_banner()
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)

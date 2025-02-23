@@ -16,3 +16,4 @@ tsan_output_condensed.txt
 .vscode
 __pycache__
 src/modules/ui/prompt/commands/history.txt
+src/chad.log

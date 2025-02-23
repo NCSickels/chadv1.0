@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html><head>
+<title> LDRA Testbed Quality Review Report </title>
+
+<style type="text/css">
+.orag-line, .break {background-color: #ff7b42;}
+.blue-line {background-color: #000080;}
+.break-p {background-color: #000084;}
+.break-p, .break {border-radius:10px;}
+div {padding:0;margin:0;}
+h2,h3,.header {text-align:center;}
+table td {text-align:left;}
+table {margin:auto;}
+ p.pagebreak {page-break-before: always}
+ p.nopagebreak {page-break-after: never}
+ p.shiftleft {margin-left:-54.0pt}
+ ul {padding-left: 20px;}
+ br.pagebreak {page-break-before: always}
+</style>
+
+<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+<!--
+function show(object) {
+if (document.layers && document.layers[object] != null)
+    document.layers[object].visibility = 'visible';
+else if (document.all)
+    document.all[object].style.visibility = 'visible';
+else
+    document.getElementById(object).style.visibility = 'visible';
+}
+function hide(object) {
+if (document.layers && document.layers[object] != null)
+    document.layers[object].visibility = 'hidden';
+else if (document.all)
+    document.all[object].style.visibility = 'hidden';
+else
+    document.getElementById(object).style.visibility = 'hidden';
+
+}//--></SCRIPT>
+<STYLE TYPE="text/css"><!--
+.exStyle { position: absolute; visibility: hidden; width: 225px;}
+A.classone:link { color:#18213C;background:BLUE transparent; }
+A.classone:visited { color:#18213C;background:BLUE transparent; }
+A.classone:active { color:#18213C;background:BLUE transparent; }
+A.classone:hover { color:red;background:#A4A6E6 transparent; }
+//--></STYLE>
+<SCRIPT LANGUAGE="Javascript" SRC="../metrics_info.js">
+// -->
+</SCRIPT>
+<SCRIPT LANGUAGE="Javascript" SRC="imagejs.js"> 
+// -->
+</SCRIPT>
+</head><body bgcolor="#FFFFF2"  > 
+
+<div class="break"style="width:80%;height:10px;margin:0px auto;display:block;"></div>
+<BR>
+<a id="top_of_rep">
+</a><BR>
+<Style type='text/css'><!--A.set1:link{color:#FBFCC8;background:none transparent;text-decoration: none}A.set1:visited{color:#FBFCC8;background:none transparent;text-decoration: none}A.set1:active{color:#FBFCC8;background:none transparent;text-decoration: none}A:link{color:BLUE;background:none transparent;text-decoration: none}A:visited{color:BLUE;background:none transparent;text-decoration: none}A:active{color:BLUE;background:none transparent;text-decoration: none}--></style><CENTER><font size='9'><b> LDRA Testbed &reg Quality Review Report </font></b>
+</CENTER>
+<CENTER><font size='9'><b>  </font></b>
+</CENTER>
+<CENTER><H1> File : /home/student/ncs0016/senior_design/gen-ai/banner_grabber.cpp </H1>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<BR>
+ <CENTER> <TABLE bgcolor="#D7EDED" BORDER WIDTH=80% >
+<TR><th >  Report Production </th><th >  Report Configuration </th><th colspan = 2>  Analysis phases </th></TR>
+<TR><td > <ul><li>C/C++ LDRA Testbed Version: 9.8.2</li><li>Report Produced On:  Fri Feb 21 2025 at 12:57:20</li><li>Metrics Data File: /apps/ldra2019/ldra_toolsuite/metpen.dat</li></ul> </td><td > <ul><li>Report Format: By Metric</li><li>Procedures Reported: All Procedures</li><li>Show Metric Passes: Yes</li><li>Show Metric Fails: Yes</li><li>Reporting Scope: Source file and associated header</li></ul> </td><td > <ul><li>Static: Yes</li><li>Complexity: Yes</li><li>Dataflow: Yes</li></ul> </td><td>&nbsp;</td></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<BR>
+<h4><a id="contents">Contents
+</a></h4>
+<BR>
+Metrics
+<BR>
+<UL>
+<LI> <a href="#metric_table">List of File, Procedure and OO Metrics
+</a><BR>
+<BR>
+</UL>
+<a href="#procedure_table">Procedure Table
+</a><BR>
+<BR>
+Results
+<BR>
+<UL>
+<LI> <a href="#results">Results for each Metric
+</a><BR>
+</UL>
+<BR>
+<BR>
+<BR>
+<h4><a id="metric_table">List of Metrics to be Displayed
+</a></h4>
+<h4><a href="#reformatted code information for file
+">Reformatted Code Information for File
+</a></h4>
+<UL>
+<LI> Total reformatted Lines, Total comments in ref. Code, Executable ref. Lines, Non-executable ref. Lines
+   <BR>Number of Procedures, Total source Lines, Expansion Factor. 
+<BR>
+</UL>
+<h4><a href="#procedure information
+">Procedure Information
+</a></h4>
+<UL>
+<LI> Executable reformatted Lines, Number of Basic Blocks, Average Length of Basic Blocks, Procedure Entry Points
+   <BR>Procedure Exit Points. 
+<BR>
+</UL>
+<h4><a href="#comments associated with procedures (% of total)
+">Comments Associated with Procedures (% of total)
+</a></h4>
+<UL>
+<LI> Total Comments, Comments in Headers, Comments in Declarations, Comments in Executable Code
+   <BR>Blank Lines. 
+<BR>
+</UL>
+<h4><a href="#ratio of comments to executable lines (%)
+">Ratio of Comments to Executable lines (%)
+</a></h4>
+<UL>
+<LI> Executable reformatted Lines, Total Comments/Exe. Lines, Header Comments/Exe. Lines, Declaration Comments/Exe. Lines
+   <BR>Code Comments/Exe. Lines. 
+<BR>
+</UL>
+<h4><a href="#complexity metrics
+">Complexity Metrics
+</a></h4>
+<UL>
+<LI> Knots, Cyclomatic Complexity, Essential Knots, Essential Cyclomatic Complexity
+   <BR>Procedure Structured (SPV). 
+<BR>
+</UL>
+<h4><a href="#halsteads metrics
+">Halsteads Metrics
+</a></h4>
+<UL>
+<LI> Total Operators, Total Operands, Unique Operators, Unique Operands
+   <BR>Vocabulary, Length, Volume. 
+<BR>
+</UL>
+<h4><a href="#loop/interval analysis
+">Loop/Interval Analysis
+</a></h4>
+<UL>
+<LI> Number of Loops, Depth of Loop Nesting, Number of Order 1 Intervals, Maximum Interval Nesting
+   <BR>Reducible (Intervals). 
+<BR>
+</UL>
+<h4><a href="#lcsaj and unreachability
+">LCSAJ and Unreachability
+</a></h4>
+<UL>
+<LI> Total LCSAJs, Reachable LCSAJs, Unreachable LCSAJs, Maximum LCSAJ Density
+   <BR>Unreachable Lines, Unreachable Branches. 
+<BR>
+</UL>
+<h4><a href="#file based c++ oo metrics
+">File Based C++ OO Metrics
+</a></h4>
+<UL>
+<LI> Total Structured Types Declared, Total Objects Created. 
+<BR>
+</UL>
+<h4><a href="#class level c++ oo metrics
+">Class Level C++ OO Metrics
+</a></h4>
+<UL>
+<LI> Objects Created, Number of Data Members, Number of Members, Number of Child Classes
+   <BR><BR>
+</UL>
+<h4><a href="#class level oo metrics - with base classes
+">Class Level OO Metrics - with Base Classes
+</a></h4>
+<UL>
+<LI> Total Base Classes, Total Data Members, Total Members, Inheritance Depth
+   <BR><BR>
+</UL>
+<h4><a href="#class level oo metrics - with base classes (2)
+">Class Level OO Metrics - with Base Classes (2)
+</a></h4>
+<UL>
+<LI> Static Members, Out of Class Variable Usage, Out of Class Procedure Calls, External Class Methods used
+   <BR>Out of Class Objects used. 
+<BR>
+</UL>
+<h4><a href="#dataflow information
+">Dataflow Information
+</a></h4>
+<UL>
+<LI> Globals in Procedure, File Fan in, Fan Out. 
+<BR>
+</UL>
+<BR>
+<BR>
+<HR>
+<BR>
+<a id="banner_grabber.cpp">
+</a><BR>
+<CENTER><TABLE BORDER WIDTH=50%><TR><TH BGCOLOR="#2D2F93"><font color='#FBFCC8' size='5'> banner_grabber.cpp </font></TH></TR> </TABLE></CENTER>
+<a id="procedure_table">
+</a><BR>
+<CENTER> <h2>Overall Results - Percentage of metrics passing
+</h2>
+</CENTER>
+ <BR>
+Total Metrics: 63
+<BR>
+Clarity Metrics: 14 (of which 4 are whole file only)
+<BR>
+Maintainability Metrics: 11 (of which 7 are whole file only)
+<BR>
+Testability Metrics: 15 (of which 7 are whole file only)
+<BR>
+<BR>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+</TR>
+<TR><th colspan = 11> <TT> Procedure </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> All Metrics </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> <a href="#clarity_metrics">Clarity</a> </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> <a href="#maintainability_metrics">Maintainability</a> </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> <a href="#testability_metrics">Testability</a> </TT> </th> <th WIDTH=1%> &nbsp;</th>
+</TR>
+<TR><th colspan = 55 WIDTH=99%> <TT> &nbsp; </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th WIDTH=1%> &nbsp;</th>
+<th WIDTH=1%> &nbsp;</th>
+<th WIDTH=1%> &nbsp;</th>
+<th WIDTH=1%> &nbsp;</th>
+</TR>
+<TR><td colspan=11>  <a href="ldra://editor/?File=/home/student/ncs0016/senior_design/gen-ai/banner_grabber.cpp&Line=1">main  </td> <td></td><td colspan=8 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer0')"onMouseout="hide('myLayer0')" class="classone"> 70 </a><DIV ID="myLayer0" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Fan Out<br>2.&nbsp;Procedure Exit Points<br>3.&nbsp;Procedure Entry Points<br>4.&nbsp;Code Comments/Exe. Lines<br>5.&nbsp;Declaration Comments/Exe. Lines<br>6.&nbsp;Total Comments/Exe. Lines<br>7.&nbsp;Comments in Headers<br>8.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=3 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=6 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer1')"onMouseout="hide('myLayer1')" class="classone"> 50 </a><DIV ID="myLayer1" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Code Comments/Exe. Lines<br>2.&nbsp;Declaration Comments/Exe. Lines<br>3.&nbsp;Total Comments/Exe. Lines<br>4.&nbsp;Comments in Headers<br>5.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=5 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=11 bgcolor="#5FC05A"><font color="white"> 100 </font></td><td></td>
+<td colspan=8 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer2')"onMouseout="hide('myLayer2')" class="classone"> 75 </a><DIV ID="myLayer2" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Fan Out<br>2.&nbsp;Procedure Exit Points<br> </TD></TR></TABLE></DIV></td> <td colspan=3 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+</TR>
+<TR><td colspan=11>  <a href="ldra://editor/?File=/home/student/ncs0016/senior_design/gen-ai/banner_grabber.cpp&Line=18">BannerGrabber::BannerGrabber  </td> <td></td><td colspan=8 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer3')"onMouseout="hide('myLayer3')" class="classone"> 78 </a><DIV ID="myLayer3" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Code Comments/Exe. Lines<br>2.&nbsp;Declaration Comments/Exe. Lines<br>3.&nbsp;Total Comments/Exe. Lines<br>4.&nbsp;Comments in Executable Code<br>5.&nbsp;Comments in Headers<br>6.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=3 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=5 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer4')"onMouseout="hide('myLayer4')" class="classone"> 40 </a><DIV ID="myLayer4" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Code Comments/Exe. Lines<br>2.&nbsp;Declaration Comments/Exe. Lines<br>3.&nbsp;Total Comments/Exe. Lines<br>4.&nbsp;Comments in Executable Code<br>5.&nbsp;Comments in Headers<br>6.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=6 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=11 bgcolor="#5FC05A"><font color="white"> 100 </font></td><td></td>
+<td colspan=11 bgcolor="#5FC05A"><font color="white"> 100 </font></td><td></td>
+</TR>
+<TR><td colspan=11>  <a href="ldra://editor/?File=/home/student/ncs0016/senior_design/gen-ai/banner_grabber.cpp&Line=20">BannerGrabber::~BannerGrabber  </td> <td></td><td colspan=9 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer5')"onMouseout="hide('myLayer5')" class="classone"> 81 </a><DIV ID="myLayer5" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Declaration Comments/Exe. Lines<br>2.&nbsp;Total Comments/Exe. Lines<br>3.&nbsp;Comments in Executable Code<br>4.&nbsp;Comments in Headers<br>5.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=2 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=6 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer6')"onMouseout="hide('myLayer6')" class="classone"> 50 </a><DIV ID="myLayer6" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Declaration Comments/Exe. Lines<br>2.&nbsp;Total Comments/Exe. Lines<br>3.&nbsp;Comments in Executable Code<br>4.&nbsp;Comments in Headers<br>5.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=5 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=11 bgcolor="#5FC05A"><font color="white"> 100 </font></td><td></td>
+<td colspan=11 bgcolor="#5FC05A"><font color="white"> 100 </font></td><td></td>
+</TR>
+<TR><td colspan=11>  <a href="ldra://editor/?File=/home/student/ncs0016/senior_design/gen-ai/banner_grabber.cpp&Line=28">BannerGrabber::initializeSocket  </td> <td></td><td colspan=9 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer7')"onMouseout="hide('myLayer7')" class="classone"> 81 </a><DIV ID="myLayer7" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Code Comments/Exe. Lines<br>2.&nbsp;Declaration Comments/Exe. Lines<br>3.&nbsp;Total Comments/Exe. Lines<br>4.&nbsp;Comments in Headers<br>5.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=2 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=6 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer8')"onMouseout="hide('myLayer8')" class="classone"> 50 </a><DIV ID="myLayer8" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Code Comments/Exe. Lines<br>2.&nbsp;Declaration Comments/Exe. Lines<br>3.&nbsp;Total Comments/Exe. Lines<br>4.&nbsp;Comments in Headers<br>5.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=5 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=11 bgcolor="#5FC05A"><font color="white"> 100 </font></td><td></td>
+<td colspan=11 bgcolor="#5FC05A"><font color="white"> 100 </font></td><td></td>
+</TR>
+<TR><td colspan=11>  <a href="ldra://editor/?File=/home/student/ncs0016/senior_design/gen-ai/banner_grabber.cpp&Line=44">BannerGrabber::connectToTarget  </td> <td></td><td colspan=8 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer9')"onMouseout="hide('myLayer9')" class="classone"> 74 </a><DIV ID="myLayer9" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Procedure Exit Points<br>2.&nbsp;Code Comments/Exe. Lines<br>3.&nbsp;Declaration Comments/Exe. Lines<br>4.&nbsp;Total Comments/Exe. Lines<br>5.&nbsp;Comments in Executable Code<br>6.&nbsp;Comments in Headers<br>7.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=3 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=5 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer10')"onMouseout="hide('myLayer10')" class="classone"> 40 </a><DIV ID="myLayer10" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Code Comments/Exe. Lines<br>2.&nbsp;Declaration Comments/Exe. Lines<br>3.&nbsp;Total Comments/Exe. Lines<br>4.&nbsp;Comments in Executable Code<br>5.&nbsp;Comments in Headers<br>6.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=6 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=11 bgcolor="#5FC05A"><font color="white"> 100 </font></td><td></td>
+<td colspan=9 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer11')"onMouseout="hide('myLayer11')" class="classone"> 88 </a><DIV ID="myLayer11" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Procedure Exit Points<br> </TD></TR></TABLE></DIV></td> <td colspan=2 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+</TR>
+<TR><td colspan=11>  <a href="ldra://editor/?File=/home/student/ncs0016/senior_design/gen-ai/banner_grabber.cpp&Line=62">BannerGrabber::grabBanner  </td> <td></td><td colspan=8 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer12')"onMouseout="hide('myLayer12')" class="classone"> 78 </a><DIV ID="myLayer12" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Procedure Exit Points<br>2.&nbsp;Code Comments/Exe. Lines<br>3.&nbsp;Total Comments/Exe. Lines<br>4.&nbsp;Comments in Executable Code<br>5.&nbsp;Comments in Headers<br>6.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=3 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=6 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer13')"onMouseout="hide('myLayer13')" class="classone"> 50 </a><DIV ID="myLayer13" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Code Comments/Exe. Lines<br>2.&nbsp;Total Comments/Exe. Lines<br>3.&nbsp;Comments in Executable Code<br>4.&nbsp;Comments in Headers<br>5.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=5 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=11 bgcolor="#5FC05A"><font color="white"> 100 </font></td><td></td>
+<td colspan=9 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer14')"onMouseout="hide('myLayer14')" class="classone"> 88 </a><DIV ID="myLayer14" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Procedure Exit Points<br> </TD></TR></TABLE></DIV></td> <td colspan=2 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+</TR>
+<TR><td colspan=11>  &nbsp;  </td> <td></td></TR>
+<TR><td colspan=11>  <a href="ldra://editor/?File=/home/student/ncs0016/senior_design/gen-ai/banner_grabber.cpp&Line=1">Total for banner_grabber.cpp  </td> <td></td><td colspan=9 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer15')"onMouseout="hide('myLayer15')" class="classone"> 83 </a><DIV ID="myLayer15" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Total comments in ref. Code<br>2.&nbsp;Procedure Exit Points<br>3.&nbsp;Procedure Entry Points<br>4.&nbsp;Code Comments/Exe. Lines<br>5.&nbsp;Total Comments/Exe. Lines<br>6.&nbsp;Comments in Executable Code<br>7.&nbsp;Comments in Headers<br>8.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=2 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=7 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer16')"onMouseout="hide('myLayer16')" class="classone"> 64 </a><DIV ID="myLayer16" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Code Comments/Exe. Lines<br>2.&nbsp;Total Comments/Exe. Lines<br>3.&nbsp;Comments in Executable Code<br>4.&nbsp;Comments in Headers<br>5.&nbsp;Total Comments<br> </TD></TR></TABLE></DIV></td> <td colspan=4 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=11 bgcolor="#5FC05A"><font color="white"> 100 </font></td><td></td>
+<td colspan=10 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer17')"onMouseout="hide('myLayer17')" class="classone"> 93 </a><DIV ID="myLayer17" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Procedure Exit Points<br> </TD></TR></TABLE></DIV></td> <td colspan=1 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+</TR>
+<TR><td colspan=11>  &nbsp;  </td> <td></td></TR>
+<TR><th colspan = 11> <TT> Class </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> &nbsp; </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> &nbsp; </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 22 WIDTH=39%> <TT> &nbsp; </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th WIDTH=1%> &nbsp;</th>
+</TR>
+<TR><td colspan=11>  &nbsp;  </td> <td></td></TR>
+<TR><td colspan=11>  BannerGrabber (banner_grabber.cpp)  </td> <td></td><td colspan=10 bgcolor="#AFE1AB"><A HREF="#met_table"onMouseover="show('myLayer18')"onMouseout="hide('myLayer18')" class="classone"> 92 </a><DIV ID="myLayer18" CLASS="exStyle"><TABLE BGCOLOR="#FFFFB0" width="225"><TR><TD> 1.&nbsp;Out of Class Variable Usage<br> </TD></TR></TABLE></DIV></td> <td colspan=1 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+</TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<BR>
+<a id="results">
+</a><BR>
+<CENTER> <h2>File and Procedure and OO Results, Metric by Metric
+</h2>
+</CENTER>
+ <BR>
+<BR>
+<BR>
+<h4><a id="reformatted code information for file">Reformatted Code Information for File (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  File </th><th >  Total Ref. </th><th >  Total </th><th >  Executable </th><th >  Non-Executable </th><th >  Number of </th><th >  Total </th><th >  Expansion </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> Lines </U> </th><th >  <U> Comments </U> </th><th >  <U> Ref. Lines </U> </th><th >  <U> Ref. Lines </U> </th><th >  <U> Procedures </U> </th><th >  <U> Src. Lines </U> </th><th >  <U> Factor </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 8>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > Total for banner_grabber.cpp </td><td ><font color="#008000"> 180 (P) </font></td><td ><font color="#FF0000"> 5 (F) (3%) </font></td><td ><font color="#008000"> 145 (P) (81%) </font></td><td ><font color="#008000"> 30 (P) (17%) </font></td><td ><font color="#008000"> 6 (P) </font></td><td ><font color="#008000"> 118 (P) </font></td><td ><font color="#008000"> 1.53 (P) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="procedure information">Procedure Information (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  Procedure </th><th >  Executable </th><th >  Basic </th><th >  Ave. Block </th><th >  Procedure </th><th >  Procedure </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> Lines </U> </th><th >  <U> Blocks </U> </th><th >  <U> Length </U> </th><th >  <U> Entries </U> </th><th >  <U> Exits </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 6>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > main </td><td ><font color="#008000"> 54 (P) </font></td><td ><font color="#008000"> 10 (P) </font></td><td ><font color="#008000"> 5.40 (P) </font></td><td ><font color="#FF0000"> 2 (F) </font></td><td ><font color="#FF0000"> 2 (F) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::BannerGrabber </td><td ><font color="#008000"> 4 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 4.00 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::~BannerGrabber </td><td ><font color="#008000"> 10 (P) </font></td><td ><font color="#008000"> 3 (P) </font></td><td ><font color="#008000"> 3.33 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::initializeSocket </td><td ><font color="#008000"> 23 (P) </font></td><td ><font color="#008000"> 4 (P) </font></td><td ><font color="#008000"> 5.75 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::connectToTarget </td><td ><font color="#008000"> 25 (P) </font></td><td ><font color="#008000"> 7 (P) </font></td><td ><font color="#008000"> 3.57 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#FF0000"> 2 (F) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::grabBanner </td><td ><font color="#008000"> 21 (P) </font></td><td ><font color="#008000"> 4 (P) </font></td><td ><font color="#008000"> 5.25 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#FF0000"> 2 (F) </font></td></TR>
+<TR ALIGN=LEFT><td > &nbsp; </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></TR>
+<TR ALIGN=LEFT><td > Total for banner_grabber.cpp </td><td ><font color="#008000"> 137 (P) </font></td><td ><font color="#008000"> 29 (P) </font></td><td ><font color="#008000"> 4.72 (P) </font></td><td ><font color="#FF0000"> 2 (F) </font></td><td ><font color="#FF0000"> 4 (F) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="comments associated with procedures (% of total)">Comments Associated with Procedures (% of total) (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  Procedure </th><th >  Total </th><th >  In </th><th >  In </th><th >  In </th><th >  Blank </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> Comments </U> </th><th >  <U> Headers </U> </th><th >  <U> Declarations </U> </th><th >  <U> Executable Code </U> </th><th >  <U> Comments </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 6>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > main </td><td ><font color="#FF0000"> 3 (F) </font></td><td ><font color="#FF0000"> 0 (F) (0%) </font></td><td ><font color="#008000"> 1 (P) (33%) </font></td><td ><font color="#008000"> 2 (P) (67%) </font></td><td ><font color="#008000"> 0 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::BannerGrabber </td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#FF0000"> 0 (F) (0%) </font></td><td ><font color="#008000"> 0 (P) (0%) </font></td><td ><font color="#FF0000"> 0 (F) (0%) </font></td><td ><font color="#008000"> 0 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::~BannerGrabber </td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#FF0000"> 0 (F) (0%) </font></td><td ><font color="#008000"> 0 (P) (0%) </font></td><td ><font color="#FF0000"> 0 (F) (0%) </font></td><td ><font color="#008000"> 0 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::initializeSocket </td><td ><font color="#FF0000"> 2 (F) </font></td><td ><font color="#FF0000"> 0 (F) (0%) </font></td><td ><font color="#008000"> 0 (P) (0%) </font></td><td ><font color="#008000"> 2 (P) (100%) </font></td><td ><font color="#008000"> 0 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::connectToTarget </td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#FF0000"> 0 (F) (0%) </font></td><td ><font color="#008000"> 0 (P) (0%) </font></td><td ><font color="#FF0000"> 0 (F) (0%) </font></td><td ><font color="#008000"> 0 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::grabBanner </td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#FF0000"> 0 (F) (0%) </font></td><td ><font color="#008000"> 0 (P) (0%) </font></td><td ><font color="#FF0000"> 0 (F) (0%) </font></td><td ><font color="#008000"> 0 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > &nbsp; </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></TR>
+<TR ALIGN=LEFT><td > Total for banner_grabber.cpp </td><td ><font color="#FF0000"> 5 (F) </font></td><td ><font color="#FF0000"> 0 (F) (0%) </font></td><td ><font color="#008000"> 1 (P) (20%) </font></td><td ><font color="#FF0000"> 4 (F) (80%) </font></td><td ><font color="#008000"> 0 (P) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="ratio of comments to executable lines (%)">Ratio of Comments to Executable lines (%) (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  Procedure </th><th >  Executable </th><th >  Total </th><th >  In </th><th >  In </th><th >  In </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> Lines </U> </th><th >  <U> Comments(%) </U> </th><th >  <U> Headers(%) </U> </th><th >  <U> Decl.(%) </U> </th><th >  <U> Code(%) </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 6>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > main </td><td ><font color="#008000"> 54 (P) </font></td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#FF0000"> 0 (F) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::BannerGrabber </td><td ><font color="#008000"> 4 (P) </font></td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#FF0000"> 0 (F) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::~BannerGrabber </td><td ><font color="#008000"> 10 (P) </font></td><td ><font color="#FF0000"> 9 (F) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#008000"> 9 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::initializeSocket </td><td ><font color="#008000"> 23 (P) </font></td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#FF0000"> 0 (F) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::connectToTarget </td><td ><font color="#008000"> 25 (P) </font></td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#FF0000"> 0 (F) </font></td><td ><font color="#FF0000"> 0 (F) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::grabBanner </td><td ><font color="#008000"> 21 (P) </font></td><td ><font color="#FF0000"> 6 (F) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 2 (P) </font></td><td ><font color="#FF0000"> 4 (F) </font></td></TR>
+<TR ALIGN=LEFT><td > &nbsp; </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></TR>
+<TR ALIGN=LEFT><td > Total for banner_grabber.cpp </td><td ><font color="#008000"> 137 (P) </font></td><td ><font color="#FF0000"> 4 (F) </font></td><td > 0 </td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#FF0000"> 3 (F) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="complexity metrics">Complexity Metrics (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  Procedure </th><th >  &nbsp; </th><th >  Cyclomatic </th><th >  Essential </th><th >  Ess. Cycl. </th><th >  Structured </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> Knots  </U> </th><th >  <U> Complexity </U> </th><th >  <U> Knots </U> </th><th >  <U> Complexity </U> </th><th >  <U> Proc (SPV) </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 6>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > main </td><td ><font color="#008000"> 5 (P) </font></td><td ><font color="#008000"> 4 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::BannerGrabber </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::~BannerGrabber </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 2 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::initializeSocket </td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 2 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::connectToTarget </td><td ><font color="#008000"> 2 (P) </font></td><td ><font color="#008000"> 3 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::grabBanner </td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 2 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > &nbsp; </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></TR>
+<TR ALIGN=LEFT><td > Total for banner_grabber.cpp </td><td ><font color="#008000"> 9 (P) </font></td><td ><font color="#008000"> 9 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="halsteads metrics">Halsteads Metrics (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  File </th><th >  Total </th><th >  Total </th><th >  Unique </th><th >  Unique </th><th >  &nbsp; </th><th >  &nbsp; </th><th >  &nbsp; </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> Operators </U> </th><th >  <U> Operands </U> </th><th >  <U> Operators </U> </th><th >  <U> Operands </U> </th><th >  <U> Vocabulary </U> </th><th >  <U> Length </U> </th><th >  <U> Volume </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 8>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > Total for banner_grabber.cpp </td><td ><font color="#008000"> 75 (P) </font></td><td ><font color="#008000"> 91 (P) </font></td><td ><font color="#008000"> 14 (P) </font></td><td ><font color="#008000"> 40 (P) </font></td><td ><font color="#008000"> 54 (P) </font></td><td ><font color="#008000"> 166 (P) </font></td><td ><font color="#008000"> 955 (P) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="loop/interval analysis">Loop/Interval Analysis (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  Procedure </th><th >  Number of </th><th >  Nesting </th><th >  Order 1 </th><th >  Max. Int.  </th><th >  Reducible  </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> Loops </U> </th><th >  <U> Depth </U> </th><th >  <U> Intervals </U> </th><th >  <U> Nesting </U> </th><th >  <U> (Intervals) </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 6>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > main </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::BannerGrabber </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::~BannerGrabber </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::initializeSocket </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::connectToTarget </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::grabBanner </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+<TR ALIGN=LEFT><td > &nbsp; </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></TR>
+<TR ALIGN=LEFT><td > Total for banner_grabber.cpp </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> Yes (P) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="lcsaj and unreachability">LCSAJ and Unreachability (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  File </th><th >  Total </th><th >  Reachable </th><th >  Unreachable </th><th >  Max. LCSAJ </th><th >  Unreachable </th><th >  Unreachable </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> LCSAJs </U> </th><th >  <U> LCSAJs </U> </th><th >  <U> LCSAJs </U> </th><th >  <U> Density </U> </th><th >  <U> Lines </U> </th><th >  <U> Branches </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 7>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > Total for banner_grabber.cpp </td><td ><font color="#008000"> 33 (P) </font></td><td ><font color="#008000"> 33 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 2 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="file based c++ oo metrics">File Based C++ OO Metrics (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  Structured </th><th >  Total </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> Types Decl. </U> </th><th >  <U> Objects Created </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 3>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > Total for banner_grabber.cpp </td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="class level c++ oo metrics">Class Level C++ OO Metrics (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=60% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR><th >  Class Type </th><th >  Description
+ </th></TR>
+<TR><td align=center> P </td><td > Prolog class, only pure virtual functions and a virtual destructor </td></TR>
+<TR><td align=center> A </td><td > Abstract class with at least one pure virtual function </td></TR>
+<TR><td align=center> H </td><td > Handle/Envelope class with pointers to classes </td></TR>
+<TR><td align=center> AH </td><td > Both Abstract and Handle/Envelope class </td></TR>
+<TR><td align=center> S </td><td > Standard, no specific category for this class </td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  Class </th><th >  Type </th><th >  Objects </th><th >  Number of </th><th >  Number of </th><th >  Number of </th></TR>
+<TR ALIGN=LEFT><th colspan = 2>  &nbsp; </th><th >  <U> Created </U> </th><th >  <U> Data Members </U> </th><th >  <U> Members(WMC) </U> </th><th >  <U> Children (NOC) </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 6>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > BannerGrabber </td><td > S </td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 7 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="class level oo metrics - with base classes">Class Level OO Metrics - with Base Classes (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  Class </th><th >  Total Base </th><th >  Total Data </th><th >  Total </th><th >  Depth of </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> Classes </U> </th><th >  <U> Members </U> </th><th >  <U> Members </U> </th><th >  <U> Inheritance (DIT) </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 5>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > BannerGrabber </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 7 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="class level oo metrics - with base classes (2)">Class Level OO Metrics - with Base Classes (2) (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  Class </th><th >  Static </th><th >  Out-of-Class </th><th >  Out-of-Class </th><th >  Ext. Class </th><th >  Out-of-Class </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> Members </U> </th><th >  <U> Var. uses </U> </th><th >  <U> Proc. calls </U> </th><th >  <U> Methods used </U> </th><th >  <U> Objects used in methods </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 6>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > BannerGrabber </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#FF0000"> 17 (F) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 3 (P) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<h4><a id="dataflow information">Dataflow Information (banner_grabber.cpp)</a></h4>
+<BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR ALIGN=LEFT><th >  Procedure </th><th >  Globals in </th><th >  File </th><th >  Fan </th></TR>
+<TR ALIGN=LEFT><th >  &nbsp; </th><th >  <U> Procedure </U> </th><th >  <U> Fan in </U> </th><th >  <U> Out </U> </th></TR>
+<TR ALIGN=LEFT><th colspan = 4>  &nbsp; </th></TR>
+<TR ALIGN=LEFT><td > main </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#FF0000"> 7 (F) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::BannerGrabber </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::~BannerGrabber </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::initializeSocket </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 5 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::connectToTarget </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 5 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > BannerGrabber::grabBanner </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 1 (P) </font></td><td ><font color="#008000"> 4 (P) </font></td></TR>
+<TR ALIGN=LEFT><td > &nbsp; </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></TR>
+<TR ALIGN=LEFT><td > Total for banner_grabber.cpp </td><td ><font color="#008000"> 0 (P) </font></td><td ><font color="#008000"> 5 (P) </font></td><td ><font color="#008000"> 22 (P) </font></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#key_to_terms">Key to Terms</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<a id="key_to_terms">
+</a><BR>
+<CENTER> <h2>Key to Terms
+</h2>
+</CENTER>
+ <BR>
+<a id="clarity_metrics">
+</a><BR>
+<h4>Clarity
+</h4>
+Metrics that indicate how easy it is likely to be
+<BR>
+to read and understand the purpose of a source code module or procedure:
+<BR>
+<BR>
+<UL>
+<LI> Executable ref. Lines
+<BR>
+<LI> Total Comments
+<BR>
+<LI> Comments in Headers
+<BR>
+<LI> Comments in Declarations
+<BR>
+<LI> Comments in Executable Code
+<BR>
+<LI> Blank Lines
+<BR>
+<LI> Total Comments/Exe. Lines
+<BR>
+<LI> Declaration Comments/Exe. Lines
+<BR>
+<LI> Code Comments/Exe. Lines
+<BR>
+<LI> Average Length of Basic Blocks
+<BR>
+<LI> Unique Operands
+<BR>
+<LI> Total LCSAJs
+<BR>
+<LI> Depth of Loop Nesting
+<BR>
+<LI> Expansion Factor
+<BR>
+<BR>
+</UL>
+<a id="testability_metrics">
+</a><BR>
+<h4>Testability
+</h4>
+Metrics that indicate the amount testing that will be required,
+<BR>
+particularly with respect to achieving high Dynamic Coverage :
+<BR>
+<BR>
+<UL>
+<LI> Knots
+<BR>
+<LI> Cyclomatic Complexity
+<BR>
+<LI> Executable reformatted Lines
+<BR>
+<LI> Number of Basic Blocks
+<BR>
+<LI> Total Operands
+<BR>
+<LI> Number of Loops
+<BR>
+<LI> Procedure Exit Points
+<BR>
+<LI> Number of Procedures
+<BR>
+<LI> Total LCSAJs
+<BR>
+<LI> Unreachable LCSAJs
+<BR>
+<LI> Maximum LCSAJ Density
+<BR>
+<LI> Unreachable Lines
+<BR>
+<LI> Unreachable Branches
+<BR>
+<LI> File Fan in
+<BR>
+<LI> Fan Out
+<BR>
+<BR>
+</UL>
+<a id="maintainability_metrics">
+</a><BR>
+<h4>Maintainability
+</h4>
+Metrics that indicate the level of consideration that must be given
+<BR>
+to modifying a source code module or procedure:
+<BR>
+<BR>
+<UL>
+<LI> Essential Knots
+<BR>
+<LI> Essential Cyclomatic Complexity
+<BR>
+<LI> Knots
+<BR>
+<LI> Cyclomatic Complexity
+<BR>
+<LI> Vocabulary
+<BR>
+<LI> Number of Procedures
+<BR>
+<LI> Total LCSAJs
+<BR>
+<LI> Unreachable LCSAJs
+<BR>
+<LI> Maximum LCSAJ Density
+<BR>
+<LI> Unreachable Lines
+<BR>
+<LI> Unreachable Branches
+<BR>
+<BR>
+<BR>
+</UL>
+<h4>Metric results Pass/Fail indicators.
+</h4>
+The display of Pass and Fail indicators is controlled by two environment variables:
+<BR>
+<BR>
+ <CENTER> <TABLE bgcolor="#D7EDED" BORDER WIDTH=60% >
+<TR ALIGN=CENTER><th >  Result </th><th >  Environment Flag </th><th >  Indicator
+ </th></TR>
+<TR ALIGN=CENTER><td > Pass </td><td > SHOW_METRIC_PASS </td><td ><font color="#008000"> (P)
+ </font></td></TR>
+<TR ALIGN=CENTER><td > Fail </td><td > SHOW_METRIC_FAIL </td><td ><font color="#FF0000"> (F)
+ </font></td></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+Upper and lower limits for a "Total for &lt;file&gt;" metric can be derived from the 
+<BR>
+upper and lower limits for a procedure where appropriate.
+<BR>
+This is achieved using the 'c' marker in the Metrics Data File.
+<BR>
+<BR>
+The base for this calculation is currently variable between files:
+     (Number of procedures in each source file)
+<BR>
+<BR>
+<BR>
+<BR>
+<HR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  | </th><td > <a href="#metric_table">Metric Table</a> </td><th >  | </th><td > <a href="#contents">Contents</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<CENTER><H3> End of Quality Review Report </H3>
+</CENTER>
+<CENTER><H3>  </H3>
+</CENTER>
+<CENTER><H3> Copyright &copy 2019 Liverpool Data Research Associates </H3>
+</CENTER>
+<center>
+<img src='/apps/ldra2019/ldra_toolsuite/images//blue_line.gif' width='80%' height='10'>
+</center>
+</BODY>
+
+
+
+
+
+
+</HTML>

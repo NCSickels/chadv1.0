@@ -6,7 +6,12 @@ from prompt_toolkit.history import History
 
 
 class ChadHistory(History):
-    """Custom history class for the Chad prompt."""
+    """
+    Custom history class for the Chad prompt.
+
+    Args:
+        History (class): Base history class.
+    """
 
     def __init__(self):
         super().__init__()
@@ -14,7 +19,7 @@ class ChadHistory(History):
         self.history_file_path = os.path.join(os.path.dirname(__file__), "history.txt")
         self.load_history_strings()
 
-    def load_history_strings(self):
+    def load_history_strings(self) -> list:
         """Load history strings from a persistent storage."""
         history_strings = []
         try:
@@ -25,14 +30,14 @@ class ChadHistory(History):
             pass
         return history_strings
 
-    def store_string(self, string):
+    def store_string(self, string: str) -> None:
         """Store a string in persistent storage."""
         if string != self.last_command:
             with open(self.history_file_path, "a") as file:
                 file.write(f"{string}\n")
             self.last_command = string
 
-    def list_history(self):
+    def list_history(self) -> None:
         """List the history of commands."""
         for index, command in enumerate(self.load_history_strings()):
             print(f"{index + 1}: {command}")

@@ -5,6 +5,7 @@ Custom colored wrapper for Logging module.
 import logging
 import logging.config
 import re
+import sys
 
 import colorama
 from termcolor import colored
@@ -88,12 +89,33 @@ def c(text: str) -> str:
     return result
 
 
+class StreamToLogger:
+    def __init__(self, logger, log_level=logging.INFO):
+        self.logger = logger
+        self.log_level = log_level
+        self.linebuf = ""
+
+    def write(self, buf):
+        for line in buf.rstrip().splitlines():
+            self.logger.log(self.log_level, line.rstrip())
+
+    def flush(self):
+        pass
+
+
+def integrate_stream_to_logger():
+    """
+    Integrates StreamToLogger with the central logger.
+    """
+    logger = get_central_logger()
+    stream_to_logger = StreamToLogger(logger, logging.INFO)
+    sys.stdout = stream_to_logger
+    sys.stderr = stream_to_logger
+
+
 class ColorFormatter(logging.Formatter):
     """
     A custom logging formatter that adds color to log messages.
-
-    Methods:
-        format(record): Formats the log record with color.
     """
 
     def __init__(self, *args, **kwargs):
@@ -234,11 +256,18 @@ LOGGING_CONFIG = {
             "formatter": "colored",
             "stream": "ext://sys.stdout",
         },
+        "file": {
+            "class": "logging.FileHandler",
+            "level": "DEBUG",
+            "formatter": "colored",
+            "filename": "chad.log",
+            "mode": "a",
+        },
     },
     "loggers": {
         "root": {
             "level": "INFO",
-            "handlers": ["colored_console"],
+            "handlers": ["colored_console", "file"],
         },
     },
 }

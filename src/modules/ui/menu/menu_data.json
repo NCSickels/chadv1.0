@@ -1,50 +1,11 @@
 {
-    "Main": [
-        {
-            "header": [
-                {
-                    "show_header": true,
-                    "header_style": "bold white",
-                    "title": "Chad Help Menu",
-                    "width": 84,
-                    "show_lines": true
-                }
-            ],
-            "columns": [
-                {
-                    "title": "Option",
-                    "justify": "center",
-                    "style": "bright_cyan",
-                    "width": 7
-                },
-                {
-                    "title": "Modules",
-                    "justify": "right",
-                    "style": "magenta"
-                },
-                {
-                    "title": "Description",
-                    "justify": "right",
-                    "style": "bright_black",
-                    "width": 40
-                }
-            ],
-            "rows": [
-                {
-                    "option": "0",
-                    "modules": "Module 1",
-                    "description": "Module 1 Description"
-                }
-            ]
-        }
-    ],
     "Core": [
         {
             "header": [
                 {
                     "show_header": true,
                     "header_style": "bold white",
-                    "title": "Chad Core Commands (Global)",
+                    "title": "Chad Commands",
                     "width": 84,
                     "show_lines": true
                 }
@@ -54,7 +15,7 @@
                     "title": "Command",
                     "justify": "center",
                     "style": "bright_cyan",
-                    "width": 8
+                    "width": 12
                 },
                 {
                     "title": "Description",
@@ -65,12 +26,93 @@
             ],
             "rows": [
                 {
+                    "command": "exit",
+                    "description": "Exits the Chad terminal. Alias: quit."
+                },
+                {
                     "command": "help",
-                    "description": "Displays the help menu for the specified module. Default is the main help menu."
+                    "description": "Displays this help menu."
                 },
                 {
                     "command": "clear",
-                    "description": "Clears the terminal screen"
+                    "description": "Clears the terminal screen."
+                },
+                {
+                    "command": "status",
+                    "description": "Displays the current status of the Chad service."
+                },
+                {
+                    "command": "unit_test <module>",
+                    "description": "Runs unit tests for the specified module. Available modules: all, logger."
+                },
+                {
+                    "command": "history",
+                    "description": "Displays the command history."
+                },
+                {
+                    "command": "history_clear",
+                    "description": "Clears the command history."
+                },
+                {
+                    "command": "config",
+                    "description": "Displays the current configuration settings."
+                }
+            ]
+        }
+    ],
+    "Networking": [
+        {
+            "header": [
+                {
+                    "show_header": true,
+                    "header_style": "bold white",
+                    "title": "Chad Networking Commands",
+                    "width": 84,
+                    "show_lines": true
+                }
+            ],
+            "columns": [
+                {
+                    "title": "Command",
+                    "justify": "center",
+                    "style": "bright_cyan",
+                    "width": 12
+                },
+                {
+                    "title": "Description",
+                    "justify": "right",
+                    "style": "bright_black",
+                    "width": 50
+                }
+            ],
+            "rows": [
+                {
+                    "command": "start",
+                    "description": "Starts packet capture on the specified interface."
+                },
+                {
+                    "command": "list_interfaces",
+                    "description": "Lists all available network interfaces."
+                },
+                {
+                    "command": "set_interface",
+                    "description": "Sets the network interface to use for packet capture."
+                },
+                {
+                    "command": "set_ip",
+                    "description": "Sets the IP address of the target host."
+                },
+                {
+                    "command": "set_port",
+                    "description": "Sets the port number of the target host."
+                },
+                {
+                    "command": "set_protocol",
+                    "description": "Sets the protocol to filter packets by."
+                },
+                {
+                    "command": "set_filter",
+                    "description": "Sets a BPF filter to apply to the packet capture."
                 }
             ]
         }

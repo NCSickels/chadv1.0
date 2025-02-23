@@ -21,3 +21,10 @@ repos:
         language_version: python3.12
         additional_dependencies:
           - rich
+          - nest_asyncio
+          - attrs
+          - prompt_toolkit
+          - pyshark
+          - scapy
+          - colorama
+

@@ -1,3 +1,5 @@
+"""Helpers for the network connection modules."""
+
 import ctypes
 import errno
 import os
@@ -90,29 +92,31 @@ test_step_info = {
 }
 
 
-def color_html(data, msg_type):
+def color_html(data: str, msg_type: str) -> HTML:
     if msg_type in constants.STYLE:
         return HTML("<{}>{}</{}>".format(msg_type, data, msg_type))
     else:
         return HTML(data)
 
 
-def color_formatted_text(data, msg_type):
+def color_formatted_text(data: str, msg_type: str) -> FormattedText:
     if msg_type in constants.STYLE:
         return FormattedText([("class:{}".format(msg_type), data)])
     else:
         return FormattedText([("", data)])
 
 
-def ip_str_to_bytes(ip):
-    """Convert an IP string to a four-byte bytes.
+def ip_str_to_bytes(ip: str) -> bytes:
+    """
+    Convert an IP string to a four-byte bytes.
 
-    :param ip: IP address string, e.g. '127.0.0.1'
+    Args:
+        ip (str): IP address string, e.g. '127.0.0.1'
 
-    :return 4-byte representation of ip, e.g. b'\x7f\x00\x00\x01'
-    :rtype bytes
+    Returns:
+        4-byte representation of ip, e.g. b'\x7f\x00\x00\x01'
 
-    :raises ValueError if ip is not a legal IP address.
+        :raises ValueError if ip is not a legal IP address.
     """
     try:
         return socket.inet_aton(ip)
@@ -122,12 +126,13 @@ def ip_str_to_bytes(ip):
         )
 
 
-def get_max_udp_size():
+def get_max_udp_size() -> int:
     """
     Crazy CTypes magic to do a getsockopt() which determines the max UDP payload size in a platform-agnostic way.
 
+    Returns:
+        The maximum length of a UDP packet the current platform supports.
         @rtype:  long
-        @return: The maximum length of a UDP packet the current platform supports
     """
     windows = platform.uname()[0] == "Windows"
     mac = platform.uname()[0] == "Darwin"
@@ -165,15 +170,16 @@ def get_max_udp_size():
     )
 
 
-def calculate_four_byte_padding(string, character="\x00"):
+def calculate_four_byte_padding(string: str, character: str = "\x00") -> str:
     return character * ((4 - (len(string) & 3)) & 3)
 
 
-def crc16(string, value=0):
+def crc16(string: str, value: int = 0) -> int:
     """CRC-16 poly: p(x) = x**16 + x**15 + x**2 + 1
 
-    @param string: Data over which to calculate crc.
-    @param value: Initial CRC value.
+    Args:
+        string (str): Data over which to calculate crc.
+        value (int): Initial CRC value.
     """
     crc16_table = []
     for byte in range(256):
@@ -195,14 +201,15 @@ def crc16(string, value=0):
     return value
 
 
-def crc32(string):
+def crc32(string: str) -> int:
     return zlib.crc32(string) & 0xFFFFFFFF
 
 
-def uuid_bin_to_str(uuid):
+def uuid_bin_to_str(uuid: bytes) -> str:
     """Convert a binary UUID to human readable string.
 
-    @param uuid: bytes representing UUID.
+    Args:
+        uuid (bytes): Binary UUID.
     """
     (block1, block2, block3) = struct.unpack("<LHH", uuid[:8])
     (block4, block5, block6) = struct.unpack(">HHL", uuid[8:16])
@@ -217,14 +224,15 @@ def uuid_bin_to_str(uuid):
     )
 
 
-def uuid_str_to_bin(uuid):
+def uuid_str_to_bin(uuid: str) -> bytes:
     """Converts a UUID string to binary form.
 
     Expected string input format is same as uuid_bin_to_str()'s output format.
 
     Ripped from Core Impacket.
 
-    @param uuid: UUID string to convert to bytes.
+    Args:
+        uuid (str): UUID string to convert to bytes.
     """
     uuid_re = r"([\dA-Fa-f]{8})-([\dA-Fa-f]{4})-([\dA-Fa-f]{4})-([\dA-Fa-f]{4})-([\dA-Fa-f]{4})([\dA-Fa-f]{8})"
 
@@ -241,42 +249,44 @@ def uuid_str_to_bin(uuid):
     return uuid
 
 
-def _ones_complement_sum_carry_16(a, b):
+def _ones_complement_sum_carry_16(a: int, b: int) -> int:
     """Compute ones complement sum and carry at 16 bits.
 
-    :type a: int
-    :type b: int
+    Args:
+        a (int): First number.
+        b (int): Second number.
 
-    :return: Sum of a and b, ones complement, carry at 16 bits.
+    Returns:
+        Sum of a and b, ones complement, carry at 16 bits.
     """
     pre_sum = a + b
     return (pre_sum & 0xFFFF) + (pre_sum >> 16)
 
 
-def _collate_bytes(msb, lsb):
+def _collate_bytes(msb: str, lsb: str) -> int:
     """
     Helper function for our helper functions.
     Collates msb and lsb into one 16-bit value.
 
-    :type msb: str
-    :param msb: Single byte (most significant).
+    Args:
+        msb (str): Single byte (most significant).
+        lsb (str): Single byte (least significant).
 
-    :type lsb: str
-    :param lsb: Single byte (least significant).
-
-    :return: msb and lsb all together in one 16 bit value.
+    Returns:
+        msb and lsb all together in one 16 bit value.
     """
     return (ord(msb) << 8) + ord(lsb)
 
 
-def ipv4_checksum(msg: bytes):
+def ipv4_checksum(msg: bytes) -> int:
     """
     Return IPv4 checksum of msg.
-    :param msg: Message to compute checksum over.
-    :type msg: bytes
 
-    :return: IPv4 checksum of msg.
-    :rtype: int
+    Args:
+        msg (bytes): Message to compute checksum over.
+
+    Returns:
+        IPv4 checksum of msg.
     """
     # Pad with 0 byte if needed
     if len(msg) % 2 == 1:
@@ -287,20 +297,19 @@ def ipv4_checksum(msg: bytes):
     return ~total & 0xFFFF
 
 
-def _udp_checksum_pseudo_header(src_addr: bytes, dst_addr: bytes, msg_len: int):
-    """Return pseudo-header for UDP checksum.
+def _udp_checksum_pseudo_header(
+    src_addr: bytes, dst_addr: bytes, msg_len: int
+) -> bytes:
+    """
+    Return pseudo-header for UDP checksum.
 
-    :type src_addr: bytes
-    :param src_addr: Source IP address -- 4 bytes.
+    Args:
+        src_addr (bytes): Source IP address -- 4 bytes.
+        dst_addr (bytes): Destination IP address -- 4 bytes.
+        msg_len (int): Length of UDP message (not including IPv4 header).
 
-    :type dst_addr: bytes
-    :param dst_addr: Destination IP address -- 4 bytes.
-
-    :param msg_len: Length of UDP message (not including IPv4 header).
-    :type msg_len: int
-
-    :return: UDP pseudo-header
-    :rtype: bytes
+    Returns:
+        UDP pseudo-header
     """
     return (
         src_addr
@@ -311,7 +320,7 @@ def _udp_checksum_pseudo_header(src_addr: bytes, dst_addr: bytes, msg_len: int):
     )
 
 
-def udp_checksum(msg: bytes, src_addr: bytes, dst_addr: bytes):
+def udp_checksum(msg: bytes, src_addr: bytes, dst_addr: bytes) -> int:
     """Return UDP checksum of msg.
 
     Recall that the UDP checksum involves creating a sort of pseudo IP header.
@@ -323,17 +332,13 @@ def udp_checksum(msg: bytes, src_addr: bytes, dst_addr: bytes):
     checksum will be invalid. This loosey goosey error checking is done to
     support fuzz tests which at times generate huge, invalid packets.
 
+    Args:
+        msg (str): Message to compute checksum over.
+        src_addr (bytes): Source IP address -- 4 bytes.
+        dst_addr (bytes): Destination IP address -- 4 bytes.
 
-    :param msg: Message to compute checksum over.
-    :type msg: str
-
-    :type src_addr: bytes
-    :param src_addr: Source IP address -- 4 bytes.
-    :type dst_addr: bytes
-    :param dst_addr: Destination IP address -- 4 bytes.
-
-    :return: UDP checksum of msg.
-    :rtype: int
+    Returns:
+        UDP checksum of msg.
     """
     # If the packet is too big, the checksum is undefined since len(msg)
     # won't fit into two bytes. So we just pick our best definition.
@@ -345,7 +350,7 @@ def udp_checksum(msg: bytes, src_addr: bytes, dst_addr: bytes):
     )
 
 
-def hex_str(s):
+def hex_str(s: bytes) -> str:
     """
     Returns a hex-formatted string based on s.
 
@@ -358,7 +363,7 @@ def hex_str(s):
     return " ".join("{:02x}".format(b) for b in bytearray(s))
 
 
-def pause_for_signal():
+def pause_for_signal() -> None:
     """
     Pauses the current thread in a way that can still receive signals like SIGINT from Ctrl+C.
 
@@ -367,8 +372,8 @@ def pause_for_signal():
      - Windows uses a loop that sleeps for 1 ms at a time, allowing signals
        to interrupt the thread fairly quickly.
 
-    :return: None
-    :rtype: None
+    Returns:
+        None
     """
     try:
         while True:
@@ -379,30 +384,30 @@ def pause_for_signal():
             time.sleep(0.001)
 
 
-def get_time_stamp():
+def get_time_stamp() -> str:
     t = time.time()
     s = time.strftime("[%Y-%m-%d %H:%M:%S", time.localtime(t))
     s += ",%03d]" % (t * 1000 % 1000)
     return s
 
 
-def _indent_all_lines(lines, amount, ch=" "):
+def _indent_all_lines(lines: str, amount: int, ch: str = " ") -> str:
     padding = amount * ch
     return padding + ("\n" + padding).join(lines.split("\n"))
 
 
-def _indent_after_first_line(lines, amount, ch=" "):
+def _indent_after_first_line(lines: str, amount: int, ch: str = " ") -> str:
     padding = amount * ch
     return ("\n" + padding).join(lines.split("\n"))
 
 
 def format_log_msg(
-    msg_type,
-    description=None,
-    data=None,
-    indent_size=2,
-    timestamp=None,
-    format_type="terminal",
+    msg_type: str = "info",
+    description: str = "",
+    data: str = "",
+    indent_size: int = 2,
+    timestamp: str = "",
+    format_type: str = "terminal",
 ):
     if data is None:
         data = b""
@@ -424,14 +429,16 @@ def format_log_msg(
     return msg
 
 
-def format_msg(msg, indent_level, indent_size, timestamp=None):
+def format_msg(
+    msg: str, indent_level: int, indent_size: int, timestamp: str = ""
+) -> str:
     msg = _indent_all_lines(msg, indent_level * indent_size)
     if timestamp is None:
         timestamp = get_time_stamp()
     return timestamp + " " + _indent_after_first_line(msg, len(timestamp) + 1)
 
 
-def hex_to_hexstr(input_bytes):
+def hex_to_hexstr(input_bytes: bytes = b"") -> str:
     """
     Render input_bytes as ASCII-encoded hex bytes, followed by a best effort
     utf-8 rendering.
@@ -445,7 +452,7 @@ def hex_to_hexstr(input_bytes):
     return hex_str(input_bytes) + " " + repr(input_bytes)
 
 
-def repr_input_bytes(input_bytes):
+def repr_input_bytes(input_bytes: bytes = b"") -> str:
     if len(input_bytes) > 10000:
         return "[{} bytes]".format(len(input_bytes))
     groups = groupby(input_bytes)
@@ -464,7 +471,7 @@ def repr_input_bytes(input_bytes):
     # return hexb + '- ' + repr(b)
 
 
-def mkdir_safe(directory_name):
+def mkdir_safe(directory_name: str) -> None:
     try:
         os.makedirs(directory_name)
     except OSError as e:
@@ -472,7 +479,7 @@ def mkdir_safe(directory_name):
             raise
 
 
-def get_all_subclasses(cls):
+def get_all_subclasses(cls: type) -> list:
     all_subclasses = []
 
     for subclass in cls.__subclasses__():
@@ -482,11 +489,12 @@ def get_all_subclasses(cls):
     return all_subclasses
 
 
-def check_sudo():
+def check_sudo() -> bool:
     """
     Check if the current user has root privileges.
 
-    :return: True if the current user has root privileges, False otherwise.
+    Returns:
+        True if the current user has root privileges, False otherwise.
     """
     if os.geteuid() != 0:
         return False

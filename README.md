@@ -7,7 +7,7 @@
 
  <!-- *Noah Sickels, Adam Brannon, and William Lochte* -->
 
-![Project Banner](.assets/Charger-Active-Defense-Banner.png)
+![Project Banner](.github/.assets/Charger-Active-Defense-Banner.png)
 ![Static Badge](https://img.shields.io/badge/Platform-Kali-blue?style=plastic&logo=kalilinux&logoSize=auto)
 ![Static Badge](https://img.shields.io/badge/Platform-Ubuntu-blue?style=plastic&logo=ubuntu&logoSize=auto)
 [![Static Badge](https://img.shields.io/badge/Python%203.12+-FFDE57?style=plastic&label=Requirement&link=https%3A%2F%2Fwww.python.org%2Fdownloads)](https://www.python.org/downloads)
@@ -47,7 +47,7 @@ You can find the sponsor's project proposal slide below.
 
 <div style="text-align:center">
 
-![Project Overview](.assets/project_overview.png)
+![Project Overview](.github/.assets/project_overview.png)
 
 </div>
 
@@ -55,7 +55,7 @@ You can find the sponsor's project proposal slide below.
 
 ---
 
-![System Diagram](.assets/Chad-System-Overview-Diagram-Background.png)
+![System Diagram](.github/.assets/Chad-System-Overview-Diagram-Background.png)
 
 ### Project Directory Structure
 

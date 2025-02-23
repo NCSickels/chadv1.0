@@ -2,13 +2,22 @@
 import argparse
 import asyncio
 
+import nest_asyncio
+
 from log.clogger import Logger
 from modules.ui.banner import print_banner
 from modules.ui.prompt.prompt import ChadPrompt
+from modules.utils.exception import ChadProgramExit
 
 
 class ChadArgumentParser:
-    """Custom argparse.ArgumentParser class."""
+    """
+    Custom argparse.ArgumentParser class.
+
+    Attributes:
+        loop (asyncio.AbstractEventLoop): The asyncio event loop.
+        parser (argparse.ArgumentParser): The argparse parser.
+    """
 
     def __init__(self):
         self.loop = asyncio.new_event_loop()
@@ -23,7 +32,7 @@ class ChadArgumentParser:
         )
         self.run()
 
-    def run(self):
+    def run(self) -> None:
         args = self.parser.parse_args()
         if args.start:
             pass
@@ -34,18 +43,32 @@ class ChadArgumentParser:
             self.parser.print_help()
 
 
-def main():
+def main() -> None:
     print_banner()
-
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
+    nest_asyncio.apply()
+    Logger()
+
     try:
-        Logger()
         ChadArgumentParser()
+    except ChadProgramExit:
+        pass
     except KeyboardInterrupt:
-        print("Exiting...")
+        pass
     except Exception as e:
         print(f"Error: {e}")
+    finally:
+        pending = asyncio.all_tasks(loop)
+        for task in pending:
+            task.cancel()
+        try:
+            loop.run_until_complete(asyncio.gather(*pending, return_exceptions=True))
+        except asyncio.CancelledError:
+            pass
+        finally:
+            loop.run_until_complete(loop.shutdown_asyncgens())
+            loop.close()
 
 
 if __name__ == "__main__":

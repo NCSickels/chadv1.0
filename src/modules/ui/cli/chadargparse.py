@@ -1,7 +1,7 @@
 """Chad Argparse module."""
 
 import argparse
-
+import asyncio
 from modules.ui.prompt.prompt import ChadPrompt
 
 
@@ -17,10 +17,12 @@ class ChadArgumentParser:
         )
         self.run()
 
-    def run(self):
+    def run(self) -> None:
         args = self.parser.parse_args()
         if args.interactive:
-            prompt = ChadPrompt()
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            prompt = ChadPrompt(loop=loop)
             prompt.start_prompt()
         else:
             self.parser.print_help()

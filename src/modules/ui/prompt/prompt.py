@@ -1,7 +1,5 @@
 """Prompt module for the interactive UI."""
 
-import sys
-
 from prompt_toolkit import HTML, PromptSession, print_formatted_text
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.styles import Style, merge_styles
@@ -13,7 +11,7 @@ from modules.connections.interface import NetworkInterface
 from modules.ui.menu.table import TableCreator
 from modules.ui.prompt.commands import COMMANDS, CommandCompleter, CommandHandler
 from modules.ui.prompt.commands.history import ChadHistory
-from modules.utils import constants
+from modules.utils import constants, exception
 
 from .helpers import get_tokens
 
@@ -22,26 +20,25 @@ class CommandPrompt(object):
     """
     Command prompt for the interactive UI.
 
+    Args:
+        loop (asyncio.AbstractEventLoop): Event loop.
+
     Attributes:
         commands (dict): Dictionary of commands.
         cmd_handler (CommandHandler): Command handler.
         completer (CommandCompleter): Command completer.
+        history (ChadHistory): Command history.
         style (Style): Prompt style.
         _break (bool): Break flag.
         prompt_session (PromptSession): Prompt session.
-        logger (Logger): Logger instance.
-
-    Methods:
-        get_commands() -> dict: Returns the commands dictionary.
-        get_prompt() -> HTML: Returns the prompt.
-        get_style() -> Style: Returns the prompt style.
-        intro_message(): Prints the intro message.
-        exit_message(): Prints the exit message.
-        handle_exit(tokens: list) -> None: Handles the exit command.
-        handle_break(tokens: list) -> bool: Handles the break command.
-        handle_command(tokens: list) -> None: Handles a command.
-        bottom_toolbar(): Returns the bottom toolbar.
-        start_prompt() -> None: Starts the prompt session.
+        network_interface (NetworkInterface): Network interface class instance.
+        status_info (dict): Network interface status information.
+        status (str): Network interface status value.
+        interface_name (str): Network interface name.
+        connected_ip (str): Connected IP address.
+        connected_port (str): Connected port number.
+        logger (Logger): Central logger.
+        loop (asyncio.AbstractEventLoop): Event loop.
     """
 
     def __init__(self, loop) -> None:
@@ -80,7 +77,7 @@ class CommandPrompt(object):
 
     # --------------------------------------------------------------- #
 
-    def get_style(self):
+    def get_style(self) -> Style | None:
         Style.from_dict(
             {
                 "completion-menu.completion": "bg:#008888 #ffffff",
@@ -93,13 +90,13 @@ class CommandPrompt(object):
 
     # --------------------------------------------------------------- #
 
-    def intro_message(self):
+    def intro_message(self) -> None:
         self.logger.info("Starting prompt...")
         self.logger.info("Welcome to the Chad interactive prompt!")
 
     # --------------------------------------------------------------- #
 
-    def exit_message(self):
+    def exit_message(self) -> None:
         self.logger.info("Exiting prompt...")
 
     # --------------------------------------------------------------- #
@@ -107,7 +104,7 @@ class CommandPrompt(object):
     def handle_exit(self, tokens: list) -> None:
         if len(tokens) > 0:
             if tokens[0] in ("exit", "quit", "q"):
-                sys.exit(0)
+                raise exception.ChadProgramExit
 
     # --------------------------------------------------------------- #
 
@@ -125,7 +122,7 @@ class CommandPrompt(object):
 
     # --------------------------------------------------------------- #
 
-    def bottom_toolbar(self):
+    def bottom_toolbar(self) -> HTML | None:
         return None
 
     # --------------------------------------------------------------- #
@@ -146,13 +143,22 @@ class CommandPrompt(object):
 
             except KeyboardInterrupt:
                 continue
+            except exception.ChadProgramExit:
+                break
             except EOFError:
-                # self.handle_exit(['exit'])
+                self.handle_exit(["exit"])
                 break
         self.exit_message()
 
 
 class ChadPrompt(CommandPrompt):
+    """
+    Wrapper class for the CommandPrompt.
+
+    Args:
+        loop (asyncio.AbstractEventLoop): Event loop.
+    """
+
     def __init__(self, loop) -> None:
         super().__init__(loop)
 
@@ -160,7 +166,7 @@ class ChadPrompt(CommandPrompt):
     # CommandPrompt Overridden Functions                              #
     # ================================================================#
 
-    def get_commands(self):
+    def get_commands(self) -> dict:
         """Contains the full list of commands."""
         commands = super().get_commands()
         commands.update(
@@ -211,12 +217,12 @@ class ChadPrompt(CommandPrompt):
 
     # --------------------------------------------------------------- #
 
-    def get_prompt(self):
+    def get_prompt(self) -> HTML:
         return HTML("<b>> </b>")
 
     # --------------------------------------------------------------- #
 
-    def bottom_toolbar(self):
+    def bottom_toolbar(self) -> HTML:
         if self.status == "Connected":
             status_tag = "active"
         else:
@@ -238,7 +244,7 @@ class ChadPrompt(CommandPrompt):
     def _cmd_help(self, tokens: list) -> None:
         """Displays the help menu."""
         table = TableCreator()
-        [table.display_table_from_file(section) for section in ["Main", "Core"]]
+        [table.display_table_from_file(section) for section in ["Core", "Networking"]]
         return None
 
     # --------------------------------------------------------------- #

@@ -35,8 +35,8 @@ class ChadTargetConnectionAborted(ChadError):
     Raised on `errno.ECONNABORTED`.
     """
 
-    socket_errno = attrs.field()
-    socket_errmsg = attrs.field()
+    socket_errno: int = attrs.field()
+    socket_errmsg: str = attrs.field()
 
 
 class ChadRuntimeError(ChadError):
@@ -48,6 +48,10 @@ class ChadPacketCaptureInterrupted(ChadError):
     Raised when packet capture is interrupted by user.
     """
 
+    pass
+
+
+class ChadProgramExit(ChadError):
     pass
 
 

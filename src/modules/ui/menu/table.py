@@ -18,16 +18,6 @@ class TableCreator:
     Attributes:
         console (Console): The rich console object.
         json_file (str): The path to the JSON file containing the table data.
-
-    Methods:
-        read_json(file_path: str) -> dict:
-            Reads the JSON file and returns the data as a dictionary.
-        create_table(header_data: dict, column_data: list, row_data: list, column_keys: list) -> Table:
-            Creates a rich table from the provided data.
-        display_table(json_data: dict, module: str) -> None:
-            Displays the table for the specified module using the rich console.
-        display_table_from_file(module: str) -> None:
-            Displays the table for the specified module from the JSON file.
     """
 
     def __init__(self):
@@ -42,7 +32,7 @@ class TableCreator:
 
     def create_table(
         self, header_data: dict, column_data: list, row_data: list, column_keys: list
-    ) -> None:
+    ) -> Table:
         table = Table(
             show_header=header_data.get("show_header", True),
             header_style=header_data.get("header_style", "bold white"),
@@ -67,8 +57,8 @@ class TableCreator:
 
     def display_table(self, json_data: dict, module: str) -> None:
         column_keys_dict = {
-            "Main": ["option", "modules", "description"],
             "Core": ["command", "description"],
+            "Networking": ["command", "description"],
         }
         for table in json_data[module]:
             header_data = table.get("header", [{}])[0]
@@ -79,7 +69,6 @@ class TableCreator:
             self.console.print(table)
             print("\n")
 
-    # TODO - Implement tabulation for non-rich tables
     def display_table_from_file(self, module: str) -> None:
         if settings.GENERAL_SETTINGS.use_rich_tables:
             json_data = self.read_json(self.json_file)

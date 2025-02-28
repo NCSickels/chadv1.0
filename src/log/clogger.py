@@ -10,6 +10,8 @@ import sys
 import colorama
 from termcolor import colored
 
+from config.settings import LOGGER_SETTINGS as settings
+
 colorama.just_fix_windows_console()
 
 SENT_TRAFFIC_LEVEL = 25
@@ -182,6 +184,10 @@ class Logger(metaclass=Singleton):
     _logger: logging.Logger = None
 
     def __init__(self):
+        if settings.color_log_file:
+            pass
+        else:
+            LOGGING_CONFIG["handlers"]["file"]["formatter"] = "default"
         logging.config.dictConfig(LOGGING_CONFIG)
         Logger._logger = logging.getLogger()
 

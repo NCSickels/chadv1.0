@@ -38,7 +38,7 @@ class NetworkInterface:
         self._display_filter = display_filter
         self._bpf_filter = bpf_filter
         self._status = "Disconnected"
-        self._connected_ip = "None"
+        self._connected_ip = "127.0.0.1"
         self._connected_port = 22
         self.capture = None
         self.logger = get_central_logger()
@@ -179,9 +179,18 @@ class NetworkInterface:
     def handle_packet(self, packet: pyshark.packet.packet.Packet) -> None:
         # If IP packet, print source and destination IP addresses
         if "IP" in packet:
-            self.logger.info(
-                f"Source IP: {packet.ip.src}, Destination IP: {packet.ip.dst}"
-            )
+            if hasattr(packet.ip, "src") and packet.ip.src == self._connected_ip:
+                self.logger.received_traffic(
+                    f"Received packet from {packet.ip.src} to {packet.ip.dst}"
+                )
+            elif hasattr(packet.ip, "dst") and packet.ip.dst == self._connected_ip:
+                self.logger.sent_traffic(
+                    f"Sent packet from {packet.ip.src} to {packet.ip.dst}"
+                )
+            else:
+                self.logger.info(
+                    f"Packet from {packet.ip.src} to {packet.ip.dst} not related to connected IP"
+                )
         print(packet)
 
     # --------------------------------------------------------------- #

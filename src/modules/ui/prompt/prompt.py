@@ -361,5 +361,5 @@ class ChadPrompt(CommandPrompt):
 
     # --------------------------------------------------------------- #
 
-    def get_style(self):
+    def get_style(self) -> Style | None:
         return merge_styles([super().get_style(), Style.from_dict(constants.STYLE)])

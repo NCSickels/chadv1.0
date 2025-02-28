@@ -20,17 +20,17 @@ logging.addLevelName(RECEIVED_TRAFFIC_LEVEL, "RECEIVED")
 logging.addLevelName(AD_RESPONSE_LEVEL, "RESPONSE")
 
 
-def sent_traffic(self, message, *args, **kws):
+def sent_traffic(self, message, *args, **kws) -> None:
     if self.isEnabledFor(SENT_TRAFFIC_LEVEL):
         self._log(SENT_TRAFFIC_LEVEL, message, args, **kws)
 
 
-def received_traffic(self, message, *args, **kws):
+def received_traffic(self, message, *args, **kws) -> None:
     if self.isEnabledFor(RECEIVED_TRAFFIC_LEVEL):
         self._log(RECEIVED_TRAFFIC_LEVEL, message, args, **kws)
 
 
-def ad_response(self, message, *args, **kws):
+def ad_response(self, message, *args, **kws) -> None:
     if self.isEnabledFor(AD_RESPONSE_LEVEL):
         self._log(AD_RESPONSE_LEVEL, message, args, **kws)
 
@@ -95,15 +95,15 @@ class StreamToLogger:
         self.log_level = log_level
         self.linebuf = ""
 
-    def write(self, buf):
+    def write(self, buf: str) -> None:
         for line in buf.rstrip().splitlines():
             self.logger.log(self.log_level, line.rstrip())
 
-    def flush(self):
+    def flush(self) -> None:
         pass
 
 
-def integrate_stream_to_logger():
+def integrate_stream_to_logger() -> None:
     """
     Integrates StreamToLogger with the central logger.
     """
@@ -121,7 +121,7 @@ class ColorFormatter(logging.Formatter):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def format(self, record):
+    def format(self, record) -> str:
         format_prop = {
             logging.DEBUG: "primary",
             logging.INFO: "primary",

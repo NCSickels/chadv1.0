@@ -3,7 +3,7 @@ import collections
 from prompt_toolkit.completion import CompleteEvent, Completer, Completion
 from prompt_toolkit.document import Document
 
-from ..helpers import get_tokens
+from modules.ui.prompt.helpers import get_tokens
 
 
 class CommandCompleter(Completer):

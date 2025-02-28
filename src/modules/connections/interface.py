@@ -5,9 +5,7 @@ Hook module for connecting to a live network interface using PyShark.
 import asyncio
 
 import pyshark
-import pyshark.packet
 import pyshark.packet.packet
-import pyshark.tshark
 import pyshark.tshark.tshark
 
 from config.settings import NETWORK_SETTINGS as settings
@@ -129,8 +127,6 @@ class NetworkInterface:
 
     # --------------------------------------------------------------- #
 
-    # TODO: Fix this to work with asyncio properly; capture packets repeats when trying to stop capture
-
     async def capture_packets(self) -> None:
         self.capture = pyshark.LiveCapture(
             interface="any",
@@ -143,7 +139,6 @@ class NetworkInterface:
                 packet_count=settings.packet_count
             ):
                 self.handle_packet(packet)
-            # await self.capture.apply_on_packets(self.handle_packet)
         except asyncio.CancelledError:
             self.logger.info("Packet capture task cancelled.")
         except EOFError:
@@ -151,7 +146,6 @@ class NetworkInterface:
         except Exception as e:
             self.logger.error(f"Unexpected error during packet capture: {e}")
         finally:
-            # await self.stop_capture()
             self.capture.close()
 
     def start_capture(self) -> None:
@@ -172,7 +166,6 @@ class NetworkInterface:
         """Stop capturing packets on the network interface."""
         if self.capture:
             asyncio.sleep(3)
-            # await self.capture.close_async()
             self.capture.close()
             self.logger.info("Packet capture stopped.")
 

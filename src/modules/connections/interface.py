@@ -11,7 +11,7 @@ import pyshark.tshark.tshark
 from config.settings import NETWORK_SETTINGS as settings
 from log.clogger import get_central_logger
 from modules.connections.adresponse import ADResponse
-from modules.helpers.helpers import check_sudo
+from modules.helpers.helpers import check_sudo, log_network_traffic
 
 
 class NetworkInterface:
@@ -172,18 +172,60 @@ class NetworkInterface:
     def handle_packet(self, packet: pyshark.packet.packet.Packet) -> None:
         # If IP packet, print source and destination IP addresses
         if "IP" in packet:
-            if hasattr(packet.ip, "src") and packet.ip.src == self._connected_ip:
-                self.logger.received_traffic(
-                    f"Received packet from {packet.ip.src} to {packet.ip.dst}"
-                )
-            elif hasattr(packet.ip, "dst") and packet.ip.dst == self._connected_ip:
-                self.logger.sent_traffic(
-                    f"Sent packet from {packet.ip.src} to {packet.ip.dst}"
-                )
+            if "TCP" in packet:
+                if hasattr(packet.ip, "src") and packet.ip.src == self._connected_ip:
+                    self.logger.received_traffic(
+                        f"Received packet from {packet.ip.src} to {packet.ip.dst}"
+                    )
+                    log_network_traffic(
+                        "received",
+                        packet.ip.src,
+                        packet.ip.dst,
+                        packet[packet.transport_layer].srcport,
+                        packet[packet.transport_layer].dstport,
+                    )
+                elif hasattr(packet.ip, "dst") and packet.ip.dst == self._connected_ip:
+                    self.logger.sent_traffic(
+                        f"Sent packet from {packet.ip.src} to {packet.ip.dst}"
+                    )
+                    log_network_traffic(
+                        "sent",
+                        packet.ip.src,
+                        packet.ip.dst,
+                        packet[packet.transport_layer].srcport,
+                        packet[packet.transport_layer].dstport,
+                    )
+                else:
+                    self.logger.info(
+                        f"Packet from {packet.ip.src} to {packet.ip.dst} not related to connected IP"
+                    )
             else:
-                self.logger.info(
-                    f"Packet from {packet.ip.src} to {packet.ip.dst} not related to connected IP"
-                )
+                if hasattr(packet.ip, "src") and packet.ip.src == self._connected_ip:
+                    self.logger.received_traffic(
+                        f"Received packet from {packet.ip.src} to {packet.ip.dst}"
+                    )
+                    log_network_traffic(
+                        "received",
+                        packet.ip.src,
+                        packet.ip.dst,
+                        self._connected_port,
+                        self._connected_port,
+                    )
+                elif hasattr(packet.ip, "dst") and packet.ip.dst == self._connected_ip:
+                    self.logger.sent_traffic(
+                        f"Sent packet from {packet.ip.src} to {packet.ip.dst}"
+                    )
+                    log_network_traffic(
+                        "sent",
+                        packet.ip.src,
+                        packet.ip.dst,
+                        self._connected_port,
+                        self._connected_port,
+                    )
+                else:
+                    self.logger.info(
+                        f"Packet from {packet.ip.src} to {packet.ip.dst} not related to connected IP"
+                    )
         print(packet)
 
     # --------------------------------------------------------------- #

@@ -21,6 +21,7 @@
 - [Project Overview](#project-overview)
   - [System Overview Diagram](#system-overview-diagram)
   - [Project Directory Structure](#project-directory-structure)
+- [Project Prerequisites](#project-prerequisites)
 - [Testbed Configuration](#testbed-configuration)
   - [Network Configuration](#network-configuration)
 - [Fuzzing Workflow](#fuzzing-workflow)
@@ -42,9 +43,11 @@
 
 ## Project Overview
 
-Our senior design group is the second team working on the Charger Active Defense project. This project aims to develop a fuzzing workflow that effectively tests the networking aspects of the selected target applications, Medusa and Masscan. We strive to identify any hangs or crashes that may occur, which can then be sent back to the host machine to potentially disrupt or halt the adversary’s tool.
+Our senior design group is the second team working on the Charger Active Defense project. This project aims to create a fuzzing workflow that effectively tests the networking aspects of selected target applications. These target applications include Medusa, Masscan, and three different attack tools generated using the Phind and GitHub Copilot AI models. We strive to identify any hangs or crashes that may occur, which can then be sent back to the host machine to potentially disrupt or halt the adversary's tool.
 
 This project is divided into two main phases - the fuzzing workflow and the active defense tool. The fuzzing workflow phase involves the selection of fuzzing tools, two attack tools to fuzz, and the development of a fuzzing workflow. The active defense tool phase involves the development of a tool that can detect and respond to attacks on the network and send the fuzzed responses back to the adversary's tool.
+
+At the sponsor's request, we have expanded the second phase to include generating three attack tools derived from the Phind and GitHub Copilot AI models. This addition will involve creating a banner-grabbing tool, an FTP password brute-force tool, and a simple, multi-threaded banner-grabbing tool from each model, comprising six tools.
 
 You can find the sponsor's project proposal slide below.
 
@@ -67,7 +70,7 @@ You can find the sponsor's project proposal slide below.
 #### Highlights
 
 - **User_Guide.docx:** User guide document for the project (MS Word formatted README).
-- **workflow.sh:** Bash script for installing and building the attack and fuzzing tools for the workflow.
+- **scripts/workflow.sh:** Bash script for installing and building the attack and fuzzing tools for the workflow.
 - **Dockerfile:** WIP Dockerfile for fuzzing workflow.
 - **Makefile:** Makefile for building and running the Docker container.
 - **Background Screening:** Contains CVEs, LDRA Static Analysis test results, and Valgrind test results for all attack tool candidates.
@@ -82,6 +85,19 @@ You can find the sponsor's project proposal slide below.
   - **Attack_Tool_Commands.md:** Commands used for the attack tools.
   - **password_list.txt:** Password list used for testing.
   - **repeat_medusa.sh:** Script to repeatedly run Medusa.
+
+- **ai_tools:** Contains the AI-generated attack tools.
+
+## Project Prerequisites
+
+*Combined list of all prerequisites required for the fuzzing workflow and active defense tool.*
+
+- VirtualBox 7.1.0 (or later)
+- Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
+- Wi-Fi/Ethernet Adapter that supports promiscuous mode.
+- Python 3.12 (or later)
+- Apt Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`, `wireshark`, `tshark`.
+- Pip Packages: `rich`, `colorama`, `termcolor`, `pyshark`, `prompt_toolkit`, `attrs`.
 
 ## Testbed Configuration
 
@@ -494,7 +510,7 @@ python3 chad.py --start --interface <INTERFACE_NAME> --target <TARGET_IP> --port
 ### Key Features
 
 - **Interactive Command Line Interface:** Custom interactive user interface that allows you to start/stop the packet capture, set target attributes (IP address, port, etc.), and view live packet details.
-- **Packet Capture:** Utilizes the PyShark library to capture packets from the network interface and display them in real-time.
+- **Live Packet Capture:** Utilizes the PyShark library to capture packets from the network interface and display them in real-time.
 - **Logging:** Custom colored wrapper of the Python Logging library with user-defined message types for sent/received traffic and sent active defense responses. Logs packet details to a file for later analysis.
 - **Active Defense Responses:** Automated responses to detected attacks, pulled from found crashes or hangs from AFLnet fuzz testing.
 

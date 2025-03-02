@@ -24,11 +24,34 @@ class ChadArgumentParser:
         self.parser = argparse.ArgumentParser(
             usage="%(prog)s [options] <command> [<args>]...",
         )
+        # Interactive mode
+        self.parser.add_argument(
+            "-i", "--interactive", action="store_true", help="Run in interactive mode."
+        )
+        # Command line argument mode, not applicable for interactive mode
+        # interactive mode is pulled from the defined config file
         self.parser.add_argument(
             "-s", "--start", action="store_true", help="Start the application."
         )
         self.parser.add_argument(
-            "-i", "--interactive", action="store_true", help="Run in interactive mode."
+            "--interface",
+            action="store_true",
+            dest="interface",
+            help="The network interface to use.",
+        )
+        self.parser.add_argument(
+            "-t",
+            "--ip",
+            action="store_true",
+            dest="ip_address",
+            help="The IP address to use.",
+        )
+        self.parser.add_argument(
+            "-p",
+            "--port",
+            action="store_true",
+            dest="port",
+            help="The port on the target to use.",
         )
         self.run()
 

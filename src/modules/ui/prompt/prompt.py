@@ -311,6 +311,12 @@ class ChadPrompt(CommandPrompt):
             print_formatted_text(HTML(f"<b>{interface}</b>"))
         return None
 
+    def _cmd_list_config(self, tokens: list) -> None:
+        """Lists the current configuration."""
+        print_formatted_text(HTML(f"<b>Interface: {self.interface_name}</b>"))
+        print_formatted_text(HTML(f"<b>IP: {self.connected_ip}</b>"))
+        print_formatted_text(HTML(f"<b>Port: {self.connected_port}</b>"))
+
     # --------------------------------------------------------------- #
 
     def _cmd_start(self, tokens: list) -> None:

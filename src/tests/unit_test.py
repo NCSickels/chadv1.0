@@ -4,7 +4,7 @@
 class ChadUnitTest:
     """Unit tests for the Chad Python service."""
 
-    def __init__(self, token: str) -> None:
+    def __init__(self, token: str = "all") -> None:
         self.token = token
 
     def run_unit_tests(self) -> None:

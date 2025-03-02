@@ -21,27 +21,33 @@
 - [Project Overview](#project-overview)
   - [System Overview Diagram](#system-overview-diagram)
   - [Project Directory Structure](#project-directory-structure)
-- [Prerequisites](#prerequisites)
+- [Project Prerequisites](#project-prerequisites)
 - [Testbed Configuration](#testbed-configuration)
   - [Network Configuration](#network-configuration)
-- [Usage & Installation - Fuzzing Workflow](#usage--installation---fuzzing-workflow)
-  - [Bash Script (Recommended)](#bash-script-recommended)
-  - [Dockerfile *(WIP)*](#dockerfile-wip)
-  - [Manual Installation (Recommended)](#manual-installation-recommended)
-  - [Usage](#usage)
+- [Fuzzing Workflow](#fuzzing-workflow)
+  - [Prerequisites - Fuzzing Workflow](#prerequisites---fuzzing-workflow)
+  - [Installation - Fuzzing Workflow](#installation---fuzzing-workflow)
+    - [Bash Script (Recommended)](#bash-script-recommended)
+    - [Dockerfile *(WIP)*](#dockerfile-wip)
+    - [Manual Installation (Recommended)](#manual-installation-recommended)
+  - [Usage - Fuzzing Workflow](#usage---fuzzing-workflow)
     - [Radamsa & Medusa](#radamsa--medusa)
     - [AFLnet & Masscan](#aflnet--masscan)
-- [Usage & Installation - Active Defense Tool](#usage--installation---active-defense-tool-wip)
-  - [Installation - Python Virtual Environment (Recommended)](#installation---python-virtual-environment-recommended)
+- [Active Defense Tool](#active-defense-tool)
+  - [Prerequisites - Active Defense Tool](#prerequisites---active-defense-tool)
+  - [Installation - Active Defense Tool *(WIP)*](#installation---active-defense-tool-wip)
+    - [Python Virtual Environment (Recommended)](#python-virtual-environment-recommended)
   - [Usage - Replay Service](#usage---replay-service)
 - [Demonstration Video](#demonstration-video)
 - [References](#references)
 
 ## Project Overview
 
-Our senior design group is the second team working on the Charger Active Defense project. This project aims to develop a fuzzing workflow that effectively tests the networking aspects of the selected target applications, Medusa and Masscan. We strive to identify any hangs or crashes that may occur, which can then be sent back to the host machine to potentially disrupt or halt the adversary’s tool.
+Our senior design group is the second team working on the Charger Active Defense project. This project aims to create a fuzzing workflow that effectively tests the networking aspects of selected target applications. These target applications include Medusa, Masscan, and three different attack tools generated using the Phind and GitHub Copilot AI models. We strive to identify any hangs or crashes that may occur, which can then be sent back to the host machine to potentially disrupt or halt the adversary's tool.
 
 This project is divided into two main phases - the fuzzing workflow and the active defense tool. The fuzzing workflow phase involves the selection of fuzzing tools, two attack tools to fuzz, and the development of a fuzzing workflow. The active defense tool phase involves the development of a tool that can detect and respond to attacks on the network and send the fuzzed responses back to the adversary's tool.
+
+At the sponsor's request, we have expanded the second phase to include generating three attack tools derived from the Phind and GitHub Copilot AI models. This addition will involve creating a banner-grabbing tool, an FTP password brute-force tool, and a simple, multi-threaded banner-grabbing tool from each model, comprising six tools.
 
 You can find the sponsor's project proposal slide below.
 
@@ -64,7 +70,7 @@ You can find the sponsor's project proposal slide below.
 #### Highlights
 
 - **User_Guide.docx:** User guide document for the project (MS Word formatted README).
-- **workflow.sh:** Bash script for installing and building the attack and fuzzing tools for the workflow.
+- **scripts/workflow.sh:** Bash script for installing and building the attack and fuzzing tools for the workflow.
 - **Dockerfile:** WIP Dockerfile for fuzzing workflow.
 - **Makefile:** Makefile for building and running the Docker container.
 - **Background Screening:** Contains CVEs, LDRA Static Analysis test results, and Valgrind test results for all attack tool candidates.
@@ -73,278 +79,24 @@ You can find the sponsor's project proposal slide below.
   - **G12_attack_tool_selection_report.docx**: Attack tool selection report.
   - **G12_fuzz_tool_selection_report.docx**: Fuzz tool selection report.
   - **G12_fuzzing_results_analysis.docx**: Fuzzing toolls compatibility testing results and analysis report.
+  - **G12_gen_ai_comparison.docx**: AI-generated attack tool comparison report.
 
 - **Fuzzing:** Contains fuzzing-related files, including attack tool commands and fuzzing tool files.
   - **Attack_Tool_Commands.md:** Commands used for the attack tools.
   - **password_list.txt:** Password list used for testing.
   - **repeat_medusa.sh:** Script to repeatedly run Medusa.
 
-<details>
-<summary>Directory Tree</summary>
+- **ai_tools:** Contains the AI-generated attack tools.
 
-```plaintext
-Charger Active Defense v1.0 - Senior Design Project
-.
-├── README.md
-├── User_Guide.docx
-|── Charger-Active-Defense-Banner.png
-├── Dockerfile
-├── Makefile
-├── project_overview.png
-├── scripts
-|   ├── workflow.sh
-|   └── post-create.sh
-├── background_screening
-|   ├── CVEs.md
-│   ├── Attack_Tool_Info.md
-|   ├── ldra
-|   │   ├── aircrack-ng
-|   │   │   └── aircrack-ng.mts.htm
-|   │   ├── masscan
-|   │   │   └── masscan.mts.htm
-|   │   ├── medusa
-|   │   │   └── medusa.mts.htm
-|   │   ├── netdiscover
-|   │   │   └── netdiscover.mts.htm
-|   │   ├── reaver
-|   │   │   └── reaver.mts.htm
-|   │   └── yersinia
-|   │       └── yersinia.mts.htm
-|   └── valgrind
-|       ├── commands.txt
-|       ├── masscan.txt
-|       ├── medusa_ftp.txt
-|       ├── medusa_postgres.txt
-|       ├── medusa_ssh.txt
-|       └── netdiscover.txt
-├── config
-|   ├──network_configuration_assets
-|   ├── configuration_table.md
-|   ├── Configuration_Table.png
-|   ├── dockerconf.sh
-│   ├── Metasploitable2_Running_Services.txt
-│   └── Testbed_Config.md
-├── deliverables
-│   ├── G12_attack_tool_selection_report.docx
-│   ├── G12_fuzz_tool_selection_report.docx
-│   ├── G12_fuzzing_results_analysis.docx
-│   ├── briefings
-│   │   ├── brief_1
-│   │   │   ├── G12_briefing_1_progress_report.docx
-│   │   ├── brief_2
-│   │   │   ├── G12_briefing_2_progress_report.docx
-│   │   │   └── fuzzowski_medusa_telnet.pcap
-│   │   └── brief_3
-│   │       └── G12_briefing_3_progress_report.docx
-│   ├── design_review
-│   │   ├── 495_488_design_review_template.pptx
-│   │   ├── Behavioral_Decomposition.vsdx
-│   │   ├── Functional_Decomposition.vsdx
-│   │   ├── G12_design_review_presentation.pptx
-│   │   ├── G12_level_of_effort.docx
-│   │   ├── G12_marketing_requirements.docx
-│   │   ├── Updated_Behavioral_Decomposition.png
-│   │   ├── Updated_Functional_Decomposition.png
-│   │   └── individual_level_of_effort.md
-│   ├── final_report
-│   ├── proposal
-│   │   ├── ChAD Senior Design Project - rev 4.png
-│   │   ├── G12_project_proposal.pptx 
-│   │   ├── G12_project_proposal.pdf
-│   │   └── Senior Design Project Gantt Chart.png
-│   └── timeline_and_milestones
-│       ├── G12_updated_milestones.docx
-|       ├── G12_updated_timeline.png
-│       ├── Project_Timeline_v2.gan
-│       └── initial
-│           ├── Project_Timeline_Proposal.gan
-│           └── milestone_analysis.md
-├── fuzzing
-|   ├── Attack_Tool_Commands.md
-|   ├── password_list.txt
-|   ├── repeat_medusa.sh
-│   ├── afl-qemu-trace
-│   ├── fuzzowski.medusa.ftp
-│   │   └── ftp.py
-│   ├── fuzzshark
-│   │   └── ~src
-|   ├── icmp.masscan
-│   │   ├── fuzz_ping.sh
-│   │   ├── grammer.bnf
-│   │   ├── internet_checksum.py
-│   │   ├── requirements.txt
-│   │   └── send_icmp.py 
-│   ├── medusa.postgresql.afl_1
-│   │   ├── cmdline
-│   │   ├── fuzz_bitmap
-│   │   ├── fuzzer_setup
-│   │   ├── fuzzer_stats
-│   │   ├── ~hangs
-│   │   ├── init_attempt
-│   │   │   ├── medusa_config.txt
-│   │   │   ├── wrapper.c
-│   │   │   └── wrapper.sh
-│   │   ├── ~plot_data
-│   │   └── ~queue
-│   ├── peach_fuzz
-│   │   ├── network_fuzzing.xml
-│   │   └── peachfuzzer.dockerfile
-│   ├── radamsa
-│   │   ├── Radamsa_Instructions.md
-│   │   └── ~img
-│   ├── randbytes
-│   │   ├── ftp_server.py
-│   │   └── pcap_parsing.py
-│   ├── randpkt
-│   │   └── ~src
-│   └── scapy.radamsa
-│       └── radamsa_scapy_pcap_fuzzing.py
-├── misc
-|   ├── Charger-Active-Defense-Banner-old.png
-|   ├── Conference-template-A4.doc
-|   ├── generate_tree.py
-|   └── project_directory_tree.txt
-├── pcaps
-│   ├── baseline
-│   │   ├── masscan.pcap
-│   │   ├── medusa_ftp.pcap
-│   │   ├── medusa_postgresql.pcap
-│   │   └── medusa_ssh.pcap
-│   └── scapy
-│       ├── ftp_login_packets.pcap
-│       ├── fuzz_test_1.pcap
-│       ├── medusa_ftp_brute_force.pcap
-│       ├── medusa_ftp_fail.pcap
-│       └── nmap_ftp_scan.pcap
-└── research
-    ├── Fuzzing_Tools.md
-    └── cmiller-csw-2010.pdf
+## Project Prerequisites
 
-```
-
-<details>
-<summary>Explanation</summary>
-
-- **README.md:** This file.
-- **User_Guide.docx:** User guide document for the project (MS Word formatted README).
-- **Charger-Active-Defense-Banner.png:** Project banner image.
-- **workflow.sh:** Bash script for installing and building the attack and fuzzing tools for the workflow.
-- **Dockerfile:** WIP Dockerfile for fuzzing workflow.
-- **Makefile:** Makefile for building and running the Docker container.
-- **project_overview.png:** Image of the project overview.
-- **scripts:** Contains workflow script files.
-  - **workflow.sh:** Fuzzing workflow script.
-  - **post-create.sh:** Post-create script for Docker\devcontainer.
-- **background_screening:** Contains test-related files.
-  - **CVEs.md:** List of CVEs from all attack tool candidates.
-  - **Attack_Tool_Info.md:** Information about attack tools.
-  - **ldra:** LDRA test files.
-    - **aircrack-ng/aircrack-ng.mts.htm:** Aircrack-ng LDRA test files.
-    - **masscan/masscan.mts.htm:** Masscan LDRA test files.
-    - **medusa/medusa.mts.htm** Medusa LDRA test files.
-    - **netdiscover/netdiscover.mts.htm:** Netdiscover LDRA test report.
-    - **reaver/reaver.mts.htm:** Reaver LDRA test report.
-    - **yersinia/yersinia.mts.htm:** Yersinia LDRA test report.
-  - **valgrind:** Valgrind test results for each attack tool candidate.
-    - **commands.txt:** Commands used for running the Valgrind tests.
-    - **masscan.txt:** Masscan Valgrind test results file.
-    - **medusa_ftp.txt:** Medusa FTP Valgrind test results file.
-    - **medusa_postgres.txt:** Medusa PostgreSQL Valgrind test results file.
-    - **medusa_ssh.txt:** Medusa SSH Valgrind test results file.
-    - **netdiscover.txt:** Netdiscover Valgrind test results file.
-- **project_overview.png:** Image of the project overview.
-- **config:** Contains configuration files.
-  - **network_configuration_assets:** Screenshots of VirtualBox Network adapter settings menus for README and User Guide.
-  - **configuration_table.md:** Configuration table for the testbed (Markdown).
-  - **Configuration_Table.png:** Configuration table for the testbed (PNG).
-  - **dockerconf.sh:** Docker configuration script.
-  - **Testbed_Config.md:** Configuration details for the testbed.
-- **deliverables**: Contains project deliverables, including the tool reports, proposal presentation slides, briefings, design review, and final report.
-  - **G12_attack_tool_selection_report.docx:** Attack tool selection report.
-  - **G12_fuzz_tool_selection_report.docx:** Fuzz tool selection report.
-  - **G12_fuzzing_results_analysis.docx:** Fuzzing results analysis.
-  - **briefings:** Contains briefing files.
-    - **brief_1:** Briefing 1 files.
-      - **G12_briefing_1_progress_report.docx:** Briefing 1 progress report.
-    - **brief_2:** Briefing 2 files.
-      - **G12_briefing_2_progress_report.docx:** Briefing 2 progress report.
-      - **fuzzowski_medusa_telnet.pcap:** Fuzzowski Medusa Telnet PCAP file.
-    - **brief_3:** Briefing 3 files.
-      - **G12_briefing_3_progress_report.docx:** Briefing 3 progress report.
-  - **design_review:** Contains design review files.
-    - **495_488_design_review_template.pptx:** Design review template.
-    - **Behavioral_Decomposition.vsdx:** Behavioral decomposition Visio diagram.
-    - **Functional_Decomposition.vsdx:** Functional decomposition Visio diagram.
-    - **G12_design_review_presentation.pptx:** Design review presentation.
-    - **G12_level_of_effort.docx:** Level of effort document.
-    - **G12_marketing_requirements.docx:** Marketing requirements document.
-    - **Updated_Behavioral_Decomposition.png:** Updated behavioral decomposition diagram image.
-    - **Updated_Functional_Decomposition.png:** Updated functional decomposition diagram image.
-    - **individual_level_of_effort.md:** Individual level of effort document.
-  - **final_report:** Final report files.
-  - **proposal:** Proposal files.
-    - **ChAD Senior Design Project - rev 4.png:** Proposal overview diagram.
-    - **G12_project_proposal.pptx:** Project proposal presentation slides.
-    - **G12_project_proposal.pdf:** Project proposal PDF.
-    - **Senior Design Project Gantt Chart.png:** Initial project timeline Gantt chart.
-  - **timeline_and_milestones:** Contains timeline and milestones files.
-    - **G12_updated_milestones.docx:** Updated milestones document for Design Review.
-    - **G12_updated_timeline.png:** Updated timeline.
-    - **Project_Timeline_v2.gan:** Gantt chart file for the project timeline.
-    - **initial:** Initial timeline and milestones.
-      - **Project_Timeline_Proposal.gan:** Initial project timeline proposal.
-      - **milestone_analysis.md:** Milestone analysis.  
-- **fuzzing:** Contains fuzzing-related files.
-  - **Attack_Tool_Commands.md:** Commands used for the attack tools.
-  - **password_list.txt:** Password list used for testing.
-  - **repeat_medusa.sh:** Script to repeatedly run Medusa.
-  - **afl-qemu-trace:** AFL QEMU trace binary.
-  - **fuzzowski.medusa.ftp:** Fuzzowski Medusa FTP files.
-    - **ftp.py:** FTP file for Fuzzowski Medusa.
-  - **fuzzshark:** Fuzzshark files.
-  - **medusa.postgresql.afl_1:** Medusa PostgreSQL AFL files.
-    - **init_attempt:** Initial attempts with AFLnet.
-      - **medusa_config.txt:** Medusa configuration file for wrapper.
-      - **wrapper.c:** Custom wrapper source file.
-      - **wrapper.sh:** Custom wrapper script.
-  - **peach_fuzz:** Peach Fuzz files.
-    - **network_fuzzing.xml:** Network fuzzing XML model file.
-    - **peachfuzzer.dockerfile:** Peach Fuzzer Dockerfile.
-  - **radamsa:** Radamsa files.
-    - **Radamsa_Instructions.md:** Radamsa testing instructions.
-  - **randbytes:** Randbytes files.
-    - **ftp_server.py:** FTP server file.
-    - **pcap_parsing.py:** PCAP parsing file with Scapy.
-  - **randpkt:** Randpkt files.
-  - **scapy.radamsa:** Scapy Radamsa files.
-    - **radamsa_scapy_pcap_fuzzing.py:** Radamsa & Scapy PCAP fuzzing Python script.
-- **misc:** Miscellaneous files.
-  - **Charger-Active-Defense-Banner-old.png:** Old project banner.
-  - **Conference-template-A4.doc:** IEEE conference template document.
-  - **generate_tree.py:** Python script to generate the directory tree.
-  - **project_directory_tree.txt:** Directory tree text file.
-- **pcaps:** Contains PCAP files.
-  - **baseline:** Baseline PCAP files.
-  - **scapy:** Scapy PCAP files.
-- **research:** Contains research-related files.
-  - **Fuzzing_Tools.md:** Background research on possible fuzzing tools.
-  - **cmiller-csw-2010.pdf:** Research paper on general fuzzing and fuzzing tools.
-
-</details>
-</details>
-
-## Prerequisites
-
-### Fuzzing Workflow
+*Combined list of all prerequisites required for the fuzzing workflow and active defense tool.*
 
 - VirtualBox 7.1.0 (or later)
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
 - Wi-Fi/Ethernet Adapter that supports promiscuous mode.
-- Apt Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`.
-
-### Active Defense Tool *(WIP)*
-
 - Python 3.12 (or later)
+- Apt Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`, `wireshark`, `tshark`.
 - Pip Packages: `rich`, `colorama`, `termcolor`, `pyshark`, `prompt_toolkit`, `attrs`.
 
 ## Testbed Configuration
@@ -471,11 +223,20 @@ If the connection is unsuccessful, restart the VMs and verify the network config
 
 If they are not set, you can reconfigure them by repeating the steps above.
 
-## Usage & Installation - Fuzzing Workflow
+## Fuzzing Workflow
+
+### Prerequisites - Fuzzing Workflow
+
+- VirtualBox 7.1.0 (or later)
+- Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
+- Wi-Fi/Ethernet Adapter that supports promiscuous mode.
+- Apt Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`.
+
+### Installation - Fuzzing Workflow
 
 There are three ways to install and use the tools necessary for the Chadv1.0 workflow: using the Bash script, the Dockerfile, or manually.
 
-### Bash Script (Recommended)
+#### Bash Script (Recommended)
 
 ---
 
@@ -501,7 +262,7 @@ sudo ./workflow.sh build
 > [!NOTE]\
 > If you encounter the error: *`-bash: ./workflow.sh: /bin/bash^M: bad interpreter: No such file or directory`*, it is due to the script being in DOS format on a UNIX system. To fix this, you can use the *`dos2unix`* command to convert the script to UNIX format. You can install it through Apt package manager using the command *`sudo apt install dos2unix`*.  
 
-### Dockerfile *(WIP)*
+#### Dockerfile *(WIP)*
 
 ---
 
@@ -515,25 +276,25 @@ The Chad workflow can also be run in a Docker container. The Docker implementati
 
 Optionally, you can build the Docker image and run the container manually using the commands below.
 
-#### Build the Docker Image
+##### Build the Docker Image
 
 ```bash
 # Build the Docker image
 docker build -t workflow .
 ```
 
-#### Run the Docker Container
+##### Run the Docker Container
 
 ```bash
 # Run the Docker container
 docker run --rm -it --name workflow -v . workflow /bin/bash
 ```  
 
-### Manual Installation (Recommended)
+#### Manual Installation (Recommended)
 
 ---
 
-#### Clone the Repositories
+##### Clone the Repositories
 
 ```bash
 # Clone the attack tool repositories
@@ -545,13 +306,13 @@ git clone https://github.com/aflnet/aflnet.git
 git clone https://gitlab.com/akihe/radamsa.git
 ```
 
-#### Install Necessary Dependencies
+##### Install Necessary Dependencies
 
 ```bash
 sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf automake libssl-dev wget curl dos2unix php-cli
 ```
 
-#### Build Attack Tools
+##### Build Attack Tools
 
 ```bash
 # Build Medusa
@@ -569,7 +330,7 @@ make install
 cd ..
 ```
 
-#### Build Fuzzing Tools
+##### Build Fuzzing Tools
 
 ```bash
 # Build AFLnet
@@ -596,7 +357,7 @@ cd ..
 
 This will install the necessary tools for the Chadv1.0 fuzzing workflow, including AFLnet, Radamsa, Medusa, and Masscan.  
 
-### Usage
+### Usage - Fuzzing Workflow
 
 ---
 
@@ -604,6 +365,7 @@ After all tools are installed and configured, you can run AFLnet or Radamsa alon
 
 #### Radamsa & Medusa
 
+---
 Radamsa provides two methods for fuzzing network services, allowing it to operate as either a TCP client or server. When used as a TCP server, it can intercept web traffic and fuzz it with random data before relaying it back to the specified IP address and port.
 
 For demonstration purposes, we set up a simple PHP HTTP web server on the local host, operating on TCP port 8080, by following the steps below.
@@ -663,6 +425,7 @@ radamsa -o :5432 medusa_output.txt -n inf
 
 #### AFLnet & Masscan
 
+---
 The process for running AFLnet and Masscan is far more streamlined than the initial Radamsa and Medusa setup, as we do most of the configuration in the workflow script.
 
 1. After running the workflow script, you should see a folder named `chadv1.0`. In it, you'll see two folders - `attack_tools` and `fuzzing_tools`.
@@ -688,12 +451,19 @@ echo “masscan -p1-65535 192.168.1.100 --rate=1000” > scan3.txt
 ./afl-fuzz -t 1200 -i in -o out -N tcp://192.168.1.100/22 -P SSH masscan -p21-8180 192.168.1.100 --banners --packet-trace  --source-mac <MAC_ADDRESS>
 ```
 
-> [!WARNING]\
-> You will need to replace the `<MAC_ADDRESS>` with your adapter’s MAC address for steps 5 & 6!
+## Active Defense Tool
 
-## Usage & Installation - Active Defense Tool *(WIP)*
+### Prerequisites - Active Defense Tool
 
-### Installation - Python Virtual Environment (Recommended)
+- Python 3.12 (or later)
+- Apt Packages: `wireshark`, `tshark`.
+- Pip Packages: `rich`, `colorama`, `termcolor`, `pyshark`, `prompt_toolkit`, `attrs`.
+
+### Installation - Active Defense Tool *(WIP)*
+
+#### Python Virtual Environment (Recommended)
+
+---
 
 ```bash
 # Install apt packages
@@ -716,13 +486,33 @@ pip install -r requirements.txt
 ```
 
 ### Usage - Replay Service
->
+
 > [!WARNING]\
 > In order to properly use the live capture functionality on a network interface, you must run this with a user that has privileges to create raw packets, like `root` or a user in the `wireshark` group. These capabilities can be granted by running the following command in your Python virtual environment: `sudo setcap cap_net_raw=eip $(which python3)`
 
 ```bash
-python3 chad.py
+# Ensure sudo user
+sudo su
+
+# Activate the virtual environment
+source env/bin/activate
+
+# (OPTIONAL) Grant raw packet privileges
+sudo setcap cap_net_raw=eip $(which python3)
+
+# Run the replay service in interactive mode
+python3 chad.py -i
+
+# OR Run the replay service with command line arguments
+python3 chad.py --start --interface <INTERFACE_NAME> --target <TARGET_IP> --port <TARGET_PORT>
 ```
+
+### Key Features
+
+- **Interactive Command Line Interface:** Custom interactive user interface that allows you to start/stop the packet capture, set target attributes (IP address, port, etc.), and view live packet details.
+- **Live Packet Capture:** Utilizes the PyShark library to capture packets from the network interface and display them in real-time.
+- **Logging:** Custom colored wrapper of the Python Logging library with user-defined message types for sent/received traffic and sent active defense responses. Logs packet details to a file for later analysis.
+- **Active Defense Responses:** Automated responses to detected attacks, pulled from found crashes or hangs from AFLnet fuzz testing.
 
 ## Demonstration Video
 

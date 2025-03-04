@@ -5,3 +5,5 @@ pre-commit
 pyshark
 prompt_toolkit
 attrs
+asyncio
+nest_asyncio

@@ -18,3 +18,4 @@ __pycache__
 src/modules/ui/prompt/commands/history.txt
 src/chad.log
 src/log/network_traffic.json
+chad.log

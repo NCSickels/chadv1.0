@@ -8,6 +8,7 @@ from log.clogger import Logger
 from modules.ui.banner import print_banner
 from modules.ui.prompt.prompt import ChadPrompt
 from modules.utils.exception import ChadProgramExit
+from modules.ui.cli.chadcli import ChadCLI
 
 
 class ChadArgumentParser:
@@ -29,36 +30,45 @@ class ChadArgumentParser:
             "-i", "--interactive", action="store_true", help="Run in interactive mode."
         )
         # Command line argument mode, not applicable for interactive mode
-        # interactive mode is pulled from the defined config file
+        # interactive mode pulls from the default config file
         self.parser.add_argument(
             "-s", "--start", action="store_true", help="Start the application."
         )
         self.parser.add_argument(
             "--interface",
-            action="store_true",
-            dest="interface",
+            nargs="?",
+            default="any",
+            type=str,
             help="The network interface to use.",
+            metavar="INTERFACE",
+            dest="interface",
         )
         self.parser.add_argument(
             "-t",
             "--ip",
-            action="store_true",
-            dest="ip_address",
+            nargs="?",
+            default="127.0.0.1",
             help="The IP address to use.",
+            metavar="IP_ADDRESS",
+            dest="ip_address",
         )
         self.parser.add_argument(
             "-p",
             "--port",
-            action="store_true",
-            dest="port",
+            nargs="?",
+            default=22,
+            type=int,
             help="The port on the target to use.",
+            metavar="PORT",
+            dest="port",
         )
         self.run()
 
     def run(self) -> None:
         args = self.parser.parse_args()
         if args.start:
-            pass
+            chadcli = ChadCLI(args.interface, args.ip_address, args.port)
+            chadcli.run()
         elif args.interactive:
             prompt = ChadPrompt(self.loop)
             prompt.start_prompt()

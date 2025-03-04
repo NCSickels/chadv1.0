@@ -99,7 +99,7 @@ You can find the sponsor's project proposal slide below.
 - Wi-Fi/Ethernet Adapter that supports promiscuous mode.
 - Python 3.12 (or later)
 - Apt Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`, `wireshark`, `tshark`.
-- Pip Packages: `rich`, `colorama`, `termcolor`, `pyshark`, `prompt_toolkit`, `attrs`, `asyncio`, `nest_asyncio`.
+- Pip Packages: `rich`, `colorama`, `termcolor`, `pyshark`, `prompt_toolkit`, `attrs`, `asyncio`, `nest_asyncio`, `scapy`.
 
 ## Testbed Configuration
 
@@ -459,7 +459,7 @@ echo “masscan -p1-65535 192.168.1.100 --rate=1000” > scan3.txt
 
 - Python 3.12 (or later)
 - Apt Packages: `wireshark`, `tshark`.
-- Pip Packages: `rich`, `colorama`, `termcolor`, `pyshark`, `prompt_toolkit`, `attrs`, `asyncio`, `nest_asyncio`.
+- Pip Packages: `rich`, `colorama`, `termcolor`, `pyshark`, `prompt_toolkit`, `attrs`, `asyncio`, `nest_asyncio`, `scapy`.
 
 ### Installation - Active Defense Tool *(WIP)*
 

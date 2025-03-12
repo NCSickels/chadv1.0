@@ -184,6 +184,7 @@ class Logger(metaclass=Singleton):
     _logger: logging.Logger = None
 
     def __init__(self):
+        super().__init__()
         if settings.color_log_file:
             pass
         else:
@@ -197,6 +198,16 @@ class Logger(metaclass=Singleton):
         Returns the logger instance.
         """
         return cls._logger
+
+    @classmethod
+    def setLevel(cls, level: int) -> None:
+        """
+        Sets the logging level for the logger.
+
+        Args:
+            level (int): The logging level to be set.
+        """
+        cls._logger.setLevel(level)
 
     @classmethod
     def debug(cls, message: str):  # Severity: 10

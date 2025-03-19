@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html><head>
+<title> Test Manager </title>
+
+<style type="text/css">
+.orag-line, .break {background-color: #ff7b42;}
+.blue-line {background-color: #000080;}
+.break-p {background-color: #000084;}
+.break-p, .break {border-radius:10px;}
+div {padding:0;margin:0;}
+h2,h3,.header {text-align:center;}
+table td {text-align:left;}
+table {margin:auto;}
+ p.pagebreak {page-break-before: always}
+ p.nopagebreak {page-break-after: never}
+ p.shiftleft {margin-left:-54.0pt}
+ ul {padding-left: 20px;}
+ br.pagebreak {page-break-before: always}
+</style>
+
+<script type="text/javascript">
+function inIframe () {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+}
+function checkPath (elm) {
+  if(window.parent != undefined) {
+    try {
+      if(window.parent.TBpublish != undefined) {
+        var link = elm.getAttribute('href');
+        var parts = link.split('/');
+        if(parts.length == 1)
+        {
+          parts = link.split('\\');
+        }
+        link = elm.getAttribute('id') + '/' + parts[parts.length-1];
+        elm.setAttribute('href', link);
+      }
+    }
+    catch (e) {
+      if(inIframe ()) {
+        var link = elm.getAttribute('href');
+        var parts = link.split('/');
+        if(parts.length == 1)
+        {
+          parts = link.split('\\');
+        }
+        link = elm.getAttribute('id') + '/' + parts[parts.length-1];
+        elm.setAttribute('href', link);
+      }
+    }
+  }
+}
+</script>
+<SCRIPT LANGUAGE="Javascript" SRC="imagejs.js"> 
+// -->
+</SCRIPT>
+</head><body bgcolor="#FFFFF2"  > 
+
+<div class="break"style="width:80%;height:10px;margin:0px auto;display:block;"></div>
+<BR>
+<a id="top_of_rep">
+</a><BR>
+<Style type='text/css'><!--A.set1:link{color:#FBFCC8;background:none transparent;text-decoration: none}A.set1:visited{color:#FBFCC8;background:none transparent;text-decoration: none}A.set1:active{color:#FBFCC8;background:none transparent;text-decoration: none}A:link{color:BLUE;background:none transparent;text-decoration: none}A:visited{color:BLUE;background:none transparent;text-decoration: none}A:active{color:BLUE;background:none transparent;text-decoration: none}--></style><CENTER><font size='9'><b> LDRA Testbed &reg Test Manager Report </font></b>
+</CENTER>
+<CENTER><font size='9'><b>  </font></b>
+</CENTER>
+<CENTER><H1> File : /home/student/ncs0016/senior_design/gen-ai/tool3/copilot_multi_thread_bg.c </H1>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<BR>
+ <CENTER> <TABLE bgcolor="#D7EDED" BORDER WIDTH=60% >
+<TR><th >  Report Production </th><th >  Report Configuration </th></TR>
+<TR><td > <ul><li>C/C++ LDRA Testbed Version: 9.8.2</li></ul> </td><td > <ul><li>Report Format: Procedure Listing</li><li>Reporting Scope: Source file and associated header</li></ul> </td></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<a id="standards_table">
+</a><BR>
+<CENTER> <h2>Code Review Report
+</h2>
+</CENTER>
+ <BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+</TR>
+<TR ALIGN=LEFT><th colspan = 11> <TT> &nbsp; </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> Quality Result </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> Uniq Violations </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> No in Function  </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> Breakdown </TT> </th> <th WIDTH=1%> &nbsp;</th>
+</TR>
+<TR ALIGN=LEFT><th colspan = 22> <TT> &nbsp; </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> % in Function </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> &nbsp; </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> of Violations </TT> </th> <th WIDTH=1%> &nbsp;</th>
+</TR>
+<TR ALIGN=LEFT><td colspan=11>  <a href='copilot_multi_thread_bg_447.rpf.htm#main_copilot_multi_thread_bg.c_copilot_multi_thread_bg.c_2'> main </a>  </td> <td></td><td colspan=11> <font color="#FF0000"> Fail </font> </td> <td></td><td colspan=4 bgcolor="#5FC05A"> 38 </td> <td colspan=7 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=11>  <font color="#A39F9F"> Unique violations - 8  </td> <td></td><td colspan=11>  <font color="#A39F9F">  1-M   5-C   2-O   </td> <td></td></TR>
+<TR ALIGN=LEFT><td colspan=11>  <a href='copilot_multi_thread_bg_447.rpf.htm#grab_banner_copilot_multi_thread_bg.c_copilot_multi_thread_bg.c_1'> grab_banner </a>  </td> <td></td><td colspan=11> <font color="#FF0000"> Fail </font> </td> <td></td><td colspan=7 bgcolor="#5FC05A"> 62 </td> <td colspan=4 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=11>  <font color="#A39F9F"> Unique violations - 13  </td> <td></td><td colspan=11>  <font color="#A39F9F">  2-M   8-C   3-O   </td> <td></td></TR>
+<TR ALIGN=LEFT><td colspan=11>  &nbsp;  </td> <td></td><td colspan=11>  &nbsp;  </td> <td></td><td colspan=11>  &nbsp;  </td> <td></td><td colspan=11>  <font color="#A39F9F"> (21 out of 375 checked)  </td> <td></td></TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<a id="metrics_table">
+</a><BR>
+<CENTER> <h2>Quality Review Report
+</h2>
+</CENTER>
+ <BR>
+ <CENTER> <TABLE BORDER bgcolor="#ECE2E2" WIDTH=80% >  <TR> <TD>
+<TABLE bgcolor="#ECE2E2" WIDTH=100% >
+<TR>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+<th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th><th width=5></th>
+</TR>
+<TR><th colspan = 11> <TT> &nbsp; </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> Testability </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> Maintainability </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> Clarity </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th colspan = 11 WIDTH=19%> <TT> All Metrics </TT> </th> <th WIDTH=1%> &nbsp;</th>
+</TR>
+<TR><th colspan = 55 WIDTH=99%> <TT> &nbsp; </TT> </th> <th WIDTH=1%> &nbsp;</th>
+<th WIDTH=1%> &nbsp;</th>
+<th WIDTH=1%> &nbsp;</th>
+<th WIDTH=1%> &nbsp;</th>
+<th WIDTH=1%> &nbsp;</th>
+</TR>
+<TR><td colspan=11>  <a href='copilot_multi_thread_bg_447.met.htm#main_copilot_multi_thread_bg.c'> main </a>  </td> <td></td><td colspan=7 bgcolor="#AFE1AB"> 62 </td> <td colspan=4 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=3 bgcolor="#AFE1AB"> 25 </td> <td colspan=8 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=5 bgcolor="#AFE1AB"> 40 </td> <td colspan=6 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=6 bgcolor="#AFE1AB"> 52 </td> <td colspan=5 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+</TR>
+<TR><td colspan=11>  <a href='copilot_multi_thread_bg_447.met.htm#grab_banner_copilot_multi_thread_bg.c'> grab_banner </a>  </td> <td></td><td colspan=9 bgcolor="#AFE1AB"> 88 </td> <td colspan=2 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=11 bgcolor="#5FC05A"><font color="white"> 100 </font></td><td></td>
+<td colspan=8 bgcolor="#AFE1AB"> 70 </td> <td colspan=3 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+<td colspan=9 bgcolor="#AFE1AB"> 85 </td> <td colspan=2 bgcolor="#E17B87"> <font color="#E17B87"> - </font> </td><td></td>
+</TR>
+</TD> </TR>
+</TABLE>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+ <CENTER> <TABLE bgcolor="#FFFFF2" >
+<TR><th >  [ </th><td > <a href="#top_of_rep">Top of Report</a> </td><th >  ]
+ </th></TR>
+</TABLE>
+</CENTER>
+<BR>
+<BR>
+<CENTER><H3> End of Test Manager Report </H3>
+</CENTER>
+<CENTER><H3>  </H3>
+</CENTER>
+<CENTER><H3> Copyright &copy 2019 Liverpool Data Research Associates </H3>
+</CENTER>
+<center>
+<img src='/apps/ldra2019/ldra_toolsuite/images//blue_line.gif' width='80%' height='10'>
+</center>

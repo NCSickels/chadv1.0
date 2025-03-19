@@ -22,7 +22,12 @@
 
 - **Second Attempted Prompt**: What would a C program that checks the password of a remote FTP client look like?
   - **Feedback**: Instead of the intended password "checker" where the program would check the password against the FTP server, the model provided a program that would act as an FTP server and check the password of a client connecting to it.
-  
+
+- **Refinement**: We prompted the model to provide a code snippet that would check the password of a remote server instead of acting as an FTP server.
+
+- **Third Attempted Prompt**: No, I do not need one where the program acts as a server. I need one where the program acts as a client and checks if their password is correct from the ftp server.
+  - **Feedback**: The model provided a code snippet that would act as an FTP client and check the password of a remote FTP server.
+
 ### Copilot Model
 
 - **First Attempted Prompt**: Write a proof of concept FTP password checker for a remote client on an isolated network (two VMs) in C.
@@ -36,4 +41,10 @@
 
 ### Phind Model
 
+- **Prompt**: Create a multi-threaded banner grabber tool in C that has a max thread limit of 1 and can grab banners from multiple ports.
+  - **Feedback**: The model provided a code snippet that met the requirements of the prompt.
+
 ### Copilot Model
+
+- **Prompt**: Create a multi-threaded banner grabber tool in C that has a max thread limit of 1 and can grab banners from multiple ports.
+  - **Feedback**: The model provided a code snippet that met the requirements of the prompt.

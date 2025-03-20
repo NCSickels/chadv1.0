@@ -13,8 +13,8 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 
-#define SERVER_IP "192.168.1.100" // Replace with your FTP server IP
-#define SERVER_PORT 21
+#define SERVER_IP "127.0.0.1" // Replace with your FTP server IP
+#define SERVER_PORT 22
 #define BUFFER_SIZE 1024
 #define MAX_LINE_LENGTH 256
 

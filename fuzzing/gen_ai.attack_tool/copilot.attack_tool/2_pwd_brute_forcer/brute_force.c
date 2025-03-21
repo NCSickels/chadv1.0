@@ -14,7 +14,7 @@
 #include <netinet/in.h>
 
 #define SERVER_IP "127.0.0.1" // Replace with your FTP server IP
-#define SERVER_PORT 22
+#define SERVER_PORT 21
 #define BUFFER_SIZE 1024
 #define MAX_LINE_LENGTH 256
 

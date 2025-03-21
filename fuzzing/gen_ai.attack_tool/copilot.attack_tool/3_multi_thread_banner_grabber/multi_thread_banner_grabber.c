@@ -1,3 +1,5 @@
+// Usage: ./multi_thread_banner_grabber <targets_file>
+// Targets file format: <ip> <port>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

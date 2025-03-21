@@ -63,7 +63,7 @@ You can find the sponsor's project proposal slide below.
 
 ![System Diagram](.github/.assets/Chad-System-Overview-Diagram-Background.png)
 
-![Overview Diagram](.github/.assets/chad-diagram-v2.2.png)
+![Overview Diagram](.github/.assets/chad-diagram-v2.2_background.png)
 
 ### Project Directory Structure
 

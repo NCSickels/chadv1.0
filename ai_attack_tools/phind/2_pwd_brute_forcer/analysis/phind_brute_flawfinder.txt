@@ -1,0 +1,90 @@
+================================ Source Code Analysis =================================
+Flawfinder version 1.31, (C) 2001-2014 David A. Wheeler.
+Number of rules (primarily dangerous function names) in C/C++ ruleset: 169
+Examining phind_brute.c
+
+FINAL RESULTS:
+
+phind_brute.c:18:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119:CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+phind_brute.c:85:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119:CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+phind_brute.c:92:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119:CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+phind_brute.c:38:  [1] (buffer) strlen:
+  Does not handle strings that are not \0-terminated; if given one it may
+  perform an over-read (it could cause a crash if unprotected) (CWE-126).
+phind_brute.c:38:  [1] (buffer) strlen:
+  Does not handle strings that are not \0-terminated; if given one it may
+  perform an over-read (it could cause a crash if unprotected) (CWE-126).
+phind_brute.c:42:  [1] (buffer) strlen:
+  Does not handle strings that are not \0-terminated; if given one it may
+  perform an over-read (it could cause a crash if unprotected) (CWE-126).
+phind_brute.c:95:  [1] (port) snprintf:
+  On some very old systems, snprintf is incorrectly implemented and permits
+  buffer overflows; there are also incompatible standard definitions of it.
+  Check it during installation, or use something else.
+phind_brute.c:96:  [1] (buffer) strlen:
+  Does not handle strings that are not \0-terminated; if given one it may
+  perform an over-read (it could cause a crash if unprotected) (CWE-126).
+phind_brute.c:104:  [1] (port) snprintf:
+  On some very old systems, snprintf is incorrectly implemented and permits
+  buffer overflows; there are also incompatible standard definitions of it.
+  Check it during installation, or use something else.
+phind_brute.c:105:  [1] (buffer) strlen:
+  Does not handle strings that are not \0-terminated; if given one it may
+  perform an over-read (it could cause a crash if unprotected) (CWE-126).
+
+ANALYSIS SUMMARY:
+
+Hits = 10
+Lines analyzed = 109 in approximately 0.00 seconds (41336 lines/second)
+Physical Source Lines of Code (SLOC) = 75
+Hits@level = [0]   0 [1]   7 [2]   3 [3]   0 [4]   0 [5]   0
+Hits@level+ = [0+]  10 [1+]  10 [2+]   3 [3+]   0 [4+]   0 [5+]   0
+Hits/KSLOC@level+ = [0+] 133.333 [1+] 133.333 [2+]  40 [3+]   0 [4+]   0 [5+]   0
+Minimum risk level = 1
+Not every hit is necessarily a security vulnerability.
+There may be other security vulnerabilities; review your code!
+See 'Secure Programming for Linux and Unix HOWTO'
+(http://www.dwheeler.com/secure-programs) for more information.
+
+
+
+================================ Compiled Binary Analysis =================================
+Flawfinder version 1.31, (C) 2001-2014 David A. Wheeler.
+Number of rules (primarily dangerous function names) in C/C++ ruleset: 169
+Examining phind_brute
+
+FINAL RESULTS:
+
+phind_brute:2:  [4] (format) snprintf:
+  If format strings can be influenced by an attacker, they can be exploited,
+  and note that sprintf variations do not always \0-terminate (CWE-134). Use
+  a constant for the format specification.
+phind_brute:2:  [1] (buffer) strlen:
+  Does not handle strings that are not \0-terminated; if given one it may
+  perform an over-read (it could cause a crash if unprotected) (CWE-126).
+
+ANALYSIS SUMMARY:
+
+Hits = 2
+Lines analyzed = 66 in approximately 0.01 seconds (7802 lines/second)
+Physical Source Lines of Code (SLOC) = 33
+Hits@level = [0]   0 [1]   1 [2]   0 [3]   0 [4]   1 [5]   0
+Hits@level+ = [0+]   2 [1+]   2 [2+]   1 [3+]   1 [4+]   1 [5+]   0
+Hits/KSLOC@level+ = [0+] 60.6061 [1+] 60.6061 [2+] 30.303 [3+] 30.303 [4+] 30.303 [5+]   0
+Minimum risk level = 1
+Not every hit is necessarily a security vulnerability.
+There may be other security vulnerabilities; review your code!
+See 'Secure Programming for Linux and Unix HOWTO'
+(http://www.dwheeler.com/secure-programs) for more information.

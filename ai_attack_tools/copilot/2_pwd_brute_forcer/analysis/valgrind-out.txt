@@ -1,0 +1,673 @@
+==2147== Memcheck, a memory error detector
+==2147== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2147== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==2147== Command: ./brute_force creds.txt
+==2147== Parent PID: 675
+==2147== 
+--2147-- 
+--2147-- Valgrind options:
+--2147--    --leak-check=full
+--2147--    --show-leak-kinds=all
+--2147--    --track-origins=yes
+--2147--    --verbose
+--2147--    --log-file=valgrind-out.txt
+--2147-- Contents of /proc/version:
+--2147--   Linux version 5.15.167.4-microsoft-standard-WSL2 (root@f9c826d3017f) (gcc (GCC) 11.2.0, GNU ld (GNU Binutils) 2.37) #1 SMP Tue Nov 5 00:21:55 UTC 2024
+--2147-- 
+--2147-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--2147-- Page sizes: currently 4096, max supported 4096
+--2147-- Valgrind library directory: /usr/libexec/valgrind
+--2147-- Reading syms from /mnt/c/Users/Noah/Documents/chadv1.0/chadv1.0/fuzzing/gen_ai.attack_tool/copilot.attack_tool/2_pwd_brute_forcer/brute_force
+--2147-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--2147--   Considering /usr/lib/debug/.build-id/e4/de036b19e4768e7591b596c4be9f9015f2d28a.debug ..
+--2147--   .. build-id is valid
+--2147-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--2147--    object doesn't have a symbol table
+--2147--    object doesn't have a dynamic symbol table
+--2147-- Scheduler: using generic scheduler lock implementation.
+--2147-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==2147== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-2147-by-nsickels-on-???
+==2147== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-2147-by-nsickels-on-???
+==2147== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-2147-by-nsickels-on-???
+==2147== 
+==2147== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==2147== don't want to do, unless you know exactly what you're doing,
+==2147== or are doing some strange experiment):
+==2147==   /usr/bin/vgdb --pid=2147 ...command...
+==2147== 
+==2147== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==2147==   /path/to/gdb ./brute_force
+==2147== and then give GDB the following command
+==2147==   target remote | /usr/bin/vgdb --pid=2147
+==2147== --pid is optional if only one valgrind process is running
+==2147== 
+--2147-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
+--2147-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
+--2147-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--2147--    object doesn't have a symbol table
+--2147-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--2147--    object doesn't have a symbol table
+==2147== WARNING: new redirection conflicts with existing -- ignoring it
+--2147--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
+--2147--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
+--2147-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
+--2147-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
+--2147-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--2147--   Considering /usr/lib/debug/.build-id/cd/410b710f0f094c6832edd95931006d883af48e.debug ..
+--2147--   .. build-id is valid
+==2147== WARNING: new redirection conflicts with existing -- ignoring it
+--2147--     old: 0x04909c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--2147--     new: 0x04909c60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==2147== WARNING: new redirection conflicts with existing -- ignoring it
+--2147--     old: 0x04909c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--2147--     new: 0x04909c60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+==2147== WARNING: new redirection conflicts with existing -- ignoring it
+--2147--     old: 0x04909c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--2147--     new: 0x04909c60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==2147== WARNING: new redirection conflicts with existing -- ignoring it
+--2147--     old: 0x04909c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--2147--     new: 0x04909c60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+--2147-- REDIR: 0x490c720 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490c9e0 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490c2e0 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x492acd0 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490d6d0 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x4929540 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490dc10 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x4929370 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490c260 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490c960 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490d5a0 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+==2147== Preferring higher priority redirection:
+--2147--     old: 0x04a047c0 (__memcpy_avx_unalign) R-> (2018.0) 0x04850f90 __memcpy_avx_unaligned_erms
+--2147--     new: 0x04a047c0 (__memcpy_avx_unalign) R-> (2018.1) 0x04852880 memmove
+--2147-- REDIR: 0x49293f0 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490d9e0 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x49299b0 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490c830 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490da70 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490c420 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x4929470 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490c1d0 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490db60 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490d480 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x4915570 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490f010 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490c390 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490db10 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490c6a0 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490c8d0 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490d950 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490d3f0 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490cb00 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490d7d0 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490dac0 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490ef80 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x490d310 (libc.so.6:strstr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2147-- REDIR: 0x4a01610 (libc.so.6:__strrchr_avx2) redirected to 0x484e810 (rindex)
+--2147-- REDIR: 0x49090a0 (libc.so.6:malloc) redirected to 0x4848820 (malloc)
+--2147-- REDIR: 0x490cfc0 (libc.so.6:__GI_strstr) redirected to 0x4853ae0 (__strstr_sse2)
+--2147-- REDIR: 0x49fd2c0 (libc.so.6:__memchr_avx2) redirected to 0x484fd50 (memchr)
+--2147-- REDIR: 0x4a047c0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4852880 (memmove)
+--2147-- REDIR: 0x49fd590 (libc.so.6:__rawmemchr_avx2) redirected to 0x4853360 (rawmemchr)
+--2147-- REDIR: 0x4a017e0 (libc.so.6:__strlen_avx2) redirected to 0x484ed10 (strlen)
+--2147-- REDIR: 0x4a039a0 (libc.so.6:__stpcpy_avx2) redirected to 0x4852130 (stpcpy)
+--2147-- REDIR: 0x4a04780 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4853440 (mempcpy)
+--2147-- REDIR: 0x49093e0 (libc.so.6:free) redirected to 0x484b210 (free)
+--2147-- REDIR: 0x4a01400 (libc.so.6:__strchrnul_avx2) redirected to 0x4853330 (strchrnul)
+==2147== 
+==2147== HEAP SUMMARY:
+==2147==     in use at exit: 472 bytes in 1 blocks
+==2147==   total heap usage: 4 allocs, 3 frees, 6,064 bytes allocated
+==2147== 
+==2147== Searching for pointers to 1 not-freed blocks
+==2147== Checked 108,552 bytes
+==2147== 
+==2147== 472 bytes in 1 blocks are still reachable in loss record 1 of 1
+==2147==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2147==    by 0x48E364D: __fopen_internal (iofopen.c:65)
+==2147==    by 0x48E364D: fopen@@GLIBC_2.2.5 (iofopen.c:86)
+==2147==    by 0x109685: load_credentials_and_check (in /mnt/c/Users/Noah/Documents/chadv1.0/chadv1.0/fuzzing/gen_ai.attack_tool/copilot.attack_tool/2_pwd_brute_forcer/brute_force)
+==2147==    by 0x109797: main (in /mnt/c/Users/Noah/Documents/chadv1.0/chadv1.0/fuzzing/gen_ai.attack_tool/copilot.attack_tool/2_pwd_brute_forcer/brute_force)
+==2147== 
+==2147== LEAK SUMMARY:
+==2147==    definitely lost: 0 bytes in 0 blocks
+==2147==    indirectly lost: 0 bytes in 0 blocks
+==2147==      possibly lost: 0 bytes in 0 blocks
+==2147==    still reachable: 472 bytes in 1 blocks
+==2147==         suppressed: 0 bytes in 0 blocks
+==2147== 
+==2147== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==17103== Memcheck, a memory error detector
+==17103== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==17103== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==17103== Command: ./copilot_brute pwd.txt
+==17103== Parent PID: 5151
+==17103== 
+--17103-- 
+--17103-- Valgrind options:
+--17103--    --leak-check=full
+--17103--    --show-leak-kinds=all
+--17103--    --track-origins=yes
+--17103--    --verbose
+--17103--    --log-file=copilot_brute_val.txt
+--17103-- Contents of /proc/version:
+--17103--   Linux version 5.4.0-150-generic (buildd@bos03-amd64-012) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #167~18.04.1-Ubuntu SMP Wed May 24 00:51:42 UTC 2023
+--17103-- 
+--17103-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3
+--17103-- Page sizes: currently 4096, max supported 4096
+--17103-- Valgrind library directory: /usr/lib/valgrind
+--17103-- Reading syms from /home/nsickels/ai_tools/copilot_brute
+--17103-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
+--17103--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
+--17103--   .. CRC mismatch (computed 2977d8b2 wanted c64f09ed)
+--17103--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
+--17103--   .. CRC is valid
+--17103-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--17103--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--17103--   .. CRC mismatch (computed 41ddb025 wanted 9972f546)
+--17103--    object doesn't have a symbol table
+--17103--    object doesn't have a dynamic symbol table
+--17103-- Scheduler: using generic scheduler lock implementation.
+--17103-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==17103== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-17103-by-nsickels-on-???
+==17103== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-17103-by-nsickels-on-???
+==17103== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-17103-by-nsickels-on-???
+==17103== 
+==17103== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==17103== don't want to do, unless you know exactly what you're doing,
+==17103== or are doing some strange experiment):
+==17103==   /usr/lib/valgrind/../../bin/vgdb --pid=17103 ...command...
+==17103== 
+==17103== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==17103==   /path/to/gdb ./copilot_brute
+==17103== and then give GDB the following command
+==17103==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=17103
+==17103== --pid is optional if only one valgrind process is running
+==17103== 
+--17103-- REDIR: 0x4020d20 (ld-linux-x86-64.so.2:strlen) redirected to 0x580608c1 (???)
+--17103-- REDIR: 0x4020b00 (ld-linux-x86-64.so.2:index) redirected to 0x580608db (???)
+--17103-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--17103--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--17103--   .. CRC mismatch (computed 50df1b30 wanted 4800a4cf)
+--17103--    object doesn't have a symbol table
+--17103-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--17103--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--17103--   .. CRC mismatch (computed f893b962 wanted 95ee359e)
+--17103--    object doesn't have a symbol table
+==17103== WARNING: new redirection conflicts with existing -- ignoring it
+--17103--     old: 0x04020d20 (strlen              ) R-> (0000.0) 0x580608c1 ???
+--17103--     new: 0x04020d20 (strlen              ) R-> (2007.0) 0x04c34db0 strlen
+--17103-- REDIR: 0x401d540 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c35ee0 (strcmp)
+--17103-- REDIR: 0x4021260 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c394f0 (mempcpy)
+--17103-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
+--17103--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
+--17103--   .. CRC mismatch (computed f250d419 wanted 4aacab51)
+--17103--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
+--17103--   .. CRC is valid
+--17103-- REDIR: 0x4edca50 (libc.so.6:memmove) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edbd60 (libc.so.6:strncpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edcd30 (libc.so.6:strcasecmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edb7b0 (libc.so.6:strcat) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edbd90 (libc.so.6:rindex) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4ede480 (libc.so.6:rawmemchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edcbc0 (libc.so.6:mempcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edc9f0 (libc.so.6:bcmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edbd20 (libc.so.6:strncmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edb820 (libc.so.6:strcmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edcb20 (libc.so.6:memset) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4ef9db0 (libc.so.6:wcschr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edbcc0 (libc.so.6:strnlen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edb890 (libc.so.6:strcspn) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edcd80 (libc.so.6:strncasecmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edb860 (libc.so.6:strcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edcec0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edbdc0 (libc.so.6:strpbrk) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edb7e0 (libc.so.6:index) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edbc90 (libc.so.6:strlen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4ee6380 (libc.so.6:memrchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edcdd0 (libc.so.6:strcasecmp_l) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edc9c0 (libc.so.6:memchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4efab70 (libc.so.6:wcslen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edc070 (libc.so.6:strspn) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edcd00 (libc.so.6:stpncpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edccd0 (libc.so.6:stpcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4ede4b0 (libc.so.6:strchrnul) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edce20 (libc.so.6:strncasecmp_l) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4edc900 (libc.so.6:strstr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--17103-- REDIR: 0x4eeeff0 (libc.so.6:__strrchr_sse2) redirected to 0x4c34790 (__strrchr_sse2)
+--17103-- REDIR: 0x4ed5020 (libc.so.6:malloc) redirected to 0x4c31aa0 (malloc)
+--17103-- REDIR: 0x4edc5a0 (libc.so.6:__GI_strstr) redirected to 0x4c39760 (__strstr_sse2)
+--17103-- REDIR: 0x4ee9630 (libc.so.6:__memchr_sse2) redirected to 0x4c35f80 (memchr)
+--17103-- REDIR: 0x4ef9120 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4c36060 (memcpy@GLIBC_2.2.5)
+--17103-- REDIR: 0x4ee9960 (libc.so.6:__rawmemchr_sse2) redirected to 0x4c39050 (rawmemchr)
+--17103-- REDIR: 0x4eeede0 (libc.so.6:__strchrnul_sse2) redirected to 0x4c39020 (strchrnul)
+--17103-- REDIR: 0x4eef2e0 (libc.so.6:__strlen_sse2) redirected to 0x4c34d30 (__strlen_sse2)
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4C34D48: __strlen_sse2 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x4E9B4A2: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108CE0: check_ftp_password (copilot_brute.c:51)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+--17103-- REDIR: 0x4ef9100 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4c39130 (mempcpy)
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4C34D48: __strlen_sse2 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x4E9B4A2: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108D6A: check_ftp_password (copilot_brute.c:57)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4EC9A05: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1241)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108D6A: check_ftp_password (copilot_brute.c:57)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4ECB2DD: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:789)
+==17103==    by 0x4ECC443: _IO_default_xsputn (genops.c:417)
+==17103==    by 0x4EC99D2: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1287)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108D6A: check_ftp_password (copilot_brute.c:57)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4ECB30A: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:797)
+==17103==    by 0x4ECC443: _IO_default_xsputn (genops.c:417)
+==17103==    by 0x4EC99D2: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1287)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108D6A: check_ftp_password (copilot_brute.c:57)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4ECC447: _IO_default_xsputn (genops.c:417)
+==17103==    by 0x4EC99D2: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1287)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108D6A: check_ftp_password (copilot_brute.c:57)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4C34D48: __strlen_sse2 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x4E9B4A2: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108DF4: check_ftp_password (copilot_brute.c:63)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4EC9A05: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1241)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108DF4: check_ftp_password (copilot_brute.c:63)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== Syscall param write(buf) points to uninitialised byte(s)
+==17103==    at 0x4F4E104: write (write.c:27)
+==17103==    by 0x4EC915C: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1203)
+==17103==    by 0x4ECAF00: new_do_write (fileops.c:457)
+==17103==    by 0x4ECAF00: _IO_do_write@@GLIBC_2.2.5 (fileops.c:433)
+==17103==    by 0x4EC998C: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108DF4: check_ftp_password (copilot_brute.c:63)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Address 0x52302f0 is 0 bytes inside a block of size 1,024 alloc'd
+==17103==    at 0x4C31B0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x4EBC13B: _IO_file_doallocate (filedoalloc.c:101)
+==17103==    by 0x4ECC328: _IO_doallocbuf (genops.c:365)
+==17103==    by 0x4ECB447: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==17103==    by 0x4EC998C: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==17103==    by 0x4E99503: vfprintf (vfprintf.c:1328)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108CE0: check_ftp_password (copilot_brute.c:51)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+--17103-- REDIR: 0x4ef8a70 (libc.so.6:__strstr_sse2_unaligned) redirected to 0x4c396e0 (strstr)
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4C3971C: strstr (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x108E0A: check_ftp_password (copilot_brute.c:66)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4C39721: strstr (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x108E0A: check_ftp_password (copilot_brute.c:66)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+--17103-- REDIR: 0x4ed5910 (libc.so.6:free) redirected to 0x4c32cd0 (free)
+==17103== 
+==17103== HEAP SUMMARY:
+==17103==     in use at exit: 0 bytes in 0 blocks
+==17103==   total heap usage: 3 allocs, 3 frees, 5,672 bytes allocated
+==17103== 
+==17103== All heap blocks were freed -- no leaks are possible
+==17103== 
+==17103== ERROR SUMMARY: 18 errors from 11 contexts (suppressed: 0 from 0)
+==17103== 
+==17103== 1 errors in context 1 of 11:
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4C39721: strstr (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x108E0A: check_ftp_password (copilot_brute.c:66)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== 
+==17103== 1 errors in context 2 of 11:
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4EC9A05: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1241)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108DF4: check_ftp_password (copilot_brute.c:63)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== 
+==17103== 1 errors in context 3 of 11:
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4EC9A05: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1241)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108D6A: check_ftp_password (copilot_brute.c:57)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== 
+==17103== 1 errors in context 4 of 11:
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4C34D48: __strlen_sse2 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x4E9B4A2: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108CE0: check_ftp_password (copilot_brute.c:51)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== 
+==17103== 2 errors in context 5 of 11:
+==17103== Syscall param write(buf) points to uninitialised byte(s)
+==17103==    at 0x4F4E104: write (write.c:27)
+==17103==    by 0x4EC915C: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1203)
+==17103==    by 0x4ECAF00: new_do_write (fileops.c:457)
+==17103==    by 0x4ECAF00: _IO_do_write@@GLIBC_2.2.5 (fileops.c:433)
+==17103==    by 0x4EC998C: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108DF4: check_ftp_password (copilot_brute.c:63)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Address 0x52302f0 is 0 bytes inside a block of size 1,024 alloc'd
+==17103==    at 0x4C31B0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x4EBC13B: _IO_file_doallocate (filedoalloc.c:101)
+==17103==    by 0x4ECC328: _IO_doallocbuf (genops.c:365)
+==17103==    by 0x4ECB447: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==17103==    by 0x4EC998C: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==17103==    by 0x4E99503: vfprintf (vfprintf.c:1328)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108CE0: check_ftp_password (copilot_brute.c:51)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== 
+==17103== 2 errors in context 6 of 11:
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4C3971C: strstr (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x108E0A: check_ftp_password (copilot_brute.c:66)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== 
+==17103== 2 errors in context 7 of 11:
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4ECC447: _IO_default_xsputn (genops.c:417)
+==17103==    by 0x4EC99D2: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1287)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108D6A: check_ftp_password (copilot_brute.c:57)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== 
+==17103== 2 errors in context 8 of 11:
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4ECB30A: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:797)
+==17103==    by 0x4ECC443: _IO_default_xsputn (genops.c:417)
+==17103==    by 0x4EC99D2: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1287)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108D6A: check_ftp_password (copilot_brute.c:57)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== 
+==17103== 2 errors in context 9 of 11:
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4ECB2DD: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:789)
+==17103==    by 0x4ECC443: _IO_default_xsputn (genops.c:417)
+==17103==    by 0x4EC99D2: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1287)
+==17103==    by 0x4E9AFBA: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108D6A: check_ftp_password (copilot_brute.c:57)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== 
+==17103== 2 errors in context 10 of 11:
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4C34D48: __strlen_sse2 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x4E9B4A2: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108DF4: check_ftp_password (copilot_brute.c:63)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== 
+==17103== 2 errors in context 11 of 11:
+==17103== Conditional jump or move depends on uninitialised value(s)
+==17103==    at 0x4C34D48: __strlen_sse2 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17103==    by 0x4E9B4A2: vfprintf (vfprintf.c:1643)
+==17103==    by 0x4EA2EE5: printf (printf.c:33)
+==17103==    by 0x108D6A: check_ftp_password (copilot_brute.c:57)
+==17103==    by 0x108F1E: load_credentials_and_check (copilot_brute.c:96)
+==17103==    by 0x108FB8: main (copilot_brute.c:111)
+==17103==  Uninitialised value was created by a stack allocation
+==17103==    at 0x108BDE: check_ftp_password (copilot_brute.c:22)
+==17103== 
+==17103== ERROR SUMMARY: 18 errors from 11 contexts (suppressed: 0 from 0)
+
+
+==1781== Memcheck, a memory error detector
+==1781== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1781== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==1781== Command: ./brute_force creds.txt
+==1781== Parent PID: 675
+==1781== 
+--1781-- 
+--1781-- Valgrind options:
+--1781--    --leak-check=full
+--1781--    --show-leak-kinds=all
+--1781--    --track-origins=yes
+--1781--    --verbose
+--1781--    --log-file=valgrind_test2.txt
+--1781-- Contents of /proc/version:
+--1781--   Linux version 5.15.167.4-microsoft-standard-WSL2 (root@f9c826d3017f) (gcc (GCC) 11.2.0, GNU ld (GNU Binutils) 2.37) #1 SMP Tue Nov 5 00:21:55 UTC 2024
+--1781-- 
+--1781-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--1781-- Page sizes: currently 4096, max supported 4096
+--1781-- Valgrind library directory: /usr/libexec/valgrind
+--1781-- Reading syms from /mnt/c/Users/Noah/Documents/chadv1.0/chadv1.0/fuzzing/gen_ai.attack_tool/copilot.attack_tool/2_pwd_brute_forcer/brute_force
+--1781-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--1781--   Considering /usr/lib/debug/.build-id/e4/de036b19e4768e7591b596c4be9f9015f2d28a.debug ..
+--1781--   .. build-id is valid
+--1781-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--1781--    object doesn't have a symbol table
+--1781--    object doesn't have a dynamic symbol table
+--1781-- Scheduler: using generic scheduler lock implementation.
+--1781-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==1781== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-1781-by-nsickels-on-???
+==1781== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-1781-by-nsickels-on-???
+==1781== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-1781-by-nsickels-on-???
+==1781== 
+==1781== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==1781== don't want to do, unless you know exactly what you're doing,
+==1781== or are doing some strange experiment):
+==1781==   /usr/bin/vgdb --pid=1781 ...command...
+==1781== 
+==1781== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==1781==   /path/to/gdb ./brute_force
+==1781== and then give GDB the following command
+==1781==   target remote | /usr/bin/vgdb --pid=1781
+==1781== --pid is optional if only one valgrind process is running
+==1781== 
+--1781-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
+--1781-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
+--1781-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--1781--    object doesn't have a symbol table
+--1781-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--1781--    object doesn't have a symbol table
+==1781== WARNING: new redirection conflicts with existing -- ignoring it
+--1781--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
+--1781--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
+--1781-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
+--1781-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
+--1781-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--1781--   Considering /usr/lib/debug/.build-id/cd/410b710f0f094c6832edd95931006d883af48e.debug ..
+--1781--   .. build-id is valid
+==1781== WARNING: new redirection conflicts with existing -- ignoring it
+--1781--     old: 0x04909c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--1781--     new: 0x04909c60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==1781== WARNING: new redirection conflicts with existing -- ignoring it
+--1781--     old: 0x04909c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--1781--     new: 0x04909c60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+==1781== WARNING: new redirection conflicts with existing -- ignoring it
+--1781--     old: 0x04909c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--1781--     new: 0x04909c60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==1781== WARNING: new redirection conflicts with existing -- ignoring it
+--1781--     old: 0x04909c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--1781--     new: 0x04909c60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+--1781-- REDIR: 0x490c720 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490c9e0 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490c2e0 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x492acd0 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490d6d0 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x4929540 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490dc10 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x4929370 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490c260 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490c960 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490d5a0 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+==1781== Preferring higher priority redirection:
+--1781--     old: 0x04a047c0 (__memcpy_avx_unalign) R-> (2018.0) 0x04850f90 __memcpy_avx_unaligned_erms
+--1781--     new: 0x04a047c0 (__memcpy_avx_unalign) R-> (2018.1) 0x04852880 memmove
+--1781-- REDIR: 0x49293f0 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490d9e0 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x49299b0 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490c830 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490da70 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490c420 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x4929470 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490c1d0 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490db60 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490d480 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x4915570 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490f010 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490c390 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490db10 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490c6a0 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490c8d0 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490d950 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490d3f0 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490cb00 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490d7d0 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490dac0 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490ef80 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x490d310 (libc.so.6:strstr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1781-- REDIR: 0x4a01610 (libc.so.6:__strrchr_avx2) redirected to 0x484e810 (rindex)
+--1781-- REDIR: 0x49090a0 (libc.so.6:malloc) redirected to 0x4848820 (malloc)
+--1781-- REDIR: 0x490cfc0 (libc.so.6:__GI_strstr) redirected to 0x4853ae0 (__strstr_sse2)
+--1781-- REDIR: 0x49fd2c0 (libc.so.6:__memchr_avx2) redirected to 0x484fd50 (memchr)
+--1781-- REDIR: 0x4a047c0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4852880 (memmove)
+--1781-- REDIR: 0x49fd590 (libc.so.6:__rawmemchr_avx2) redirected to 0x4853360 (rawmemchr)
+--1781-- REDIR: 0x4a017e0 (libc.so.6:__strlen_avx2) redirected to 0x484ed10 (strlen)
+--1781-- REDIR: 0x4a039a0 (libc.so.6:__stpcpy_avx2) redirected to 0x4852130 (stpcpy)
+--1781-- REDIR: 0x4a04780 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4853440 (mempcpy)
+--1781-- REDIR: 0x49093e0 (libc.so.6:free) redirected to 0x484b210 (free)
+--1781-- REDIR: 0x4a01400 (libc.so.6:__strchrnul_avx2) redirected to 0x4853330 (strchrnul)
+==1781== 
+==1781== HEAP SUMMARY:
+==1781==     in use at exit: 472 bytes in 1 blocks
+==1781==   total heap usage: 4 allocs, 3 frees, 6,064 bytes allocated
+==1781== 
+==1781== Searching for pointers to 1 not-freed blocks
+==1781== Checked 108,584 bytes
+==1781== 
+==1781== 472 bytes in 1 blocks are still reachable in loss record 1 of 1
+==1781==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1781==    by 0x48E364D: __fopen_internal (iofopen.c:65)
+==1781==    by 0x48E364D: fopen@@GLIBC_2.2.5 (iofopen.c:86)
+==1781==    by 0x109685: load_credentials_and_check (brute_force.c:81)
+==1781==    by 0x109797: main (brute_force.c:111)
+==1781== 
+==1781== LEAK SUMMARY:
+==1781==    definitely lost: 0 bytes in 0 blocks
+==1781==    indirectly lost: 0 bytes in 0 blocks
+==1781==      possibly lost: 0 bytes in 0 blocks
+==1781==    still reachable: 472 bytes in 1 blocks
+==1781==         suppressed: 0 bytes in 0 blocks
+==1781== 
+==1781== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

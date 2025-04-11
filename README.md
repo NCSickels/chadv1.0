@@ -28,14 +28,14 @@
   - [Prerequisites - Fuzzing Workflow](#prerequisites---fuzzing-workflow)
   - [Installation - Fuzzing Workflow](#installation---fuzzing-workflow)
     - [Bash Script (Recommended)](#bash-script-recommended)
-    - [Dockerfile *(WIP)*](#dockerfile-wip)
+    - [Dockerfile](#dockerfile)
     - [Manual Installation (Recommended)](#manual-installation-recommended)
   - [Usage - Fuzzing Workflow](#usage---fuzzing-workflow)
     - [Radamsa & Medusa](#radamsa--medusa)
     - [AFLnet & Masscan](#aflnet--masscan)
 - [Active Defense Tool](#active-defense-tool)
   - [Prerequisites - Active Defense Tool](#prerequisites---active-defense-tool)
-  - [Installation - Active Defense Tool *(WIP)*](#installation---active-defense-tool-wip)
+  - [Installation - Active Defense Tool](#installation---active-defense-tool)
     - [Python Virtual Environment (Recommended)](#python-virtual-environment-recommended)
   - [Usage - Replay Service](#usage---replay-service)
 - [Demonstration Video](#demonstration-video)
@@ -264,7 +264,7 @@ sudo ./workflow.sh build
 > [!NOTE]\
 > If you encounter the error: *`-bash: ./workflow.sh: /bin/bash^M: bad interpreter: No such file or directory`*, it is due to the script being in DOS format on a UNIX system. To fix this, you can use the *`dos2unix`* command to convert the script to UNIX format. You can install it through Apt package manager using the command *`sudo apt install dos2unix`*.  
 
-#### Dockerfile *(WIP)*
+#### Dockerfile
 
 ---
 
@@ -461,7 +461,7 @@ echo “masscan -p1-65535 192.168.1.100 --rate=1000” > scan3.txt
 - Apt Packages: `wireshark`, `tshark`.
 - Pip Packages: `rich`, `colorama`, `termcolor`, `pyshark`, `prompt_toolkit`, `attrs`, `asyncio`, `nest_asyncio`, `scapy`.
 
-### Installation - Active Defense Tool *(WIP)*
+### Installation - Active Defense Tool
 
 #### Python Virtual Environment (Recommended)
 
@@ -499,7 +499,7 @@ sudo su
 # Activate the virtual environment
 source env/bin/activate
 
-# (OPTIONAL) Grant raw packet privileges
+# (OPTIONAL- AS NEEDED) Grant raw packet privileges
 sudo setcap cap_net_raw=eip $(which python3)
 
 # Run the replay service in interactive mode

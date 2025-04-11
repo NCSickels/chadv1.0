@@ -540,9 +540,13 @@ python3 chad.py --start --interface <INTERFACE_NAME> --target <TARGET_IP> --port
 - [Ubuntu 20.04 LTS ISO](https://releases.ubuntu.com/focal/)
 - [Metasploitable2](https://www.rapid7.com/products/metasploit/metasploitable/)
 
+### Static Analysis Tools
+
+- [LDRA](https://ldra.com)
+- [Valgrind](https://valgrind.org)
+- [Flawfinder](https://github.com/david-a-wheeler/flawfinder)
+
 ### Miscellaneous Tools
 
 - [dos2unix](https://dos2unix.sourceforge.io)
-- [Valgrind](https://valgrind.org)
-- [LDRA](https://ldra.com)
 - [MD to DOCX Converter (Used for creating user guide)](https://cloudconvert.com/md-to-docx)

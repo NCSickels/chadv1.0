@@ -1,0 +1,105 @@
+================================ Source Code Analysis =================================
+Flawfinder version 1.31, (C) 2001-2014 David A. Wheeler.
+Number of rules (primarily dangerous function names) in C/C++ ruleset: 169
+Examining phind_multi.c
+
+FINAL RESULTS:
+
+phind_multi.c:16:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119:CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+phind_multi.c:18:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119:CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+phind_multi.c:29:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119:CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+phind_multi.c:36:  [2] (buffer) strcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Consider using strcpy_s, strncpy, or strlcpy (warning, strncpy is easily
+  misused). Risk is low because the source is a constant string.
+phind_multi.c:51:  [2] (buffer) strcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Consider using strcpy_s, strncpy, or strlcpy (warning, strncpy is easily
+  misused). Risk is low because the source is a constant string.
+phind_multi.c:63:  [2] (buffer) strcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Consider using strcpy_s, strncpy, or strlcpy (warning, strncpy is easily
+  misused). Risk is low because the source is a constant string.
+phind_multi.c:71:  [1] (buffer) strncpy:
+  Easily used incorrectly; doesn't always \0-terminate or check for invalid
+  pointers (CWE-120).
+phind_multi.c:94:  [1] (buffer) strncpy:
+  Easily used incorrectly; doesn't always \0-terminate or check for invalid
+  pointers (CWE-120).
+phind_multi.c:98:  [1] (buffer) strncpy:
+  Easily used incorrectly; doesn't always \0-terminate or check for invalid
+  pointers (CWE-120).
+
+ANALYSIS SUMMARY:
+
+Hits = 9
+Lines analyzed = 124 in approximately 0.00 seconds (41571 lines/second)
+Physical Source Lines of Code (SLOC) = 97
+Hits@level = [0]   0 [1]   3 [2]   6 [3]   0 [4]   0 [5]   0
+Hits@level+ = [0+]   9 [1+]   9 [2+]   6 [3+]   0 [4+]   0 [5+]   0
+Hits/KSLOC@level+ = [0+] 92.7835 [1+] 92.7835 [2+] 61.8557 [3+]   0 [4+]   0 [5+]   0
+Minimum risk level = 1
+Not every hit is necessarily a security vulnerability.
+There may be other security vulnerabilities; review your code!
+See 'Secure Programming for Linux and Unix HOWTO'
+(http://www.dwheeler.com/secure-programs) for more information.
+
+
+
+================================ Compiled Binary Analysis =================================
+Flawfinder version 1.31, (C) 2001-2014 David A. Wheeler.
+Number of rules (primarily dangerous function names) in C/C++ ruleset: 169
+Examining phind_multi
+Error: File ended while in string.
+
+FINAL RESULTS:
+
+phind_multi:91:  [4] (buffer) strcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Consider using strcpy_s, strncpy, or strlcpy (warning, strncpy is easily
+  misused).
+phind_multi:91:  [4] (format) printf:
+  If format strings can be influenced by an attacker, they can be exploited
+  (CWE-134). Use a constant for the format specification.
+phind_multi:101:  [3] (buffer) getenv:
+  Environment variables are untrustable input if they can be set by an
+  attacker. They can have any content and length, and the same variable can
+  be set more than once (CWE-807, CWE-20). Check environment variables
+  carefully before using them.
+phind_multi:101:  [2] (integer) atoi:
+  Unless checked, the resulting number can exceed the expected range
+  (CWE-190). If source untrusted, check both minimum and maximum, even if the
+  input had no minus sign (large numbers can roll over into negative number;
+  consider saving to an unsigned value if that is intended).
+phind_multi:101:  [1] (buffer) strncpy:
+  Easily used incorrectly; doesn't always \0-terminate or check for invalid
+  pointers (CWE-120).
+phind_multi:101:  [1] (buffer) read:
+  Check buffer boundaries if used in a loop including recursive loops
+  (CWE-120, CWE-20).
+
+ANALYSIS SUMMARY:
+
+Hits = 6
+Lines analyzed = 104 in approximately 0.01 seconds (9453 lines/second)
+Physical Source Lines of Code (SLOC) = 45
+Hits@level = [0]   0 [1]   2 [2]   1 [3]   1 [4]   2 [5]   0
+Hits@level+ = [0+]   6 [1+]   6 [2+]   4 [3+]   3 [4+]   2 [5+]   0
+Hits/KSLOC@level+ = [0+] 133.333 [1+] 133.333 [2+] 88.8889 [3+] 66.6667 [4+] 44.4444 [5+]   0
+Minimum risk level = 1
+Not every hit is necessarily a security vulnerability.
+There may be other security vulnerabilities; review your code!
+See 'Secure Programming for Linux and Unix HOWTO'
+(http://www.dwheeler.com/secure-programs) for more information.

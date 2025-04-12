@@ -10,6 +10,8 @@ import sys
 import colorama
 from termcolor import colored
 
+from config.settings import LOGGER_SETTINGS as settings
+
 colorama.just_fix_windows_console()
 
 SENT_TRAFFIC_LEVEL = 25
@@ -20,17 +22,17 @@ logging.addLevelName(RECEIVED_TRAFFIC_LEVEL, "RECEIVED")
 logging.addLevelName(AD_RESPONSE_LEVEL, "RESPONSE")
 
 
-def sent_traffic(self, message, *args, **kws):
+def sent_traffic(self, message, *args, **kws) -> None:
     if self.isEnabledFor(SENT_TRAFFIC_LEVEL):
         self._log(SENT_TRAFFIC_LEVEL, message, args, **kws)
 
 
-def received_traffic(self, message, *args, **kws):
+def received_traffic(self, message, *args, **kws) -> None:
     if self.isEnabledFor(RECEIVED_TRAFFIC_LEVEL):
         self._log(RECEIVED_TRAFFIC_LEVEL, message, args, **kws)
 
 
-def ad_response(self, message, *args, **kws):
+def ad_response(self, message, *args, **kws) -> None:
     if self.isEnabledFor(AD_RESPONSE_LEVEL):
         self._log(AD_RESPONSE_LEVEL, message, args, **kws)
 
@@ -95,15 +97,15 @@ class StreamToLogger:
         self.log_level = log_level
         self.linebuf = ""
 
-    def write(self, buf):
+    def write(self, buf: str) -> None:
         for line in buf.rstrip().splitlines():
             self.logger.log(self.log_level, line.rstrip())
 
-    def flush(self):
+    def flush(self) -> None:
         pass
 
 
-def integrate_stream_to_logger():
+def integrate_stream_to_logger() -> None:
     """
     Integrates StreamToLogger with the central logger.
     """
@@ -121,7 +123,7 @@ class ColorFormatter(logging.Formatter):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def format(self, record):
+    def format(self, record) -> str:
         format_prop = {
             logging.DEBUG: "primary",
             logging.INFO: "primary",
@@ -182,6 +184,11 @@ class Logger(metaclass=Singleton):
     _logger: logging.Logger = None
 
     def __init__(self):
+        super().__init__()
+        if settings.color_log_file:
+            pass
+        else:
+            LOGGING_CONFIG["handlers"]["file"]["formatter"] = "default"
         logging.config.dictConfig(LOGGING_CONFIG)
         Logger._logger = logging.getLogger()
 
@@ -191,6 +198,16 @@ class Logger(metaclass=Singleton):
         Returns the logger instance.
         """
         return cls._logger
+
+    @classmethod
+    def setLevel(cls, level: int) -> None:
+        """
+        Sets the logging level for the logger.
+
+        Args:
+            level (int): The logging level to be set.
+        """
+        cls._logger.setLevel(level)
 
     @classmethod
     def debug(cls, message: str):  # Severity: 10

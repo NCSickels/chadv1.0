@@ -2,6 +2,7 @@
 
 import ctypes
 import errno
+import json
 import os
 import platform
 import re
@@ -10,6 +11,7 @@ import socket
 import struct
 import time
 import zlib
+from datetime import datetime, timezone
 from functools import reduce
 from itertools import groupby
 
@@ -499,3 +501,31 @@ def check_sudo() -> bool:
     if os.geteuid() != 0:
         return False
     return True
+
+
+log_dir = os.path.join(os.path.dirname(__file__), "..", "..", "log")
+json_file_path = os.path.join(log_dir, "network_traffic.json")
+
+
+def log_network_traffic(
+    category: str, src_ip: str, dst_ip: str, src_port: int, dst_port: int
+) -> None:
+    log_entry = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "category": category,
+        "src_ip": src_ip,
+        "dst_ip": dst_ip,
+        "src_port": src_port,
+        "dst_port": dst_port,
+    }
+
+    if os.path.exists(json_file_path):
+        with open(json_file_path, "r") as f:
+            data = json.load(f)
+    else:
+        data = []
+
+    data.append(log_entry)
+
+    with open(json_file_path, "w") as file:
+        json.dump(data, file, indent=4)

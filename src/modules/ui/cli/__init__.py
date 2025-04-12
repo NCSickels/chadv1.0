@@ -1,3 +1,3 @@
-from modules.ui.cli.chadargparse import ChadArgumentParser
+from modules.ui.cli.chadcli import ChadCLI
 
-__all__ = ["ChadArgumentParser"]
+__all__ = ["ChadCLI"]

@@ -1,0 +1,126 @@
+================================ Source Code Analysis =================================
+Flawfinder version 1.31, (C) 2001-2014 David A. Wheeler.
+Number of rules (primarily dangerous function names) in C/C++ ruleset: 169
+Examining copilot_brute.c
+
+FINAL RESULTS:
+
+copilot_brute.c:94:  [4] (buffer) sscanf:
+  The scanf() family's %s operation, without a limit specification, permits
+  buffer overflows (CWE-120, CWE-20). Specify a limit to %s, or use a
+  different input function.
+copilot_brute.c:25:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119:CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+copilot_brute.c:26:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119:CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+copilot_brute.c:81:  [2] (misc) fopen:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (CWE-362).
+copilot_brute.c:88:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119:CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+copilot_brute.c:89:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119:CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+copilot_brute.c:90:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119:CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+copilot_brute.c:50:  [1] (buffer) read:
+  Check buffer boundaries if used in a loop including recursive loops
+  (CWE-120, CWE-20).
+copilot_brute.c:54:  [1] (port) snprintf:
+  On some very old systems, snprintf is incorrectly implemented and permits
+  buffer overflows; there are also incompatible standard definitions of it.
+  Check it during installation, or use something else.
+copilot_brute.c:55:  [1] (buffer) strlen:
+  Does not handle strings that are not \0-terminated; if given one it may
+  perform an over-read (it could cause a crash if unprotected) (CWE-126).
+copilot_brute.c:56:  [1] (buffer) read:
+  Check buffer boundaries if used in a loop including recursive loops
+  (CWE-120, CWE-20).
+copilot_brute.c:60:  [1] (port) snprintf:
+  On some very old systems, snprintf is incorrectly implemented and permits
+  buffer overflows; there are also incompatible standard definitions of it.
+  Check it during installation, or use something else.
+copilot_brute.c:61:  [1] (buffer) strlen:
+  Does not handle strings that are not \0-terminated; if given one it may
+  perform an over-read (it could cause a crash if unprotected) (CWE-126).
+copilot_brute.c:62:  [1] (buffer) read:
+  Check buffer boundaries if used in a loop including recursive loops
+  (CWE-120, CWE-20).
+
+ANALYSIS SUMMARY:
+
+Hits = 14
+Lines analyzed = 115 in approximately 0.00 seconds (40452 lines/second)
+Physical Source Lines of Code (SLOC) = 81
+Hits@level = [0]   0 [1]   7 [2]   6 [3]   0 [4]   1 [5]   0
+Hits@level+ = [0+]  14 [1+]  14 [2+]   7 [3+]   1 [4+]   1 [5+]   0
+Hits/KSLOC@level+ = [0+] 172.84 [1+] 172.84 [2+] 86.4198 [3+] 12.3457 [4+] 12.3457 [5+]   0
+Minimum risk level = 1
+Not every hit is necessarily a security vulnerability.
+There may be other security vulnerabilities; review your code!
+See 'Secure Programming for Linux and Unix HOWTO'
+(http://www.dwheeler.com/secure-programs) for more information.
+
+
+
+================================ Compiled Binary Analysis =================================
+Flawfinder version 1.31, (C) 2001-2014 David A. Wheeler.
+Number of rules (primarily dangerous function names) in C/C++ ruleset: 169
+Examining copilot_brute
+Error: File ended while in string.
+
+FINAL RESULTS:
+
+copilot_brute:2:  [4] (format) fprintf:
+  If format strings can be influenced by an attacker, they can be exploited
+  (CWE-134). Use a constant for the format specification.
+copilot_brute:2:  [4] (format) snprintf:
+  If format strings can be influenced by an attacker, they can be exploited,
+  and note that sprintf variations do not always \0-terminate (CWE-134). Use
+  a constant for the format specification.
+copilot_brute:2:  [2] (misc) fopen:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (CWE-362).
+copilot_brute:8:  [2] (misc) open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (CWE-362).
+copilot_brute:2:  [1] (buffer) strlen:
+  Does not handle strings that are not \0-terminated; if given one it may
+  perform an over-read (it could cause a crash if unprotected) (CWE-126).
+copilot_brute:2:  [1] (buffer) read:
+  Check buffer boundaries if used in a loop including recursive loops
+  (CWE-120, CWE-20).
+
+ANALYSIS SUMMARY:
+
+Hits = 6
+Lines analyzed = 58 in approximately 0.01 seconds (7972 lines/second)
+Physical Source Lines of Code (SLOC) = 19
+Hits@level = [0]   0 [1]   2 [2]   2 [3]   0 [4]   2 [5]   0
+Hits@level+ = [0+]   6 [1+]   6 [2+]   4 [3+]   2 [4+]   2 [5+]   0
+Hits/KSLOC@level+ = [0+] 315.789 [1+] 315.789 [2+] 210.526 [3+] 105.263 [4+] 105.263 [5+]   0
+Minimum risk level = 1
+Not every hit is necessarily a security vulnerability.
+There may be other security vulnerabilities; review your code!
+See 'Secure Programming for Linux and Unix HOWTO'
+(http://www.dwheeler.com/secure-programs) for more information.

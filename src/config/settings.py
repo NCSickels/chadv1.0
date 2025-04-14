@@ -30,8 +30,9 @@ class LOGGER_SETTINGS:
 
 
 class NETWORK_SETTINGS:
-    interface = "any"
+    interface = "eth0"
     display_filter = None
     bpf_filter = ""
     loop = None
-    packet_count = 20
+    packet_count = 80
+    ip_address = "192.168.56.1"

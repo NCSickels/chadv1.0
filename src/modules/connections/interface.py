@@ -36,7 +36,7 @@ class NetworkInterface:
         self._display_filter = display_filter
         self._bpf_filter = bpf_filter
         self._status = "Disconnected"
-        self._connected_ip = "127.0.0.1"
+        self._connected_ip = "192.168.56.102"
         self._connected_port = 22
         self.capture = None
         self.logger = get_central_logger()
@@ -184,6 +184,11 @@ class NetworkInterface:
                         packet[packet.transport_layer].srcport,
                         packet[packet.transport_layer].dstport,
                     )
+                    self.logger.ad_response(
+                        f"Active Defense Response: Sent packet from {packet.ip.src} to {packet.ip.dst}"
+                    )
+                    print(packet)
+
                 elif hasattr(packet.ip, "dst") and packet.ip.dst == self._connected_ip:
                     self.logger.sent_traffic(
                         f"Sent packet from {packet.ip.src} to {packet.ip.dst}"
@@ -195,6 +200,8 @@ class NetworkInterface:
                         packet[packet.transport_layer].srcport,
                         packet[packet.transport_layer].dstport,
                     )
+                    print(packet)
+
                 else:
                     self.logger.info(
                         f"Packet from {packet.ip.src} to {packet.ip.dst} not related to connected IP"
@@ -211,6 +218,11 @@ class NetworkInterface:
                         self._connected_port,
                         self._connected_port,
                     )
+                    self.logger.ad_response(
+                        f"Active Defense Response: Sent packet from {packet.ip.src} to {packet.ip.dst}"
+                    )
+                    print(packet)
+
                 elif hasattr(packet.ip, "dst") and packet.ip.dst == self._connected_ip:
                     self.logger.sent_traffic(
                         f"Sent packet from {packet.ip.src} to {packet.ip.dst}"
@@ -222,11 +234,13 @@ class NetworkInterface:
                         self._connected_port,
                         self._connected_port,
                     )
+                    print(packet)
+
                 else:
                     self.logger.info(
                         f"Packet from {packet.ip.src} to {packet.ip.dst} not related to connected IP"
                     )
-        print(packet)
+        # print(packet)
 
     # --------------------------------------------------------------- #
 

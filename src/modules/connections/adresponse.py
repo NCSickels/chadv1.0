@@ -1,5 +1,6 @@
 """Active Defense Response Handling Module"""
 
+from config.settings import NETWORK_SETTINGS as settings
 from scapy.layers.inet import IP, TCP, UDP
 from scapy.packet import Packet
 from scapy.sendrecv import send
@@ -22,10 +23,10 @@ class ADResponse:
 
     def __init__(
         self,
-        dst_ip: str = "127.0.0.1",
-        dst_port: int = 22,
+        dst_ip: str = "192.168.56.102",
+        dst_port: int = settings.ad_response_port,
         protocol: str = "tcp",
-        data: str = "",
+        data: str = "DATA",
     ):
         self.dst_ip = dst_ip
         self.dst_port = dst_port

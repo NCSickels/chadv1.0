@@ -36,3 +36,4 @@ class NETWORK_SETTINGS:
     loop = None
     packet_count = 80
     ip_address = "192.168.56.1"
+    ad_response_port = 80

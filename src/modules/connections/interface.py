@@ -184,6 +184,7 @@ class NetworkInterface:
                         packet[packet.transport_layer].srcport,
                         packet[packet.transport_layer].dstport,
                     )
+                    self.send_packet()
                     self.logger.ad_response(
                         f"Active Defense Response: Sent packet from {packet.ip.src} to {packet.ip.dst}"
                     )
@@ -218,6 +219,7 @@ class NetworkInterface:
                         self._connected_port,
                         self._connected_port,
                     )
+                    self.send_packet()
                     self.logger.ad_response(
                         f"Active Defense Response: Sent packet from {packet.ip.src} to {packet.ip.dst}"
                     )
@@ -244,14 +246,14 @@ class NetworkInterface:
 
     # --------------------------------------------------------------- #
 
-    def send_packet(self, data: str) -> None:
+    def send_packet(self) -> None:
         """
         Send a packet to the network interface.
 
         Args:
             data (str): The data to send.
         """
-        response = ADResponse(self._connected_ip, self._connected_port, "tcp", data)
+        response = ADResponse()
         response.send_packet()
 
     # --------------------------------------------------------------- #

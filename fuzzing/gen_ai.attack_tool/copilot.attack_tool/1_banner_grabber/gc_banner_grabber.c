@@ -6,7 +6,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 32
 
 void banner_grab(int sockfd)
 {
@@ -17,7 +17,7 @@ void banner_grab(int sockfd)
     memset(buffer, 0, sizeof(buffer));
 
     // Receive banner
-    bytes_received = recv(sockfd, buffer, sizeof(buffer) - 1, 0);
+    bytes_received = recv(sockfd, buffer, 1024, 0);
     if (bytes_received < 0)
     {
         perror("recv");

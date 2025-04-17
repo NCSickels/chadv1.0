@@ -347,19 +347,21 @@ class ChadPrompt(CommandPrompt):
         import socketserver
 
         PORT = 1337
-        TESTDATA = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCS"
+        DATA = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCS"
 
-        class CustomHandler(http.server.SimpleHTTPRequestHandler):
-            def do_GET(self):
-                self.send_response(200)
-                self.send_header("Content-type", "text/plain")
-                self.end_headers()
-                self.wfile.write(TESTDATA.encode("utf-8"))
+        class CustomHandler(http.server.BaseHTTPRequestHandler):
+            def handle(self):
+                self.logger = get_central_logger()
+                # Write the TESTDATA directly to the socket
+                self.request.sendall(DATA.encode("utf-8"))
+                self.logger.ad_response(
+                    f"Active defense response sent through port: {PORT}"
+                )
 
-        self.logger.info(f"Starting server on port {PORT}...")
+        self.logger.info(f"Starting server on port: {PORT}")
         try:
             with socketserver.TCPServer(("", PORT), CustomHandler) as httpd:
-                self.logger.info(f"Serving on port {PORT}. Press Ctrl+C to stop.")
+                self.logger.info(f"Serving on port: {PORT}. Press Ctrl+C to stop.")
                 httpd.serve_forever()
         except KeyboardInterrupt:
             self.logger.info("Shutting down server.")

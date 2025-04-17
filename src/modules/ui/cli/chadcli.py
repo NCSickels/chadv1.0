@@ -39,16 +39,16 @@ class ChadCLI:
             class CustomHandler(http.server.BaseHTTPRequestHandler):
                 def handle(self):
                     self.logger = get_central_logger()
-                    # Write the TESTDATA directly to the socket
+                    # Write the DATA directly to the socket
                     self.request.sendall(DATA.encode("utf-8"))
                     self.logger.ad_response(
-                        f"Active defense response sent through port {PORT}"
+                        f"Active defense response sent through port: {PORT}"
                     )
 
-            self.logger.info(f"Starting server on port {PORT}...")
+            self.logger.info(f"Starting server on port: {PORT}...")
             try:
                 with socketserver.TCPServer(("", PORT), CustomHandler) as httpd:
-                    self.logger.info(f"Serving on port {PORT}. Press Ctrl+C to stop.")
+                    self.logger.info(f"Serving on port: {PORT}. Press Ctrl+C to stop.")
                     httpd.serve_forever()
             except KeyboardInterrupt:
                 self.logger.info("Shutting down server.")

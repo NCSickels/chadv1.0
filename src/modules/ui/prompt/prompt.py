@@ -362,9 +362,9 @@ class ChadPrompt(CommandPrompt):
                 self.logger.info(f"Serving on port {PORT}. Press Ctrl+C to stop.")
                 httpd.serve_forever()
         except KeyboardInterrupt:
-            self.logger.info("Shutting down the HTTP server.")
+            self.logger.info("Shutting down server.")
         except Exception as e:
-            self.logger.error(f"Error starting HTTP server: {e}")
+            self.logger.error(f"Error starting server: {e}")
 
     # --------------------------------------------------------------- #
 

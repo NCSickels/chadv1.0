@@ -37,7 +37,7 @@ class ChadArgumentParser:
         self.parser.add_argument(
             "--interface",
             nargs="?",
-            default="any",
+            default="enp0s8",
             type=str,
             help="The network interface to use.",
             metavar="INTERFACE",
@@ -67,7 +67,7 @@ class ChadArgumentParser:
     def run(self) -> None:
         args = self.parser.parse_args()
         if args.start:
-            chadcli = ChadCLI(args.interface, args.ip_address, args.port)
+            chadcli = ChadCLI(args.interface, args.ip_address, args.port, server=True)
             chadcli.run()
         elif args.interactive:
             prompt = ChadPrompt(self.loop)

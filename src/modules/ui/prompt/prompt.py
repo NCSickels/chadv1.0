@@ -6,6 +6,7 @@ from prompt_toolkit.styles import Style, merge_styles
 
 from log.clogger import get_central_logger
 from modules.connections.interface import NetworkInterface
+from modules.connections.socket_connection import SocketConnection
 
 # from modules.connections.socket_connection import SocketConnection
 from modules.ui.menu.table import TableCreator
@@ -183,6 +184,10 @@ class ChadPrompt(CommandPrompt):
                     "desc": "Stops the network interface.",
                     "exec": self._cmd_stop,
                 },
+                "start_demo": {
+                    "desc": "Starts the Python service demo.",
+                    "exec": self._cmd_start_demo,
+                },
                 "list_interfaces": {
                     "desc": "Lists all available network interfaces.",
                     "exec": self._cmd_list_interfaces,
@@ -334,6 +339,32 @@ class ChadPrompt(CommandPrompt):
         """Stops the network interface."""
         self.status = "Disconnected"
         self.refresh_prompt()
+
+    def _cmd_start_demo(self, tokens: list) -> None:
+        """Starts the Python service demo."""
+        self.logger.info("Running Python service demo...")
+        import http.server
+        import socketserver
+
+        PORT = 1337
+        TESTDATA = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCS"
+
+        class CustomHandler(http.server.SimpleHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(200)
+                self.send_header("Content-type", "text/plain")
+                self.end_headers()
+                self.wfile.write(TESTDATA.encode("utf-8"))
+
+        self.logger.info(f"Starting server on port {PORT}...")
+        try:
+            with socketserver.TCPServer(("", PORT), CustomHandler) as httpd:
+                self.logger.info(f"Serving on port {PORT}. Press Ctrl+C to stop.")
+                httpd.serve_forever()
+        except KeyboardInterrupt:
+            self.logger.info("Shutting down the HTTP server.")
+        except Exception as e:
+            self.logger.error(f"Error starting HTTP server: {e}")
 
     # --------------------------------------------------------------- #
 

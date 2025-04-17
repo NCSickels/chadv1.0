@@ -1,4 +1,5 @@
 // Github Copilot - C Banner Grabber Attack Tool
+// Usage: gcc -fno-stack-protector -o gc_banner_grabber gc_banner_grabber.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,6 +27,9 @@ void banner_grab(int sockfd)
 
     // Print banner
     printf("Banner: %s\n", buffer);
+    // char small_buffer[BUFFER_SIZE];
+    // strcpy(small_buffer, buffer);
+    // printf("Banner: %s\n", small_buffer);
 }
 
 void scan_port(const char *host, int port)

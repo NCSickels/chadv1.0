@@ -347,7 +347,7 @@ class ChadPrompt(CommandPrompt):
         import socketserver
 
         PORT = 1337
-        DATA = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCS"
+        DATA = "fVENOXc0CU2gcGtUHMmjUYABYkievrMxPQM7BJNUfaJwGSpwReRfIZ95t2KoqXLAT6fbCg1K6f9f1xxOyuaVuycbgi4aqS2aeI53WqqdGfIdxewn"
 
         class CustomHandler(http.server.BaseHTTPRequestHandler):
             def handle(self):

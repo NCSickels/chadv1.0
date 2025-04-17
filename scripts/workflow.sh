@@ -85,6 +85,7 @@ DEST_DIR="$SCRIPT_DIR/chadv$CHAD_VERSION"
 
 ATTACKTOOL_DIR="$DEST_DIR/attack_tools"
 
+GENAI_DIR="$ATTACKTOOL_DIR/ai_attack_tools"
 MEDUSA_DIR="$ATTACKTOOL_DIR/medusa"
 MASSCAN_DIR="$ATTACKTOOL_DIR/masscan"
 
@@ -187,6 +188,32 @@ dir_exists() {
     fi
 }
 
+function check_repo_connection() {
+    local repo_url=$1
+
+    log info "Checking connection to repository: $repo_url"
+    if git ls-remote "$repo_url" &> /dev/null; then
+        log info "Successfully connected to the repository."
+        return 0
+    else
+        log error "Failed to connect to the repository: $repo_url"
+        return 1
+    fi
+}
+
+function retrieve_file() {
+    local file_url=$1
+    local destination_path=$2
+
+    log info "Retrieving file from: $file_url"
+    if curl -o "$destination_path" -L --fail "$file_url"; then
+        log info "File successfully retrieved and saved to: $destination_path"
+    else
+        log error "Failed to retrieve file from: $file_url"
+        exit 1
+    fi
+}
+
 function uninstall() {
     banner
     log info "Removing related files and directories..."
@@ -206,6 +233,10 @@ function install_tool() {
     local target_dir=$3
 
     log info "Installing: $tool_name"
+    if ! check_repo_connection "$repo_url"; then
+        log error "Failed to connect to the repository: $repo_url"
+        exit 1
+    fi
     if [ ! -d "$target_dir" ]; then
         log info "Cloning repository into: $target_dir"
         if git clone $repo_url "$target_dir"; then
@@ -233,6 +264,20 @@ function install() {
     sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf \
         automake libssl-dev wget curl php-cli wireshark tshark
 
+    # TODO: Need to uncomment this if we're able to publish the repo. 
+    # log info "Retrieving AI attack tools..."
+    # command_exists curl
+    # retrieve_file "https://raw.githubusercontent.com/NCSickels/chadv1.0/main/fuzzing/gen_ai.attack_tool/ai_tools_src.zip" "$GENAI_DIR/ai_tools_src.zip"
+    # log info "Unzipping AI attack tools..."
+    # unzip -q "$GENAI_DIR/ai_tools_src.zip" -d "$GENAI_DIR"
+    # if [ -d "$GENAI_DIR/ai_tools_src" ]; then
+    #     log info "AI attack tools sucessfully extracted."
+    #     rm -f "$GENAI_DIR/ai_tools_src.zip"
+    # else
+    #     log error "Failed to extract AI attack tools."
+    #     exit 1
+    # fi
+
     command_exists git
 
     # * May need to check to ensure --depth 1 will work
@@ -251,7 +296,21 @@ function install() {
 function build() {
     banner
     log info "Building all tools, this may take some time."
-
+    # Build AI attack tools
+    # log info "Building AI attack tools..."
+    # if [ -d "$GENAI_DIR" ]; then
+    #     cd "$GENAI_DIR"
+    #     if make; then
+    #         log info "AI attack tools built successfully."
+    #     else
+    #         log error "Failed to build AI attack tools."
+    #         exit 1
+    #     fi
+    #     cd "$SCRIPT_DIR"
+    # else 
+    #     log error "AI attack tools directory not found."
+    #     exit 1
+    # fi
     # Build Medusa
     # TODO: Error when building on Ubuntu system, missing openssl libraries
     log info "Building Medusa..."

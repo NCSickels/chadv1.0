@@ -1,3 +1,4 @@
+// Phind - C Multi-threaded Banner Grabber Attack Tool
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

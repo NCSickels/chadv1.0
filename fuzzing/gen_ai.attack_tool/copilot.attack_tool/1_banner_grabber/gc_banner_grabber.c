@@ -1,3 +1,4 @@
+// Github Copilot - C Banner Grabber Attack Tool
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

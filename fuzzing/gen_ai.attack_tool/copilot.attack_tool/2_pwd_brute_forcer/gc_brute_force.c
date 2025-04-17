@@ -1,5 +1,5 @@
 // #########################
-// # FTP Password Brute Forcer
+// # GitHub Copilot - FTP Password Brute Forcer
 //
 // Compile: gcc brute_force.c -o brute_force
 // Usage: ./brute_force <credentials_file>

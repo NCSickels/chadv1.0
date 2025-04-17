@@ -27,7 +27,7 @@ class NetworkInterface:
 
     def __init__(
         self,
-        interface: str = "any",
+        interface: str = "eth0",
         display_filter: str = "",
         bpf_filter: str = "",
         loop=None,
@@ -129,7 +129,7 @@ class NetworkInterface:
 
     async def capture_packets(self) -> None:
         self.capture = pyshark.LiveCapture(
-            interface="any",
+            interface="eth0",
             eventloop=self.loop,
         )
         self.logger.info(f"Starting packet capture on interface: {self._interface}")

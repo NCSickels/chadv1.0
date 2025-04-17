@@ -55,7 +55,7 @@ class CommandPrompt(object):
             auto_suggest=AutoSuggestFromHistory(),
             history=self.history,
         )
-        self.network_interface = NetworkInterface(interface="any", loop=loop)
+        self.network_interface = NetworkInterface(interface="eth0", loop=loop)
         self.status_info = self.network_interface.get_status_info()
         self.status = self.status_info["status"]
         self.interface_name = self.status_info["interface"]
@@ -277,6 +277,10 @@ class ChadPrompt(CommandPrompt):
                 return None
             self.logger.info(f"Setting interface to {tokens[0]}")
             self.interface_name = tokens[0]
+            self.network_interface = NetworkInterface(
+                interface=self.interface_name, loop=self.loop
+            )
+
             self.refresh_prompt()
         else:
             print_formatted_text(HTML("<b>Usage: set interface [interface]</b>"))

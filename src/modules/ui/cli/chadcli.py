@@ -39,10 +39,17 @@ class ChadCLI:
             class CustomHandler(http.server.BaseHTTPRequestHandler):
                 def handle(self):
                     self.logger = get_central_logger()
+                    client_ip, client_port = self.client_address
+                    self.logger.received_traffic(
+                        f"Received packet from {client_ip}:{client_port} to {self.ip_address}:{self.port}"
+                    )
                     # Write the DATA directly to the socket
                     self.request.sendall(DATA.encode("utf-8"))
                     self.logger.ad_response(
-                        f"Active defense response sent through port: {PORT}"
+                        f"Active Defense Response: Sent packet from {self.ip_address}:{PORT} to {client_ip}:{client_port}"
+                    )
+                    self.sent_traffic(
+                        f"Sent packet to {client_ip}:{client_port} from {self.ip_address}:{self.port}"
                     )
 
             self.logger.info(f"Starting server on port: {PORT}...")

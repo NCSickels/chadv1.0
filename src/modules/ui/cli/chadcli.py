@@ -38,7 +38,11 @@ class ChadCLI:
 
             class CustomHandler(http.server.BaseHTTPRequestHandler):
                 def __init__(
-                    self, *args, ip_address: str = "", port: int = 1337, **kwargs
+                    self,
+                    *args,
+                    ip_address: str = "192.168.56.106",
+                    port: int = 1337,
+                    **kwargs,
                 ):
                     self.ip_address = ip_address
                     self.port = port
@@ -56,7 +60,7 @@ class ChadCLI:
                     self.logger.ad_response(
                         f"Active Defense Response: Sent packet from {self.ip_address}:{PORT} to {client_ip}:{client_port}"
                     )
-                    self.sent_traffic(
+                    self.logger.sent_traffic(
                         f"Sent packet to {client_ip}:{client_port} from {self.ip_address}:{self.port}"
                     )
 

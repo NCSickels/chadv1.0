@@ -7,6 +7,7 @@ from prompt_toolkit.styles import Style, merge_styles
 from log.clogger import get_central_logger
 from modules.connections.interface import NetworkInterface
 from modules.connections.socket_connection import SocketConnection
+from modules.connections.adsocket import start_server
 
 # from modules.connections.socket_connection import SocketConnection
 from modules.ui.menu.table import TableCreator
@@ -342,31 +343,8 @@ class ChadPrompt(CommandPrompt):
 
     def _cmd_start_demo(self, tokens: list) -> None:
         """Starts the Python service demo."""
-        self.logger.info("Running Python service demo...")
-        import http.server
-        import socketserver
-
-        PORT = 1337
-        DATA = "fVENOXc0CU2gcGtUHMmjUYABYkievrMxPQM7BJNUfaJwGSpwReRfIZ95t2KoqXLAT6fbCg1K6f9f1xxOyuaVuycbgi4aqS2aeI53WqqdGfIdxewn"
-
-        class CustomHandler(http.server.BaseHTTPRequestHandler):
-            def handle(self):
-                self.logger = get_central_logger()
-                # Write the TESTDATA directly to the socket
-                self.request.sendall(DATA.encode("utf-8"))
-                self.logger.ad_response(
-                    f"Active defense response sent through port: {PORT}"
-                )
-
-        self.logger.info(f"Starting server on port: {PORT}")
-        try:
-            with socketserver.TCPServer(("", PORT), CustomHandler) as httpd:
-                self.logger.info(f"Serving on port: {PORT}. Press Ctrl+C to stop.")
-                httpd.serve_forever()
-        except KeyboardInterrupt:
-            self.logger.info("Shutting down server.")
-        except Exception as e:
-            self.logger.error(f"Error starting server: {e}")
+        self.logger.info("Starting Python service demo...")
+        start_server()
 
     # --------------------------------------------------------------- #
 

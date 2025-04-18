@@ -37,8 +37,16 @@ class ChadCLI:
             DATA = "fVENOXc0CU2gcGtUHMmjUYABYkievrMxPQM7BJNUfaJwGSpwReRfIZ95t2KoqXLAT6fbCg1K6f9f1xxOyuaVuycbgi4aqS2aeI53WqqdGfIdxewn"
 
             class CustomHandler(http.server.BaseHTTPRequestHandler):
-                def handle(self):
+                def __init__(
+                    self, *args, ip_address: str = "", port: int = 1337, **kwargs
+                ):
+                    self.ip_address = ip_address
+                    self.port = port
                     self.logger = get_central_logger()
+
+                    super().__init__(*args, **kwargs)
+
+                def handle(self):
                     client_ip, client_port = self.client_address
                     self.logger.received_traffic(
                         f"Received packet from {client_ip}:{client_port} to {self.ip_address}:{self.port}"

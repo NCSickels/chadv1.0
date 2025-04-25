@@ -1,6 +1,7 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -O2
+CFLAGS = -Wall -Wextra -O2 
+LDFLAGS = -lpthread -lm
 
 # Source files
 SOURCES = gc_banner_grabber.c gc_brute_force.c gc_mt_banner_grabber.c \
@@ -14,7 +15,7 @@ all: $(BINARIES)
 
 # Rule to build each binary
 %: %.c
-	$(CC) $(CFLAGS) -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 tsan: CFLAGS += -fsanitize=thread,undefined,bounds-strict -fno-omit-frame-pointer
 tsan: $(BINARIES)

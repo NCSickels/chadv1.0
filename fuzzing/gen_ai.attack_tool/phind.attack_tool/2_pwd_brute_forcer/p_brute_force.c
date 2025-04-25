@@ -6,8 +6,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#define BUFFER_SIZE 1024
-#define PORT 21
+#define BUFFER_SIZE 32
+#define PORT 1337
 
 // Function prototypes
 int establish_connection(const char *server_ip);

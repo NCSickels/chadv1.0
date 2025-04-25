@@ -9,8 +9,8 @@
 #include <sys/socket.h>
 #include <time.h>
 
-#define BUFFER_SIZE 4096
-#define TIMEOUT_SECONDS 5
+#define BUFFER_SIZE 32
+#define TIMEOUT_SECONDS 20
 
 // Structure to hold connection parameters
 typedef struct

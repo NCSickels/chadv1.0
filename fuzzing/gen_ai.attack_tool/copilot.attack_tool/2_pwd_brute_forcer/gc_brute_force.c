@@ -13,10 +13,10 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 
-#define SERVER_IP "127.0.0.1" // Replace with your FTP server IP
-#define SERVER_PORT 21
-#define BUFFER_SIZE 1024
-#define MAX_LINE_LENGTH 256
+#define SERVER_IP "192.168.56.106" // Replace with your FTP server IP
+#define SERVER_PORT 1337
+#define BUFFER_SIZE 32
+#define MAX_LINE_LENGTH 10
 
 void check_ftp_password(const char *username, const char *password)
 {
@@ -51,13 +51,15 @@ void check_ftp_password(const char *username, const char *password)
     printf("Server: %s", response);
 
     // Send USER command
-    snprintf(buffer, BUFFER_SIZE, "USER %s\r\n", username);
+    // snprintf(buffer, BUFFER_SIZE, "USER %s\r\n", username);
+    sprintf(buffer, "USER %s\r\n", username);
     write(sockfd, buffer, strlen(buffer));
     read(sockfd, response, BUFFER_SIZE);
     printf("Server: %s", response);
 
     // Send PASS command
-    snprintf(buffer, BUFFER_SIZE, "PASS %s\r\n", password);
+    // snprintf(buffer, BUFFER_SIZE, "PASS %s\r\n", password);
+    sprintf(buffer, "PASS %s\r\n", password);
     write(sockfd, buffer, strlen(buffer));
     read(sockfd, response, BUFFER_SIZE);
     printf("Server: %s", response);
@@ -84,7 +86,7 @@ void load_credentials_and_check(const char *filename)
         perror("Failed to open file");
         exit(EXIT_FAILURE);
     }
-
+    printf("Loading credentials from file: %s\n", filename);
     char line[MAX_LINE_LENGTH];
     char username[MAX_LINE_LENGTH];
     char password[MAX_LINE_LENGTH];
@@ -93,6 +95,7 @@ void load_credentials_and_check(const char *filename)
     {
         if (sscanf(line, "%s %s", username, password) == 2)
         {
+            printf("Checking credentials...\n");
             check_ftp_password(username, password);
         }
     }
@@ -107,7 +110,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Usage: %s <credentials_file>\n", argv[0]);
         exit(EXIT_FAILURE);
     }
-
+    printf("Connecting to server...\n");
     load_credentials_and_check(argv[1]);
 
     return 0;

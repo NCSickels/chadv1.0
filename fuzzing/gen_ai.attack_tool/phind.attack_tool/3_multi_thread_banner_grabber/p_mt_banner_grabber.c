@@ -6,10 +6,11 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 
 #define MAX_THREADS 1
-#define BUFFER_SIZE 1024
-#define PORT 80
+#define BUFFER_SIZE 32
+#define PORT 1337
 
 // Shared result structure
 typedef struct

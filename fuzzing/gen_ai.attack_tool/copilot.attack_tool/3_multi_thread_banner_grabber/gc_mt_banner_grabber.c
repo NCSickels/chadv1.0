@@ -9,8 +9,8 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 
-#define BUFFER_SIZE 1024
-#define MAX_THREADS 10
+#define BUFFER_SIZE 32
+#define MAX_THREADS 1
 
 typedef struct
 {

@@ -43,13 +43,18 @@ function log() {
 }
 
 function banner() {
+    local DARK_BLUE="\033[38;5;20m"
+    local DARK_PURPLE="\033[38;5;92m"
+    local DARK_RED="\033[38;5;1m"
+    local NC='\033[0m' # No Color
+
     echo -e "\t\t============================================"
-    echo -e "\t\t     ██████╗██╗  ██╗ █████╗ ██████╗"
-    echo -e "\t\t    ██╔════╝██║  ██║██╔══██╗██╔══██╗"
-    echo -e "\t\t    ██║     ███████║███████║██║  ██║"
-    echo -e "\t\t    ██║     ██╔══██║██╔══██║██║  ██║"
-    echo -e "\t\t    ╚██████╗██║  ██║██║  ██║██████╔╝"
-    echo -e "\t\t     ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝"
+    echo -e "${DARK_BLUE}\t\t     ██████╗██╗  ██╗ █████╗ ██████╗${NC}"
+    echo -e "${DARK_BLUE}\t\t    ██╔════╝██║  ██║██╔══██╗██╔══██╗${NC}"
+    echo -e "${DARK_PURPLE}\t\t    ██║     ███████║███████║██║  ██║${NC}"
+    echo -e "${DARK_PURPLE}\t\t    ██║     ██╔══██║██╔══██║██║  ██║${NC}"
+    echo -e "${DARK_RED}\t\t    ╚██████╗██║  ██║██║  ██║██████╔╝${NC}"
+    echo -e "${DARK_RED}\t\t     ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝${NC}"
     echo -e "\t\t============================================"
     echo -e "\t\t      Charger Active Defense v$CHAD_VERSION"
     echo -e "\t\t============================================"

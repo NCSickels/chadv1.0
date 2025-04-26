@@ -15,6 +15,13 @@ CHAD_VERSION="1.0"
 SCRIPT_VERSION="0.1.0"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+# Set the repository URL to the GitHub repository - change if needed. 
+REPO_PARENT_URL="https://github.com"
+REPO_RAW_URL="https://raw.githubusercontent.com"
+REPO_USER="NCSickels"
+REPO_BASE="chadv1.0"
+REPO_URL="$REPO_PARENT_URL/$REPO_BASE.git"
+
 # Debug mode flag
 DEBUG=false
 
@@ -211,6 +218,7 @@ function retrieve_file() {
     local destination_path=$2
 
     log info "Retrieving file from: $file_url"
+    command_exists curl
     if curl -o "$destination_path" -L --fail "$file_url"; then
         log info "File successfully retrieved and saved to: $destination_path"
     else
@@ -267,12 +275,11 @@ function install() {
     log info "Installing required packages..."
     sudo apt update -y && sudo apt upgrade -y
     sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf \
-        automake libssl-dev wget curl php-cli wireshark tshark
+        automake libssl-dev wget curl php-cli wireshark tshark unzip 
 
     # TODO: Need to uncomment this if we're able to publish the repo. 
-    # log info "Retrieving AI attack tools..."
-    # command_exists curl
-    # retrieve_file "https://raw.githubusercontent.com/NCSickels/chadv1.0/main/fuzzing/gen_ai.attack_tool/ai_tools_src.zip" "$GENAI_DIR/ai_tools_src.zip"
+    log info "Retrieving AI attack tools..."
+    retrieve_file "$REPO_RAW_URL/$REPO_BASE/$REPO_USER/main/fuzzing/gen_ai.attack_tool/ai_tools_src.zip" "$GENAI_DIR/ai_tools_src.zip"
     # log info "Unzipping AI attack tools..."
     # unzip -q "$GENAI_DIR/ai_tools_src.zip" -d "$GENAI_DIR"
     # if [ -d "$GENAI_DIR/ai_tools_src" ]; then
@@ -301,6 +308,7 @@ function install() {
 function build() {
     banner
     log info "Building all tools, this may take some time."
+    
     # Build AI attack tools
     # log info "Building AI attack tools..."
     # if [ -d "$GENAI_DIR" ]; then
@@ -316,8 +324,9 @@ function build() {
     #     log error "AI attack tools directory not found."
     #     exit 1
     # fi
+
     # Build Medusa
-    # TODO: Error when building on Ubuntu system, missing openssl libraries
+    # NOTE: Error when building on Ubuntu system, missing openssl libraries
     log info "Building Medusa..."
     if [ -d "$MEDUSA_DIR" ]; then
         cd "$MEDUSA_DIR"
@@ -328,7 +337,6 @@ function build() {
                 log info "Medusa successfully built."
             else
                 log error "Failed to build Medusa."
-                # TODO: Need to set new Medusa path here.
                 log warn "Using the pre-built package for Medusa instead."
                 # exit 1
             fi
@@ -347,7 +355,8 @@ function build() {
     if [ -d "$MASSCAN_DIR" ]; then
         cd "$MASSCAN_DIR"
         # Get updated Makefile from repository
-        # curl -o Makefile https://raw.githubusercontent.com/NCSickels/chadv1.0/main/fuzzing/aflnet.masscan/Makefile
+        command_exists curl
+        # curl -o Makefile $REPO_RAW_URL/$REPO_USER/$REPO_BASE/main/fuzzing/aflnet.masscan/Makefile
         if make; then
             log info "Masscan built successfully."
         else
@@ -421,11 +430,9 @@ function build() {
 
             # Move to AFLNet's parent directory
             cd ..
-            # TODO: Add commands to create AFLnet in and out folders and files for Masscan 
             export AFLNET=$(pwd)/aflnet
             export WORKDIR=$(pwd)
             # export LLVM_CONFIG=$LLVM_CONFIG
-            # TODO:: Verify if this works correctly
             if [[ ":$PATH:" != *":$AFLNET:"* ]]; then
                 export PATH=$PATH:$AFLNET
                 log info "Added AFLNet to PATH."

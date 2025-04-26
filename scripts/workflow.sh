@@ -218,6 +218,16 @@ function retrieve_file() {
     local destination_path=$2
 
     log info "Retrieving file from: $file_url"
+
+    # Ensure the parent directory exists
+    local destination_dir
+    destination_dir=$(dirname "$destination_path")
+    if [ ! -d "$destination_dir" ]; then
+        log info "Creating directory: $destination_dir"
+        mkdir -p "$destination_dir"
+    fi
+
+    # Download the file
     command_exists curl
     if curl -o "$destination_path" -L --fail "$file_url"; then
         log info "File successfully retrieved and saved to: $destination_path"
@@ -275,20 +285,16 @@ function install() {
     log info "Installing required packages..."
     sudo apt update -y && sudo apt upgrade -y
     sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf \
-        automake libssl-dev wget curl php-cli wireshark tshark unzip 
+        automake libssl-dev wget curl php-cli wireshark tshark unzip dos2unix 
 
-    # TODO: Need to uncomment this if we're able to publish the repo. 
     log info "Retrieving AI attack tools..."
-    retrieve_file "$REPO_RAW_URL/$REPO_BASE/$REPO_USER/main/fuzzing/gen_ai.attack_tool/ai_tools_src.zip" "$GENAI_DIR/ai_tools_src.zip"
-    # log info "Unzipping AI attack tools..."
-    # unzip -q "$GENAI_DIR/ai_tools_src.zip" -d "$GENAI_DIR"
-    # if [ -d "$GENAI_DIR/ai_tools_src" ]; then
-    #     log info "AI attack tools sucessfully extracted."
-    #     rm -f "$GENAI_DIR/ai_tools_src.zip"
-    # else
-    #     log error "Failed to extract AI attack tools."
-    #     exit 1
-    # fi
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/copilot.attack_tool/1_banner_grabber/gc_banner_grabber.c" "$GENAI_DIR/gc_banner_grabber.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/copilot.attack_tool/2_pwd_brute_forcer/gc_brute_force.c" "$GENAI_DIR/gc_brute_force.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/copilot.attack_tool/3_multi_thread_banner_grabber/gc_mt_banner_grabber.c" "$GENAI_DIR/gc_mt_banner_grabber.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/phind.attack_tool/1_banner_grabber/p_banner_grabber.c" "$GENAI_DIR/p_banner_grabber.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/phind.attack_tool/2_pwd_brute_forcer/p_brute_force.c" "$GENAI_DIR/p_brute_force.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/phind.attack_tool/3_multi_thread_banner_grabber/p_mt_banner_grabber.c" "$GENAI_DIR/p_mt_banner_grabber.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/Makefile" "$GENAI_DIR/Makefile"
 
     command_exists git
 
@@ -310,20 +316,20 @@ function build() {
     log info "Building all tools, this may take some time."
     
     # Build AI attack tools
-    # log info "Building AI attack tools..."
-    # if [ -d "$GENAI_DIR" ]; then
-    #     cd "$GENAI_DIR"
-    #     if make; then
-    #         log info "AI attack tools built successfully."
-    #     else
-    #         log error "Failed to build AI attack tools."
-    #         exit 1
-    #     fi
-    #     cd "$SCRIPT_DIR"
-    # else 
-    #     log error "AI attack tools directory not found."
-    #     exit 1
-    # fi
+    log info "Building AI attack tools..."
+    if [ -d "$GENAI_DIR" ]; then
+        cd "$GENAI_DIR"
+        if make; then
+            log info "AI attack tools built successfully."
+        else
+            log error "Failed to build AI attack tools."
+            exit 1
+        fi
+        cd "$SCRIPT_DIR"
+    else 
+        log error "AI attack tools directory not found."
+        exit 1
+    fi
 
     # Build Medusa
     # NOTE: Error when building on Ubuntu system, missing openssl libraries
@@ -356,7 +362,11 @@ function build() {
         cd "$MASSCAN_DIR"
         # Get updated Makefile from repository
         command_exists curl
-        # curl -o Makefile $REPO_RAW_URL/$REPO_USER/$REPO_BASE/main/fuzzing/aflnet.masscan/Makefile
+        if [ -f "Makefile" ]; then
+            log info "Removing existing Makefile..."
+            rm -f Makefile
+        fi
+        retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/aflnet.masscan/Makefile" "$MASSCAN_DIR/Makefile"
         if make; then
             log info "Masscan built successfully."
         else

@@ -455,6 +455,8 @@ echo “masscan -p1-65535 192.168.1.100 --rate=1000” > scan3.txt
 
 ## Active Defense Tool
 
+![Project Overview](.github/.assets/chad-replay-UI.png)
+
 ### Prerequisites - Active Defense Tool
 
 - Python 3.12 (or later)

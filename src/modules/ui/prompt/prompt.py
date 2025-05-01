@@ -5,11 +5,8 @@ from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.styles import Style, merge_styles
 
 from log.clogger import get_central_logger
-from modules.connections.interface import NetworkInterface
-from modules.connections.socket_connection import SocketConnection
 from modules.connections.adsocket import start_server
-
-# from modules.connections.socket_connection import SocketConnection
+from modules.connections.interface import NetworkInterface
 from modules.ui.menu.table import TableCreator
 from modules.ui.prompt.commands import COMMANDS, CommandCompleter, CommandHandler
 from modules.ui.prompt.commands.history import ChadHistory

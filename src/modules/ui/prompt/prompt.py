@@ -5,9 +5,8 @@ from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.styles import Style, merge_styles
 
 from log.clogger import get_central_logger
+from modules.connections.adsocket import start_server
 from modules.connections.interface import NetworkInterface
-
-# from modules.connections.socket_connection import SocketConnection
 from modules.ui.menu.table import TableCreator
 from modules.ui.prompt.commands import COMMANDS, CommandCompleter, CommandHandler
 from modules.ui.prompt.commands.history import ChadHistory
@@ -183,6 +182,10 @@ class ChadPrompt(CommandPrompt):
                     "desc": "Stops the network interface.",
                     "exec": self._cmd_stop,
                 },
+                "start_demo": {
+                    "desc": "Starts the Python service demo.",
+                    "exec": self._cmd_start_demo,
+                },
                 "list_interfaces": {
                     "desc": "Lists all available network interfaces.",
                     "exec": self._cmd_list_interfaces,
@@ -334,6 +337,11 @@ class ChadPrompt(CommandPrompt):
         """Stops the network interface."""
         self.status = "Disconnected"
         self.refresh_prompt()
+
+    def _cmd_start_demo(self, tokens: list) -> None:
+        """Starts the Python service demo."""
+        self.logger.info("Starting Python service demo...")
+        start_server()
 
     # --------------------------------------------------------------- #
 

@@ -15,6 +15,13 @@ CHAD_VERSION="1.0"
 SCRIPT_VERSION="0.1.0"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+# Set the repository URL to the GitHub repository - change if needed. 
+REPO_PARENT_URL="https://github.com"
+REPO_RAW_URL="https://raw.githubusercontent.com"
+REPO_USER="NCSickels"
+REPO_BASE="chadv1.0"
+REPO_URL="$REPO_PARENT_URL/$REPO_BASE.git"
+
 # Debug mode flag
 DEBUG=false
 
@@ -43,13 +50,18 @@ function log() {
 }
 
 function banner() {
+    local DARK_BLUE="\033[38;5;20m"
+    local DARK_PURPLE="\033[38;5;92m"
+    local DARK_RED="\033[38;5;1m"
+    local NC='\033[0m' # No Color
+
     echo -e "\t\t============================================"
-    echo -e "\t\t     ██████╗██╗  ██╗ █████╗ ██████╗"
-    echo -e "\t\t    ██╔════╝██║  ██║██╔══██╗██╔══██╗"
-    echo -e "\t\t    ██║     ███████║███████║██║  ██║"
-    echo -e "\t\t    ██║     ██╔══██║██╔══██║██║  ██║"
-    echo -e "\t\t    ╚██████╗██║  ██║██║  ██║██████╔╝"
-    echo -e "\t\t     ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝"
+    echo -e "${DARK_BLUE}\t\t     ██████╗██╗  ██╗ █████╗ ██████╗${NC}"
+    echo -e "${DARK_BLUE}\t\t    ██╔════╝██║  ██║██╔══██╗██╔══██╗${NC}"
+    echo -e "${DARK_PURPLE}\t\t    ██║     ███████║███████║██║  ██║${NC}"
+    echo -e "${DARK_PURPLE}\t\t    ██║     ██╔══██║██╔══██║██║  ██║${NC}"
+    echo -e "${DARK_RED}\t\t    ╚██████╗██║  ██║██║  ██║██████╔╝${NC}"
+    echo -e "${DARK_RED}\t\t     ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝${NC}"
     echo -e "\t\t============================================"
     echo -e "\t\t      Charger Active Defense v$CHAD_VERSION"
     echo -e "\t\t============================================"
@@ -85,6 +97,7 @@ DEST_DIR="$SCRIPT_DIR/chadv$CHAD_VERSION"
 
 ATTACKTOOL_DIR="$DEST_DIR/attack_tools"
 
+GENAI_DIR="$ATTACKTOOL_DIR/ai_attack_tools"
 MEDUSA_DIR="$ATTACKTOOL_DIR/medusa"
 MASSCAN_DIR="$ATTACKTOOL_DIR/masscan"
 
@@ -187,6 +200,43 @@ dir_exists() {
     fi
 }
 
+function check_repo_connection() {
+    local repo_url=$1
+
+    log info "Checking connection to repository: $repo_url"
+    if git ls-remote "$repo_url" &> /dev/null; then
+        log info "Successfully connected to the repository."
+        return 0
+    else
+        log error "Failed to connect to the repository: $repo_url"
+        return 1
+    fi
+}
+
+function retrieve_file() {
+    local file_url=$1
+    local destination_path=$2
+
+    log info "Retrieving file from: $file_url"
+
+    # Ensure the parent directory exists
+    local destination_dir
+    destination_dir=$(dirname "$destination_path")
+    if [ ! -d "$destination_dir" ]; then
+        log info "Creating directory: $destination_dir"
+        mkdir -p "$destination_dir"
+    fi
+
+    # Download the file
+    command_exists curl
+    if curl -o "$destination_path" -L --fail "$file_url"; then
+        log info "File successfully retrieved and saved to: $destination_path"
+    else
+        log error "Failed to retrieve file from: $file_url"
+        exit 1
+    fi
+}
+
 function uninstall() {
     banner
     log info "Removing related files and directories..."
@@ -206,6 +256,10 @@ function install_tool() {
     local target_dir=$3
 
     log info "Installing: $tool_name"
+    if ! check_repo_connection "$repo_url"; then
+        log error "Failed to connect to the repository: $repo_url"
+        exit 1
+    fi
     if [ ! -d "$target_dir" ]; then
         log info "Cloning repository into: $target_dir"
         if git clone $repo_url "$target_dir"; then
@@ -231,7 +285,16 @@ function install() {
     log info "Installing required packages..."
     sudo apt update -y && sudo apt upgrade -y
     sudo apt install -y clang graphviz-dev libcap-dev git make gcc autoconf \
-        automake libssl-dev wget curl php-cli wireshark tshark
+        automake libssl-dev wget curl php-cli wireshark tshark unzip dos2unix 
+
+    log info "Retrieving AI attack tools..."
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/copilot.attack_tool/1_banner_grabber/gc_banner_grabber.c" "$GENAI_DIR/gc_banner_grabber.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/copilot.attack_tool/2_pwd_brute_forcer/gc_brute_force.c" "$GENAI_DIR/gc_brute_force.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/copilot.attack_tool/3_multi_thread_banner_grabber/gc_mt_banner_grabber.c" "$GENAI_DIR/gc_mt_banner_grabber.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/phind.attack_tool/1_banner_grabber/p_banner_grabber.c" "$GENAI_DIR/p_banner_grabber.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/phind.attack_tool/2_pwd_brute_forcer/p_brute_force.c" "$GENAI_DIR/p_brute_force.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/phind.attack_tool/3_multi_thread_banner_grabber/p_mt_banner_grabber.c" "$GENAI_DIR/p_mt_banner_grabber.c"
+    retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/gen_ai.attack_tool/Makefile" "$GENAI_DIR/Makefile"
 
     command_exists git
 
@@ -251,9 +314,25 @@ function install() {
 function build() {
     banner
     log info "Building all tools, this may take some time."
+    
+    # Build AI attack tools
+    log info "Building AI attack tools..."
+    if [ -d "$GENAI_DIR" ]; then
+        cd "$GENAI_DIR"
+        if make; then
+            log info "AI attack tools built successfully."
+        else
+            log error "Failed to build AI attack tools."
+            exit 1
+        fi
+        cd "$SCRIPT_DIR"
+    else 
+        log error "AI attack tools directory not found."
+        exit 1
+    fi
 
     # Build Medusa
-    # TODO: Error when building on Ubuntu system, missing openssl libraries
+    # NOTE: Error when building on Ubuntu system, missing openssl libraries
     log info "Building Medusa..."
     if [ -d "$MEDUSA_DIR" ]; then
         cd "$MEDUSA_DIR"
@@ -264,7 +343,6 @@ function build() {
                 log info "Medusa successfully built."
             else
                 log error "Failed to build Medusa."
-                # TODO: Need to set new Medusa path here.
                 log warn "Using the pre-built package for Medusa instead."
                 # exit 1
             fi
@@ -283,7 +361,12 @@ function build() {
     if [ -d "$MASSCAN_DIR" ]; then
         cd "$MASSCAN_DIR"
         # Get updated Makefile from repository
-        # curl -o Makefile https://raw.githubusercontent.com/NCSickels/chadv1.0/main/fuzzing/aflnet.masscan/Makefile
+        command_exists curl
+        if [ -f "Makefile" ]; then
+            log info "Removing existing Makefile..."
+            rm -f Makefile
+        fi
+        retrieve_file "$REPO_PARENT_URL/$REPO_USER/$REPO_BASE/refs/heads/main/fuzzing/aflnet.masscan/Makefile" "$MASSCAN_DIR/Makefile"
         if make; then
             log info "Masscan built successfully."
         else
@@ -357,11 +440,9 @@ function build() {
 
             # Move to AFLNet's parent directory
             cd ..
-            # TODO: Add commands to create AFLnet in and out folders and files for Masscan 
             export AFLNET=$(pwd)/aflnet
             export WORKDIR=$(pwd)
             # export LLVM_CONFIG=$LLVM_CONFIG
-            # TODO:: Verify if this works correctly
             if [[ ":$PATH:" != *":$AFLNET:"* ]]; then
                 export PATH=$PATH:$AFLNET
                 log info "Added AFLNet to PATH."

@@ -27,7 +27,7 @@ class NetworkInterface:
 
     def __init__(
         self,
-        interface: str = "eth0",
+        interface: str = "enp0s8",
         display_filter: str = "",
         bpf_filter: str = "",
         loop=None,
@@ -37,7 +37,7 @@ class NetworkInterface:
         self._bpf_filter = bpf_filter
         self._status = "Disconnected"
         self._connected_ip = "192.168.56.102"
-        self._connected_port = 22
+        self._connected_port = 1337
         self.capture = None
         self.logger = get_central_logger()
         self.loop = loop or asyncio.get_event_loop()
@@ -129,7 +129,7 @@ class NetworkInterface:
 
     async def capture_packets(self) -> None:
         self.capture = pyshark.LiveCapture(
-            interface="eth0",
+            interface=self._interface,
             eventloop=self.loop,
         )
         self.logger.info(f"Starting packet capture on interface: {self._interface}")

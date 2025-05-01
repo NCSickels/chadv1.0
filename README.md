@@ -98,7 +98,7 @@ You can find the sponsor's project proposal slide below.
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
 - Wi-Fi/Ethernet Adapter that supports promiscuous mode.
 - Python 3.12 (or later)
-- Apt Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`, `wireshark`, `tshark`.
+- Apt Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`, `wireshark`, `tshark`, `unzip`.
 - Pip Packages: `rich`, `colorama`, `termcolor`, `pyshark`, `prompt_toolkit`, `attrs`, `asyncio`, `nest_asyncio`, `scapy`.
 
 ## Testbed Configuration
@@ -232,7 +232,7 @@ If they are not set, you can reconfigure them by repeating the steps above.
 - VirtualBox 7.1.0 (or later)
 - Kali Linux 2023.4 (or later) or Ubuntu 20.04 (or later)
 - Wi-Fi/Ethernet Adapter that supports promiscuous mode.
-- Apt Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`.
+- Apt Packages: `clang`, `graphviz-dev`, `libcap-dev`, `git`, `make`, `gcc`, `autoconf`, `automake`, `libssl-dev`, `wget`, `curl`, `dos2unix`, `php-cli`, `unzip`.
 
 ### Installation - Fuzzing Workflow
 
@@ -454,6 +454,8 @@ echo “masscan -p1-65535 192.168.1.100 --rate=1000” > scan3.txt
 ```
 
 ## Active Defense Tool
+
+![Project Overview](.github/.assets/chad-replay-UI.png)
 
 ### Prerequisites - Active Defense Tool
 
